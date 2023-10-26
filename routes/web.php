@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ZonasController;
 use App\Http\Controllers\FamiliasController;
+use App\Http\Controllers\DatatableController;
+use App\Http\Controllers\ProductosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +43,8 @@ Route::controller(ZonasController::class)->group(function () {
     Route::get('zonas/{zona}/edit', 'edit')->name('zonas.edit');
     Route::put('zonas/{zona}', 'update')->name('zonas.update');
     Route::delete('zonas/{zona}/destroy', 'destroy')->name('zonas.destroy');
+
+    Route::post('zonas/ajax', 'ajax')->name('zonas.ajax');
 });
 
 Route::controller(FamiliasController::class)->group(function () {
@@ -52,4 +56,20 @@ Route::controller(FamiliasController::class)->group(function () {
     Route::get('familias/{familia}/edit', 'edit')->name('familias.edit');
     Route::put('familias/{familia}', 'update')->name('familias.update');
     Route::delete('familias/{familia}/destroy', 'destroy')->name('familias.destroy');
+});
+
+Route::controller(ProductosController::class)->group(function () {
+    Route::get('productos', 'index')->name('productos.index');
+    Route::get('productos/create', 'create')->name('productos.create');
+    Route::post('productos', 'store')->name('productos.store');
+    Route::get('productos/{producto}', 'show')->name('productos.show');
+
+    Route::get('productos/{producto}/edit', 'edit')->name('productos.edit');
+    Route::put('productos/{producto}', 'update')->name('productos.update');
+    Route::delete('productos/{producto}/destroy', 'destroy')->name('productos.destroy');
+});
+
+Route::controller(DatatableController::class)->group(function () {
+    Route::get('datatable/zonas', 'zonas')->name('datatable.zonas');
+
 });

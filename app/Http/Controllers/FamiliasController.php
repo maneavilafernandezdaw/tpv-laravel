@@ -29,7 +29,7 @@ class FamiliasController extends Controller
           ]);
           Familia::create($request->all());
           return redirect()->route('familias.index')
-            ->with('success','Familia creada correctamente.');
+            ->with('mensaje','Familia creada correctamente.');
     }
 
 
@@ -62,7 +62,7 @@ class FamiliasController extends Controller
         $familia->update($request->all());
 
         return redirect()->route('familias.index')
-            ->with('success', 'Familia actualizada correctamente.');
+            ->with('mensaje', 'Familia actualizada correctamente.');
     }
 
     /**
@@ -75,7 +75,7 @@ class FamiliasController extends Controller
         $familia->delete();
 
         return redirect()->route('familias.index')
-            ->with('success', 'Familia eliminada correctamente');
+            ->with('mensaje', 'Familia eliminada correctamente');
     }
 
     public function edit($id)

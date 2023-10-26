@@ -5,17 +5,36 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Zona;
+use Illuminate\Support\Facades\Auth;
+
+use function Laravel\Prompts\text;
 
 class ZonasController extends Controller
 {
+ 
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        if (Auth::check()) {
         $zonas = Zona::all();
 
         return view('zonas.index', compact('zonas'));
+    }
+    return view('welcome');
+    }
+
+        /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        $zona = Zona::find($id);
+
+        return view('zonas.show', compact('zona'));
     }
 
     /**
@@ -29,24 +48,9 @@ class ZonasController extends Controller
           ]);
           Zona::create($request->all());
           return redirect()->route('zonas.index')
-            ->with('success','Zona creada correctamente.');
+            ->with('mensaje','Zona creada correctamente.');
     }
 
-
-    public function create()
-    {
-        return view('zonas.create');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $zona = Zona::find($id);
-
-        return view('zonas.show', compact('zona'));
-    }
 
     /**
      * Update the specified resource in storage.
@@ -62,7 +66,7 @@ class ZonasController extends Controller
         $zona->update($request->all());
 
         return redirect()->route('zonas.index')
-            ->with('success', 'Zona actualizada correctamente.');
+            ->with('mensaje', 'Zona actualizada correctamente.');
     }
 
     /**
@@ -75,13 +79,8 @@ class ZonasController extends Controller
         $zona->delete();
 
         return redirect()->route('zonas.index')
-            ->with('success', 'Zona eliminada correctamente');
+            ->with('mensaje', 'Zona eliminada correctamente');
     }
 
-    public function edit($id)
-    {
-        $zona = Zona::find($id);
 
-        return view('zonas.edit', compact('zona'));
-    }
 }
