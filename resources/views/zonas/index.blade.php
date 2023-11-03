@@ -1,11 +1,11 @@
 <x-app-layout>
-    <x-slot name="header" class=" ">
+   {{--  <x-slot name="header" class=" "> --}}
  {{-- nav-admin  --}}
- @include('partials.nav-admin')
-    </x-slot>
+ {{-- @include('partials.nav-admin') --}}
+   {{--  </x-slot> --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('dashboard') }}>Inicio</a>
+            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
             <h1 class="text-white h1">ZONAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -67,11 +67,11 @@
 
 
         <div class="card-body bg-gray-300 rounded-none my-3">
-            <table id="tabla_Datatables" class="table table-dark table-striped table-hover ">
+            <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
                     <tr>
 
-                        <th>NOMBRE DE ZONA</th>
+                        <th>NOMBRE</th>
                         <th>Nº DE MESAS</th>
                         <th></th>
 
@@ -93,11 +93,12 @@
                                             {{ __('Editar') }}
                                         </x-boton-editar>
                                         <!-- Modal Editar-->
-                                        <div class="modal fade" id="modalEditar{{ $zona->id }}" tabindex="-1"
+                                
+                                        <div class="modal fade " id="modalEditar{{ $zona->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-blue-600">
+                                            <div class="modal-dialog  text-black">
+                                                <div class="modal-content w-auto">
+                                                    <div class="modal-header  bg-blue-600">
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
                                                             Editar Zona
                                                         </h1>
@@ -137,7 +138,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                               
 
 
 

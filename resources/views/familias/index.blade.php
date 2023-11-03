@@ -1,11 +1,10 @@
 <x-app-layout>
     <x-slot name="header" class=" ">
- {{-- nav-admin  --}}
- @include('partials.nav-admin')
+
     </x-slot>
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('dashboard') }}>Inicio</a>
+            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
             <h1 class="text-white h1">FAMILIAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -63,11 +62,11 @@
 
 
         <div class="card-body bg-gray-300 rounded-none my-3">
-            <table id="tabla_Datatables" class="table table-dark table-striped table-hover ">
+            <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
                     <tr>
 
-                        <th>NOMBRE DE ZONA</th>
+                        <th>NOMBRE</th>
                         
                         <th></th>
 

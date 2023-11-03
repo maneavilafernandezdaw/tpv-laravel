@@ -1,0 +1,19 @@
+<x-app-layout>
+
+
+    {{-- <x-slot name="header"> --}}
+  {{-- nav-admin  --}}
+  {{-- @include('partials.nav-admin') --}}
+    {{-- </x-slot> --}}
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <a href="{{ route('comandas.index') }}"><div class="p-6 text-gray-900">
+                    {{ __("Crear Comanda") }}
+                </div></a>
+            </div>
+        </div>
+    </div>
+
+</x-app-layout>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('descripcion');
             $table->unsignedDecimal('precio');
             $table->integer('iva')->unsigned();
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->unsignedBigInteger('familia_id'); // Campo de la clave foránea
             $table->foreign('familia_id')->references('id')->on('familias'); 
             $table->timestamps();
