@@ -19,8 +19,8 @@
 
             @foreach ($zonas as $zona)
                 <a href="{{ route('zonas.show', $zona->id) }}">
-                    <div class="card ">
-                        <div class="card-body text-center">
+                    <div class="card rounded-none">
+                        <div class="card-body  text-center">
                             <h3 class="card-title fw-bold text-xl">{{ $zona->nombre }}</h3>
                             <h5>Nº de mesas:</h5>
                             <h5 class="card-title text-xl">{{ $zona->mesas }}</h5>

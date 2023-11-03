@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Zona;
+use App\Models\Comanda;
 use Illuminate\Support\Facades\Auth;
 
 use function Laravel\Prompts\text;
 
 class ZonasController extends Controller
 {
- 
+
 
 
     /**
@@ -20,21 +21,21 @@ class ZonasController extends Controller
     public function index()
     {
         if (Auth::check()) {
-        $zonas = Zona::all();
+            $zonas = Zona::all();
 
-        return view('zonas.index', compact('zonas'));
-    }
-    return view('welcome');
+            return view('zonas.index', compact('zonas'));
+        }
+        return view('welcome');
     }
 
-        /**
+    /**
      * Display the specified resource.
      */
     public function show($id)
     {
         $zona = Zona::find($id);
-
-        return view('zonas.show', compact('zona'));
+        $comandas = Comanda::all();
+        return view('zonas.show', compact('zona','comandas'));
     }
 
     /**
@@ -45,10 +46,10 @@ class ZonasController extends Controller
         $request->validate([
             'nombre' => 'required|max:30',
             'mesas' => 'required',
-          ]);
-          Zona::create($request->all());
-          return redirect()->route('zonas.index')
-            ->with('mensaje','Zona creada correctamente.');
+        ]);
+        Zona::create($request->all());
+        return redirect()->route('zonas.index')
+            ->with('mensaje', 'Zona creada correctamente.');
     }
 
 
@@ -74,13 +75,11 @@ class ZonasController extends Controller
      */
     public function destroy(Request $request)
     {
-     
+
         $zona = Zona::where('id', $request->idzona);
         $zona->delete();
 
         return redirect()->route('zonas.index')
             ->with('mensaje', 'Zona eliminada correctamente');
     }
-
-
 }

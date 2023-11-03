@@ -13,21 +13,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ComandasController extends Controller
 {
-   
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         if (Auth::check()) {
-        $zonas = Zona::all();
+            $zonas = Zona::all();
 
-        return view('comandas.index', compact('zonas'));
-    }
-    return view('welcome');
+            return view('comandas.index', compact('zonas'));
+        }
+        return view('welcome');
     }
 
-        /**
+    /**
      * Display the specified resource.
      */
     public function show($id)
@@ -40,26 +40,47 @@ class ComandasController extends Controller
 
     public function create($z, $m)
     {
-        $mesa=$m;
+        $mesa = $m;
         $zona = Zona::find($z);
         $productos = Producto::all();
         $familias = Familia::all();
+        $comandas = Comanda::all()->where('mesa', $m)
+            ->where('zona_id', $z)->where('estado', 'No enviado');
 
-        return view('comandas.create', compact('zona','mesa','productos','familias'));
+        return view('comandas.create', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
     }
     /**
      * Store a newly created resource in storage.
      *//*  */
-    public function store(/* Request $request */)
+    public function store(Request $request)
     {
-    /*     $request->validate([
-            'nombre' => 'required|max:30',
-            'mesas' => 'required',
-          ]);
-          Comanda::create($request->all()); */
-          return redirect()->route('comandas.create');
+        $comanda = Comanda::where('mesa', $request->mesa)
+            ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->where('producto_id', $request->producto_id)->first();
+
+        if ($comanda) {
+
+            $comanda->increment('cantidad');
+
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+        } else {
+            Comanda::create($request->all());
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+        }
     }
 
+    public function incrementar(Request $request)
+    {
+        $comanda = Comanda::find($request->comanda_id);
+        $comanda->increment('cantidad');
+        return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+    }
+
+    public function decrementar(Request $request)
+    {
+        $comanda = Comanda::find($request->comanda_id);
+        $comanda->decrement('cantidad');
+        return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -83,13 +104,11 @@ class ComandasController extends Controller
      */
     public function destroy(Request $request)
     {
-     
+
         $zona = Zona::where('id', $request->idzona);
         $zona->delete();
 
         return redirect()->route('zonas.index')
             ->with('mensaje', 'Zona eliminada correctamente');
     }
-
-
 }

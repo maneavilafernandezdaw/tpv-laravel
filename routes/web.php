@@ -72,6 +72,8 @@ Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas', 'index')->name('comandas.index');
     Route::get('comandas/create/{zona}/{mesa}', 'create')->name('comandas.create');
     Route::post('comandas', 'store')->name('comandas.store');
+    Route::post('comandas/incrementar', 'incrementar')->name('comandas.incrementar');
+    Route::post('comandas/decrementar', 'decrementar')->name('comandas.decrementar');
     Route::get('comandas/{comanda}', 'show')->name('comandas.show');
 
   
