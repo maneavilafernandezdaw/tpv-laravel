@@ -1,11 +1,8 @@
 <x-app-layout>
-   {{--  <x-slot name="header" class=" "> --}}
- {{-- nav-admin  --}}
- {{-- @include('partials.nav-admin') --}}
-   {{--  </x-slot> --}}
+
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
+            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
             <h1 class="text-white h1">ZONAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -31,7 +28,7 @@
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" class="form-control rounded-md" id="nombre"
-                                                name="nombre" required maxlength="30">
+                                                name="nombre" required maxlength="30" >
                                         </div>
                                         <div class="form-group">
                                             <label for="mesas">Mesas</label>
@@ -85,7 +82,7 @@
                             <td class="fw-bold text-xl align-middle">{{ $zona->mesas }}</td>
 
                             <td>
-                                <div class="d-flex justify-center gap-4">
+                                <div class="d-flex justify-end gap-4">
                                     <div>
                                         <!-- Button trigger modal Editar-->
                                   

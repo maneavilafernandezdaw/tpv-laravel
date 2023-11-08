@@ -49,6 +49,17 @@ class ComandasController extends Controller
 
         return view('comandas.create', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
     }
+    public function pedido($z, $m)
+    {
+        $mesa = $m;
+        $zona = Zona::find($z);
+        $productos = Producto::all();
+        $familias = Familia::all();
+        $comandas = Comanda::all()->where('mesa', $m)
+            ->where('zona_id', $z)->where('estado', 'No enviado');
+
+        return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
+    }
     /**
      * Store a newly created resource in storage.
      *//*  */
@@ -68,6 +79,7 @@ class ComandasController extends Controller
         }
     }
 
+
     public function incrementar(Request $request)
     {
         $comanda = Comanda::find($request->comanda_id);
@@ -79,7 +91,27 @@ class ComandasController extends Controller
     {
         $comanda = Comanda::find($request->comanda_id);
         $comanda->decrement('cantidad');
+        if($comanda->cantidad < 1){
+            $comanda->delete();  
+        }
         return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+    }
+
+    public function incrementarTabla(Request $request)
+    {
+        $comanda = Comanda::find($request->comanda_id);
+        $comanda->increment('cantidad');
+        return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
+    }
+
+    public function decrementarTabla(Request $request)
+    {
+        $comanda = Comanda::find($request->comanda_id);
+        $comanda->decrement('cantidad');
+        if($comanda->cantidad < 1){
+            $comanda->delete();  
+        }
+        return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
     }
 
     /**
@@ -97,6 +129,26 @@ class ComandasController extends Controller
 
         return redirect()->route('zonas.index')
             ->with('mensaje', 'Zona actualizada correctamente.');
+    }
+
+    public function enviar(Request $request)
+    {
+     
+
+        $comandas = Comanda::where('mesa', $request->mesa)
+            ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
+
+
+   
+            foreach ($comandas as $comanda){
+                $comanda->estado = 'Enviada';
+                $comanda->save();
+            }
+                $zonas = Zona::all();
+
+                return view('comandas.index', compact('zonas'))
+            ->with('mensaje', 'Comanda Enviada Correctamente.');
+
     }
 
     /**

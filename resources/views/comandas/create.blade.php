@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
             <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
-
+            <a class="navbar-brand h1 text-white" href={{ route('comandas.index') }}>Volver a Zonas</a>
         </div>
     </nav>
 
@@ -15,8 +15,26 @@
     <div class=" row p-sm-4">
 
         {{-- productos para pedir --}}
-        <div class="col-12 col-sm-8 col-md-9">
+        <div class="col-12  col-md-9">
+
+            <div class="d-md-none">
+                <!-- Button trigger modal Crear-->
+                <div class="d-flex justify-center">
+                    <a href={{ route('comandas.pedido', [$zona->id, $mesa]) }}><x-boton-comanda
+                            class="d-block d-md-hidden">
+                            {{ __('Ver Comanda') }}
+                        </x-boton-comanda></a>
+                </div>
+
+
+
+
+            </div>
+
+
             <h3 class=" h3 text-center mt-2">Productos</h3>
+
+
             <div class=" my-3 d-flex flex-wrap gap-2 justify-center">
 
                 @foreach ($productos as $producto)
@@ -46,7 +64,7 @@
                                         <img src="../../../imagen/{{ $producto->imagen }}" class=" h-20 w-20"
                                             alt="imagen producto">
                                     @else
-                                        <h5 class="card-title  text-xl fw-bold text-center mb-0">
+                                        <h5 class="card-title  text-lg fw-bold text-center mb-0">
                                             {{ $producto->nombre }}
                                         </h5>
                                     @endif
@@ -61,14 +79,14 @@
         </div>
 
         {{-- tabla de pedido --}}
-        <div class="col-12 col-sm-4 col-md-3 ">
-            <h3 class=" h3 text-center mt-2">Pedido</h3>
+        <div class="hidden d-md-block   col-md-3 ">
+            <h3 class=" h3 text-center mt-2">Comanda</h3>
             <table class="table table-striped text-sm">
                 <thead>
                     <tr>
                         <th scope="col">Cant.</th>
-                        <th scope="col">Nombre</th>
-<th></th>
+                        <th scope="col">Producto</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,57 +102,84 @@
                             </td>
                             <td>
                                 <div class="d-flex gap-2 justify-center">
-                                <form action="{{ route('comandas.incrementar') }}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="hidden" id="mesa" name="mesa"
-                                            value="{{ $mesa }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="zona_id" name="zona_id"
-                                            value="{{ $zona->id }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="comanda_id" name="comanda_id"
-                                            value="{{ $comanda->id }}">
-                                    </div>
+                                    <form action="{{ route('comandas.incrementar') }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="hidden" id="mesa" name="mesa"
+                                                value="{{ $mesa }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" id="zona_id" name="zona_id"
+                                                value="{{ $zona->id }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" id="comanda_id" name="comanda_id"
+                                                value="{{ $comanda->id }}">
+                                        </div>
 
-                                    <x-boton-incrementar>
-                                        {{ __('+') }}
-                                    </x-boton-incrementar>
-                                </form>
+                                        <x-boton-incrementar>
+                                            {{ __('+') }}
+                                        </x-boton-incrementar>
+                                    </form>
 
-                                <form action="{{ route('comandas.decrementar') }}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="hidden" id="mesa" name="mesa"
-                                            value="{{ $mesa }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="zona_id" name="zona_id"
-                                            value="{{ $zona->id }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="comanda_id" name="comanda_id"
-                                            value="{{ $comanda->id }}">
-                                    </div>
-                   
-                                    <x-boton-decrementar>
-                                        {{ __('-') }}
-                                    </x-boton-decrementar>
-                                </form>
-                            </div>
+                                    <form action="{{ route('comandas.decrementar') }}" method="post">
+                                        @csrf
+                                        <div class="form-group">
+                                            <input type="hidden" id="mesa" name="mesa"
+                                                value="{{ $mesa }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" id="zona_id" name="zona_id"
+                                                value="{{ $zona->id }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" id="comanda_id" name="comanda_id"
+                                                value="{{ $comanda->id }}">
+                                        </div>
+
+                                        <x-boton-decrementar>
+                                            {{ __('-') }}
+                                        </x-boton-decrementar>
+                                    </form>
+                                </div>
                             </td>
 
                         </tr>
                     @endforeach
+                    <tr>
+                        <td colspan="3">
+                            @if (isset($comanda))
+                                <form action="{{ route('comandas.enviar') }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" id="mesa" name="mesa"
+                                            value="{{ $mesa }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="zona_id" name="zona_id"
+                                            value="{{ $zona->id }}">
+                                    </div>
+
+
+
+                                    <x-boton-enviar-comanda>
+                                        {{ __('Enviar') }}
+                                    </x-boton-enviar-comanda>
+
+                                </form>
+                            @endif
+                        </td>
+                    </tr>
                 </tbody>
             </table>
 
-
-
         </div>
 
+
     </div>
+    <div>
+
+
+
 
 </x-app-layout>

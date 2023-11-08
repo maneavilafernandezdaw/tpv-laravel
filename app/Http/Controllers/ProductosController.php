@@ -27,6 +27,7 @@ class ProductosController extends Controller
         return view('welcome');
     }
 
+   
     /**
      * Display the specified resource.
      */
@@ -52,6 +53,12 @@ class ProductosController extends Controller
 
         ]);
 
+        $prod=Producto::where('nombre', $request->nombre)->first();
+        
+        // Si existe
+        if(!$prod){
+       
+        
         $producto = $request->all();
 
         if ($request->file('imagen')) {
@@ -67,8 +74,11 @@ class ProductosController extends Controller
 
         return redirect()->route('productos.index')
             ->with('mensaje', 'Producto creado correctamente.');
+    }else{
+        return redirect()->route('productos.index')
+        ->with('mensaje', 'Ya Existe un producto con ese nombre.');
     }
-
+    }
 
     /**
      * Update the specified resource in storage.

@@ -1,10 +1,8 @@
 <x-app-layout>
-    <x-slot name="header" class=" ">
-
-    </x-slot>
+  
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
+            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
             <h1 class="text-white h1">FAMILIAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -80,7 +78,7 @@
                    
 
                             <td>
-                                <div class="d-flex justify-center gap-4">
+                                <div class="d-flex justify-end gap-4">
                                     <div>
                                         <!-- Button trigger modal Editar-->
                                   

@@ -6,6 +6,7 @@ use App\Http\Controllers\FamiliasController;
 use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ComandasController;
+use App\Http\Controllers\ProductAjaxController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,8 @@ Route::controller(ProductosController::class)->group(function () {
     Route::post('productos', 'store')->name('productos.store');
     Route::get('productos/{producto}', 'show')->name('productos.show');
 
+    Route::post('productos/ajax', 'ajax')->name('productos.ajax');
+
   
     Route::put('productos/{producto}/edit', 'update')->name('productos.update');
     Route::delete('productos/{producto}/destroy', 'destroy')->name('productos.destroy');
@@ -71,13 +74,17 @@ Route::controller(ProductosController::class)->group(function () {
 Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas', 'index')->name('comandas.index');
     Route::get('comandas/create/{zona}/{mesa}', 'create')->name('comandas.create');
+    Route::get('comandas/pedido/{zona}/{mesa}', 'pedido')->name('comandas.pedido');
     Route::post('comandas', 'store')->name('comandas.store');
     Route::post('comandas/incrementar', 'incrementar')->name('comandas.incrementar');
     Route::post('comandas/decrementar', 'decrementar')->name('comandas.decrementar');
+    Route::post('comandas/incrementarTabla', 'incrementarTabla')->name('comandas.incrementarTabla');
+    Route::post('comandas/decrementarTabla', 'decrementarTabla')->name('comandas.decrementarTabla');
     Route::get('comandas/{comanda}', 'show')->name('comandas.show');
 
   
     Route::put('comandas/{comanda}/edit', 'update')->name('comandas.update');
+    Route::post('comandas/enviar', 'enviar')->name('comandas.enviar');
     Route::delete('comandas/{comanda}/destroy', 'destroy')->name('comandas.destroy');
 });
 
@@ -85,3 +92,5 @@ Route::controller(DatatableController::class)->group(function () {
     Route::get('datatable/zonas', 'zonas')->name('datatable.zonas');
 
 });
+
+Route::resource('products-ajax-crud', ProductAjaxController::class);

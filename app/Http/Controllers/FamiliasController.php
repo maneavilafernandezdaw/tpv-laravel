@@ -27,9 +27,24 @@ class FamiliasController extends Controller
             'nombre' => 'required|max:30',
             
           ]);
-          Familia::create($request->all());
-          return redirect()->route('familias.index')
-            ->with('mensaje','Familia creada correctamente.');
+
+          $fam=Familia::where('nombre', $request->nombre)->first();
+        
+          // Si existe
+          if(!$fam){
+            Familia::create($request->all());
+            return redirect()->route('familias.index')
+              ->with('mensaje','Familia creada correctamente.');
+          } else{
+             
+           
+            return redirect()->route('familias.index')
+              ->with('mensaje','Ya existe una Familia con ese nombre.');
+          }
+  
+  
+          
+
     }
 
 

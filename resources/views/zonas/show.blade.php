@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
+            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
             <a class="navbar-brand h1 text-white" href={{ route('comandas.index') }}>Volver a Zonas</a>
         </div>
     </nav>

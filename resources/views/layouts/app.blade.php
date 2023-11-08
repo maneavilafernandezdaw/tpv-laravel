@@ -38,6 +38,7 @@
             </header>
         @endif
 
+ 
         <!-- Page Content -->
         <main class="m-0 p-0">
             {{ $slot }}

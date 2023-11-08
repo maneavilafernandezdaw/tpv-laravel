@@ -47,9 +47,21 @@ class ZonasController extends Controller
             'nombre' => 'required|max:30',
             'mesas' => 'required',
         ]);
-        Zona::create($request->all());
-        return redirect()->route('zonas.index')
-            ->with('mensaje', 'Zona creada correctamente.');
+
+        $zon=Zona::where('nombre', $request->nombre)->first();
+        
+        // Si existe
+        if(!$zon){
+            Zona::create($request->all());
+            return redirect()->route('zonas.index')
+                ->with('mensaje', 'Zona creada correctamente.');
+        } else{
+           
+            return redirect()->route('zonas.index')
+                ->with('mensaje', 'Existe una zona con ese nombre.');
+        }
+
+
     }
 
 
