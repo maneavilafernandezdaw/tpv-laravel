@@ -27,6 +27,16 @@ class ComandasController extends Controller
         return view('welcome');
     }
 
+    public function cuenta()
+    {
+        if (Auth::check()) {
+            $zonas = Zona::all();
+
+            return view('comandas.cuenta', compact('zonas'));
+        }
+        return view('welcome');
+    }
+
     /**
      * Display the specified resource.
      */
@@ -40,25 +50,51 @@ class ComandasController extends Controller
 
     public function create($z, $m)
     {
-        $mesa = $m;
-        $zona = Zona::find($z);
-        $productos = Producto::all();
-        $familias = Familia::all();
-        $comandas = Comanda::all()->where('mesa', $m)
-            ->where('zona_id', $z)->where('estado', 'No enviado');
+        if (Auth::check()) {
+            $mesa = $m;
+            $zona = Zona::find($z);
+            $productos = Producto::all();
+            $familias = Familia::all();
+            $comandas = Comanda::all()->where('mesa', $m)
+                ->where('zona_id', $z)->where('estado', 'No enviado');
+    
+            return view('comandas.create', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
+        }
+        return view('welcome');
 
-        return view('comandas.create', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
     }
+
+
+
+    public function consultarCuenta($z, $m)
+    {
+        if (Auth::check()) {
+            $mesa = $m;
+            $zona = Zona::find($z);
+            $productos = Producto::all();
+            $comandas = Comanda::all()->where('mesa', $m)
+                ->where('zona_id', $z)->where('estado', 'Enviada');
+    
+            return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas'));
+        }
+        return view('welcome');
+
+    }
+
     public function pedido($z, $m)
     {
-        $mesa = $m;
-        $zona = Zona::find($z);
-        $productos = Producto::all();
-        $familias = Familia::all();
-        $comandas = Comanda::all()->where('mesa', $m)
-            ->where('zona_id', $z)->where('estado', 'No enviado');
+        if (Auth::check()) {
+            $mesa = $m;
+            $zona = Zona::find($z);
+            $productos = Producto::all();
+            $familias = Familia::all();
+            $comandas = Comanda::all()->where('mesa', $m)
+                ->where('zona_id', $z)->where('estado', 'No enviado');
+    
+            return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
+        }
+        return view('welcome');
 
-        return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
     }
     /**
      * Store a newly created resource in storage.
@@ -151,16 +187,23 @@ class ComandasController extends Controller
 
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Request $request)
+
+    public function eliminarComanda(Request $request)
     {
+     
 
-        $zona = Zona::where('id', $request->idzona);
-        $zona->delete();
+        $comandas = Comanda::where('mesa', $request->mesa)
+            ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
 
-        return redirect()->route('zonas.index')
-            ->with('mensaje', 'Zona eliminada correctamente');
+
+   
+            foreach ($comandas as $comanda){
+           
+                $comanda->delete();
+            }
+                $zonas = Zona::all();
+                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa])
+            ->with('mensaje', 'Comanda Eliminada Correctamente.');
+
     }
 }

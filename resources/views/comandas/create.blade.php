@@ -15,7 +15,7 @@
     <div class=" row p-sm-4">
 
         {{-- productos para pedir --}}
-        <div class="col-12  col-md-9">
+        <div class="col-12  col-md-8">
 
             <div class="d-md-none">
                 <!-- Button trigger modal Crear-->
@@ -57,14 +57,14 @@
                         </div>
 
                         <button type="submit">
-                            <div class="card rounded-none  h-20 w-20  align-middle ">
+                            <div class="card rounded-none border border-dark h-20 w-20  align-middle">
                                 <div class="card-body  d-flex justify-center items-center p-0">
 
                                     @if ($producto->imagen)
                                         <img src="../../../imagen/{{ $producto->imagen }}" class=" h-20 w-20"
                                             alt="imagen producto">
                                     @else
-                                        <h5 class="card-title  text-lg fw-bold text-center mb-0">
+                                        <h5 class="card-title  text-lg fw-bold text-center mb-0 ">
                                             {{ $producto->nombre }}
                                         </h5>
                                     @endif
@@ -79,7 +79,7 @@
         </div>
 
         {{-- tabla de pedido --}}
-        <div class="hidden d-md-block   col-md-3 ">
+        <div class="hidden d-md-block  col-md-4">
             <h3 class=" h3 text-center mt-2">Comanda</h3>
             <table class="table table-striped text-sm">
                 <thead>
@@ -149,24 +149,42 @@
                     <tr>
                         <td colspan="3">
                             @if (isset($comanda))
-                                <form action="{{ route('comandas.enviar') }}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="hidden" id="mesa" name="mesa"
-                                            value="{{ $mesa }}">
+                                <div class="d-flex gap-3 justify-center">
+                                    <div>
+                                        <form action="{{ route('comandas.enviar') }}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="hidden" id="mesa" name="mesa"
+                                                    value="{{ $mesa }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" id="zona_id" name="zona_id"
+                                                    value="{{ $zona->id }}">
+                                            </div>
+                                            <x-boton-enviar-comanda>
+                                                {{ __('Enviar') }}
+                                            </x-boton-enviar-comanda>
+
+                                        </form>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="zona_id" name="zona_id"
-                                            value="{{ $zona->id }}">
+                                    <div>
+                                        <form action="{{ route('comandas.eliminarComanda') }}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="hidden" id="mesa" name="mesa"
+                                                    value="{{ $mesa }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" id="zona_id" name="zona_id"
+                                                    value="{{ $zona->id }}">
+                                            </div>
+                                            <x-boton-eliminar>
+                                                {{ __('Eliminar') }}
+                                            </x-boton-eliminar>
+
+                                        </form>
                                     </div>
-
-
-
-                                    <x-boton-enviar-comanda>
-                                        {{ __('Enviar') }}
-                                    </x-boton-enviar-comanda>
-
-                                </form>
+                                </div>
                             @endif
                         </td>
                     </tr>

@@ -97,22 +97,44 @@
                 @endforeach
                 <tr>
                     <td colspan="3">
-                        <form action="{{ route('comandas.enviar') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <input type="hidden" id="mesa" name="mesa"
-                                    value="{{ $mesa }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="zona_id" name="zona_id"
-                                    value="{{ $zona->id }}">
-                            </div>
-          
+                        @if (isset($comanda))
+                        <div class="d-flex gap-3 justify-center">
+                            <div>
+                                <form action="{{ route('comandas.enviar') }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" id="mesa" name="mesa"
+                                            value="{{ $mesa }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="zona_id" name="zona_id"
+                                            value="{{ $zona->id }}">
+                                    </div>
+                                    <x-boton-enviar-comanda>
+                                        {{ __('Enviar') }}
+                                    </x-boton-enviar-comanda>
 
-                            <x-boton-enviar-comanda>
-                                {{ __('Enviar') }}
-                            </x-boton-enviar-comanda>
-                        </form>
+                                </form>
+                            </div>
+                            <div>
+                                <form action="{{ route('comandas.eliminarComanda') }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" id="mesa" name="mesa"
+                                            value="{{ $mesa }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="zona_id" name="zona_id"
+                                            value="{{ $zona->id }}">
+                                    </div>
+                                    <x-boton-eliminar>
+                                        {{ __('Eliminar') }}
+                                    </x-boton-eliminar>
+
+                                </form>
+                            </div>
+                        </div>
+                    @endif
                     </td>
                 </tr>
             </tbody>

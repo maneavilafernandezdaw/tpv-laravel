@@ -41,6 +41,7 @@ Route::controller(ZonasController::class)->group(function () {
     Route::get('zonas/create', 'create')->name('zonas.create');
     Route::post('zonas', 'store')->name('zonas.store');
     Route::get('zonas/{zona}', 'show')->name('zonas.show');
+    Route::get('zonas/consultar/{zona}', 'consultar')->name('zonas.consultar');
 
     Route::get('zonas/{zona}/edit', 'edit')->name('zonas.edit');
     Route::put('zonas/{zona}', 'update')->name('zonas.update');
@@ -73,7 +74,9 @@ Route::controller(ProductosController::class)->group(function () {
 
 Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas', 'index')->name('comandas.index');
+    Route::get('comandas/cuenta', 'cuenta')->name('comandas.cuenta');
     Route::get('comandas/create/{zona}/{mesa}', 'create')->name('comandas.create');
+    Route::get('comandas/cuenta/{zona}/{mesa}', 'consultarCuenta')->name('comandas.consultarCuenta');
     Route::get('comandas/pedido/{zona}/{mesa}', 'pedido')->name('comandas.pedido');
     Route::post('comandas', 'store')->name('comandas.store');
     Route::post('comandas/incrementar', 'incrementar')->name('comandas.incrementar');
@@ -81,11 +84,13 @@ Route::controller(ComandasController::class)->group(function () {
     Route::post('comandas/incrementarTabla', 'incrementarTabla')->name('comandas.incrementarTabla');
     Route::post('comandas/decrementarTabla', 'decrementarTabla')->name('comandas.decrementarTabla');
     Route::get('comandas/{comanda}', 'show')->name('comandas.show');
+   
 
   
     Route::put('comandas/{comanda}/edit', 'update')->name('comandas.update');
     Route::post('comandas/enviar', 'enviar')->name('comandas.enviar');
-    Route::delete('comandas/{comanda}/destroy', 'destroy')->name('comandas.destroy');
+    Route::post('comandas/eliminar', 'eliminarComanda')->name('comandas.eliminarComanda');
+  
 });
 
 Route::controller(DatatableController::class)->group(function () {

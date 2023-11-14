@@ -33,9 +33,13 @@ class ProductosController extends Controller
      */
     public function show($id)
     {
-        $producto = Producto::find($id);
+        if (Auth::check()) {
+            $producto = Producto::find($id);
 
-        return view('productos.show', compact('producto'));
+            return view('productos.show', compact('producto'));
+        }
+        return view('welcome');
+
     }
 
     /**

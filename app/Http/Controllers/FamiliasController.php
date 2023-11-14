@@ -48,21 +48,6 @@ class FamiliasController extends Controller
     }
 
 
-    public function create()
-    {
-        return view('familias.create');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $familia = Familia::find($id);
-
-        return view('familias.show', compact('familia'));
-    }
-
     /**
      * Update the specified resource in storage.
      */

@@ -3,18 +3,15 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
         <div class="container-fluid">
             <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand h1 text-white" href={{ route('comandas.index') }}>Volver</a>
+            <a class="navbar-brand h1 text-white" href={{ route('comandas.cuenta') }}>Volver</a>
         </div>
     </nav>
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
-
 <div>
-    <h1 class=" h1 text-center text-gray-700 mt-2">Crear Comanda</h1>
-
+    <h1 class=" h1 text-center text-gray-700 mt-2">Consultar Cuenta</h1>
 </div>
-
     <div class="container mt-3 card bg-gray-700 rounded-none">
 
         <h1 class="text-white h1 text-center mt-2">{{ $zona->nombre }}</h1>
@@ -27,7 +24,7 @@
                     $ocupada = 0;
                 @endphp
 
-                <a href="{{ route('comandas.create', [$zona->id, $i]) }}">
+                <a href="{{ route('comandas.consultarCuenta', [$zona->id, $i]) }}">
 
                     @foreach ($comandas as $comanda)
                         @if ($comanda->mesa == $i && $comanda->zona_id === $zona->id)

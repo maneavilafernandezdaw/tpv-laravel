@@ -33,10 +33,26 @@ class ZonasController extends Controller
      */
     public function show($id)
     {
-        $zona = Zona::find($id);
-        $comandas = Comanda::all();
-        return view('zonas.show', compact('zona','comandas'));
+
+        if (Auth::check()) {
+            $zona = Zona::find($id);
+            $comandas = Comanda::all();
+            return view('zonas.show', compact('zona', 'comandas'));
+        }
+        return view('welcome');
     }
+
+    public function consultar($id)
+    {
+
+        if (Auth::check()) {
+            $zona = Zona::find($id);
+            $comandas = Comanda::all();
+            return view('comandas.consultar', compact('zona', 'comandas'));
+        }
+        return view('welcome');
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -48,20 +64,18 @@ class ZonasController extends Controller
             'mesas' => 'required',
         ]);
 
-        $zon=Zona::where('nombre', $request->nombre)->first();
-        
+        $zon = Zona::where('nombre', $request->nombre)->first();
+
         // Si existe
-        if(!$zon){
+        if (!$zon) {
             Zona::create($request->all());
             return redirect()->route('zonas.index')
                 ->with('mensaje', 'Zona creada correctamente.');
-        } else{
-           
+        } else {
+
             return redirect()->route('zonas.index')
                 ->with('mensaje', 'Existe una zona con ese nombre.');
         }
-
-
     }
 
 
