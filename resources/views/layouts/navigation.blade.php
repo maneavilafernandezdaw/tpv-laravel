@@ -119,6 +119,7 @@
         </div>
 
          {{-- nav-admin  --}}
+         
  @include('partials.nav-admin')
     </div>
 </nav>

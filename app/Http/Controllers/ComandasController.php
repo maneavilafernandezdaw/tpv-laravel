@@ -206,4 +206,21 @@ class ComandasController extends Controller
             ->with('mensaje', 'Comanda Eliminada Correctamente.');
 
     }
+
+    public function eliminarCuenta(Request $request)
+    {
+     
+
+        $comandas = Comanda::where('mesa', $request->mesa)
+            ->where('zona_id', $request->zona_id)->get();
+
+
+   
+            foreach ($comandas as $comanda){
+           
+                $comanda->delete();
+            }
+            return view('home');
+
+    }
 }
