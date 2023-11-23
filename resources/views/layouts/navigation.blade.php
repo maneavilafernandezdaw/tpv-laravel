@@ -13,12 +13,12 @@
                 <!-- Navigation Links -->
    
             </div>
-            <div class="hidden space-x-8 md:-my-px md:ml-10 md:flex">
+            <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                 {{-- nav-admin  --}}
                 @include('partials.nav-admin')
             </div>
             <!-- Settings Dropdown -->
-            <div class="hidden md:flex md:items-center md:ml-6">
+            <div class="hidden lg:flex md:items-center lg:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button
@@ -56,7 +56,7 @@
             </div>
 
             <!-- Hamburger -->
-            <div class="-mr-2 flex items-center md:hidden">
+            <div class="-mr-2 flex items-center lg:hidden">
                 <button @click="open = ! open"
                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -72,12 +72,10 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
-        <div class="d-flex items-center bg-indigo-50">
-            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
-                {{ __('Inicio') }}
-            </x-responsive-nav-link>
+    <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
+        <div class="d-flex items-center justify-between bg-indigo-50">
         
+        <h1 class="ms-2">Administración</h1>
 
        
          <!-- Settings Dropdown -->

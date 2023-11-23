@@ -2,8 +2,8 @@
 
     <div class="pt-12">
         <div class="max-w-4xl mx-auto px-8 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm ">
-                <a href="{{ route('comandas.index') }}"><div class="p-6 fw-bold text-2xl text-gray-900">
+            <div class=" overflow-hidden shadow">
+                <a href="{{ route('comandas.index') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
                     {{ __("Crear Comanda") }}
                 </div></a>
       
@@ -13,9 +13,9 @@
 
     <div class="pt-12">
         <div class="max-w-4xl mx-auto px-8 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm ">
+            <div class=" overflow-hidden shadow ">
         
-                <a href="{{ route('comandas.cuenta') }}"><div class="p-6 fw-bold text-2xl text-gray-900">
+                <a href="{{ route('comandas.cuenta') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
                     {{ __("Consultar Cuenta") }}
                 </div></a>
             </div>

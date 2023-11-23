@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ComandasController;
 use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\CobrosController;
+use App\Http\Controllers\CajasController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,6 +91,14 @@ Route::controller(ComandasController::class)->group(function () {
 Route::controller(CobrosController::class)->group(function () {
 
     Route::post('cobros/store', 'store')->name('cobros.store');
+    Route::get('cobros', 'index')->name('cobros.index');
+
+});
+
+Route::controller(CajasController::class)->group(function () {
+
+    Route::get('cajas/store', 'store')->name('cajas.store');
+    Route::get('cajas', 'index')->name('cajas.index');
 
 });
 

@@ -1,16 +1,16 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
+    <nav class="navbar navbar-expand-lg navbar-light  bg-primary-subtle">
         <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand h1 text-white" href={{ route('comandas.cuenta') }}>Volver</a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}>Inicio</a>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.cuenta') }}>Volver a zonas</a>
         </div>
     </nav>
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
     <div>
-        <h2 class=" h2 text-center m-4"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</h2>
+        <h1 class=" h1 text-center mt-3"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</h1>
     </div>
 
 
@@ -18,7 +18,7 @@
         <div class="row">
             {{-- tabla de pedido --}}
             <div class="col-sm-6">
-                <h1 class=" h1 text-center m-4">Cuenta</h1>
+                <h1 class=" h1 text-center mt-3">Cuenta</h1>
                 <table class="table table-striped text-sm">
                     <thead>
                         <tr>
@@ -70,7 +70,7 @@
 
 
             <div class="col-sm-6">
-                <h1 class=" h1 text-center m-4">Cobrar: {{ $total }}€ </h1>
+                <h1 class=" h1 text-center m-4">Total: {{ $total }}€ </h1>
                
                 @if (isset($comanda) && Auth::user()->admin)
                     <div class="d-flex flex-wrap justify-center row">

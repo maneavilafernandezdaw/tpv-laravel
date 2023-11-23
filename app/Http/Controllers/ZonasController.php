@@ -59,6 +59,7 @@ class ZonasController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::check()) {
         $request->validate([
             'nombre' => 'required|max:30',
             'mesas' => 'required',
@@ -77,6 +78,8 @@ class ZonasController extends Controller
                 ->with('mensaje', 'Existe una zona con ese nombre.');
         }
     }
+    return view('welcome');
+    }
 
 
     /**
@@ -84,6 +87,7 @@ class ZonasController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        if (Auth::check()) {
         $request->validate([
             'nombre' => 'required|max:30',
             'mesas' => 'required',
@@ -94,6 +98,9 @@ class ZonasController extends Controller
 
         return redirect()->route('zonas.index')
             ->with('mensaje', 'Zona actualizada correctamente.');
+        
+        }
+        return view('welcome');
     }
 
     /**
@@ -101,11 +108,13 @@ class ZonasController extends Controller
      */
     public function destroy(Request $request)
     {
-
+        if (Auth::check()) {
         $zona = Zona::where('id', $request->idzona);
         $zona->delete();
 
         return redirect()->route('zonas.index')
             ->with('mensaje', 'Zona eliminada correctamente');
-    }
+        }
+        return view('welcome');
+}
 }

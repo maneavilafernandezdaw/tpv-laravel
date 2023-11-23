@@ -15,13 +15,14 @@
 
 
 
-    <div class="d-md-none">
-        <!-- Button trigger modal Crear-->
+    <div class="">
+    
         <div class="d-flex justify-center">
             <a href={{ route('comandas.create', [$zona->id, $mesa]) }}>
-                <x-boton-comanda class="d-block d-md-hidden">
+             {{--    <x-boton-comanda class="d-block ">
                     {{ __('Volver a Productos') }}
-                </x-boton-comanda></a>
+                </x-boton-comanda></a> --}}
+                <button type="submit" class="btn btn-outline-success rounded-none w-screen text-3xl p-3 mb-3 shadow">Volver a Productos</button>
         </div>
     </div>
 
@@ -29,8 +30,11 @@
 
 
     {{-- tabla de pedido --}}
-    <div class=" ">
+    <div >
+        <div class="d-flex flex-col">
         <h3 class=" h3 text-center mt-2">Comanda</h3>
+        <h1 class="text-center"><a class="btn btn-outline-primary  rounded-none w-screen text-3xl p-3 mb-3 shadow" href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">Consultar cuenta</a></h1>
+    </div>
         <table class="table table-striped text-sm">
             <thead>
                 <tr>

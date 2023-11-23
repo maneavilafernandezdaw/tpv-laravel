@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Familia;
+use Illuminate\Support\Facades\Auth;
 
 class FamiliasController extends Controller
 {
@@ -13,9 +14,12 @@ class FamiliasController extends Controller
      */
     public function index()
     {
+        if (Auth::check()) {
         $familias = Familia::all();
 
         return view('familias.index', compact('familias'));
+    }
+    return view('welcome');
     }
 
     /**
@@ -23,6 +27,7 @@ class FamiliasController extends Controller
      */
     public function store(Request $request)
     {
+        if (Auth::check()) {
         $request->validate([
             'nombre' => 'required|max:30',
             
@@ -42,7 +47,8 @@ class FamiliasController extends Controller
               ->with('mensaje','Ya existe una Familia con ese nombre.');
           }
   
-  
+        }
+        return view('welcome');
           
 
     }
@@ -53,6 +59,7 @@ class FamiliasController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        if (Auth::check()) {
         $request->validate([
             'nombre' => 'required|max:30',
            
@@ -63,6 +70,8 @@ class FamiliasController extends Controller
 
         return redirect()->route('familias.index')
             ->with('mensaje', 'Familia actualizada correctamente.');
+        }
+        return view('welcome');
     }
 
     /**
@@ -70,18 +79,23 @@ class FamiliasController extends Controller
      */
     public function destroy(Request $request)
     {
-     
+        if (Auth::check()) {
         $familia = Familia::where('id', $request->idfamilia);
         $familia->delete();
 
         return redirect()->route('familias.index')
             ->with('mensaje', 'Familia eliminada correctamente');
+        }
+        return view('welcome');
     }
 
     public function edit($id)
     {
+        if (Auth::check()) {
         $familia = Familia::find($id);
 
         return view('familias.edit', compact('familia'));
+    }
+    return view('welcome');
     }
 }

@@ -27,7 +27,7 @@ class ProductosController extends Controller
         return view('welcome');
     }
 
-   
+
     /**
      * Display the specified resource.
      */
@@ -39,7 +39,6 @@ class ProductosController extends Controller
             return view('productos.show', compact('producto'));
         }
         return view('welcome');
-
     }
 
     /**
@@ -47,41 +46,44 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|max:30',
-            'descripcion' => 'max:300',
-            'precio' => 'required',
-            'iva' => 'required',
-            'familia_id' => 'required',
+        if (Auth::check()) {
+            $request->validate([
+                'nombre' => 'required|max:30',
+                'descripcion' => 'max:300',
+                'precio' => 'required',
+                'iva' => 'required',
+                'familia_id' => 'required',
 
 
-        ]);
+            ]);
 
-        $prod=Producto::where('nombre', $request->nombre)->first();
-        
-        // Si existe
-        if(!$prod){
-       
-        
-        $producto = $request->all();
+            $prod = Producto::where('nombre', $request->nombre)->first();
 
-        if ($request->file('imagen')) {
-            if ($imagen = $request->file('imagen')) {
-                $rutaGuardarImg = 'imagen/';
-                $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-                $imagen->move($rutaGuardarImg, $imagenProducto);
-                $producto['imagen'] = $imagenProducto;
+            // Si existe
+            if (!$prod) {
+
+
+                $producto = $request->all();
+
+                if ($request->file('imagen')) {
+                    if ($imagen = $request->file('imagen')) {
+                        $rutaGuardarImg = 'imagen/';
+                        $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+                        $imagen->move($rutaGuardarImg, $imagenProducto);
+                        $producto['imagen'] = $imagenProducto;
+                    }
+                }
+
+                Producto::create($producto);
+
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Producto creado correctamente.');
+            } else {
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Ya Existe un producto con ese nombre.');
             }
         }
-
-        Producto::create($producto);
-
-        return redirect()->route('productos.index')
-            ->with('mensaje', 'Producto creado correctamente.');
-    }else{
-        return redirect()->route('productos.index')
-        ->with('mensaje', 'Ya Existe un producto con ese nombre.');
-    }
+        return view('welcome');
     }
 
     /**
@@ -90,36 +92,36 @@ class ProductosController extends Controller
     public function update(Request $request,  $id)
     {
 
+        if (Auth::check()) {
+
+            $prod = Producto::find($id);
 
 
-        $prod = Producto::find($id);
+            $producto = $request->all();
+
+            if ($request->file('imagen')) {
+                if ($imagen = $request->file('imagen')) {
+                    $rutaGuardarImg = 'imagen/';
+                    $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
+                    $imagen->move($rutaGuardarImg, $imagenProducto);
+                    $producto['imagen'] = $imagenProducto;
+                }
 
 
-        $producto = $request->all();
+                $prod->update($producto);
 
-        if ($request->file('imagen')) {
-            if ($imagen = $request->file('imagen')) {
-                $rutaGuardarImg = 'imagen/';
-                $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-                $imagen->move($rutaGuardarImg, $imagenProducto);
-                $producto['imagen'] = $imagenProducto;
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Producto creado correctamente.');
+            } else {
+
+                $producto['imagen'] = $prod->imagen;
+                $prod->update($producto);
+
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Producto actualizado correctamente.');
             }
-        
-        
-            $prod->update($producto);
-
-        return redirect()->route('productos.index')
-            ->with('mensaje', 'Producto creado correctamente.');
-       } else{
-
-            $producto['imagen'] = $prod->imagen;
-            $prod->update($producto);
-    
-            return redirect()->route('productos.index')
-                ->with('mensaje', 'Producto actualizado correctamente.');
         }
-
-
+        return view('welcome');
     }
 
     /**
@@ -127,11 +129,13 @@ class ProductosController extends Controller
      */
     public function destroy(Request $request)
     {
+        if (Auth::check()) {
+            $producto = Producto::where('id', $request->idproducto);
+            $producto->delete();
 
-        $producto = Producto::where('id', $request->idproducto);
-        $producto->delete();
-
-        return redirect()->route('productos.index')
-            ->with('mensaje', 'Producto eliminado correctamente');
+            return redirect()->route('productos.index')
+                ->with('mensaje', 'Producto eliminado correctamente');
+        }
+        return view('welcome');
     }
 }

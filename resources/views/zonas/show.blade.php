@@ -1,26 +1,27 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand h1 text-white" href={{ route('comandas.index') }}>Volver</a>
-        </div>
-    </nav>
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
+    <div>
+        <h1 class=" h1 text-center  mt-2">Crear Comanda</h1>
+    </div>
 
-<div>
-    <h1 class=" h1 text-center text-gray-700 mt-2">Crear Comanda</h1>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle">
+        <div class="container-fluid">
+            <a class="navbar-brand text-2xl" href={{ route('home') }}>Inicio</a>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}>Volver</a>
+        </div>
+    </nav>
 
-</div>
+    <div class="container mt-3 card  rounded-none">
 
-    <div class="container mt-3 card bg-gray-700 rounded-none">
-
-        <h1 class="text-white h1 text-center mt-2">{{ $zona->nombre }}</h1>
+        <h1 class=" h1 text-center mt-2">Mesas: {{ $zona->nombre }}</h1>
 
 
-        <div class="card-body bg-gray-300 rounded-none my-2 d-flex flex-wrap gap-2 justify-center">
+        <div class="card-body rounded-none my-2 d-flex flex-wrap gap-3 justify-center">
+
+
 
             @for ($i = 1; $i <= $zona->mesas; $i++)
                 @php
@@ -37,15 +38,16 @@
                         @endif
                     @endforeach
                     @if ($ocupada > 0)
-                        <div class="card rounded-none ">
-                            <div class="card-body text-center bg-red-500">
-                                <h5>Mesa</h5>
-                                <h5 class="card-title text-xl ">{{ $i }}</h5>
+                        <div class="card w-24 h-24 border border-danger border-2 position-relative">
+                            <div class="position-absolute top-50 start-50 translate-middle  fw-bold text-danger">
+
+                                <h5 class=" text-3xl  text-center">{{ $i }}</h5>
                             @else
-                                <div class="card rounded-none">
-                                    <div class="card-body text-center bg-green-500">
-                                        <h5>Mesa</h5>
-                                        <h5 class="card-title text-xl">{{ $i }}</h5>
+                                <div class="card w-24 h-24 border border-primary border-2 position-relative">
+                                    <div
+                                        class="position-absolute top-50 start-50 translate-middle  fw-bold text-primary">
+
+                                        <h5 class=" text-3xl  text-center">{{ $i }}</h5>
                     @endif
 
 

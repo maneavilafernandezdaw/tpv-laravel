@@ -42,9 +42,12 @@ class ComandasController extends Controller
      */
     public function show($id)
     {
-        $zona = Zona::find($id);
+        if (Auth::check()) {
+            $zona = Zona::find($id);
 
-        return view('zonas.show', compact('zona'));
+            return view('zonas.show', compact('zona'));
+        }
+        return view('welcome');
     }
 
 
@@ -53,15 +56,15 @@ class ComandasController extends Controller
         if (Auth::check()) {
             $mesa = $m;
             $zona = Zona::find($z);
-            $productos = Producto::all();
+            $productos = Producto::all()->where('familia_id','!=', 1);
+            $general = Producto::all()->where('familia_id','=', 1);
             $familias = Familia::all();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
-    
-            return view('comandas.create', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
+
+            return view('comandas.create', compact('zona', 'mesa', 'productos','general', 'familias', 'comandas'));
         }
         return view('welcome');
-
     }
 
 
@@ -74,11 +77,12 @@ class ComandasController extends Controller
             $productos = Producto::all();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'Enviada');
-    
+
+
+
             return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas'));
         }
         return view('welcome');
-
     }
 
     public function pedido($z, $m)
@@ -90,64 +94,78 @@ class ComandasController extends Controller
             $familias = Familia::all();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
-    
+
             return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
         }
         return view('welcome');
-
     }
     /**
      * Store a newly created resource in storage.
      *//*  */
     public function store(Request $request)
     {
-        $comanda = Comanda::where('mesa', $request->mesa)
-            ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->where('producto_id', $request->producto_id)->first();
+        if (Auth::check()) {
+            $comanda = Comanda::where('mesa', $request->mesa)
+                ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->where('producto_id', $request->producto_id)->first();
 
-        if ($comanda) {
+            if ($comanda) {
 
-            $comanda->increment('cantidad');
+                $comanda->increment('cantidad');
 
-            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
-        } else {
-            Comanda::create($request->all());
-            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+            } else {
+                Comanda::create($request->all());
+                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+            }
         }
+        return view('welcome');
     }
 
 
     public function incrementar(Request $request)
     {
-        $comanda = Comanda::find($request->comanda_id);
-        $comanda->increment('cantidad');
-        return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+        if (Auth::check()) {
+            $comanda = Comanda::find($request->comanda_id);
+            $comanda->increment('cantidad');
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+        }
+        return view('welcome');
     }
 
     public function decrementar(Request $request)
     {
-        $comanda = Comanda::find($request->comanda_id);
-        $comanda->decrement('cantidad');
-        if($comanda->cantidad < 1){
-            $comanda->delete();  
+        if (Auth::check()) {
+            $comanda = Comanda::find($request->comanda_id);
+            $comanda->decrement('cantidad');
+            if ($comanda->cantidad < 1) {
+                $comanda->delete();
+            }
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
         }
-        return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+        return view('welcome');
     }
 
     public function incrementarTabla(Request $request)
     {
-        $comanda = Comanda::find($request->comanda_id);
-        $comanda->increment('cantidad');
-        return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
+        if (Auth::check()) {
+            $comanda = Comanda::find($request->comanda_id);
+            $comanda->increment('cantidad');
+            return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
+        }
+        return view('welcome');
     }
 
     public function decrementarTabla(Request $request)
     {
-        $comanda = Comanda::find($request->comanda_id);
-        $comanda->decrement('cantidad');
-        if($comanda->cantidad < 1){
-            $comanda->delete();  
+        if (Auth::check()) {
+            $comanda = Comanda::find($request->comanda_id);
+            $comanda->decrement('cantidad');
+            if ($comanda->cantidad < 1) {
+                $comanda->delete();
+            }
+            return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
         }
-        return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
+        return view('welcome');
     }
 
     /**
@@ -155,72 +173,78 @@ class ComandasController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        $request->validate([
-            'nombre' => 'required|max:30',
-            'mesas' => 'required',
-        ]);
+        if (Auth::check()) {
+            $request->validate([
+                'nombre' => 'required|max:30',
+                'mesas' => 'required',
+            ]);
 
-        $zona = Zona::find($id);
-        $zona->update($request->all());
+            $zona = Zona::find($id);
+            $zona->update($request->all());
 
-        return redirect()->route('zonas.index')
-            ->with('mensaje', 'Zona actualizada correctamente.');
+            return redirect()->route('zonas.index')
+                ->with('mensaje', 'Zona actualizada correctamente.');
+        }
+        return view('welcome');
     }
 
     public function enviar(Request $request)
     {
-     
+        if (Auth::check()) {
 
-        $comandas = Comanda::where('mesa', $request->mesa)
-            ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
+            $comandas = Comanda::where('mesa', $request->mesa)
+                ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
 
 
-   
-            foreach ($comandas as $comanda){
+
+            foreach ($comandas as $comanda) {
                 $comanda->estado = 'Enviada';
                 $comanda->save();
             }
-                $zonas = Zona::all();
+            $zonas = Zona::all();
 
-                return view('comandas.index', compact('zonas'))
-            ->with('mensaje', 'Comanda Enviada Correctamente.');
-
+            return view('comandas.index', compact('zonas'))
+                ->with('mensaje', 'Comanda Enviada Correctamente.');
+        }
+        return view('welcome');
     }
 
 
     public function eliminarComanda(Request $request)
     {
-     
+        if (Auth::check()) {
 
-        $comandas = Comanda::where('mesa', $request->mesa)
-            ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
+            $comandas = Comanda::where('mesa', $request->mesa)
+                ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
 
 
-   
-            foreach ($comandas as $comanda){
-           
+
+            foreach ($comandas as $comanda) {
+
                 $comanda->delete();
             }
-                $zonas = Zona::all();
-                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa])
-            ->with('mensaje', 'Comanda Eliminada Correctamente.');
-
+            $zonas = Zona::all();
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa])
+                ->with('mensaje', 'Comanda Eliminada Correctamente.');
+        }
+        return view('welcome');
     }
 
     public function eliminarCuenta(Request $request)
     {
-     
+        if (Auth::check()) {
 
-        $comandas = Comanda::where('mesa', $request->mesa)
-            ->where('zona_id', $request->zona_id)->get();
+            $comandas = Comanda::where('mesa', $request->mesa)
+                ->where('zona_id', $request->zona_id)->get();
 
 
-   
-            foreach ($comandas as $comanda){
-           
+
+            foreach ($comandas as $comanda) {
+
                 $comanda->delete();
             }
             return view('home');
-
+        }
+        return view('welcome');
     }
 }
