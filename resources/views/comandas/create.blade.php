@@ -8,10 +8,11 @@
         <h1 class=" h1 text-center mt-2"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</h1>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}>Volver a zonas</a>
+    <nav>
+        <div class="container-fluid d-flex gap-2 justify-center mb-2">
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-admin>Volver a
+                    zonas</x-boton-admin></a>
         </div>
     </nav>
 
@@ -35,9 +36,9 @@
             </div>
 
             @if (Auth::user()->admin)
-            <h3 class=" h3 text-center mt-2">General</h3>
+                <h3 class=" h3 text-center mt-2">General</h3>
 
-          
+
                 <div class=" my-3 d-flex flex-wrap gap-2 justify-center">
 
                     @foreach ($general as $producto)
@@ -64,7 +65,7 @@
                                     <div class="card-body  d-flex justify-center items-center p-0">
 
                                         @if ($producto->imagen)
-                                            <img src="../../../imagen/{{ $producto->imagen }}" class=" h-24 w-24"
+                                            <img src="../../../imagen/{{ $producto->imagen }}" class=" h-20 w-20"
                                                 alt="imagen producto">
                                         @else
                                             <h5 class="card-title  text-lg fw-bold text-center mb-0 ">
@@ -109,7 +110,7 @@
                                 <div class="card-body  d-flex justify-center items-center p-0">
 
                                     @if ($producto->imagen)
-                                        <img src="../../../imagen/{{ $producto->imagen }}" class=" h-24 w-24"
+                                        <img src="../../../imagen/{{ $producto->imagen }}" class=" h-24 w-24 rounded-full"
                                             alt="imagen producto">
                                     @else
                                         <h5 class="card-title  text-lg fw-bold text-center mb-0 ">
@@ -129,7 +130,11 @@
         {{-- tabla de pedido --}}
         <div class="hidden d-md-block col-md-4">
             <h3 class=" h3 text-center mt-2">Comanda</h3>
-            <a class="btn btn-primary rou d-block text-4xl p-3 mb-3" href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">Consultar cuenta</a>
+
+            <a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">
+                <x-boton-consultar>
+                    {{ __('Consultar cuenta') }}
+                </x-boton-consultar></a>
             <table class="table table-striped text-sm  border border-collapse">
                 <thead>
                     <tr>
@@ -147,14 +152,12 @@
                                     @if ($producto->id === $comanda->producto_id)
                                         {{ $producto->nombre }}
                                     @endif
-                                    
                                 @endforeach
                                 @foreach ($general as $producto)
-                                @if ($producto->id === $comanda->producto_id)
-                                    {{ $producto->nombre }}
-                                @endif
-                                
-                            @endforeach
+                                    @if ($producto->id === $comanda->producto_id)
+                                        {{ $producto->nombre }}
+                                    @endif
+                                @endforeach
                             </td>
                             <td>
                                 <div class="d-flex gap-2 justify-center">

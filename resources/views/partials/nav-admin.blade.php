@@ -5,29 +5,35 @@
         @if(Auth::user()->admin)
         
         <a href="{{ route('zonas.index') }}" class="">
-            <x-primary-button class="  h-16  text-lg  min-w-full">
+     
+            <x-boton-admin class="  h-16  text-lg  min-w-full">
                 {{ __('Zonas') }}
-            </x-primary-button>
+            </x-boton-admin>
         </a>
         <a href="{{ route('familias.index') }}">
-            <x-primary-button class="  h-16  text-lg  min-w-full">
+            <x-boton-admin class="  h-16  text-lg  min-w-full">
                 {{ __('Familias') }}
-            </x-primary-button>
+            </x-boton-admin>
         </a>
         <a href="{{ route('productos.index') }}">
-            <x-primary-button class="  h-16  text-lg  min-w-full">
+            <x-boton-admin class="  h-16  text-lg  min-w-full">
                 {{ __('Productos') }}
-            </x-primary-button>
+            </x-boton-admin>
+        </a>
+        <a href="{{ route('clientes.index') }}">
+            <x-boton-admin class="  h-16  text-lg  min-w-full">
+                {{ __('Clientes') }}
+            </x-boton-admin>
         </a>
         <a href="{{ route('cobros.index') }}">
-            <x-primary-button class="  h-16  text-lg  min-w-full">
+            <x-boton-admin class="  h-16  text-lg  min-w-full">
                 {{ __('Cobros') }}
-            </x-primary-button>
+            </x-boton-admin>
         </a>
         <a href="{{ route('cajas.index') }}">
-            <x-primary-button class="  h-16  text-lg  min-w-full">
+            <x-boton-admin class="  h-16  text-lg  min-w-full">
                 {{ __('Cajas') }}
-            </x-primary-button>
+            </x-boton-admin>
         </a>
       
 @endif

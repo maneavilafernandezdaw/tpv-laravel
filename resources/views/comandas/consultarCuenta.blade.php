@@ -1,11 +1,6 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light  bg-primary-subtle">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand text-2xl" href={{ route('comandas.cuenta') }}>Volver a zonas</a>
-        </div>
-    </nav>
+ 
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
@@ -13,12 +8,19 @@
         <h1 class=" h1 text-center mt-3"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</h1>
     </div>
 
+    <nav>
+        <div class="container-fluid d-flex justify-center gap-2">
+            <a href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+            <a href="{{ route('comandas.create', [$zona->id, $mesa]) }}"><x-boton-admin>Volver</x-boton-admin></a>
+          
+        </div>
+    </nav>
 
     <div class="container">
         <div class="row">
             {{-- tabla de pedido --}}
             <div class="col-sm-6">
-                <h1 class=" h1 text-center mt-3">Cuenta</h1>
+                <h1 class=" h2 text-center ">Cuenta</h1>
                 <table class="table table-striped text-sm">
                     <thead>
                         <tr>
@@ -70,12 +72,12 @@
 
 
             <div class="col-sm-6">
-                <h1 class=" h1 text-center m-4">Total: {{ $total }}€ </h1>
+                <h1 class=" h2 text-center ">Total: {{ $total }}€ </h1>
                
                 @if (isset($comanda) && Auth::user()->admin)
-                    <div class="d-flex flex-wrap justify-center row">
+                    <div class="d-flex flex-col items-center row">
                          {{-- botón efectivo --}}
-                        <div class="col-lg-6 pb-2">
+                        <div class="col-lg-8 pb-2 ">
                             <form action="{{ route('cobros.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -98,7 +100,7 @@
                             </form>
                         </div>
                          {{-- botón tarjeta --}}
-                        <div class="col-lg-6  pb-2">
+                        <div class="col-lg-8  pb-2">
                             <form action="{{ route('cobros.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
@@ -120,8 +122,31 @@
 
                             </form>
                         </div>
+                                       {{-- botón bizum --}}
+                                       <div class="col-lg-8 pb-2 ">
+                                        <form action="{{ route('cobros.store') }}" method="post">
+                                            @csrf
+                                            <div class="form-group">
+                                                <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" id="cantidad" name="cantidad" value="{{ $total }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="hidden" id="tipo" name="tipo" value="Bizum">
+                                            </div>
+            
+                                            <x-boton-cobrar>
+                                                {{ __('Bizum') }}
+                                            </x-boton-cobrar>
+            
+                                        </form>
+                                    </div>
                      <!-- Button trigger modal Eliminar-->
-                        <div class="col-lg-6 pb-2">
+                        <div class="col-lg-8 pb-2">
                    
                                 <x-boton-eliminar-cuenta  data-bs-toggle="modal" data-bs-target="#modalEliminar">
                                     {{ __('Eliminar') }}

@@ -9,6 +9,7 @@ use App\Http\Controllers\ComandasController;
 use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\CobrosController;
 use App\Http\Controllers\CajasController;
+use App\Http\Controllers\ClientesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,16 @@ Route::controller(FamiliasController::class)->group(function () {
     Route::delete('familias/{familia}/destroy', 'destroy')->name('familias.destroy');
 });
 
+Route::controller(ClientesController::class)->group(function () {
+    Route::get('clientes', 'index')->name('clientes.index');
+    Route::get('clientes/create', 'create')->name('clientes.create');
+    Route::post('clientes', 'store')->name('clientes.store');
+    Route::get('clientes/{cliente}', 'show')->name('clientes.show');
+    Route::get('clientes/{cliente}/edit', 'edit')->name('clientes.edit');
+    Route::put('clientes/{cliente}', 'update')->name('clientes.update');
+    Route::delete('clientes/{cliente}/destroy', 'destroy')->name('clientes.destroy');
+});
+
 Route::controller(ProductosController::class)->group(function () {
     Route::get('productos', 'index')->name('productos.index');
     Route::get('productos/create', 'create')->name('productos.create');
@@ -71,11 +82,10 @@ Route::controller(ProductosController::class)->group(function () {
 
 Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas', 'index')->name('comandas.index');
-    Route::get('comandas/cuenta', 'cuenta')->name('comandas.cuenta');
     Route::get('comandas/create/{zona}/{mesa}', 'create')->name('comandas.create');
     Route::get('comandas/cuenta/{zona}/{mesa}', 'consultarCuenta')->name('comandas.consultarCuenta');
     Route::get('comandas/pedido/{zona}/{mesa}', 'pedido')->name('comandas.pedido');
-    Route::post('comandas', 'store')->name('comandas.store');
+    Route::post('comandas/store', 'store')->name('comandas.store');
     Route::post('comandas/incrementar', 'incrementar')->name('comandas.incrementar');
     Route::post('comandas/decrementar', 'decrementar')->name('comandas.decrementar');
     Route::post('comandas/incrementarTabla', 'incrementarTabla')->name('comandas.incrementarTabla');
@@ -108,4 +118,3 @@ Route::controller(DatatableController::class)->group(function () {
 });
 
 
-Route::resource('products-ajax-crud', ProductAjaxController::class);

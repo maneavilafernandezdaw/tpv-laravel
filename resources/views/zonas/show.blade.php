@@ -4,13 +4,13 @@
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
     <div>
-        <h1 class=" h1 text-center  mt-2">Crear Comanda</h1>
+        <h1 class="text-center h1 mt-3">CREAR COMANDA</h1>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}>Volver</a>
+    <nav>
+        <div class="container-fluid d-flex justify-center gap-2">
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-admin>Volver</x-boton-admin></a>
         </div>
     </nav>
 

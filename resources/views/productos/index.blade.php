@@ -1,9 +1,9 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
-            <h1 class="text-white h1">Productos</h1>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin> Inicio</x-boton-admin></a>
+            <h1 class=" h1">PRODUCTOS</h1>
             <div class="justify-end ">
                 <div class="col ">
 
@@ -18,7 +18,7 @@
                         <div class="modal-dialog ">
                             <div class="modal-content">
                                 <div class="modal-header  bg-green-600">
-                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Zona</h1>
+                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Producto</h1>
 
                                 </div>
                                 <div class="modal-body">
@@ -62,12 +62,12 @@
                                             <img id="imagenSeleccionada" class="max-h-40">
                                         </div>
 
-                                        <div class="form-group">
+                                        {{-- <div class="form-group">
                                             <label for="imagen">Imagen</label>
                                             <input type="file"
                                                 class="form-control rounded-md border border-neutral-900 p-2 "
                                                 id="imagen" name="imagen">
-                                        </div><br>
+                                        </div> --}}<br>
 
                                         <x-boton-crear>
                                             {{ __('Aceptar') }}
@@ -90,7 +90,7 @@
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
 
-    <div class="container mt-3 card bg-gray-700 rounded-none">
+    <div class="container mt-3 card rounded-none">
 
 
 
@@ -105,7 +105,7 @@
                         <th>FAMILIA</th>
                         <th>PRECIO</th>
                         <th>IVA</th>
-                        <th>IMAGEN</th>
+                        {{-- <th>IMAGEN</th> --}}
                         <th></th>
 
 
@@ -127,14 +127,14 @@
                             <td class="fw-bold text-xl align-middle">{{ $producto->precio }}€</td>
                             <td class="fw-bold text-xl align-middle">{{ $producto->iva }}%</td>
                             {{-- <td class="fw-bold text-xl align-middle">{{ $producto->imagen }}</td> --}}
-                            <td class="fw-bold text-xl align-middle">
+                            {{--      <td class="fw-bold text-xl align-middle">
                                 @if ($producto->imagen)
                                     <img src="imagen/{{ $producto->imagen }}"
                                         class="h-24 w-24 rounded-full  border border-black" alt="imagen producto">
                                 @else
                                     Sin Imagen
                                 @endif
-                            </td>
+                            </td> --}}
                             <td class="fw-bold text-xl align-middle">
                                 <div class="d-flex justify-end gap-4">
                                     <div>
@@ -182,8 +182,14 @@
                                                                     id="familia_id" name="familia_id" required
                                                                     value="{{ $producto->familia_id }}">
                                                                     @foreach ($familias as $familia)
-                                                                        <option value="{{ $familia->id }}">
-                                                                            {{ $familia->nombre }}</option>
+                                                                        @if ($familia->id === $producto->familia_id)
+                                                                            <option value="{{ $familia->id }}"
+                                                                                selected>
+                                                                                {{ $familia->nombre }}</option>
+                                                                        @else
+                                                                            <option value="{{ $familia->id }}">
+                                                                                {{ $familia->nombre }}</option>
+                                                                        @endif
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -201,18 +207,20 @@
                                                                 <input type="number" class="form-control rounded-md"
                                                                     id="iva" name="iva"
                                                                     value="{{ $producto->iva }}">
-                                                            </div>
-                                                            <div>
-                                                                <img src="imagen/{{ $producto->imagen }}"
-                                                                    id="imagenSeleccionada" class="max-h-40">
-                                                            </div>
+                                                            </div><br>
 
-                                                            <div class="form-group">
+
+                                                            {{-- <div class="form-group">
                                                                 <label for="imagen">Imagen</label>
                                                                 <input type="file"
                                                                     class="form-control rounded-md border border-neutral-900 p-2 "
                                                                     id="imagen" name="imagen">
-                                                            </div><br>
+                                                                    @if ($producto->imagen)
+                                                                    <img src="imagen/{{ $producto->imagen }}"
+                                                                        class="h-24 w-24 rounded-full  border border-black" alt="imagen producto">
+                                                             
+                                                                @endif
+                                                            </div><br> --}}
 
                                                             <x-boton-editar>
                                                                 {{ __('Aceptar') }}

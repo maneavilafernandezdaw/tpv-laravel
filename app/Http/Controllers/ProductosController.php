@@ -92,26 +92,28 @@ class ProductosController extends Controller
     public function update(Request $request,  $id)
     {
 
+        $prod = Producto::find($id);
         if (Auth::check()) {
 
-            $prod = Producto::find($id);
+
 
 
             $producto = $request->all();
 
             if ($request->file('imagen')) {
-                if ($imagen = $request->file('imagen')) {
-                    $rutaGuardarImg = 'imagen/';
-                    $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
-                    $imagen->move($rutaGuardarImg, $imagenProducto);
-                    $producto['imagen'] = $imagenProducto;
-                }
+
+
+                $rutaGuardarImg = 'imagen/';
+                $imagenProducto = date('YmdHis') . "." . $request->file('imagen')->getClientOriginalExtension();
+                $request->file('imagen')->move($rutaGuardarImg, $imagenProducto);
+                $producto['imagen'] = $imagenProducto;
+
 
 
                 $prod->update($producto);
 
                 return redirect()->route('productos.index')
-                    ->with('mensaje', 'Producto creado correctamente.');
+                    ->with('mensaje', 'Producto actualizado correctamente.');
             } else {
 
                 $producto['imagen'] = $prod->imagen;
@@ -120,8 +122,9 @@ class ProductosController extends Controller
                 return redirect()->route('productos.index')
                     ->with('mensaje', 'Producto actualizado correctamente.');
             }
+        } else {
+            return view('welcome');
         }
-        return view('welcome');
     }
 
     /**

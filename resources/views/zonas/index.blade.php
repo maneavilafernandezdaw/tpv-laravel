@@ -1,9 +1,9 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
+    <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
-            <h1 class="text-white h1">ZONAS</h1>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin>Inicio</x-boton-admin></a>
+            <h1 class=" h1">ZONAS</h1>
             <div class="justify-end ">
                 <div class="col ">
 
@@ -58,7 +58,7 @@
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
 
-    <div class="container mt-3 card bg-gray-700 rounded-none">
+    <div class="container mt-3 card rounded-none">
 
 
 

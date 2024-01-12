@@ -3,14 +3,14 @@
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
             <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
-            <h1 class=" h1">FAMILIAS</h1>
+            <h1 class=" h1">CLIENTES</h1>
             <div class="justify-end ">
                 <div class="col ">
 
                     <!-- Button trigger modal Crear-->
                   
                     <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear">
-                        {{ __('Nueva') }}
+                        {{ __('Nuevo') }}
                     </x-boton-crear>
                     <!-- Modal Crear-->
                     <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
@@ -18,17 +18,32 @@
                         <div class="modal-dialog ">
                             <div class="modal-content">
                                 <div class="modal-header  bg-green-600">
-                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Familia</h1>
+                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Cliente</h1>
 
                                 </div>
                                 <div class="modal-body">
 
-                                    <form action="{{ route('familias.store') }}" method="post">
+                                    <form action="{{ route('clientes.store') }}" method="post">
                                         @csrf
+                                        <div class="form-group">
+                                            <label for="cif">Cif o Nif</label>
+                                            <input type="text" class="form-control rounded-md" id="cif"
+                                                name="cif" required >
+                                        </div>
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" class="form-control rounded-md" id="nombre"
-                                                name="nombre" required maxlength="30">
+                                                name="nombre" required >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="direccion">Dirección</label>
+                                            <input type="text" class="form-control rounded-md" id="direccion"
+                                                name="direccion" required >
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email">Email</label>
+                                            <input type="email" class="form-control rounded-md" id="email"
+                                                name="email" required >
                                         </div>
                                   
                                         <br>
@@ -64,50 +79,68 @@
                 <thead>
                     <tr>
 
+                        <th>CIF/NIF</th>
                         <th>NOMBRE</th>
-                        
+                        <th>DIRECCIÓN</th>
+                        <th>EMAIL</th>
                         <th></th>
 
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($familias as $familia)
+                    @foreach ($clientes as $cliente)
                         <tr>
-
-                            <td class="fw-bold text-xl align-middle">{{ $familia->nombre }}</td>
-                   
-
+                            <td class="fw-bold text-xl align-middle">{{ $cliente->cif }}</td>
+                            <td class="fw-bold text-xl align-middle">{{ $cliente->nombre }}</td>
+                            <td class="fw-bold text-xl align-middle">{{ $cliente->direccion }}</td>
+                            <td class="fw-bold text-xl align-middle">{{ $cliente->email }}</td>
                             <td>
                                 <div class="d-flex justify-end gap-4">
                                     <div>
                                         <!-- Button trigger modal Editar-->
                                   
-                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $familia->id }}">
+                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $cliente->id }}">
                                             {{ __('Editar') }}
                                         </x-boton-editar>
                                         <!-- Modal Editar-->
-                                        <div class="modal fade" id="modalEditar{{ $familia->id }}" tabindex="-1"
+                                        <div class="modal fade" id="modalEditar{{ $cliente->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
                                             <div class="modal-dialog text-black">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-blue-600">
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
-                                                            Editar Familia
+                                                            Editar Cliente
                                                         </h1>
 
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <form action="{{ route('familias.update', $familia->id) }}"
+                                                        <form action="{{ route('clientes.update', $cliente->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('PUT')
+                                                            
+                                                            <div class="form-group">
+                                                                <label for="cif">Cif o Nif</label>
+                                                                <input type="text" class="form-control rounded-md" id="cif"
+                                                                    name="cif" required value="{{ $cliente->cif }}" >
+                                                            </div>
                                                             <div class="form-group">
                                                                 <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control  rounded-md"
-                                                                    id="nombre" name="nombre" required
-                                                                    maxlength="30" value="{{ $familia->nombre }}">
+                                                                <input type="text" class="form-control rounded-md" id="nombre"
+                                                                    name="nombre" required value="{{ $cliente->nombre }}">
                                                             </div>
+                                                            <div class="form-group">
+                                                                <label for="direccion">Dirección</label>
+                                                                <input type="text" class="form-control rounded-md" id="direccion"
+                                                                    name="direccion" required value="{{ $cliente->direccion }}" >
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="email">Email</label>
+                                                                <input type="email" class="form-control rounded-md" id="email"
+                                                                    name="email" required  value="{{ $cliente->email }}">
+                                                            </div>
+                                                      
                                         
                                                             <br>
 
@@ -132,33 +165,33 @@
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
-                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $familia->id }}">
+                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $cliente->id }}">
                                             {{ __('Eliminar') }}
                                         </x-boton-eliminar>
                                         <!-- Modal Eliminar-->
-                                        <div class="modal fade" id="modalEliminar{{ $familia->id }}" tabindex="-1"
+                                        <div class="modal fade" id="modalEliminar{{ $cliente->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
                                             <div class="modal-dialog text-black">
                                                 <div class="modal-content">
                                                     <div class="modal-header  bg-red-600">
-                                                        <h1 class="modal-title fs-5 text-white">Eliminar Familia
+                                                        <h1 class="modal-title fs-5 text-white">Eliminar Cliente
                                                         </h1>
 
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
-                                                            <p class="text-black">¿Está seguro que desea eliminar la
-                                                                familia {{ $familia->nombre }} ?</p>
+                                                            <p class="text-black">¿Está seguro que desea eliminar el
+                                                                cliente {{ $cliente->nombre }} ?</p>
 
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <form action="{{ route('familias.destroy', $familia->id) }}"
+                                                        <form action="{{ route('clientes.destroy', $cliente->id) }}"
                                                             method="post">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <input type="hidden" name="idfamilia" id="idfamilia"
-                                                                value="{{ $familia->id }}">
+                                                            <input type="hidden" name="idcliente" id="idcliente"
+                                                                value="{{ $cliente->id }}">
 
                                                                 <x-boton-eliminar>
                                                                     {{ __('Eliminar') }}

@@ -1,17 +1,17 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
-            <h1 class="text-white h1">Cajas</h1>
-            <div></div>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid relative">
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+            <h1 class=" h1">Cajas</h1>
+          <div class="w-40"></div>
         </div>
     </nav>
 
   {{-- session mensaje  --}}
   @include('partials.session-mensaje')
 
-    <div class="container mt-3 card bg-gray-700 rounded-none">
+    <div class="container mt-3 card rounded-none">
         <div class="card-body bg-gray-300 rounded-none my-3">
            
             <table id="tabla_Datatables" class="table  table-striped table-hover ">

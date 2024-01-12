@@ -6,10 +6,10 @@
         <h1 class="text-center h1 mt-3">CREAR COMANDA</h1>
     </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary-subtle">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}>Inicio</a>
-           
+    <nav>
+        <div class="container-fluid d-flex justify-center">
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+
         </div>
     </nav>
 
@@ -24,17 +24,41 @@
 
 
         <div class="card-body  my-3 d-flex gap-3 flex-wrap justify-center">
-
+            @php
+            $ocupada = 0;
+        @endphp
             @foreach ($zonas as $zona)
-                <a href="{{ route('zonas.show', $zona->id) }}">
-                    <div class="card border border-primary border-2 shadow">
-                        <div class="card-body  text-center">
-                            <h3 class="card-title fw-bold text-xl">{{ $zona->nombre }}</h3>
-                            <h5>Nº de mesas:</h5>
-                            <h5 class="card-title text-xl">{{ $zona->mesas }}</h5>
+                @foreach ($comandas as $comanda)
+                    @php
+                        $ocupada = 0;
+                    @endphp
+                    @if ($comanda->zona_id === $zona->id)
+                        @php
+                            $ocupada = 1;
+                        @endphp
+                    @endif
+                @endforeach
+                @if ($ocupada > 0)
+                    <a href="{{ route('zonas.show', $zona->id) }}">
+                        <div class="card border border-danger border-2 shadow">
+                            <div class="card-body  text-center">
+                                <h3 class="card-title fw-bold text-xl">{{ $zona->nombre }}</h3>
+                                <h5>Nº de mesas:</h5>
+                                <h5 class="card-title text-xl">{{ $zona->mesas }}</h5>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                @else
+                    <a href="{{ route('zonas.show', $zona->id) }}">
+                        <div class="card border border-primary border-2 shadow">
+                            <div class="card-body  text-center">
+                                <h3 class="card-title fw-bold text-xl">{{ $zona->nombre }}</h3>
+                                <h5>Nº de mesas:</h5>
+                                <h5 class="card-title text-xl">{{ $zona->mesas }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                @endif
             @endforeach
 
 

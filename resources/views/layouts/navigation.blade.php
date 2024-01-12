@@ -1,17 +1,17 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 p-1">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-4 ">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        <x-application-logo />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
-   
+
             </div>
             <div class="hidden space-x-8 lg:-my-px lg:ml-10 lg:flex">
                 {{-- nav-admin  --}}
@@ -26,6 +26,7 @@
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
+
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
@@ -74,12 +75,12 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden lg:hidden">
         <div class="d-flex items-center justify-between bg-indigo-50">
-        
-        <h1 class="ms-2">Administración</h1>
 
-       
-         <!-- Settings Dropdown -->
-         
+            <h1 class="ms-2">Administración</h1>
+
+
+            <!-- Settings Dropdown -->
+
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
                     <button
@@ -87,8 +88,7 @@
                         <div>{{ Auth::user()->name }}</div>
 
                         <div class="ml-1">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 20 20">
+                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                     clip-rule="evenodd" />
@@ -116,8 +116,8 @@
             </x-dropdown>
         </div>
 
-         {{-- nav-admin  --}}
-         
- @include('partials.nav-admin')
+        {{-- nav-admin  --}}
+
+        @include('partials.nav-admin')
     </div>
 </nav>

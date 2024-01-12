@@ -21,8 +21,14 @@ class ComandasController extends Controller
     {
         if (Auth::check()) {
             $zonas = Zona::all();
+            $comandas = Comanda::all();
+   
 
-            return view('comandas.index', compact('zonas'));
+
+
+
+
+            return view('comandas.index', compact('zonas','comandas'));
         }
         return view('welcome');
     }
@@ -56,13 +62,13 @@ class ComandasController extends Controller
         if (Auth::check()) {
             $mesa = $m;
             $zona = Zona::find($z);
-            $productos = Producto::all()->where('familia_id','!=', 1);
-            $general = Producto::all()->where('familia_id','=', 1);
+            $productos = Producto::all()->where('familia_id', '!=', 1);
+            $general = Producto::all()->where('familia_id', '=', 1);
             $familias = Familia::all();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
 
-            return view('comandas.create', compact('zona', 'mesa', 'productos','general', 'familias', 'comandas'));
+            return view('comandas.create', compact('zona', 'mesa', 'productos', 'general', 'familias', 'comandas'));
         }
         return view('welcome');
     }
@@ -202,8 +208,9 @@ class ComandasController extends Controller
                 $comanda->save();
             }
             $zonas = Zona::all();
+            $comandas=Comanda::all();
 
-            return view('comandas.index', compact('zonas'))
+            return view('comandas.index', compact('zonas','comandas'))
                 ->with('mensaje', 'Comanda Enviada Correctamente.');
         }
         return view('welcome');

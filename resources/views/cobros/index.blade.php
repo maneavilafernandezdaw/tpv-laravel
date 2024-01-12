@@ -1,9 +1,9 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl text-white" href={{ route('home') }}>Inicio</a>
-            <h1 class="text-white h1">Cobros</h1>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin>Inicio</x-boton-admin> </a>
+            <h1 class="h1">Cobros</h1>
             <div>
                 <a href="{{ route('cajas.store') }}"><x-boton-crear >
                     {{ __('Cerrar Caja') }}
@@ -13,9 +13,9 @@
         </div>
     </nav>
 
-    <div class="container mt-3 card bg-gray-700 rounded-none">
+    <div class="container mt-3 card rounded-none">
         <div class="card-body bg-gray-300 rounded-none my-3">
-            <h1 class="text-gray-700 h1">Total: {{ $total }}€</h1>
+            <h1 class=" h1">Total: {{ $total }}€</h1>
             <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
 

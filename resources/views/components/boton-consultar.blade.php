@@ -5,6 +5,6 @@
     {{ $slot }}
 </button> --}}
 
-<button {{ $attributes->merge(['type' => 'submit', 'class' => ' btn btn-outline-success w-full h-24 text-3xl  inline-flex items-center justify-center   font-semibold  uppercase  rounded-none']) }}>
+<button {{ $attributes->merge(['type' => 'submit', 'class' => ' btn btn-outline-primary w-full  text-4xl p-3 mb-3  rounded-none']) }}>
     {{ $slot }}
 </button>
