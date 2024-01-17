@@ -8,8 +8,14 @@ use App\Models\Comanda;
 use App\Models\Familia;
 use App\Models\Producto;
 use App\Models\Zona;
+use App\Models\Cliente;
 
 use Illuminate\Support\Facades\Auth;
+
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
+
+use Barryvdh\DomPDF\Facade as PDF;
 
 class ComandasController extends Controller
 {
@@ -37,6 +43,7 @@ class ComandasController extends Controller
     {
         if (Auth::check()) {
             $zonas = Zona::all();
+            
 
             return view('comandas.cuenta', compact('zonas'));
         }
@@ -83,10 +90,10 @@ class ComandasController extends Controller
             $productos = Producto::all();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'Enviada');
+                $clientes = Cliente::all();
 
 
-
-            return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas'));
+            return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'));
         }
         return view('welcome');
     }
@@ -209,6 +216,22 @@ class ComandasController extends Controller
             }
             $zonas = Zona::all();
             $comandas=Comanda::all();
+
+            try {
+                $connector = new WindowsPrintConnector("Adobe PDF"); // Reemplaza "NombreImpresora" con el nombre de tu impresora
+                $printer = new Printer($connector);
+        
+                // Contenido a imprimir
+                $printer->text("Texto de ejemplo\n");
+                $printer->cut();
+        
+                $printer->close();
+        
+                return view('comandas.index', compact('zonas','comandas'))
+                ->with('mensaje', 'Comanda Enviada Correctamente.');
+            } catch (\Exception $e) {
+                return "Error al imprimir: " . $e->getMessage();
+            }
 
             return view('comandas.index', compact('zonas','comandas'))
                 ->with('mensaje', 'Comanda Enviada Correctamente.');

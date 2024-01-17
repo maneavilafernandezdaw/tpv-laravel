@@ -1,6 +1,6 @@
 <x-app-layout>
 
- 
+
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
@@ -12,7 +12,7 @@
         <div class="container-fluid d-flex justify-center gap-2">
             <a href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
             <a href="{{ route('comandas.create', [$zona->id, $mesa]) }}"><x-boton-admin>Volver</x-boton-admin></a>
-          
+
         </div>
     </nav>
 
@@ -73,10 +73,10 @@
 
             <div class="col-sm-6">
                 <h1 class=" h2 text-center ">Total: {{ $total }}€ </h1>
-               
+
                 @if (isset($comanda) && Auth::user()->admin)
                     <div class="d-flex flex-col items-center row">
-                         {{-- botón efectivo --}}
+                        {{-- botón efectivo --}}
                         <div class="col-lg-8 pb-2 ">
                             <form action="{{ route('cobros.store') }}" method="post">
                                 @csrf
@@ -99,7 +99,7 @@
 
                             </form>
                         </div>
-                         {{-- botón tarjeta --}}
+                        {{-- botón tarjeta --}}
                         <div class="col-lg-8  pb-2">
                             <form action="{{ route('cobros.store') }}" method="post">
                                 @csrf
@@ -122,39 +122,45 @@
 
                             </form>
                         </div>
-                                       {{-- botón bizum --}}
-                                       <div class="col-lg-8 pb-2 ">
-                                        <form action="{{ route('cobros.store') }}" method="post">
-                                            @csrf
-                                            <div class="form-group">
-                                                <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="hidden" id="cantidad" name="cantidad" value="{{ $total }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="hidden" id="tipo" name="tipo" value="Bizum">
-                                            </div>
-            
-                                            <x-boton-cobrar>
-                                                {{ __('Bizum') }}
-                                            </x-boton-cobrar>
-            
-                                        </form>
-                                    </div>
-                     <!-- Button trigger modal Eliminar-->
-                        <div class="col-lg-8 pb-2">
-                   
-                                <x-boton-eliminar-cuenta  data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                    {{ __('Eliminar') }}
-                                </x-boton-eliminar-cuenta>
+                        {{-- botón bizum --}}
+                        <div class="col-lg-8 pb-2 ">
+                            <form action="{{ route('cobros.store') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="cantidad" name="cantidad" value="{{ $total }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="tipo" name="tipo" value="Bizum">
+                                </div>
 
-                 
-                            
-                       
+                                <x-boton-cobrar>
+                                    {{ __('Bizum') }}
+                                </x-boton-cobrar>
+
+                            </form>
+                        </div>
+
+
+
+       
+
+
+                        <!-- Button trigger modal Eliminar-->
+                        <div class="col-lg-8 pb-2">
+
+                            <x-boton-eliminar-cuenta data-bs-toggle="modal" data-bs-target="#modalEliminar">
+                                {{ __('Eliminar') }}
+                            </x-boton-eliminar-cuenta>
+
+
+
+
                             <!-- Modal Eliminar-->
                             <div class="modal fade" id="modalEliminar" tabindex="-1"
                                 aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -176,25 +182,101 @@
                                             <form action="{{ route('comandas.eliminarCuenta') }}" method="post">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
+                                                    <input type="hidden" id="mesa" name="mesa"
+                                                        value="{{ $mesa }}">
                                                 </div>
                                                 <div class="form-group">
-                                                    <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
+                                                    <input type="hidden" id="zona_id" name="zona_id"
+                                                        value="{{ $zona->id }}">
                                                 </div>
-                                  
-                                                    <x-boton-eliminar>
-                                                        {{ __('Eliminar') }}
-                                                    </x-boton-eliminar>
+
+                                                <x-boton-eliminar>
+                                                    {{ __('Eliminar') }}
+                                                </x-boton-eliminar>
 
                                             </form>
-                                            
+
                                             @include('components.boton-cancelar')
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                                                                            
                         </div>
+
+                         <!-- Button trigger modal Facturar-->
+                         <div class="col-lg-8 pb-2">
+
+                            <x-boton-cobrar data-bs-toggle="modal" data-bs-target="#modalFacturar">
+                                {{ __('Factura') }}
+                            </x-boton-cobrar>
+
+
+
+
+                            <!-- Modal Eliminar-->
+                            <div class="modal fade" id="modalFacturar" tabindex="-1"
+                                aria-labelledby="modalFacturarLabel" aria-hidden="true">
+                                <div class="modal-dialog text-black">
+                                    <div class="modal-content">
+                                        <div class="modal-header  bg-success">
+                                            <h1 class="modal-title fs-5 text-white">Crear Factura y Cobrar
+                                            </h1>
+
+                                        </div>
+                                        <div class="modal-body text-center">
+                                             {{-- botón factura --}}
+                        <div class=" ">
+                            <form action="{{ route('cobros.store') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="cantidad" name="cantidad" value="{{ $total }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="tipo" name="tipo" value="Bizum">
+                                </div>
+                                <label for="tipo">Tipo de cobro</label>
+                                <select class="form-select" aria-label="Default select example"
+                                    id="tipo" name="tipo" required>
+                                    <option value="Efectivo">Efectivo</option>
+                                        <option value="Tarjeta">Tarjeta</option>
+                                        <option value="Bizum">Bizum</option>
+                                    
+                                </select>
+                                <br>
+                                <label for="cliente">Cliente</label>
+                                <select class="form-select" aria-label="Default select example"
+                                    id="cliente" name="cliente" required>
+                                    @foreach ($clientes as $cliente)
+                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                                    @endforeach
+                                </select>
+                                <br>
+                                <x-boton-facturar>
+                                    {{ __('Facturar') }}
+                                </x-boton-facturar>
+                                
+
+                            </form>
+                        </div>
+                                        </div>
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                                                                            
+                        </div>
+
+                        <h1 class=" h2 text-center ">Factura </h1>
+
+                       
                     </div>
                 @endif
             </div>

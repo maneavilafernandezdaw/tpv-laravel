@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.bg {
+    background-image: url('imagen/logoMinibar.jpeg');
+    background-size: cover; /* Ajusta según tus necesidades */
+    background-position: center center; /* Ajusta según tus necesidades */
+}

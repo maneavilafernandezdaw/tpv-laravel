@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Http\Request;
 
+
+
 class ClientesController extends Controller
 {
    /**
@@ -98,4 +100,6 @@ class ClientesController extends Controller
     }
     return view('welcome');
     }
+
+
 }

@@ -10,6 +10,8 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "mike42/escpos-php": "^4.0",
+        "tecnickcom/tcpdf": "^6.6",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
     "require-dev": {
