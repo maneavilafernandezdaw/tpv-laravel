@@ -21,6 +21,25 @@
             {{-- tabla de pedido --}}
             <div class="col-sm-6">
                 <h1 class=" h2 text-center ">Cuenta</h1>
+                @if ( Auth::user()->admin)
+                <div class="text-center">
+                    <form action="{{ route('comandas.imprimirCuenta') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <input type="hidden" id="mesa" name="mesa"
+                                value="{{ $mesa }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" id="zona_id" name="zona_id"
+                                value="{{ $zona->id }}">
+                        </div>
+                        <x-boton-cobrar>
+                            {{ __('Imprimir') }}
+                        </x-boton-cobrar>
+
+                    </form>
+                </div>
+                @endif
                 <table class="table table-striped text-sm">
                     <thead>
                         <tr>
@@ -34,6 +53,7 @@
                     <tbody>
                         @php
                             $total = 0;
+                            $subtotal = 0;
                         @endphp
                         @foreach ($comandas as $comanda)
                             <tr>
@@ -43,7 +63,10 @@
                                     @if ($producto->id === $comanda->producto_id)
                                         <td>{{ $producto->nombre }} </td>
                                         <td>{{ $producto->precio }}€ </td>
-                                        <td class="text-center">{{ $producto->precio * $comanda->cantidad }}€ </td>
+                                        @php
+                                        $subtotal =number_format($comanda->cantidad*$producto->precio, 2, '.', '');
+                                        @endphp
+                                        <td class="text-center">{{ $subtotal }}€ </td>
                                         @php
                                             $total += $producto->precio * $comanda->cantidad;
                                         @endphp
@@ -55,7 +78,9 @@
                             </tr>
                         @endforeach
                         <tr>
-
+                            @php
+                            $total = number_format($total, 2, '.', '');
+                        @endphp
                             <th colspan="4" class="text-2xl text-right">Total: {{ $total }}€</th>
 
                         </tr>
@@ -208,7 +233,7 @@
                          <!-- Button trigger modal Facturar-->
                          <div class="col-lg-8 pb-2">
 
-                            <x-boton-cobrar data-bs-toggle="modal" data-bs-target="#modalFacturar">
+                            <x-boton-cobrar data-bs-toggle="modal" data-bs-target="#modalFacturar" >
                                 {{ __('Factura') }}
                             </x-boton-cobrar>
 
@@ -221,14 +246,14 @@
                                 <div class="modal-dialog text-black">
                                     <div class="modal-content">
                                         <div class="modal-header  bg-success">
-                                            <h1 class="modal-title fs-5 text-white">Crear Factura y Cobrar
+                                            <h1 class="modal-title fs-5 text-white">Crear Factura y Enviar
                                             </h1>
 
                                         </div>
                                         <div class="modal-body text-center">
                                              {{-- botón factura --}}
                         <div class=" ">
-                            <form action="{{ route('cobros.store') }}" method="post">
+                            <form action="{{ route('cobros.descargar') }}" method="post" id="facturar">
                                 @csrf
                                 <div class="form-group">
                                     <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
@@ -242,15 +267,27 @@
                                 <div class="form-group">
                                     <input type="hidden" id="tipo" name="tipo" value="Bizum">
                                 </div>
-                                <label for="tipo">Tipo de cobro</label>
+                              
+                             
+                                <label for="cliente">Cliente</label>
                                 <select class="form-select" aria-label="Default select example"
-                                    id="tipo" name="tipo" required>
-                                    <option value="Efectivo">Efectivo</option>
-                                        <option value="Tarjeta">Tarjeta</option>
-                                        <option value="Bizum">Bizum</option>
-                                    
+                                    id="cliente" name="cliente" required>
+                                    @foreach ($clientes as $cliente)
+                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
+                                    @endforeach
                                 </select>
                                 <br>
+                                <x-boton-facturar onclick="mostrarFormulario()">
+                                    {{ __('Facturar') }}
+                                </x-boton-facturar>
+                                
+                                 @include('components.boton-cancelar')
+
+                            </form>
+
+                            <form action="{{ route('cobros.enviar-pdf') }}" method="post"  enctype="multipart/form-data"   id="enviarFactura">
+                                @csrf
+
                                 <label for="cliente">Cliente</label>
                                 <select class="form-select" aria-label="Default select example"
                                     id="cliente" name="cliente" required>
@@ -260,9 +297,10 @@
                                 </select>
                                 <br>
                                 <x-boton-facturar>
-                                    {{ __('Facturar') }}
+                                    {{ __('enviar') }}
                                 </x-boton-facturar>
                                 
+                                 @include('components.boton-cancelar')
 
                             </form>
                         </div>
@@ -274,7 +312,7 @@
                                                                             
                         </div>
 
-                        <h1 class=" h2 text-center ">Factura </h1>
+                
 
                        
                     </div>
@@ -282,5 +320,21 @@
             </div>
         </div>
     </div>
-
+    <script>
+        function mostrarFormulario() {
+          // Oculta todos los formularios
+          $('#facturar').addClass('d-none');
+    
+          // Muestra el formulario correspondiente al ID proporcionado
+          $('#enviarFactura').removeClass('d-none');
+          
+        }
+        function ocultarFormulario() {
+      
+    
+        
+          $('#enviarFactura').addClass('d-none');
+          
+        }
+      </script>
 </x-app-layout>

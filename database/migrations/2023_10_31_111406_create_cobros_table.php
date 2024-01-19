@@ -16,7 +16,7 @@ return new class extends Migration
             $table->Integer('mesa')->unsigned(); 
             $table->unsignedBigInteger('zona_id'); // Campo de la clave foránea
             $table->foreign('zona_id')->references('id')->on('zonas');
-            $table->integer('cantidad')->unsigned();
+            $table->unsignedDecimal('cantidad')->unsigned();
             $table->string('tipo');
             $table->timestamps();
         });

@@ -13,9 +13,11 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\Auth;
 
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 use Mike42\Escpos\Printer;
 
 use Barryvdh\DomPDF\Facade as PDF;
+use Mike42\Escpos\CapabilityProfile as EscposCapabilityProfile;
 
 class ComandasController extends Controller
 {
@@ -207,37 +209,123 @@ class ComandasController extends Controller
 
             $comandas = Comanda::where('mesa', $request->mesa)
                 ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
+                $zona = Zona::find($request->zona_id);
+                $productos = Producto::all();
+                $zonas = Zona::all();
+                $fecha = date("d-m-Y h:i:s");
+                try {
+                    $connector = new WindowsPrintConnector("tickets"); //  nombre de tu impresora
+                  
+                    $printer = new Printer($connector);
+            
+                    // Contenido a imprimir
+                    $printer->text("Minibar     $fecha\n");
+                    $printer->text("\n");
+                    $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
+                    $printer->text("\n");
+                
+  
+                    foreach ($comandas as $comanda){
+
+                        $printer->text("$comanda->cantidad ");
+                     
+                          
+                                foreach ($productos as $producto){
+                                    if ($producto->id === $comanda->producto_id){
+                                        $printer->text("$producto->nombre\n");
+                                    }
+                                
+                           
+                        }
+                    }
+                    $printer->text("\n\n");
+                    $printer->text("\n\n");
+                    $printer->cut();
+                    $printer->close();
+
+    foreach ($comandas as $comanda) {
+        $comanda->estado = 'Enviada';
+        $comanda->save();}
 
 
+                    return view('comandas.index', compact('zonas','comandas'))
+                    ->with('mensaje', 'Comanda Enviada Correctamente.');
 
-            foreach ($comandas as $comanda) {
-                $comanda->estado = 'Enviada';
-                $comanda->save();
+                } catch (\Exception $e) {
+                    return "Error al imprimir: " . $e->getMessage();
+                }
+
+        
             }
-            $zonas = Zona::all();
-            $comandas=Comanda::all();
-
-            try {
-                $connector = new WindowsPrintConnector("Adobe PDF"); // Reemplaza "NombreImpresora" con el nombre de tu impresora
-                $printer = new Printer($connector);
-        
-                // Contenido a imprimir
-                $printer->text("Texto de ejemplo\n");
-                $printer->cut();
-        
-                $printer->close();
-        
-                return view('comandas.index', compact('zonas','comandas'))
-                ->with('mensaje', 'Comanda Enviada Correctamente.');
-            } catch (\Exception $e) {
-                return "Error al imprimir: " . $e->getMessage();
-            }
-
-            return view('comandas.index', compact('zonas','comandas'))
-                ->with('mensaje', 'Comanda Enviada Correctamente.');
+         
+            return view('welcome');
         }
-        return view('welcome');
-    }
+       
+        public function imprimirCuenta(Request $request)
+        {
+            if (Auth::check()) {
+    
+                $comandas = Comanda::where('mesa', $request->mesa)
+                    ->where('zona_id', $request->zona_id)->where('estado', 'Enviada')->get();
+                    $mesa = $request->mesa;
+                    $zona = Zona::find($request->zona_id);
+                    $productos = Producto::all();
+                    $clientes = Cliente::all();
+                    $zonas = Zona::all();
+                    $fecha = date("d-m-Y h:i:s");
+                    $total=0;
+                    $subTotal=0;
+                    try {
+                        $connector = new WindowsPrintConnector("tickets"); //  nombre de tu impresora
+                      
+                        $printer = new Printer($connector);
+                
+                        // Contenido a imprimir
+                        $printer->text("Minibar     $fecha\n");
+                        $printer->text("\n");
+                        $printer->text("\n");
+                      
+                        $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
+                        $printer->text("\n");
+                    
+      
+                        foreach ($comandas as $comanda){
+    
+                            $printer->text("$comanda->cantidad ");
+                         
+                              
+                                    foreach ($productos as $producto){
+                                        if ($producto->id === $comanda->producto_id){
+                                            $subTotal = $comanda->cantidad*$producto->precio;
+                                            $subTotal = number_format($comanda->cantidad*$producto->precio, 2, '.', '');
+                                            $total +=   $subTotal;
+                                            $printer->text("$producto->nombre $producto->precio  $subTotal\n");
+                                        }
+                                    
+                               
+                            }
+                        }
+                        $total = number_format($total, 2, '.', '');
+                        $printer->text("\nTotal: $total \n");
+                        $printer->text("\n\n");
+                        $printer->text("\n\n");
+                        $printer->cut();
+                        $printer->close();
+    
+                        return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'));
+                       
+                
+    
+                    } catch (\Exception $e) {
+                        return "Error al imprimir: " . $e->getMessage();
+                    }
+    
+            
+                }
+             
+                return view('welcome');
+            }
+           
 
 
     public function eliminarComanda(Request $request)

@@ -8,6 +8,10 @@ use App\Models\Zona;
 use App\Models\Producto;
 use App\Models\Cliente;
 
+use App\Mail\ReportMail;
+
+use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -35,6 +39,8 @@ class CobrosController extends Controller
         return view('welcome');
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -47,64 +53,104 @@ class CobrosController extends Controller
 
             $comandas = Comanda::where('mesa', $request->mesa)
                 ->where('zona_id', $request->zona_id)->get();
-                $total = 0;
-                $subtotal=0;
 
-            if (isset($request->cliente)) {
-                $prod = Producto::all();
-                $product = [];
-                
-                $cliente = Cliente::find($request->cliente);
-                foreach ($comandas as $comanda) {
-                    foreach ($prod as $producto) {
-                        if ($comanda->producto_id === $producto->id) {
-                            $total += $comanda->cantidad * $producto->precio;
-                            $subtotal = $comanda->cantidad * $producto->precio;
-
-                            array_push($product, ['nombre' => $producto->nombre, 'precio' => $producto->precio, 'subtotal' => $subtotal]);
-
-                            $subtotal=0;
-                        }
-                    }
-                }
-                $data = [
-                    'nombreCliente' => $cliente->nombre,
-                    'cifCliente' => $cliente->cif,
-                    'direccionCliente' => $cliente->direccion,
-                    'emailCliente' => $cliente->email,
-                    'productos' => $product,
-                    'total' => $total
-                ];
-
-                $pdf = new TCPDF();
-                $pdf->SetAutoPageBreak(true, 10);
-                $pdf->AddPage();
-                $pdf->writeHTML(view('facturas/factura', $data)->render());
-
-                // Guarda el PDF en el servidor o envíalo directamente a la impresora
-                $rutaPDF = public_path('facturas\factura.pdf');
-                $pdf->Output($rutaPDF, 'F');
-
-
-               
-              
-                $response = response()->download($rutaPDF, 'factura.pdf', [
-                    'Content-Type' => 'application/pdf',
-                ], );
-             
-
-
-            }
 
             foreach ($comandas as $comanda) {
 
                 $comanda->delete();
             }
 
-            return redirect()->route('home');
-            return $response;
+            return view('home');
 
         }
         return view('welcome');
     }
+
+public function descargar(Request $request)
+{
+    if (Auth::check()) {
+        
+
+        $comandas = Comanda::where('mesa', $request->mesa)
+            ->where('zona_id', $request->zona_id)->get();
+            $total = 0;
+            $subtotal=0;
+
+        if (isset($request->cliente)) {
+            $prod = Producto::all();
+            $product = [];
+            
+            $cliente = Cliente::find($request->cliente);
+            foreach ($comandas as $comanda) {
+                foreach ($prod as $producto) {
+                    if ($comanda->producto_id === $producto->id) {
+                        $total += $comanda->cantidad * $producto->precio;
+                        $subtotal = $comanda->cantidad * $producto->precio;
+
+                        array_push($product, ['nombre' => $producto->nombre, 'precio' => $producto->precio, 'subtotal' => $subtotal]);
+
+                        $subtotal=0;
+                    }
+                }
+            }
+            $data = [
+                'nombreCliente' => $cliente->nombre,
+                'cifCliente' => $cliente->cif,
+                'direccionCliente' => $cliente->direccion,
+                'emailCliente' => $cliente->email,
+                'productos' => $product,
+                'total' => $total
+            ];
+
+            $pdf = new TCPDF();
+            $pdf->SetAutoPageBreak(true, 10);
+            $pdf->AddPage();
+            $pdf->writeHTML(view('facturas/factura', $data)->render());
+
+            // Guarda el PDF en el servidor o envíalo directamente a la impresora
+            $rutaPDF = public_path('facturas\factura.pdf');
+            $pdf->Output($rutaPDF, 'F');
+
+
+           
+          
+          $response = response()->download($rutaPDF, 'factura.pdf', [
+                'Content-Type' => 'application/pdf',
+            ], );
+         
+            return $response;
+
+        }
+
+ 
+
+        
+     
+
+    }
+    return view('welcome');
+}
+
+
+public function enviarPDF(Request $request)
+{
+    $cliente = Cliente::find($request->cliente);
+
+
+
+
+
+
+    $pdfPath = public_path('facturas/factura.pdf'); // Ruta al archivo PDF
+    $data = [
+       'subject' => "Factura Minibar",
+       'content' => "Descarga el archivo.",
+     'file' => 'factura.pdf'
+   ];
+
+
+   Mail::to($cliente->email)->send(new ReportMail($data));
+   return view('home');
+
+}
 }

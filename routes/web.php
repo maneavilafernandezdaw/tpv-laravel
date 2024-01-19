@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\CobrosController;
 use App\Http\Controllers\CajasController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -93,6 +94,7 @@ Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas/{comanda}', 'show')->name('comandas.show');
     Route::put('comandas/{comanda}/edit', 'update')->name('comandas.update');
     Route::post('comandas/enviar', 'enviar')->name('comandas.enviar');
+    Route::post('comandas/imprimirCuenta', 'imprimirCuenta')->name('comandas.imprimirCuenta');
     Route::post('comandas/eliminar', 'eliminarComanda')->name('comandas.eliminarComanda');
     Route::post('comandas/eliminar/cuenta', 'eliminarCuenta')->name('comandas.eliminarCuenta');
   
@@ -101,14 +103,23 @@ Route::controller(ComandasController::class)->group(function () {
 Route::controller(CobrosController::class)->group(function () {
 
     Route::post('cobros/store', 'store')->name('cobros.store');
+    Route::post('cobros/descargar', 'descargar')->name('cobros.descargar');
+    Route::post('cobros/enviar-pdf', 'enviarPDF')->name('cobros.enviar-pdf');
     Route::get('cobros', 'index')->name('cobros.index');
-
+    
 });
 
 Route::controller(CajasController::class)->group(function () {
 
     Route::get('cajas/store', 'store')->name('cajas.store');
     Route::get('cajas', 'index')->name('cajas.index');
+
+});
+
+Route::controller(ReportController::class)->group(function () {
+
+    Route::get('report', 'report')->name('report.index');
+    Route::post('report/send_report', 'sendReport')->name('report.sendReport');
 
 });
 

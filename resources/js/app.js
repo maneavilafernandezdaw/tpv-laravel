@@ -37,15 +37,3 @@ $(document).ready(function(e) {
 
 });
 
-function descargarPDF() {
-    // Reemplaza 'ruta/al/archivo.pdf' con la ruta real de tu archivo PDF
-    var rutaPDF = ' public_path('facturas\factura.pdf')';
-
-    // Crea un enlace temporal
-    var enlace = document.createElement('a');
-    enlace.href = rutaPDF;
-    enlace.download = 'factura.pdf';
-
-    // Dispara un clic en el enlace
-    enlace.click();
-}
