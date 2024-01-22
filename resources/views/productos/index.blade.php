@@ -29,7 +29,7 @@
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input type="text" class="form-control rounded-md" id="nombre"
-                                                name="nombre" required maxlength="30">
+                                                name="nombre" required maxlength="20">
                                         </div>
 
                                         <div class="form-group">

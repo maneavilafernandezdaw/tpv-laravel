@@ -29,7 +29,7 @@
     @endphp
 
     <h1>Factura</h1>
-    <p>Nº factura: {{ 0 }} Fecha: {{ $fechaFactura }}</p>
+    <p>Nº factura: {{ $numeroFactura }} Fecha: {{ $fechaFactura }}</p>
     <h3>Cliente:</h3>
     <p>Nombre: {{ $nombreCliente }}</p>
     <p>Cif/Nif: {{ $cifCliente }}</p>

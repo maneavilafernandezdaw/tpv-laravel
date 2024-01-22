@@ -277,15 +277,15 @@
                                     @endforeach
                                 </select>
                                 <br>
-                                <x-boton-facturar onclick="mostrarFormulario()">
+                                <x-boton-facturar onclick="mostrarFormulario()" class="w-full">
                                     {{ __('Facturar') }}
                                 </x-boton-facturar>
                                 
                                 
 
                             </form>
-
-                            @include('components.boton-cancelar')
+<br>
+                            @include('components.boton-salir')
                   
                         </div>
                                         </div>
