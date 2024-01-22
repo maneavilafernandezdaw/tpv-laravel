@@ -35,7 +35,7 @@
                 {{ __('Cajas') }}
             </x-boton-admin>
         </a>
-        <a href="{{ route('facturas.index') }}">
+        <a href="{{ route('factura.index') }}">
             <x-boton-admin class="  h-16  text-lg  min-w-full">
                 {{ __('Facturas') }}
             </x-boton-admin>

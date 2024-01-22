@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 
 use App\Models\Factura;
 
-
-use Illuminate\View\View;
-
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
-use TCPDF;
-
-class FacturasController extends Controller
+class FacturaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,7 +17,7 @@ class FacturasController extends Controller
     {
         if (Auth::check()) {
   
-            $facturas =45;
+            $facturas = Factura::all();
 
             return view('facturas.index', compact('facturas'));
         }

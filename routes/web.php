@@ -10,9 +10,10 @@ use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\CobrosController;
 use App\Http\Controllers\CajasController;
 use App\Http\Controllers\ClientesController;
-use App\Http\Controllers\FacturasController;
+use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -117,9 +118,9 @@ Route::controller(CajasController::class)->group(function () {
 
 });
 
-Route::controller(FacturasController::class)->group(function () {
+Route::controller(FacturaController::class)->group(function () {
 
-    Route::get('facturas', 'index')->name('facturas.index');
+    Route::get('factura', 'index')->name('factura.index');
 
 });
 
