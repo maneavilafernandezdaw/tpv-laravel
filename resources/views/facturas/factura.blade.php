@@ -24,15 +24,12 @@
 
 <body class="bg">
     
+    @php
+    $fechaFactura =  date("d-m-Y H:i:s");    
+    @endphp
 
-
-
-    <div>
-               
-        <x-application-logo/>
-   
-</div>
     <h1>Factura</h1>
+    <p>Nº factura: {{ 0 }} Fecha: {{ $fechaFactura }}</p>
     <h3>Cliente:</h3>
     <p>Nombre: {{ $nombreCliente }}</p>
     <p>Cif/Nif: {{ $cifCliente }}</p>

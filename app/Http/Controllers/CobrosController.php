@@ -7,6 +7,7 @@ use App\Models\Comanda;
 use App\Models\Zona;
 use App\Models\Producto;
 use App\Models\Cliente;
+use App\Models\Factura;
 
 use App\Mail\ReportMail;
 
@@ -66,8 +67,8 @@ class CobrosController extends Controller
         return view('welcome');
     }
 
-public function descargar(Request $request)
-{
+    public function descargar(Request $request)
+    {
     if (Auth::check()) {
         
 
@@ -81,6 +82,8 @@ public function descargar(Request $request)
             $product = [];
             
             $cliente = Cliente::find($request->cliente);
+            $factura = $cliente->nombre . ".pdf";
+
             foreach ($comandas as $comanda) {
                 foreach ($prod as $producto) {
                     if ($comanda->producto_id === $producto->id) {
@@ -100,17 +103,28 @@ public function descargar(Request $request)
                 'emailCliente' => $cliente->email,
                 'productos' => $product,
                 'total' => $total
-            ];
+            ]
+
+            $nombreFactura = $cliente->nombre. "_" . date('d_m_Y_H_i') . ".pdf" ;
 
             $pdf = new TCPDF();
             $pdf->SetAutoPageBreak(true, 10);
             $pdf->AddPage();
             $pdf->writeHTML(view('facturas/factura', $data)->render());
 
-            // Guarda el PDF en el servidor o envíalo directamente a la impresora
-            $rutaPDF = public_path('facturas\factura.pdf');
+            // Guarda el PDF en el servidor y envíalo directamente email
+            $rutaPDF = public_path('facturas/' . $nombreFactura);
             $pdf->Output($rutaPDF, 'F');
 
+           /*  $pdfPath = public_path('facturas/factura.pdf'); // Ruta al archivo PDF */
+            $data = [
+               'subject' => "Factura Minibar",
+               'content' => "Descarga el archivo.",
+             'file' =>  $nombreFactura,
+           
+           ];
+        
+           Mail::to($cliente->email)->send(new ReportMail($data));
 
            
           
@@ -129,28 +143,7 @@ public function descargar(Request $request)
 
     }
     return view('welcome');
-}
+    }
 
 
-public function enviarPDF(Request $request)
-{
-    $cliente = Cliente::find($request->cliente);
-
-
-
-
-
-
-    $pdfPath = public_path('facturas/factura.pdf'); // Ruta al archivo PDF
-    $data = [
-       'subject' => "Factura Minibar",
-       'content' => "Descarga el archivo.",
-     'file' => 'factura.pdf'
-   ];
-
-
-   Mail::to($cliente->email)->send(new ReportMail($data));
-   return view('home');
-
-}
 }

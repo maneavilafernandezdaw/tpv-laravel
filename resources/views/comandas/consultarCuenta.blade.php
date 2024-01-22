@@ -281,28 +281,12 @@
                                     {{ __('Facturar') }}
                                 </x-boton-facturar>
                                 
-                                 @include('components.boton-cancelar')
-
-                            </form>
-
-                            <form action="{{ route('cobros.enviar-pdf') }}" method="post"  enctype="multipart/form-data"   id="enviarFactura">
-                                @csrf
-
-                                <label for="cliente">Cliente</label>
-                                <select class="form-select" aria-label="Default select example"
-                                    id="cliente" name="cliente" required>
-                                    @foreach ($clientes as $cliente)
-                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <x-boton-facturar>
-                                    {{ __('enviar') }}
-                                </x-boton-facturar>
                                 
-                                 @include('components.boton-cancelar')
 
                             </form>
+
+                            @include('components.boton-cancelar')
+                  
                         </div>
                                         </div>
                                        
