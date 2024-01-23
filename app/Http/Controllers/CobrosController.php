@@ -102,7 +102,7 @@ class CobrosController extends Controller
                             $total += $comanda->cantidad * $producto->precio;
                             $subtotal = $comanda->cantidad * $producto->precio;
 
-                            array_push($product, ['nombre' => $producto->nombre, 'precio' => $producto->precio, 'subtotal' => $subtotal]);
+                            array_push($product, ['nombre' => $producto->nombre,'cantidad' => $comanda->cantidad, 'precio' => $producto->precio, 'subtotal' => $subtotal]);
 
                             $subtotal = 0;
                         }
