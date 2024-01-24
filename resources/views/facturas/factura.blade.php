@@ -23,95 +23,110 @@
 </head>
 
 <body class="bg">
-    
+
     @php
-    $fechaFactura =  date("d-m-Y H:i:s");    
+        $fechaFactura = date('d-m-Y H:i:s');
     @endphp
 
 
 
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="text-center">Factura</h2>
-                            
-    <p>Nº factura: {{ $numeroFactura }}</p>     
-    <p>Fecha: {{ $fechaFactura }}</p>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="text-center">Factura</h2>
+
+                        <p>Nº factura: {{ $numeroFactura }}</p>
+                        <p>Fecha: {{ $fechaFactura }}</p>
+                        <hr>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+
+                                <thead>
+                                    <tr>
+
+                                        <th>De:</th>
+                                        <th>Para:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>
+                                            Nombre: Minibar<br>
+                                            Cif/Nif: 2334253424F<br>
+                                            Dirección: Sevilla, 45, Utrera(Sevilla)<br>
+                                            Email minibar@minibar.com<br>
+                                        </td>
+                                       
+                                        <td>
+                                            Nombre: {{ $nombreCliente }}<br>
+                                            Cif/Nif: {{ $cifCliente }}<br>
+                                            Dirección: {{ $direccionCliente }}<br>
+                                            Email: {{ $emailCliente }}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-sm-6">
-                                    <strong>De:</strong>
-                                    <address>
-                                        Minibar<br>
-                                        Sevilla, 45, Utrera(Sevilla)<br>
-                                        minibar@minibar.com<br>
-                                        Teléfono: +123456789
-                                    </address>
-                                </div>
-        
-                                <div class="col-sm-6 text-right">
-                                    <strong>Para:</strong>
-                                    <address>
-                                        Nombre: {{ $nombreCliente }}<br>
-                                        Cif/Nif: {{ $cifCliente }}<br>
-                                        Dirección: {{ $direccionCliente }}<br>
-                                        Email: {{ $emailCliente }}
-                                    </address>
-                                </div>
-                            </div>
-        
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                   
-                                    <thead>
+                        <hr>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+
+                                <thead>
+                                    <tr>
+                                        <th><u>Producto</u></th>
+                                        <th><u>Cantidad</u></th>
+                                        <th><u>Precio</u></th>
+                                        <th><u>Total</u></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach ($productos as $producto)
                                         <tr>
-                                            <th>Producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Precio</th>
-                                            <th>Total</th>
+                                            <td>{{ $producto['nombre'] }}</td>
+                                            <td>{{ $producto['cantidad'] }}</td>
+                                            <td>{{ $producto['precio'] }}€</td>
+                                            <td>{{ $producto['subtotal'] }}€</td>
                                         </tr>
-                                    </thead>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table">
                                     <tbody>
-                                        @foreach ($productos as $producto)
-                                            <tr>
-                                                <td>{{ $producto['nombre'] }}</td>
-                                                <td>{{ $producto['cantidad'] }}</td>
-                                                <td>{{ $producto['precio'] }}€</td>
-                                                <td>{{ $producto['subtotal'] }}€</td>
-                                            </tr>
-                                        @endforeach
+
+                                        <tr>
+
+                                            <td> </td>
+                                            <td> </td>
+                                            <td> </td>
+                                            <td><strong>Total: {{ $total }}€</strong></td>
+
+
+
+                                        </tr>
                                     </tbody>
                                 </table>
-                                
-                            </div>
-        
-                            <div class="row">
-                                <div class="col-md-6">
-                                    
-                                </div>
-                                <div class="col-md-6">
-                                    <table class="table">
-                                        <tbody>
-                          
-                                            <tr>
-                                                <td><strong>Total</strong></td>
-                                                <td>{{ $total }}€</td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-         {{-- script bootstrap --}}
+    {{-- script bootstrap --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
@@ -119,7 +134,7 @@
     </script>
     {{-- script jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        
+
 </body>
 
 </html>

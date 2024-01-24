@@ -101,13 +101,19 @@ class CobrosController extends Controller
                         if ($comanda->producto_id === $producto->id) {
                             $total += $comanda->cantidad * $producto->precio;
                             $subtotal = $comanda->cantidad * $producto->precio;
-
+                          
+                            $subtotal = number_format($subtotal, 2, '.', '');
+                        
                             array_push($product, ['nombre' => $producto->nombre,'cantidad' => $comanda->cantidad, 'precio' => $producto->precio, 'subtotal' => $subtotal]);
 
                             $subtotal = 0;
                         }
                     }
                 }
+           
+                $total = number_format($total, 2, '.', '');
+       
+
                 $data = [
                     'numeroFactura' => $factura->id,
                     'nombreCliente' => $cliente->nombre,
