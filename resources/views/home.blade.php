@@ -3,9 +3,18 @@
     <div class="pt-12">
         <div class="max-w-4xl mx-auto px-8 lg:px-8">
             <div class=" overflow-hidden shadow">
+                @if(Auth::user()->super)
+                <a href="{{ route('profile.register') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
+                    {{ __("crear usuario") }}
+                </div></a>
+                
+                @else
                 <a href="{{ route('comandas.index') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
                     {{ __("Comandas") }}
                 </div></a>
+                @endif
+                
+                
       
             </div>
         </div>

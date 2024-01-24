@@ -213,48 +213,78 @@ class ComandasController extends Controller
                 $productos = Producto::all();
                 $zonas = Zona::all();
                 $fecha = date("d-m-Y h:i:s");
-                try {
-                    $connector = new WindowsPrintConnector("tickets"); //  nombre de tu impresora
-                  
-                    $printer = new Printer($connector);
-            
-                    // Contenido a imprimir
-                    $printer->text("Minibar     $fecha\n");
-                    $printer->text("\n");
-                    $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
-                    $printer->text("\n");
-                
-  
-                    foreach ($comandas as $comanda){
 
-                        $printer->text("$comanda->cantidad ");
-                     
+                try {
+                    $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
+                    $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
+        
+                    $impresoras = [];
+                    foreach ($printers as $printer) {
+                        $impresoras[] = $printer->Name;
+                    }
+
+                    foreach ($impresoras as $impresora) {
+                  
+
+
+               
+                        try {
+                            $connector = new WindowsPrintConnector($impresora); //  nombre de impresora
                           
-                                foreach ($productos as $producto){
-                                    if ($producto->id === $comanda->producto_id){
-                                        $printer->text("$producto->nombre\n");
-                                    }
+                            $printer = new Printer($connector);
+                    
+                            // Contenido a imprimir
+                            $printer->text("Minibar     $fecha\n");
+                            $printer->text("\n");
+                            $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
+                            $printer->text("\n");
+                        
+          
+                            foreach ($comandas as $comanda){
+
                                 
-                           
+        
+                             
+                                  
+                                        foreach ($productos as $producto){
+
+                                          if($producto->impresora === $impresora)  {
+                                            
+                               
+                                            if ($producto->id === $comanda->producto_id){
+                                                $printer->text("$comanda->cantidad ");
+                                                $printer->text("$producto->nombre\n");
+                                            }
+                                          }
+                                           
+                                        
+                                   
+                                }
+                            }
+                                $printer->text("\n\n");
+                                $printer->text("\n\n");
+                                $printer->cut();
+                                $printer->close();
+        
+                             foreach ($comandas as $comanda) {
+                                 $comanda->estado = 'Enviada';
+                                 $comanda->save();}
+        
+        
+                            return view('comandas.index', compact('zonas','comandas'))
+                            ->with('mensaje', 'Comanda Enviada Correctamente.');
+        
+                        } catch (\Exception $e) {
+                            return "Error al imprimir: " . $e->getMessage();
                         }
                     }
-                    $printer->text("\n\n");
-                    $printer->text("\n\n");
-                    $printer->cut();
-                    $printer->close();
-
-    foreach ($comandas as $comanda) {
-        $comanda->estado = 'Enviada';
-        $comanda->save();}
-
-
-                    return view('comandas.index', compact('zonas','comandas'))
-                    ->with('mensaje', 'Comanda Enviada Correctamente.');
-
+        
+    
                 } catch (\Exception $e) {
-                    return "Error al imprimir: " . $e->getMessage();
+                    
+                    return response()->json(['error' => $e->getMessage()], 500);
                 }
-
+              
         
             }
          

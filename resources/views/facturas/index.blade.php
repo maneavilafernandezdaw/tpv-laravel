@@ -33,7 +33,8 @@
                             <td class="fw-bold text-xl align-middle">{{ $factura->nombre }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $factura->cliente_id }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $factura->created_at }}</td>
-                            <td><a target="_blank" href="{{asset('http://localhost/tpv-laravel/public/facturas/'.$factura->nombre)}}"><x-boton-editar>VER PDF</x-boton-editar></a></td>
+                            <td><a target="_blank" href="{{asset('facturas/'.$factura->nombre)}}"><x-boton-editar>VER PDF</x-boton-editar></a></td>
+                           
                         </tr>
                     @endforeach
 

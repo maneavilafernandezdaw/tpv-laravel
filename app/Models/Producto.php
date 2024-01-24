@@ -14,6 +14,7 @@ class Producto extends Model
         'precio',
         'iva',
         'familia_id',
+        'impresora',
         'imagen'
       
     ];

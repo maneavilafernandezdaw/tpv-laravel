@@ -9,11 +9,41 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Models\User;
+
+
+
+
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+
+     public function register(): View
+     {
+         return view('auth.register', [
+            
+         ]);
+     }
+
+    public function store(Request $request)
+    {
+        $user=User::where('name', $request->name)->first();
+        
+        // Si existe
+        if(!$user){
+          User::create($request->all());
+          return redirect()->route('home')
+            ->with('mensaje','Usuario creado correctamente.');
+        } else{
+           
+         
+          return redirect()->route('home')
+            ->with('mensaje','Ya existe un usuario con ese nombre.');
+        }
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('profile.store') }}">
         @csrf
 
         <!-- Name -->
@@ -19,16 +19,23 @@
 
         <!-- Admin -->
         <br>
+
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault1" value="1">
-            <label class="form-check-label" for="flexRadioDefault1">
+            <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault2" value="1">
+            <label class="form-check-label" for="flexRadioDefault2">
               Administrador
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault2" value="0" checked>
-            <label class="form-check-label" for="flexRadioDefault2">
-             Camarero
+            <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault3" value="0" checked>
+            <label class="form-check-label" for="flexRadioDefault3">
+             No administrador
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="super" id="flexRadioDefault1" value="1">
+            <label class="form-check-label" for="flexRadioDefault1">
+              SuperAdministrador
             </label>
           </div>
 

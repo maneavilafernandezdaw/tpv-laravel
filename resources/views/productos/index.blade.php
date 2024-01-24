@@ -58,6 +58,17 @@
                                             <input type="number" class="form-control rounded-md" id="iva"
                                                 name="iva" value="21">
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="impresora">Impresora</label>
+                                            <select class="form-select" aria-label="Default select example"
+                                                id="impresora" name="impresora" required>
+                                                @foreach ($impresoras as $impresora)
+                                                    <option value="{{ $impresora}}">{{ $impresora }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
                                         <div>
                                             <img id="imagenSeleccionada" class="max-h-40">
                                         </div>
@@ -105,6 +116,7 @@
                         <th>FAMILIA</th>
                         <th>PRECIO</th>
                         <th>IVA</th>
+                        <th>IMPRESORA</th>
                         {{-- <th>IMAGEN</th> --}}
                         <th></th>
 
@@ -126,6 +138,7 @@
                             </td>
                             <td class="fw-bold text-xl align-middle">{{ $producto->precio }}€</td>
                             <td class="fw-bold text-xl align-middle">{{ $producto->iva }}%</td>
+                            <td class="fw-bold text-xl align-middle">{{ $producto->impresora }}</td>
                             {{-- <td class="fw-bold text-xl align-middle">{{ $producto->imagen }}</td> --}}
                             {{--      <td class="fw-bold text-xl align-middle">
                                 @if ($producto->imagen)
@@ -209,6 +222,24 @@
                                                                     value="{{ $producto->iva }}">
                                                             </div><br>
 
+                                                            <div class="form-group">
+                                                                <label for="impresora">Impresora</label>
+                                                                <select class="form-select"
+                                                                    aria-label="Default select example"
+                                                                    id="impresora" name="impresora" required
+                                                                    value="{{ $producto->impresora }}">
+                                                                    @foreach ($impresoras as $impresora)
+                                                                        @if ($impresora === $producto->impresora)
+                                                                            <option value="{{ $impresora }}"
+                                                                                selected>
+                                                                                {{ $impresora }}</option>
+                                                                        @else
+                                                                            <option value="{{ $impresora }}">
+                                                                                {{ $impresora }}</option>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
 
                                                             {{-- <div class="form-group">
                                                                 <label for="imagen">Imagen</label>
