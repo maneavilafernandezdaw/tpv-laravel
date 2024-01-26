@@ -1,6 +1,6 @@
 
 
-    <div class="d-flex flex-column flex-lg-row justify-content-center gap-2 ">
+    <div class="d-flex flex-col flex-lg-row justify-content-center gap-2 ">
 
         @if(Auth::user()->admin)
         

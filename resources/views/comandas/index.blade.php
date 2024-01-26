@@ -24,20 +24,19 @@
 
 
         <div class="card-body  my-3 d-flex gap-3 flex-wrap justify-center">
-            @php
-            $ocupada = 0;
-        @endphp
+     
             @foreach ($zonas as $zona)
-                @foreach ($comandas as $comanda)
-                    @php
+             @php
                         $ocupada = 0;
                     @endphp
+                @foreach ($comandas as $comanda)
+                   
                     @if ($comanda->zona_id === $zona->id)
                         @php
                             $ocupada = 1;
                         @endphp
                     @endif
-                @endforeach
+               @endforeach
                 @if ($ocupada > 0)
                     <a href="{{ route('zonas.show', $zona->id) }}">
                         <div class="card border border-danger border-2 shadow">
@@ -61,7 +60,7 @@
                 @endif
             @endforeach
 
-
+ 
         </div>
     </div>
 

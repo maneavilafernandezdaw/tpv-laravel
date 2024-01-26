@@ -18,21 +18,25 @@
  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body>
+
+<body class="bg">
 
 
 
-    <div class="container d-flex items-center flex-col">
+    <div class="container h-full vh-100 d-flex flex-col justify-center items-center gap-3">
        
+            
+        <div class="d-flex flex-col items-center">
+            <h1 class="text-9xl">TPV Minibar</h1>
             <img src="imagen/logoMinibar.jpeg" alt="imagen logo" class="w-3/4">
-        
+        </div>
     
     @if (Route::has('login'))
         <div class="">
             @auth
 
 
-                <a href="{{ url('/home') }}">inicio</a>
+                <a href="{{ url('/home') }}"><x-boton-crear>inicio</x-boton-crear></a>
             @else
                 <a href="{{ route('login') }}"><x-boton-crear>
                         {{ __('Iniciar sesión') }}
@@ -43,6 +47,7 @@
     @endif
 
 </div>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

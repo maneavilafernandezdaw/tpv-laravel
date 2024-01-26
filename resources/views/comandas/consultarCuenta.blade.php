@@ -40,7 +40,7 @@
                     </form>
                 </div>
                 @endif
-                <table class="table table-striped text-sm">
+                <table class="table table-striped  text-sm">
                     <thead>
                         <tr>
                             <th scope="col">Cant.</th>

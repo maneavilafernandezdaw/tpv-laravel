@@ -1,34 +1,30 @@
 <x-app-layout>
 
     <div class="pt-12">
-        <div class="max-w-4xl mx-auto px-8 lg:px-8">
-            <div class=" overflow-hidden shadow">
-                @if(Auth::user()->super)
-                <a href="{{ route('profile.register') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
-                    {{ __("crear usuario") }}
-                </div></a>
+        <div class="max-w-5xl mx-auto px-8 lg:px-8">
+            <div class="d-flex flex-col gap-4">
+                @if (Auth::user()->super)
+                    <a href="{{ route('profile.register') }}"> <x-boton-comanda>
+                            {{ __('crear usuario') }}
+                        </x-boton-comanda></a>
                 
+                    
                 @else
-                <a href="{{ route('comandas.index') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
-                    {{ __("Comandas") }}
-                </div></a>
+                    
+             
+          
+                
+
+                    <a href="{{ route('comandas.index') }}"> <x-boton-comanda>
+                            {{ __('Comandas') }}
+                        </x-boton-comanda></a>
                 @endif
-                
-                
-      
+
+
+
             </div>
         </div>
     </div>
 
-{{--     <div class="pt-12">
-        <div class="max-w-4xl mx-auto px-8 lg:px-8">
-            <div class=" overflow-hidden shadow ">
-        
-                <a href="{{ route('comandas.cuenta') }}"><div class="p-6 fw-bold text-4xl text-center bg-primary-subtle">
-                    {{ __("Consultar Cuenta") }}
-                </div></a>
-            </div>
-        </div>
-    </div>
- --}}
+
 </x-app-layout>
