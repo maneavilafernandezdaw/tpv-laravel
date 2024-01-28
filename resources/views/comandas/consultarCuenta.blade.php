@@ -10,8 +10,8 @@
 
     <nav>
         <div class="container-fluid d-flex justify-center gap-2">
-            <a href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
-            <a href="{{ route('comandas.create', [$zona->id, $mesa]) }}"><x-boton-admin>Volver</x-boton-admin></a>
+            <a href={{ route('home') }}><x-boton-inicio/></a>
+            <a href="{{ route('comandas.create', [$zona->id, $mesa]) }}"><x-boton-volver/></a>
 
         </div>
     </nav>
@@ -34,7 +34,7 @@
                                 value="{{ $zona->id }}">
                         </div>
                         <x-boton-cobrar>
-                            {{ __('Imprimir') }}
+                            <i class="fa-solid fa-print"></i>
                         </x-boton-cobrar>
 
                     </form>
@@ -119,7 +119,7 @@
                                 </div>
 
                                 <x-boton-cobrar>
-                                    {{ __('Efectivo') }}
+                                    <i class="fa-solid fa-sack-dollar"></i>
                                 </x-boton-cobrar>
 
                             </form>
@@ -142,7 +142,7 @@
                                 </div>
 
                                 <x-boton-cobrar>
-                                    {{ __('Tarjeta') }}
+                                    <i class="fa-regular fa-credit-card"></i>
                                 </x-boton-cobrar>
 
                             </form>
@@ -179,9 +179,8 @@
                         <!-- Button trigger modal Eliminar-->
                         <div class="col-lg-8 pb-2">
 
-                            <x-boton-eliminar-cuenta data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                {{ __('Eliminar') }}
-                            </x-boton-eliminar-cuenta>
+                            <x-boton-eliminar-cuenta data-bs-toggle="modal" data-bs-target="#modalEliminar"/>
+                          
 
 
 
@@ -215,9 +214,8 @@
                                                         value="{{ $zona->id }}">
                                                 </div>
 
-                                                <x-boton-eliminar>
-                                                    {{ __('Eliminar') }}
-                                                </x-boton-eliminar>
+                                                <x-boton-eliminar/>
+                                                    
 
                                             </form>
 
@@ -234,7 +232,7 @@
                          <div class="col-lg-8 pb-2">
 
                             <x-boton-cobrar data-bs-toggle="modal" data-bs-target="#modalFacturar" >
-                                {{ __('Factura') }}
+                                <i class="fa-solid fa-file-invoice"></i>
                             </x-boton-cobrar>
 
 

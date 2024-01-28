@@ -2,16 +2,14 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin> Inicio</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio/></a>
             <h1 class=" h1">PRODUCTOS</h1>
             <div class="justify-end ">
                 <div class="col ">
 
                     <!-- Button trigger modal Crear-->
 
-                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear">
-                        {{ __('Nuevo') }}
-                    </x-boton-crear>
+                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear"/>
                     <!-- Modal Crear-->
                     <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
                         aria-hidden="true">
@@ -80,9 +78,8 @@
                                                 id="imagen" name="imagen">
                                         </div> --}}<br>
 
-                                        <x-boton-crear>
-                                            {{ __('Aceptar') }}
-                                        </x-boton-crear>
+                                        <x-boton-crear/>
+                                          
 
                                         @include('components.boton-cancelar')
 

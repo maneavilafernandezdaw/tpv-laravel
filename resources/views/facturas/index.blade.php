@@ -2,9 +2,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin>Inicio</x-boton-admin> </a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio/></a>
             <h1 class="h1">Facturas</h1>
-
+            <div class="w-40"></div>
         </div>
     </nav>
 

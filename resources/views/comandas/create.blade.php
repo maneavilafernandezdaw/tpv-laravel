@@ -10,9 +10,8 @@
 
     <nav>
         <div class="container-fluid d-flex gap-2 justify-center mb-2">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
-            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-admin>Volver a
-                    zonas</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio/></a>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-volver/></a>
         </div>
     </nav>
 
@@ -176,9 +175,8 @@
                                                 value="{{ $comanda->id }}">
                                         </div>
 
-                                        <x-boton-incrementar>
-                                            {{ __('+') }}
-                                        </x-boton-incrementar>
+                                        <x-boton-incrementar/>
+                                     
                                     </form>
 
                                     <form action="{{ route('comandas.decrementar') }}" method="post">
@@ -196,9 +194,8 @@
                                                 value="{{ $comanda->id }}">
                                         </div>
 
-                                        <x-boton-decrementar>
-                                            {{ __('-') }}
-                                        </x-boton-decrementar>
+                                        <x-boton-decrementar/>
+                                       
                                     </form>
                                 </div>
                             </td>
@@ -220,18 +217,14 @@
                                                 <input type="hidden" id="zona_id" name="zona_id"
                                                     value="{{ $zona->id }}">
                                             </div>
-                                            <x-boton-enviar-comanda>
-                                                {{ __('Enviar') }}
-                                            </x-boton-enviar-comanda>
+                                            <x-boton-enviar-comanda/>
 
                                         </form>
                                     </div>
                                     <div>
 
                                         <!--Botón Modal Eliminar-->
-                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar">
-                                            {{ __('Eliminar') }}
-                                        </x-boton-eliminar>
+                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar"/>
 
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar" tabindex="-1"
@@ -264,9 +257,8 @@
                                                                 <input type="hidden" id="zona_id" name="zona_id"
                                                                     value="{{ $zona->id }}">
                                                             </div>
-                                                            <x-boton-eliminar>
-                                                                {{ __('Eliminar') }}
-                                                            </x-boton-eliminar>
+                                                            <x-boton-eliminar/>
+                                                               
 
                                                         </form>
 

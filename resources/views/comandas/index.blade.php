@@ -8,7 +8,7 @@
 
     <nav>
         <div class="container-fluid d-flex justify-center">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio/></a>
 
         </div>
     </nav>

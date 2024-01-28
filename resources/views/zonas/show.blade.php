@@ -9,8 +9,8 @@
 
     <nav>
         <div class="container-fluid d-flex justify-center gap-2">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
-            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-admin>Volver</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio/></a>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-volver/></a>
         </div>
     </nav>
 

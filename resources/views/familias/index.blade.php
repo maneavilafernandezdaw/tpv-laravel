@@ -2,16 +2,16 @@
   
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-admin>Inicio</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio/></a>
             <h1 class=" h1">FAMILIAS</h1>
             <div class="justify-end ">
                 <div class="col ">
 
                     <!-- Button trigger modal Crear-->
                   
-                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear">
-                        {{ __('Nueva') }}
-                    </x-boton-crear>
+                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear"/>
+                       
+                  
                     <!-- Modal Crear-->
                     <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
                         aria-hidden="true">
@@ -33,9 +33,8 @@
                                   
                                         <br>
 
-                                        <x-boton-crear>
-                                            {{ __('Aceptar') }}
-                                        </x-boton-crear>
+                                        <x-boton-crear/>
+                                 
 
                                         @include('components.boton-cancelar')
 
@@ -82,9 +81,9 @@
                                     <div>
                                         <!-- Button trigger modal Editar-->
                                   
-                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $familia->id }}">
-                                            {{ __('Editar') }}
-                                        </x-boton-editar>
+                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $familia->id }}"/>
+                                          
+                                      
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $familia->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
@@ -111,9 +110,9 @@
                                         
                                                             <br>
 
-                                                            <x-boton-editar>
-                                                                {{ __('Editar') }}
-                                                            </x-boton-editar>
+                                                            <x-boton-editar/>
+                                                             
+                                                          
 
                                                             @include('components.boton-cancelar')
 
@@ -132,9 +131,8 @@
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
-                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $familia->id }}">
-                                            {{ __('Eliminar') }}
-                                        </x-boton-eliminar>
+                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $familia->id }}"/>
+                                       
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $familia->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -160,9 +158,8 @@
                                                             <input type="hidden" name="idfamilia" id="idfamilia"
                                                                 value="{{ $familia->id }}">
 
-                                                                <x-boton-eliminar>
-                                                                    {{ __('Eliminar') }}
-                                                                </x-boton-eliminar>
+                                                                <x-boton-eliminar/>
+                                                                   
 
                                                         </form>
                                                         

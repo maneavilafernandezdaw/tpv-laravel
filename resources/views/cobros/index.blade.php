@@ -2,12 +2,10 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin>Inicio</x-boton-admin> </a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio/></a>
             <h1 class="h1">Cobros</h1>
             <div>
-                <a href="{{ route('cajas.store') }}"><x-boton-crear >
-                    {{ __('Cerrar Caja') }}
-                </x-boton-crear></a>
+                <a href="{{ route('cajas.store') }}"><x-boton-cerrarCaja/></a>
 
             </div>
         </div>

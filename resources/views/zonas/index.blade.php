@@ -2,7 +2,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-admin>Inicio</x-boton-admin></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio></x-boton-inicio></a>
             <h1 class=" h1">ZONAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -10,7 +10,7 @@
                     <!-- Button trigger modal Crear-->
                   
                     <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear">
-                        {{ __('Nueva') }}
+                    
                     </x-boton-crear>
                     <!-- Modal Crear-->
                     <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
@@ -37,9 +37,8 @@
                                         </div>
                                         <br>
 
-                                        <x-boton-crear>
-                                            {{ __('Aceptar') }}
-                                        </x-boton-crear>
+                                        <x-boton-crear/>
+                                        
 
                                         @include('components.boton-cancelar')
 
@@ -86,9 +85,9 @@
                                     <div>
                                         <!-- Button trigger modal Editar-->
                                   
-                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $zona->id }}">
-                                            {{ __('Editar') }}
-                                        </x-boton-editar>
+                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $zona->id }}"/>
+                                            
+                                       
                                         <!-- Modal Editar-->
                                 
                                         <div class="modal fade " id="modalEditar{{ $zona->id }}" tabindex="-1"
@@ -122,7 +121,7 @@
                                                             <br>
 
                                                             <x-boton-editar>
-                                                                {{ __('Editar') }}
+                                                               
                                                             </x-boton-editar>
 
                                                             @include('components.boton-cancelar')
@@ -142,9 +141,8 @@
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
-                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $zona->id }}">
-                                            {{ __('Eliminar') }}
-                                        </x-boton-eliminar>
+                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $zona->id }}"/>
+                                        
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $zona->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -170,9 +168,8 @@
                                                             <input type="hidden" name="idzona" id="idzona"
                                                                 value="{{ $zona->id }}">
 
-                                                                <x-boton-eliminar>
-                                                                    {{ __('Eliminar') }}
-                                                                </x-boton-eliminar>
+                                                                <x-boton-eliminar/>
+                                                                
 
                                                         </form>
                                                         
