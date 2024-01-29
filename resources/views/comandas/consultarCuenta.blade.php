@@ -10,36 +10,37 @@
 
     <nav>
         <div class="container-fluid d-flex justify-center gap-2">
-            <a href={{ route('home') }}><x-boton-inicio/></a>
-            <a href="{{ route('comandas.create', [$zona->id, $mesa, "todo"]) }}"><x-boton-volver/></a>
-
+            <a href={{ route('home') }}><x-boton-inicio /></a>
+            <a href="{{ route('comandas.create', [$zona->id, $mesa, 'todo']) }}"><x-boton-volver /></a>
         </div>
     </nav>
 
     <div class="container">
         <div class="row">
-            {{-- tabla de pedido --}}
+
+
             <div class="col-sm-6">
                 <h1 class=" h2 text-center ">Cuenta</h1>
-                @if ( Auth::user()->admin)
-                <div class="text-center">
-                    <form action="{{ route('comandas.imprimirCuenta') }}" method="post">
-                        @csrf
-                        <div class="form-group">
-                            <input type="hidden" id="mesa" name="mesa"
-                                value="{{ $mesa }}">
-                        </div>
-                        <div class="form-group">
-                            <input type="hidden" id="zona_id" name="zona_id"
-                                value="{{ $zona->id }}">
-                        </div>
-                        <x-boton-cobrar>
-                            <i class="fa-solid fa-print"></i>
-                        </x-boton-cobrar>
+                @if (Auth::user()->admin)
+                    <div class="text-center">
 
-                    </form>
-                </div>
+                        {{-- Boton imprimir cuenta --}}
+                        <form action="{{ route('comandas.imprimirCuenta') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
+                            </div>
+                            <x-boton-cobrar>
+                                <i class="fa-solid fa-print"></i>
+                            </x-boton-cobrar>
+
+                        </form>
+                    </div>
                 @endif
+                {{-- tabla de pedido --}}
                 <table class="table table-striped  text-sm">
                     <thead>
                         <tr>
@@ -64,7 +65,7 @@
                                         <td>{{ $producto->nombre }} </td>
                                         <td>{{ $producto->precio }}€ </td>
                                         @php
-                                        $subtotal =number_format($comanda->cantidad*$producto->precio, 2, '.', '');
+                                            $subtotal = number_format($comanda->cantidad * $producto->precio, 2, '.', '');
                                         @endphp
                                         <td class="text-center">{{ $subtotal }}€ </td>
                                         @php
@@ -79,8 +80,8 @@
                         @endforeach
                         <tr>
                             @php
-                            $total = number_format($total, 2, '.', '');
-                        @endphp
+                                $total = number_format($total, 2, '.', '');
+                            @endphp
                             <th colspan="4" class="text-2xl text-right">Total: {{ $total }}€</th>
 
                         </tr>
@@ -171,19 +172,10 @@
                             </form>
                         </div>
 
-
-
-       
-
-
                         <!-- Button trigger modal Eliminar-->
                         <div class="col-lg-8 pb-2">
 
-                            <x-boton-eliminar-cuenta data-bs-toggle="modal" data-bs-target="#modalEliminar"/>
-                          
-
-
-
+                            <x-boton-eliminar-cuenta data-bs-toggle="modal" data-bs-target="#modalEliminar" />
 
                             <!-- Modal Eliminar-->
                             <div class="modal fade" id="modalEliminar" tabindex="-1"
@@ -193,13 +185,11 @@
                                         <div class="modal-header  bg-red-600">
                                             <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
                                             </h1>
-
                                         </div>
                                         <div class="modal-body text-center">
                                             <div>
                                                 <p class="text-black">¿Está seguro de eliminar la
                                                     la cuenta {{ $zona->nombre }} - Mesa: {{ $mesa }}?</p>
-
                                             </div>
                                         </div>
                                         <div class="modal-footer">
@@ -214,8 +204,7 @@
                                                         value="{{ $zona->id }}">
                                                 </div>
 
-                                                <x-boton-eliminar/>
-                                                    
+                                                <x-boton-eliminar />
 
                                             </form>
 
@@ -225,18 +214,15 @@
                                     </div>
                                 </div>
                             </div>
-                                                                            
                         </div>
 
-                         <!-- Button trigger modal Facturar-->
-                         <div class="col-lg-8 pb-2">
 
-                            <x-boton-cobrar data-bs-toggle="modal" data-bs-target="#modalFacturar" >
+                        <div class="col-lg-8 pb-2">
+
+                            <!-- Button trigger modal Facturar-->
+                            <x-boton-cobrar data-bs-toggle="modal" data-bs-target="#modalFacturar">
                                 <i class="fa-solid fa-file-invoice"></i>
                             </x-boton-cobrar>
-
-
-
 
                             <!-- Modal Eliminar-->
                             <div class="modal fade" id="modalFacturar" tabindex="-1"
@@ -249,74 +235,78 @@
 
                                         </div>
                                         <div class="modal-body text-center">
-                                             {{-- botón factura --}}
-                        <div class=" ">
-                            <form action="{{ route('cobros.descargar') }}" method="post" id="facturar">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="hidden" id="mesa" name="mesa" value="{{ $mesa }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="zona_id" name="zona_id" value="{{ $zona->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="cantidad" name="cantidad" value="{{ $total }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="tipo" name="tipo" value="Bizum">
-                                </div>
-                              
-                             
-                                <label for="cliente">Cliente</label>
-                                <select class="form-select" aria-label="Default select example"
-                                    id="cliente" name="cliente" required>
-                                    @foreach ($clientes as $cliente)
-                                        <option value="{{ $cliente->id }}">{{ $cliente->nombre }}</option>
-                                    @endforeach
-                                </select>
-                                <br>
-                                <x-boton-facturar onclick="mostrarFormulario()" class="w-full">
-                                    {{ __('Facturar') }}
-                                </x-boton-facturar>
-                                
-                                
+                                            
+                                            <div>
+                                                {{-- botón factura --}}
+                                                <form action="{{ route('cobros.descargar') }}" method="post"
+                                                    id="facturar">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="mesa" name="mesa"
+                                                            value="{{ $mesa }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="zona_id" name="zona_id"
+                                                            value="{{ $zona->id }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="cantidad" name="cantidad"
+                                                            value="{{ $total }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="tipo" name="tipo"
+                                                            value="Bizum">
+                                                    </div>
 
-                            </form>
-<br>
-                            @include('components.boton-salir')
-                  
-                        </div>
+
+                                                    <label for="cliente">Cliente</label>
+                                                    <select class="form-select" aria-label="Default select example"
+                                                        id="cliente" name="cliente" required>
+                                                        @foreach ($clientes as $cliente)
+                                                            <option value="{{ $cliente->id }}">
+                                                                {{ $cliente->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <br>
+                                                    <x-boton-facturar onclick="mostrarFormulario()" class="w-full">
+                                                        {{ __('Facturar') }}
+                                                    </x-boton-facturar>
+
+
+
+                                                </form>
+                                                <br>
+
+                                                @include('components.boton-salir')
+
+                                            </div>
                                         </div>
-                                       
                                     </div>
                                 </div>
                             </div>
-                                                                            
                         </div>
-
-                
-
-                       
                     </div>
                 @endif
             </div>
         </div>
     </div>
+
     <script>
         function mostrarFormulario() {
-          // Oculta todos los formularios
-          $('#facturar').addClass('d-none');
-    
-          // Muestra el formulario correspondiente al ID proporcionado
-          $('#enviarFactura').removeClass('d-none');
-          
+            // Oculta todos los formularios
+            $('#facturar').addClass('d-none');
+
+            // Muestra el formulario correspondiente al ID proporcionado
+            $('#enviarFactura').removeClass('d-none');
+
         }
+
         function ocultarFormulario() {
-      
-    
-        
-          $('#enviarFactura').addClass('d-none');
-          
+
+
+
+            $('#enviarFactura').addClass('d-none');
+
         }
-      </script>
+    </script>
 </x-app-layout>

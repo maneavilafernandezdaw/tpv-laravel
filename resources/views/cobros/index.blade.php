@@ -2,10 +2,10 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio/></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio /></a>
             <h1 class="h1">Cobros</h1>
             <div>
-                <a href="{{ route('cajas.store') }}"><x-boton-cerrarCaja/></a>
+                <a href="{{ route('cajas.store') }}"><x-boton-cerrarCaja /></a>
 
             </div>
         </div>
@@ -13,7 +13,10 @@
 
     <div class="container mt-3 card rounded-none">
         <div class="card-body bg-gray-300 rounded-none my-3">
+
             <h1 class=" h1">Total: {{ $total }}€</h1>
+
+            {{-- Tabla Cobros --}}
             <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
 
@@ -24,7 +27,6 @@
                         <th>CANTIDAD</th>
                         <th>TIPO</th>
                         <th>Fecha/Hora</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -44,7 +46,6 @@
                             <td class="fw-bold text-xl align-middle">{{ $cobro->created_at }}</td>
                         </tr>
                     @endforeach
-
                 </tbody>
             </table>
         </div>
