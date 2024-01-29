@@ -16,6 +16,16 @@ use App\Models\User;
 
 class ProfileController extends Controller
 {
+    public function index()
+    {
+        if (Auth::check()) {
+            $usuarios = User::all();
+        
+            return view('profile.index', compact('usuarios'));
+
+        }
+        return view('welcome');
+    }
     /**
      * Display the user's profile form.
      */
@@ -50,6 +60,7 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
+
 
     /**
      * Update the user's profile information.
@@ -87,4 +98,16 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+    public function eliminar(Request $request)
+    {
+        if (Auth::check()) {
+        $usuario = User::where('id', $request->idusuario);
+        $usuario->delete();
+
+        return redirect()->route('profile.index')
+            ->with('mensaje', 'Usuario eliminado correctamente');
+        }
+        return view('welcome');
+    }
+
 }

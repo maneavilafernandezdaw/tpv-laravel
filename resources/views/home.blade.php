@@ -7,7 +7,9 @@
                     <a href="{{ route('profile.register') }}"> <x-boton-comanda>
                             {{ __('crear usuario') }}
                         </x-boton-comanda></a>
-                
+                        <a href="{{ route('profile.index') }}"> <x-boton-comanda>
+                            {{ __('Ver usuarios') }}
+                        </x-boton-comanda></a>
                     
                 @else
                     
