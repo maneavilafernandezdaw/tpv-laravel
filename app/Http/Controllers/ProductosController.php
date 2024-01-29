@@ -25,20 +25,17 @@ class ProductosController extends Controller
             try {
                 $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
                 $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
-    
+
                 $impresoras = [];
                 foreach ($printers as $printer) {
                     $impresoras[] = $printer->Name;
                 }
-    
-                return view('productos.index', compact('productos', 'familias', 'impresoras'));
 
+                return view('productos.index', compact('productos', 'familias', 'impresoras'));
             } catch (\Exception $e) {
-                
+
                 return response()->json(['error' => $e->getMessage()], 500);
             }
-
-           
         }
         return view('welcome');
     }

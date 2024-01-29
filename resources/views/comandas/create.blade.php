@@ -37,9 +37,6 @@
 
 
 
-
-            {{--  <h3 class=" h3 text-center mt-2">Productos</h3> --}}
-
             <div class=" d-flex flex-wrap gap-2 justify-center">
                 <ul class="nav nav-pills nav-stacked">
                     <div class="mb-2 d-flex flex-wrap gap-2 justify-center">
@@ -116,14 +113,16 @@
             </div>
         </div>
 
-        {{-- tabla de pedido --}}
-        <div class="hidden d-md-block col-md-4">
-            {{-- <h3 class=" h3 text-center mt-2">Comanda</h3> --}}
 
+        <div class="hidden d-md-block col-md-4">
+
+            {{-- boton consultar cuenta --}}
             <a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">
                 <x-boton-consultar>
                     {{ __('Consultar cuenta') }}
                 </x-boton-consultar></a>
+
+            {{-- tabla de pedido --}}
             <table class="table table-striped text-sm  border border-collapse">
                 <thead>
                     <tr>
@@ -142,10 +141,11 @@
                                         {{ $producto->nombre }}
                                     @endif
                                 @endforeach
-                          
+
                             </td>
                             <td>
                                 <div class="d-flex gap-2 justify-center">
+                                    {{-- boton incrementar --}}
                                     <form action="{{ route('comandas.incrementar') }}" method="post">
                                         @csrf
                                         <div class="form-group">
@@ -168,7 +168,7 @@
                                         <x-boton-incrementar />
 
                                     </form>
-
+                                    {{-- boton decrementar --}}
                                     <form action="{{ route('comandas.decrementar') }}" method="post">
                                         @csrf
                                         <div class="form-group">
@@ -201,6 +201,7 @@
                             @if (isset($comanda))
                                 <div class="d-flex gap-3 justify-center">
                                     <div>
+                                        {{-- boton enviar --}}
                                         <form action="{{ route('comandas.enviar') }}" method="post">
                                             @csrf
                                             <div class="form-group">
