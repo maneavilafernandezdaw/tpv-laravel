@@ -18,7 +18,7 @@
 
                         <th>Nº FACTURA</th>
                         <th>NOMBRE</th>
-                        <th>CLIENTE ID</th>
+                        {{-- <th>CLIENTE ID</th> --}}
                         <th>FECHA/HORA</th>
                         <th>PDF</th>
 
@@ -31,9 +31,9 @@
                    
                             <td class="fw-bold text-xl align-middle">{{ $factura->id }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $factura->nombre }}</td>
-                            <td class="fw-bold text-xl align-middle">{{ $factura->cliente_id }}</td>
+                            {{-- <td class="fw-bold text-xl align-middle">{{ $factura->cliente_id }}</td> --}}
                             <td class="fw-bold text-xl align-middle">{{ $factura->created_at }}</td>
-                            <td><a target="_blank" href="{{asset('facturas/'.$factura->nombre)}}"><x-boton-editar>VER PDF</x-boton-editar></a></td>
+                            <td><a target="_blank" href="{{asset('facturas/'.$factura->nombre)}}"><x-boton-admin>pdf</x-boton-admin></a></td>
                            
                         </tr>
                     @endforeach

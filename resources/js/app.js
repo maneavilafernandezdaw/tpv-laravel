@@ -18,9 +18,11 @@ $('#tabla_Datatables').DataTable({
 
     responsive: true,
     autoWidth: false,
+    "order": [[1, "desc"]],
     "language": {
+       
         "lengthMenu": "Mostrar _MENU_ registros por páginas",
-        "zeroRecords": "Nada encontrado - disculpa",
+        "zeroRecords": "Nada encontrado",
         "info": "Página _PAGE_ de _PAGES_",
         "infoEmpty": "No records available",
         "infoFiltered": "(filtrado de _MAX_ registros)",

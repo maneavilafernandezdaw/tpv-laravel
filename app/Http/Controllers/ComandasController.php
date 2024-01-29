@@ -66,18 +66,25 @@ class ComandasController extends Controller
     }
 
 
-    public function create($z, $m)
+    public function create($z, $m, $f)
     {
         if (Auth::check()) {
+            $familia=$f;
             $mesa = $m;
             $zona = Zona::find($z);
-            $productos = Producto::all()->where('familia_id', '!=', 1);
-            $general = Producto::all()->where('familia_id', '=', 1);
-            $familias = Familia::all();
+
+            if($familia === "todo"){
+                $productos = Producto::all();  
+            }else{
+                $productos = Producto::all()->where('familia_id', $familia);
+            }
+            
+            $todosProductos = Producto::all();
+            $familias = Familia::orderBy('nombre')->get();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
 
-            return view('comandas.create', compact('zona', 'mesa', 'productos', 'general', 'familias', 'comandas'));
+            return view('comandas.create', compact('zona', 'mesa', 'productos','todosProductos', 'familias', 'comandas','familia'));
         }
         return view('welcome');
     }
@@ -127,10 +134,10 @@ class ComandasController extends Controller
 
                 $comanda->increment('cantidad');
 
-                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa, $request->familia]);
             } else {
                 Comanda::create($request->all());
-                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+                return redirect()->route('comandas.create', [$request->zona_id, $request->mesa,  $request->familia]);
             }
         }
         return view('welcome');
@@ -142,7 +149,7 @@ class ComandasController extends Controller
         if (Auth::check()) {
             $comanda = Comanda::find($request->comanda_id);
             $comanda->increment('cantidad');
-            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa,  $request->familia]);
         }
         return view('welcome');
     }
@@ -155,7 +162,7 @@ class ComandasController extends Controller
             if ($comanda->cantidad < 1) {
                 $comanda->delete();
             }
-            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa]);
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa,  $request->familia]);
         }
         return view('welcome');
     }
@@ -389,7 +396,7 @@ class ComandasController extends Controller
                 $comanda->delete();
             }
             $zonas = Zona::all();
-            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa])
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa, $request->familia])
                 ->with('mensaje', 'Comanda Eliminada Correctamente.');
         }
         return view('welcome');

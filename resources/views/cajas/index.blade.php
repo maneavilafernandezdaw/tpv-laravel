@@ -18,7 +18,7 @@
                 <thead>
 
                     <tr>
-
+                        <th>ID</th>
                         <th>FECHA/HORA</th>
                         <th>EFECTIVO</th>
                         <th>TARJETA</th>
@@ -30,7 +30,7 @@
                 <tbody>
                     @foreach ($cajas as $caja)
                         <tr>
-                   
+                            <td class="fw-bold text-xl align-middle">{{ $caja->id}}</td>
                             <td class="fw-bold text-xl align-middle">{{ $caja->created_at }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $caja->efectivo }}€</td>
                             <td class="fw-bold text-xl align-middle">{{ $caja->tarjeta }}€</td>

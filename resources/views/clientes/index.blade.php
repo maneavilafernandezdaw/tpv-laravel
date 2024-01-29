@@ -46,7 +46,8 @@
                                         </div>
                                   
                                         <br>
-
+                                    </div>
+                                    <div class="modal-footer">
                                         <x-boton-crear/>
                                         
 
@@ -77,8 +78,9 @@
                 <thead>
                     <tr>
 
-                        <th>CIF/NIF</th>
+                       
                         <th>NOMBRE</th>
+                        <th>CIF/NIF</th>
                         <th>DIRECCIÓN</th>
                         <th>EMAIL</th>
                         <th></th>
@@ -88,8 +90,9 @@
                 <tbody>
                     @foreach ($clientes as $cliente)
                         <tr>
-                            <td class="fw-bold text-xl align-middle">{{ $cliente->cif }}</td>
+                            
                             <td class="fw-bold text-xl align-middle">{{ $cliente->nombre }}</td>
+                            <td class="fw-bold text-xl align-middle">{{ $cliente->cif }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $cliente->direccion }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $cliente->email }}</td>
                             <td>
@@ -97,9 +100,8 @@
                                     <div>
                                         <!-- Button trigger modal Editar-->
                                   
-                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $cliente->id }}">
-                                            {{ __('Editar') }}
-                                        </x-boton-editar>
+                                        <x-boton-editar data-bs-toggle="modal" data-bs-target="#modalEditar{{ $cliente->id }}"/>
+                                           
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $cliente->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
@@ -142,9 +144,10 @@
                                         
                                                             <br>
 
-                                                            <x-boton-editar>
-                                                                {{ __('Editar') }}
-                                                            </x-boton-editar>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <x-boton-editar/>
+                                                             
 
                                                             @include('components.boton-cancelar')
 
@@ -163,9 +166,8 @@
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
-                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $cliente->id }}">
-                                            {{ __('Eliminar') }}
-                                        </x-boton-eliminar>
+                                        <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar{{ $cliente->id }}"/>
+                                     
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $cliente->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -191,9 +193,8 @@
                                                             <input type="hidden" name="idcliente" id="idcliente"
                                                                 value="{{ $cliente->id }}">
 
-                                                                <x-boton-eliminar>
-                                                                    {{ __('Eliminar') }}
-                                                                </x-boton-eliminar>
+                                                                <x-boton-eliminar/>
+                                                          
 
                                                         </form>
                                                         

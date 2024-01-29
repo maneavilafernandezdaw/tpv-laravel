@@ -26,9 +26,10 @@
             @for ($i = 1; $i <= $zona->mesas; $i++)
                 @php
                     $ocupada = 0;
+                    $f='todo';
                 @endphp
 
-                <a href="{{ route('comandas.create', [$zona->id, $i]) }}">
+                <a href="{{ route('comandas.create', [$zona->id, $i, $f]) }}">
 
                     @foreach ($comandas as $comanda)
                         @if ($comanda->mesa == $i && $comanda->zona_id === $zona->id)

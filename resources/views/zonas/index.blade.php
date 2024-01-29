@@ -37,6 +37,8 @@
                                         </div>
                                         <br>
 
+                                    </div>
+                                    <div class="modal-footer">
                                         <x-boton-crear/>
                                         
 
@@ -119,7 +121,8 @@
                                                                     value="{{ $zona->mesas }}">
                                                             </div>
                                                             <br>
-
+                                                        </div>
+                                                        <div class="modal-footer">
                                                             <x-boton-editar>
                                                                
                                                             </x-boton-editar>
@@ -167,7 +170,8 @@
                                                             @method('DELETE')
                                                             <input type="hidden" name="idzona" id="idzona"
                                                                 value="{{ $zona->id }}">
-
+                                                            </div>
+                                                            <div class="modal-footer">
                                                                 <x-boton-eliminar/>
                                                                 
 

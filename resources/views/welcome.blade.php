@@ -36,11 +36,10 @@
             @auth
 
 
-                <a href="{{ url('/home') }}"><x-boton-crear>inicio</x-boton-crear></a>
+                <a href="{{ url('/home') }}"><x-boton-inicio/></a>
             @else
-                <a href="{{ route('login') }}"><x-boton-crear>
-                        {{ __('Iniciar sesión') }}
-                    </x-boton-crear></a>
+                <a href="{{ route('login') }}"><x-boton-iniciarSesion/>
+                  
 
             @endauth
         </div>

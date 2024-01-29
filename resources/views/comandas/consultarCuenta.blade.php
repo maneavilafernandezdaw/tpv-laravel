@@ -11,7 +11,7 @@
     <nav>
         <div class="container-fluid d-flex justify-center gap-2">
             <a href={{ route('home') }}><x-boton-inicio/></a>
-            <a href="{{ route('comandas.create', [$zona->id, $mesa]) }}"><x-boton-volver/></a>
+            <a href="{{ route('comandas.create', [$zona->id, $mesa, "todo"]) }}"><x-boton-volver/></a>
 
         </div>
     </nav>

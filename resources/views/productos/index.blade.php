@@ -77,7 +77,8 @@
                                                 class="form-control rounded-md border border-neutral-900 p-2 "
                                                 id="imagen" name="imagen">
                                         </div> --}}<br>
-
+                                    </div>
+                                    <div class="modal-footer">
                                         <x-boton-crear/>
                                           
 
@@ -151,9 +152,8 @@
                                         <!-- Button trigger modal Editar-->
 
                                         <x-boton-editar data-bs-toggle="modal"
-                                            data-bs-target="#modalEditar{{ $producto->id }}">
-                                            {{ __('Editar') }}
-                                        </x-boton-editar>
+                                            data-bs-target="#modalEditar{{ $producto->id }}"/>
+                                     
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $producto->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
@@ -236,7 +236,7 @@
                                                                         @endif
                                                                     @endforeach
                                                                 </select>
-                                                            </div>
+                                                            </div><br>
 
                                                             {{-- <div class="form-group">
                                                                 <label for="imagen">Imagen</label>
@@ -249,10 +249,10 @@
                                                              
                                                                 @endif
                                                             </div><br> --}}
-
-                                                            <x-boton-editar>
-                                                                {{ __('Aceptar') }}
-                                                            </x-boton-editar>
+                                                        </div>
+                                                            <div class="modal-footer">
+                                                            <x-boton-editar/>
+                                                              
 
                                                             @include('components.boton-cancelar')
 
@@ -271,9 +271,8 @@
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
                                         <x-boton-eliminar data-bs-toggle="modal"
-                                            data-bs-target="#modalEliminar{{ $producto->id }}">
-                                            {{ __('Eliminar') }}
-                                        </x-boton-eliminar>
+                                            data-bs-target="#modalEliminar{{ $producto->id }}"/>
+                                          
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $producto->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -299,9 +298,8 @@
                                                             <input type="hidden" name="idproducto" id="idproducto"
                                                                 value="{{ $producto->id }}">
 
-                                                            <x-boton-eliminar>
-                                                                {{ __('Eliminar') }}
-                                                            </x-boton-eliminar>
+                                                            <x-boton-eliminar/>
+                                                           
 
                                                         </form>
 

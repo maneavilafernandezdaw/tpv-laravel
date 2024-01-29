@@ -18,7 +18,7 @@
                 <thead>
 
                     <tr>
-
+                        <th>ID</th>
                         <th>ZONA</th>
                         <th>MESA</th>
                         <th>CANTIDAD</th>
@@ -30,6 +30,7 @@
                 <tbody>
                     @foreach ($cobros as $cobro)
                         <tr>
+                            <td class="fw-bold text-xl align-middle">{{ $cobro->id }}</td>
                             <td class="fw-bold text-xl align-middle">
                                 @foreach ($zonas as $zona)
                                     @if ($zona->id === $cobro->zona_id)

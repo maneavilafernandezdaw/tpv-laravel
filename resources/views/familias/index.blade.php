@@ -32,7 +32,8 @@
                                         </div>
                                   
                                         <br>
-
+                                    </div>
+                                    <div class="modal-footer">
                                         <x-boton-crear/>
                                  
 
@@ -109,7 +110,8 @@
                                                             </div>
                                         
                                                             <br>
-
+                                                        </div>
+                                                        <div class="modal-footer">
                                                             <x-boton-editar/>
                                                              
                                                           

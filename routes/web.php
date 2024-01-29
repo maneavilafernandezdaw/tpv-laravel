@@ -87,7 +87,7 @@ Route::controller(ProductosController::class)->group(function () {
 
 Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas', 'index')->name('comandas.index');
-    Route::get('comandas/create/{zona}/{mesa}', 'create')->name('comandas.create');
+    Route::get('comandas/create/{zona}/{mesa}/{familia}', 'create')->name('comandas.create');
     Route::get('comandas/cuenta/{zona}/{mesa}', 'consultarCuenta')->name('comandas.consultarCuenta');
     Route::get('comandas/pedido/{zona}/{mesa}', 'pedido')->name('comandas.pedido');
     Route::post('comandas/store', 'store')->name('comandas.store');
