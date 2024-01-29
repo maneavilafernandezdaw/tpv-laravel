@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
             <div>
                
-                    <x-application-logo class="w-60"/>
+                    <x-application-logo class="w-32"/>
                
             </div>
 
