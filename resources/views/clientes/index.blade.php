@@ -18,7 +18,7 @@
                             <div class="modal-content">
                                 <div class="modal-header  bg-green-600">
                                     <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Cliente</h1>
-
+                                    @include('components.boton-cancelar-mini')
                                 </div>
                                 <div class="modal-body">
 
@@ -108,7 +108,7 @@
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
                                                             Editar Cliente
                                                         </h1>
-
+                                                        @include('components.boton-cancelar-mini')
                                                     </div>
                                                     <div class="modal-body">
 
@@ -169,7 +169,7 @@
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Cliente
                                                         </h1>
-
+                                                        @include('components.boton-cancelar-mini')
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>

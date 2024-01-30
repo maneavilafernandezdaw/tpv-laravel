@@ -2,14 +2,15 @@
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio/></a>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio /></a>
             <h1 class=" h1">PRODUCTOS</h1>
             <div class="justify-end ">
                 <div class="col ">
 
                     <!-- Button trigger modal Crear-->
 
-                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear"/>
+                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear" />
+
                     <!-- Modal Crear-->
                     <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
                         aria-hidden="true">
@@ -17,7 +18,7 @@
                             <div class="modal-content">
                                 <div class="modal-header  bg-green-600">
                                     <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Producto</h1>
-
+                                    @include('components.boton-cancelar-mini')
                                 </div>
                                 <div class="modal-body">
 
@@ -62,7 +63,7 @@
                                             <select class="form-select" aria-label="Default select example"
                                                 id="impresora" name="impresora" required>
                                                 @foreach ($impresoras as $impresora)
-                                                    <option value="{{ $impresora}}">{{ $impresora }}</option>
+                                                    <option value="{{ $impresora }}">{{ $impresora }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -77,12 +78,12 @@
                                                 class="form-control rounded-md border border-neutral-900 p-2 "
                                                 id="imagen" name="imagen">
                                         </div> --}}<br>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <x-boton-crear/>
-                                          
+                                </div>
+                                <div class="modal-footer">
+                                    <x-boton-crear />
 
-                                        @include('components.boton-cancelar')
+
+                                    @include('components.boton-cancelar')
 
                                     </form>
 
@@ -152,8 +153,8 @@
                                         <!-- Button trigger modal Editar-->
 
                                         <x-boton-editar data-bs-toggle="modal"
-                                            data-bs-target="#modalEditar{{ $producto->id }}"/>
-                                     
+                                            data-bs-target="#modalEditar{{ $producto->id }}" />
+
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $producto->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
@@ -164,7 +165,7 @@
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
                                                             Editar Producto
                                                         </h1>
-
+                                                        @include('components.boton-cancelar-mini')
                                                     </div>
                                                     <div class="modal-body">
 
@@ -222,8 +223,8 @@
                                                             <div class="form-group">
                                                                 <label for="impresora">Impresora</label>
                                                                 <select class="form-select"
-                                                                    aria-label="Default select example"
-                                                                    id="impresora" name="impresora" required
+                                                                    aria-label="Default select example" id="impresora"
+                                                                    name="impresora" required
                                                                     value="{{ $producto->impresora }}">
                                                                     @foreach ($impresoras as $impresora)
                                                                         @if ($impresora === $producto->impresora)
@@ -249,12 +250,12 @@
                                                              
                                                                 @endif
                                                             </div><br> --}}
-                                                        </div>
-                                                            <div class="modal-footer">
-                                                            <x-boton-editar/>
-                                                              
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <x-boton-editar />
 
-                                                            @include('components.boton-cancelar')
+
+                                                        @include('components.boton-cancelar')
 
                                                         </form>
 
@@ -271,8 +272,8 @@
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
                                         <x-boton-eliminar data-bs-toggle="modal"
-                                            data-bs-target="#modalEliminar{{ $producto->id }}"/>
-                                          
+                                            data-bs-target="#modalEliminar{{ $producto->id }}" />
+
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $producto->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
@@ -281,7 +282,7 @@
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Producto
                                                         </h1>
-
+                                                        @include('components.boton-cancelar-mini')
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
@@ -298,8 +299,8 @@
                                                             <input type="hidden" name="idproducto" id="idproducto"
                                                                 value="{{ $producto->id }}">
 
-                                                            <x-boton-eliminar/>
-                                                           
+                                                            <x-boton-eliminar />
+
 
                                                         </form>
 

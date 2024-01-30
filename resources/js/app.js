@@ -43,5 +43,7 @@ $(document).ready(function(e) {
         reader.readAsDataURL(this.files[0]);
     });
 
+
+
 });
 

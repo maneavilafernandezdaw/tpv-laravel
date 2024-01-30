@@ -9,6 +9,7 @@
                     <a href="{{ route('home') }}">
                         <x-application-logo />
                     </a>
+                    <button onclick="cambiarTema()" class="btn rounded-fill border "><i id="dl-icon" class="fa-solid fa-moon"></i></button>
                 </div>
             </div>
 

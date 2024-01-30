@@ -25,7 +25,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased m-0 h-0 min-w-fit">
+<body class="font-sans antialiased m-0 h-0 min-w-fit bg-dark-grey" data-bs-theme="light">
     <div class=" ">
         {{-- nav --}}
         @include('layouts.navigation')
@@ -49,7 +49,23 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 
+    <script>
+        const temaOscuro = () => {
+            document.querySelector("body").setAttribute("data-bs-theme", "dark");
+            document.querySelector("#dl-icon").setAttribute("class", "fa-solid fa-sun");
+        }
+        const temaClaro = () => {
+            document.querySelector("body").setAttribute("data-bs-theme", "light");
+            document.querySelector("#dl-icon").setAttribute("class", "fa-solid fa-moon");
+        }
+        const cambiarTema = () => {
+            document.querySelector("body").getAttribute("data-bs-theme") === "light"?
+            temaOscuro() : temaClaro();
+        }
+       
 
+
+    </script>
 </body>
 
 </html>

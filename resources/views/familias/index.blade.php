@@ -19,7 +19,7 @@
                             <div class="modal-content">
                                 <div class="modal-header  bg-green-600">
                                     <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Familia</h1>
-
+                                    @include('components.boton-cancelar-mini')
                                 </div>
                                 <div class="modal-body">
 
@@ -36,7 +36,7 @@
                                     <div class="modal-footer">
                                         <x-boton-crear/>
                                  
-
+                                        
                                         @include('components.boton-cancelar')
 
                                     </form>
@@ -94,7 +94,7 @@
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
                                                             Editar Familia
                                                         </h1>
-
+                                                        @include('components.boton-cancelar-mini')
                                                     </div>
                                                     <div class="modal-body">
 
@@ -143,7 +143,7 @@
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Familia
                                                         </h1>
-
+                                                        @include('components.boton-cancelar-mini')
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
