@@ -27,19 +27,10 @@
 
 <body class="font-sans antialiased m-0 h-0 min-w-fit">
     <div class=" ">
+        {{-- nav --}}
         @include('layouts.navigation')
 
-        <!-- Page Heading -->
-        @if (isset($header))
-            <header class=" bg- shadow">
-                <div class="max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
-        @endif
-
- 
-        <!-- Page Content -->
+        <!-- Contenido de la página -->
         <main class="m-0 p-0">
             {{ $slot }}
         </main>
@@ -58,7 +49,7 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 
- 
+
 </body>
 
 </html>

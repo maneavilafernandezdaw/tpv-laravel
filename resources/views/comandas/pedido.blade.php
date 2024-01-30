@@ -1,28 +1,34 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-gray-800">
-        <div class="container-fluid">
-            <a class="navbar-brand h1 text-white" href={{ route('home') }}>Inicio</a>
-            <a class="navbar-brand h1 text-white" href={{ route('comandas.index') }}>Volver a Zonas</a>
+
+    <div class="d-flex justify-center gap-3 items-center my-3">
+  
+        <div class="d-flex  ">
+            <div>
+                <span class=" h1  text-center mt-2"> {{ $zona->nombre }}&nbsp;&nbsp; </span>
+            </div>
+            <div>
+                <span class=" h1  text-center mt-2"> Mesa: {{ $mesa }}</span>
+            </div>
         </div>
-    </nav>
+
+    </div>
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
-    <div>
-        <h2 class=" h2 text-center mt-2"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</h2>
-    </div>
+
 
 
 
     <div class="">
     
         <div class="d-flex justify-center">
-            <a href={{ route('comandas.create', [$zona->id, $mesa]) }}>
+            <a href={{ route('comandas.create', [$zona->id, $mesa, "todo"]) }}>
              {{--    <x-boton-comanda class="d-block ">
                     {{ __('Volver a Productos') }}
                 </x-boton-comanda></a> --}}
-                <button type="submit" class="btn btn-outline-success rounded-none w-screen text-3xl p-3 mb-3 shadow">Volver a Productos</button>
+               {{--  <button type="submit" class="btn btn-outline-success rounded-none w-screen text-3xl p-3 mb-3 shadow">Volver a Productos</button> --}}
+                <x-boton-volver/>
         </div>
     </div>
 
@@ -32,8 +38,8 @@
     {{-- tabla de pedido --}}
     <div >
         <div class="d-flex flex-col">
-        <h3 class=" h3 text-center mt-2">Comanda</h3>
-        <h1 class="text-center"><a class="btn btn-outline-primary  rounded-none w-screen text-3xl p-3 mb-3 shadow" href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">Consultar cuenta</a></h1>
+        <h3 class=" h2 text-center mt-2">Comanda</h3>
+        <h1 class="text-center"><a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}"><x-boton-admin>Consultar cuenta</x-boton-admin></a></h1>
     </div>
         <table class="table table-striped text-sm">
             <thead>
@@ -70,9 +76,8 @@
                                             value="{{ $comanda->id }}">
                                     </div>
 
-                                    <x-boton-incrementar>
-                                        {{ __('+') }}
-                                    </x-boton-incrementar>
+                                    <x-boton-incrementar/>
+                                
                                 </form>
 
                                 <form action="{{ route('comandas.decrementarTabla') }}" method="post">
@@ -90,9 +95,8 @@
                                             value="{{ $comanda->id }}">
                                     </div>
 
-                                    <x-boton-decrementar>
-                                        {{ __('-') }}
-                                    </x-boton-decrementar>
+                                    <x-boton-decrementar/>
+                                  
                                 </form>
                             </div>
                         </td>
@@ -114,9 +118,8 @@
                                         <input type="hidden" id="zona_id" name="zona_id"
                                             value="{{ $zona->id }}">
                                     </div>
-                                    <x-boton-enviar-comanda>
-                                        {{ __('Enviar') }}
-                                    </x-boton-enviar-comanda>
+                                    <x-boton-enviar-comanda/>
+                                  
 
                                 </form>
                             </div>
@@ -131,9 +134,8 @@
                                         <input type="hidden" id="zona_id" name="zona_id"
                                             value="{{ $zona->id }}">
                                     </div>
-                                    <x-boton-eliminar>
-                                        {{ __('Eliminar') }}
-                                    </x-boton-eliminar>
+                                    <x-boton-eliminar/>
+                               
 
                                 </form>
                             </div>

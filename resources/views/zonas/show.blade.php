@@ -3,30 +3,30 @@
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
-    <div>
-        <h1 class="text-center h1 mt-3">CREAR COMANDA</h1>
+
+
+    <div class="container px-4 d-flex justify-center gap-4 items-center mt-2">
+        <div>
+            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio /></a>
+        </div>
+        <div class="d-flex flex-col flex-md-row">
+            <div>
+                <span class=" h1  text-center mt-2"> {{ $zona->nombre }} </span>
+            </div>
+        </div>
+        <div>
+            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-volver /></a>
+        </div>
     </div>
 
-    <nav>
-        <div class="container-fluid d-flex justify-center gap-2">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio/></a>
-            <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-volver/></a>
-        </div>
-    </nav>
+
 
     <div class="container mt-3 card  rounded-none">
-
-        <h1 class=" h1 text-center mt-2">Mesas: {{ $zona->nombre }}</h1>
-
-
         <div class="card-body rounded-none my-2 d-flex flex-wrap gap-3 justify-center">
-
-
-
             @for ($i = 1; $i <= $zona->mesas; $i++)
                 @php
                     $ocupada = 0;
-                    $f='todo';
+                    $f = 'todo';
                 @endphp
 
                 <a href="{{ route('comandas.create', [$zona->id, $i, $f]) }}">
@@ -43,23 +43,24 @@
                             <div class="position-absolute top-50 start-50 translate-middle  fw-bold text-danger">
 
                                 <h5 class=" text-3xl  text-center">{{ $i }}</h5>
-                            @else
-                                <div class="card w-24 h-24 border border-primary border-2 position-relative">
-                                    <div
-                                        class="position-absolute top-50 start-50 translate-middle  fw-bold text-primary">
+                            </div>
+                        </div>
+                    @else
+                        <div class="card w-24 h-24 border border-primary border-2 position-relative">
+                            <div class="position-absolute top-50 start-50 translate-middle  fw-bold text-primary">
 
-                                        <h5 class=" text-3xl  text-center">{{ $i }}</h5>
+                                <h5 class=" text-3xl  text-center">{{ $i }}</h5>
+                            </div>
+                        </div>
                     @endif
 
-
-
+                </a>
+            @endfor
         </div>
-    </div>
-    </a>
-    @endfor
+
 
 
     </div>
-    </div>
+    
 
 </x-app-layout>

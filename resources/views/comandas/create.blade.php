@@ -6,12 +6,17 @@
     @include('partials.session-mensaje')
 
 
-    <div class="d-flex justify-around items-center">
+    <div class="d-flex justify-center gap-3 items-center mt-3">
         <div>
             <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio /></a>
         </div>
-        <div>
-            <span class=" h1 text-center mt-2"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</span>
+        <div class="d-flex flex-col flex-md-row">
+            <div>
+                <span class=" h2  text-center mt-2"> {{ $zona->nombre }}&nbsp;&nbsp; </span>
+            </div>
+            <div>
+                <span class=" h2  text-center mt-2"> Mesa: {{ $mesa }}</span>
+            </div>
         </div>
         <div>
             <a class="navbar-brand text-2xl" href={{ route('comandas.index') }}><x-boton-volver /></a>

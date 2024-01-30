@@ -2,43 +2,43 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-4 ">
         <div class="flex justify-between h-16">
+
+            <!-- Logo -->
             <div class="flex">
-                <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
                         <x-application-logo />
                     </a>
                 </div>
-
-                <!-- Navigation Links -->
-
             </div>
+
+            {{-- nav-admin  --}}
             <div class="hidden space-x-8 xl:-my-px xl:ml-10 xl:flex">
-                {{-- nav-admin  --}}
                 @include('partials.nav-admin')
             </div>
+
             <!-- Settings Dropdown -->
             <div class="hidden xl:flex md:items-center xl:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button
-                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                        <x-boton-admin>
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ml-1">
 
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </div>
-                        </button>
+                        </x-boton-admin>
+
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link :href="route('profile.edit')" class="text-xl">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
 
@@ -48,7 +48,8 @@
 
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault();
-                                                this.closest('form').submit();">
+                                                this.closest('form').submit();"
+                                class="text-xl">
                                 {{ __('Cerrar sesión') }}
                             </x-dropdown-link>
                         </form>
@@ -74,7 +75,7 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden xl:hidden">
-        <div class="d-flex items-center justify-between bg-indigo-50">
+        <div class="mb-2 d-flex items-center justify-between bg-indigo-50">
 
             <h1 class="h3 ms-2">Administración</h1>
 
@@ -83,22 +84,21 @@
 
             <x-dropdown align="right" width="48">
                 <x-slot name="trigger">
-                    <button
-                        class="inline-flex items-center me-1 px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                    <x-boton-admin>
                         <div>{{ Auth::user()->name }}</div>
 
                         <div class="ml-1">
-                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
                                     clip-rule="evenodd" />
                             </svg>
                         </div>
-                    </button>
+                    </x-boton-admin>
                 </x-slot>
 
                 <x-slot name="content">
-                    <x-dropdown-link :href="route('profile.edit')">
+                    <x-dropdown-link :href="route('profile.edit')" class="text-xl">
                         {{ __('Perfil') }}
                     </x-dropdown-link>
 
@@ -108,7 +108,8 @@
 
                         <x-dropdown-link :href="route('logout')"
                             onclick="event.preventDefault();
-                                            this.closest('form').submit();">
+                                            this.closest('form').submit();"
+                            class="text-xl">
                             {{ __('Cerrar sesión') }}
                         </x-dropdown-link>
                     </form>
@@ -117,7 +118,6 @@
         </div>
 
         {{-- nav-admin  --}}
-
         @include('partials.nav-admin')
     </div>
 </nav>

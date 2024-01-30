@@ -18,7 +18,7 @@ $('#tabla_Datatables').DataTable({
 
     responsive: true,
     autoWidth: false,
-    "order": [[1, "desc"]],
+    "order": [[0, "desc"]],
     "language": {
        
         "lengthMenu": "Mostrar _MENU_ registros por páginas",

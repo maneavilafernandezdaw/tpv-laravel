@@ -13,11 +13,9 @@ use App\Models\Cliente;
 use Illuminate\Support\Facades\Auth;
 
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
-use Mike42\Escpos\PrintConnectors\FilePrintConnector;
+
 use Mike42\Escpos\Printer;
 
-use Barryvdh\DomPDF\Facade as PDF;
-use Mike42\Escpos\CapabilityProfile as EscposCapabilityProfile;
 
 class ComandasController extends Controller
 {
@@ -396,7 +394,7 @@ class ComandasController extends Controller
                 $comanda->delete();
             }
             $zonas = Zona::all();
-            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa, $request->familia])
+            return redirect()->route('comandas.create', [$request->zona_id, $request->mesa, "todo"])
                 ->with('mensaje', 'Comanda Eliminada Correctamente.');
         }
         return view('welcome');

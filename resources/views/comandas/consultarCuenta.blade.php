@@ -4,10 +4,13 @@
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
+
+    {{-- zona-mesa --}}
     <div>
         <h1 class=" h1 text-center mt-3"> {{ $zona->nombre }} - Mesa: {{ $mesa }}</h1>
     </div>
 
+    {{-- botones inicio y volver --}}
     <nav>
         <div class="container-fluid d-flex justify-center gap-2">
             <a href={{ route('home') }}><x-boton-inicio /></a>
@@ -17,8 +20,6 @@
 
     <div class="container">
         <div class="row">
-
-
             <div class="col-sm-6">
                 <h1 class=" h2 text-center ">Cuenta</h1>
                 @if (Auth::user()->admin)
@@ -36,10 +37,10 @@
                             <x-boton-cobrar>
                                 <i class="fa-solid fa-print"></i>
                             </x-boton-cobrar>
-
                         </form>
                     </div>
                 @endif
+
                 {{-- tabla de pedido --}}
                 <table class="table table-striped  text-sm">
                     <thead>
@@ -93,7 +94,6 @@
                         </tr>
                     </tbody>
                 </table>
-
             </div>
 
 
@@ -235,7 +235,7 @@
 
                                         </div>
                                         <div class="modal-body text-center">
-                                            
+
                                             <div>
                                                 {{-- botón factura --}}
                                                 <form action="{{ route('cobros.descargar') }}" method="post"
