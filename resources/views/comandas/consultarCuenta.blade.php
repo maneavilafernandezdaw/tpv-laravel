@@ -63,14 +63,16 @@
 
                                 @foreach ($productos as $producto)
                                     @if ($producto->id === $comanda->producto_id)
-                                        <td>{{ $producto->nombre }} </td>
-                                        <td>{{ $producto->precio }}€ </td>
+                                        <td>{{ $producto->nombre }}  @if ($comanda->refresco !== "Solo")
+                                            /{{ $comanda->refresco }}
+                                            @endif</td>
+                                        <td>{{ $comanda->precio }}€ </td>
                                         @php
-                                            $subtotal = number_format($comanda->cantidad * $producto->precio, 2, '.', '');
+                                            $subtotal = number_format($comanda->cantidad * $comanda->precio, 2, '.', '');
                                         @endphp
                                         <td class="text-center">{{ $subtotal }}€ </td>
                                         @php
-                                            $total += $producto->precio * $comanda->cantidad;
+                                            $total += $comanda->precio * $comanda->cantidad;
                                         @endphp
                                     @endif
                                 @endforeach

@@ -76,6 +76,7 @@ class CobrosController extends Controller
             $total = 0;
             $subtotal = 0;
             $numeroFactura = 0;
+            $nombreProducto ='';
 
 
             if (isset($request->cliente)) {
@@ -97,14 +98,27 @@ class CobrosController extends Controller
                 $numeroFactura = $factura->id;
 
                 foreach ($comandas as $comanda) {
+       
+                
                     foreach ($prod as $producto) {
+
+
+
                         if ($comanda->producto_id === $producto->id) {
-                            $total += $comanda->cantidad * $producto->precio;
-                            $subtotal = $comanda->cantidad * $producto->precio;
+
+                            $total += $comanda->cantidad * $comanda->precio;
+                            $subtotal = $comanda->cantidad * $comanda->precio;
                           
                             $subtotal = number_format($subtotal, 2, '.', '');
-                        
-                            array_push($product, ['nombre' => $producto->nombre,'cantidad' => $comanda->cantidad, 'precio' => $producto->precio, 'subtotal' => $subtotal]);
+
+
+                            $nombreProducto = $producto->nombre;
+                            if ($comanda->refresco !== 'Solo'){
+                                $nombreProducto = $producto->nombre . ' / '. $comanda->refresco;
+                            }
+                
+                
+                            array_push($product, ['nombre' => $nombreProducto,'cantidad' => $comanda->cantidad, 'precio' => $comanda->precio, 'subtotal' => $subtotal]);
 
                             $subtotal = 0;
                         }

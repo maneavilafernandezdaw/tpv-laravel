@@ -12,7 +12,9 @@ class Comanda extends Model
         'mesa',
         'zona_id',
         'producto_id',
+        'refresco',
         'cantidad',
+        'precio',
         'estado',
     ];
 }

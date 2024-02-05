@@ -11,6 +11,7 @@ class Familia extends Model
 
     protected $fillable = [
         'nombre',
+        'combinada'
       
     ];
 }

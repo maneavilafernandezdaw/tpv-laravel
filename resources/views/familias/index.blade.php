@@ -30,6 +30,19 @@
                                             <input type="text" class="form-control rounded-md" id="nombre"
                                                 name="nombre" required maxlength="30">
                                         </div>
+                                        <br>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="combinada" id="combinada" value="1">
+                                            <label class="form-check-label" for="combinada">
+                                                Combinada
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="combinada" id="combinada" value="0" checked>
+                                            <label class="form-check-label" for="combinada">
+                                                No combinada
+                                            </label>
+                                        </div>
                                   
                                         <br>
                                     </div>
@@ -65,7 +78,7 @@
                     <tr>
 
                         <th>NOMBRE</th>
-                        
+                        <th>COMBINADA</th>
                         <th></th>
 
                     </tr>
@@ -75,7 +88,12 @@
                         <tr>
 
                             <td class="fw-bold text-xl align-middle">{{ $familia->nombre }}</td>
-                   
+
+                            @if ($familia->combinada)
+                            <td class="fw-bold text-xl align-middle">Si</td>
+                            @else
+                            <td class="fw-bold text-xl align-middle">No</td>
+                            @endif
 
                             <td>
                                 <div class="d-flex justify-end gap-4">
@@ -108,6 +126,36 @@
                                                                     id="nombre" name="nombre" required
                                                                     maxlength="30" value="{{ $familia->nombre }}">
                                                             </div>
+                                                            <br>
+                                                            @if ($familia->combinada)
+                                                            <div class="form-check">
+                                                               
+                                                                <input class="form-check-input" type="radio" name="combinada" id="combinada" value="1" checked>
+                                                                <label class="form-check-label" for="combinada">
+                                                                    Combinada
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="combinada" id="combinada" value="0" >
+                                                                <label class="form-check-label" for="combinada">
+                                                                    No combinada
+                                                                </label>
+                                                            </div>
+                                                            @else
+                                                            <div class="form-check">
+                                                               
+                                                                <input class="form-check-input" type="radio" name="combinada" id="combinada" value="1" >
+                                                                <label class="form-check-label" for="combinada">
+                                                                    Combinada
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="combinada" id="combinada" value="0" checked>
+                                                                <label class="form-check-label" for="combinada">
+                                                                    No combinada
+                                                                </label>
+                                                            </div>
+                                                            @endif
                                         
                                                             <br>
                                                         </div>

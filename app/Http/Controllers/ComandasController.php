@@ -70,6 +70,7 @@ class ComandasController extends Controller
             $familia=$f;
             $mesa = $m;
             $zona = Zona::find($z);
+            $refrescos = Producto::all()->where('familia_id', 2);
 
             if($familia === "todo"){
                 $productos = Producto::all();  
@@ -82,7 +83,7 @@ class ComandasController extends Controller
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
 
-            return view('comandas.create', compact('zona', 'mesa', 'productos','todosProductos', 'familias', 'comandas','familia'));
+            return view('comandas.create', compact('zona', 'mesa', 'productos','todosProductos', 'familias', 'comandas','familia','refrescos'));
         }
         return view('welcome');
     }
@@ -125,8 +126,9 @@ class ComandasController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
+            
             $comanda = Comanda::where('mesa', $request->mesa)
-                ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->where('producto_id', $request->producto_id)->first();
+                ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->where('producto_id', $request->producto_id)->where('refresco', $request->refresco)->first();
 
             if ($comanda) {
 
@@ -275,7 +277,14 @@ class ComandasController extends Controller
                                
                                             if ($producto->id === $comanda->producto_id){
                                                 $printer->text("$comanda->cantidad ");
-                                                $printer->text("$producto->nombre\n");
+                                               
+                                                if ($comanda->refresco !== "Solo"){
+                                                    $printer->text("$producto->nombre / $comanda->refresco\n");
+                                                }else{
+                                                    $printer->text("$producto->nombre\n");
+                                                }
+                                               
+                                               
                                             }
                                           }
                                            
@@ -348,10 +357,18 @@ class ComandasController extends Controller
                               
                                     foreach ($productos as $producto){
                                         if ($producto->id === $comanda->producto_id){
-                                            $subTotal = $comanda->cantidad*$producto->precio;
-                                            $subTotal = number_format($comanda->cantidad*$producto->precio, 2, '.', '');
+                                            $subTotal = $comanda->cantidad*$comanda->precio;
+                                            $subTotal = number_format($comanda->cantidad*$comanda->precio, 2, '.', '');
                                             $total +=   $subTotal;
-                                            $printer->text("$producto->nombre $producto->precio  $subTotal\n");
+
+
+                                            if ($comanda->refresco !== "Solo"){
+                                                $printer->text("$producto->nombre/$comanda->refresco $comanda->precio  $subTotal\n");
+                                            }else{
+                                                $printer->text("$producto->nombre $comanda->precio  $subTotal\n");
+                                            }
+
+                                            
                                         }
                                     
                                
