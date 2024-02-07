@@ -1,5 +1,5 @@
 @php
-    $img="imagen/logoMinibar.jpeg";
+    $img="imagen/logoMinibar.png";
 @endphp
 <img src="{{ asset($img) }}"
   alt="imagen logo"
