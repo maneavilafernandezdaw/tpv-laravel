@@ -26,23 +26,23 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="cif">Cif o Nif</label>
-                                            <input type="text" class="form-control rounded-md" id="cif"
-                                                name="cif" required>
+                                            <input type="text" class="form-control rounded-md bg-white text-black"
+                                                id="cif" name="cif" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control rounded-md" id="nombre"
-                                                name="nombre" required>
+                                            <input type="text" class="form-control rounded-md bg-white text-black"
+                                                id="nombre" name="nombre" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="direccion">Dirección</label>
-                                            <input type="text" class="form-control rounded-md" id="direccion"
-                                                name="direccion" required>
+                                            <input type="text" class="form-control rounded-md bg-white text-black"
+                                                id="direccion" name="direccion" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" class="form-control rounded-md" id="email"
-                                                name="email" required>
+                                            <input type="email" class="form-control rounded-md bg-white text-black"
+                                                id="email" name="email" required>
                                         </div>
 
                                         <br>
@@ -102,7 +102,7 @@
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $cliente->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-blue-600">
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
@@ -119,25 +119,29 @@
 
                                                             <div class="form-group">
                                                                 <label for="cif">Cif o Nif</label>
-                                                                <input type="text" class="form-control rounded-md"
+                                                                <input type="text"
+                                                                    class="form-control rounded-md bg-white text-black"
                                                                     id="cif" name="cif" required
                                                                     value="{{ $cliente->cif }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control rounded-md"
+                                                                <input type="text"
+                                                                    class="form-control rounded-md bg-white text-black"
                                                                     id="nombre" name="nombre" required
                                                                     value="{{ $cliente->nombre }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="direccion">Dirección</label>
-                                                                <input type="text" class="form-control rounded-md"
+                                                                <input type="text"
+                                                                    class="form-control rounded-md bg-white text-black"
                                                                     id="direccion" name="direccion" required
                                                                     value="{{ $cliente->direccion }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="email">Email</label>
-                                                                <input type="email" class="form-control rounded-md"
+                                                                <input type="email"
+                                                                    class="form-control rounded-md bg-white text-black"
                                                                     id="email" name="email" required
                                                                     value="{{ $cliente->email }}">
                                                             </div>
@@ -164,7 +168,7 @@
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $cliente->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog ">
                                                 <div class="modal-content">
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Cliente
@@ -173,7 +177,7 @@
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
-                                                            <p class="text-black">¿Está seguro que desea eliminar el
+                                                            <p>¿Está seguro que desea eliminar el
                                                                 cliente {{ $cliente->nombre }} ?</p>
 
                                                         </div>

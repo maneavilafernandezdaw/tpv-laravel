@@ -27,18 +27,18 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control rounded-md" id="nombre"
+                                            <input type="text" class="form-control rounded-md bg-white text-black" id="nombre"
                                                 name="nombre" required maxlength="20">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
-                                            <textarea class="min-w-full  rounded-md" id="descripcion" name="descripcion" required aria-label="textarea"></textarea>
+                                            <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required aria-label="textarea"></textarea>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="familia_id">Familia</label>
-                                            <select class="form-select" aria-label="Default select example"
+                                            <select class="form-select  bg-white text-black" aria-label="Default select example"
                                                 id="familia_id" name="familia_id" required>
                                                 @foreach ($familias as $familia)
                                                     <option value="{{ $familia->id }}">{{ $familia->nombre }}</option>
@@ -47,20 +47,20 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="precio">Precio</label>
-                                            <input type="number" step=".01" class="form-control rounded-md"
+                                            <label for="precio">Precio (€)</label>
+                                            <input type="number" step=".01" class="form-control rounded-md  bg-white text-black"
                                                 id="precio" name="precio" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="iva">Iva</label>
-                                            <input type="number" class="form-control rounded-md" id="iva"
+                                            <label for="iva">Iva (%)</label>
+                                            <input type="number" class="form-control rounded-md bg-white text-black" id="iva"
                                                 name="iva" value="21">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="impresora">Impresora</label>
-                                            <select class="form-select" aria-label="Default select example"
+                                            <select class="form-select  bg-white text-black" aria-label="Default select example"
                                                 id="impresora" name="impresora" required>
                                                 @foreach ($impresoras as $impresora)
                                                     <option value="{{ $impresora }}">{{ $impresora }}</option>
@@ -68,9 +68,9 @@
                                             </select>
                                         </div>
 
-                                        <div>
+                                        {{-- <div>
                                             <img id="imagenSeleccionada" class="max-h-40">
-                                        </div>
+                                        </div> --}}
 
                                         {{-- <div class="form-group">
                                             <label for="imagen">Imagen</label>
@@ -158,7 +158,7 @@
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $producto->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog ">
                                                 <div class="modal-content">
 
                                                     <div class="modal-header bg-blue-600">
@@ -176,19 +176,19 @@
                                                             @method('PUT')
                                                             <div class="form-group">
                                                                 <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control rounded-md"
+                                                                <input type="text" class="form-control rounded-md bg-white text-black"
                                                                     id="nombre" name="nombre" required
                                                                     maxlength="30" value="{{ $producto->nombre }}">
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="descripcion">Descripción</label>
-                                                                <textarea class="min-w-full  rounded-md" id="descripcion" name="descripcion" required aria-label="textarea">{{ $producto->descripcion }}</textarea>
+                                                                <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required aria-label="textarea">{{ $producto->descripcion }}</textarea>
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="familia_id">Familia</label>
-                                                                <select class="form-select"
+                                                                <select class="form-select  bg-white text-black"
                                                                     aria-label="Default select example"
                                                                     id="familia_id" name="familia_id" required
                                                                     value="{{ $producto->familia_id }}">
@@ -208,21 +208,21 @@
                                                             <div class="form-group">
                                                                 <label for="precio">Precio</label>
                                                                 <input type="number" step=".01"
-                                                                    class="form-control rounded-md" id="precio"
+                                                                    class="form-control rounded-md bg-white text-black" id="precio"
                                                                     name="precio" required
                                                                     value="{{ $producto->precio }}">
                                                             </div>
 
                                                             <div class="form-group">
                                                                 <label for="iva">Iva</label>
-                                                                <input type="number" class="form-control rounded-md"
+                                                                <input type="number" class="form-control rounded-md bg-white text-black"
                                                                     id="iva" name="iva"
                                                                     value="{{ $producto->iva }}">
                                                             </div><br>
 
                                                             <div class="form-group">
                                                                 <label for="impresora">Impresora</label>
-                                                                <select class="form-select"
+                                                                <select class="form-select bg-white text-black"
                                                                     aria-label="Default select example" id="impresora"
                                                                     name="impresora" required
                                                                     value="{{ $producto->impresora }}">
@@ -277,7 +277,7 @@
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $producto->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog ">
                                                 <div class="modal-content">
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Producto
@@ -286,7 +286,7 @@
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
-                                                            <p class="text-black">¿Está seguro que desea eliminar el
+                                                            <p class="">¿Está seguro que desea eliminar el
                                                                 producto: {{ $producto->nombre }} ?</p>
 
                                                         </div>

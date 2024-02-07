@@ -27,7 +27,7 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control rounded-md" id="nombre"
+                                            <input type="text" class="form-control rounded-md bg-white text-black" id="nombre"
                                                 name="nombre" required maxlength="30">
                                         </div>
                                         <br>
@@ -106,7 +106,7 @@
                                         <!-- Modal Editar-->
                                         <div class="modal fade" id="modalEditar{{ $familia->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header bg-blue-600">
                                                         <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
@@ -122,7 +122,7 @@
                                                             @method('PUT')
                                                             <div class="form-group">
                                                                 <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control  rounded-md"
+                                                                <input type="text" class="form-control  rounded-md bg-white text-black"
                                                                     id="nombre" name="nombre" required
                                                                     maxlength="30" value="{{ $familia->nombre }}">
                                                             </div>
@@ -186,7 +186,7 @@
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $familia->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Familia
@@ -195,7 +195,7 @@
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
-                                                            <p class="text-black">¿Está seguro que desea eliminar la
+                                                            <p>¿Está seguro que desea eliminar la
                                                                 familia {{ $familia->nombre }} ?</p>
 
                                                         </div>

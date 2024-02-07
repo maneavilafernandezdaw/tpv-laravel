@@ -70,12 +70,13 @@ class ComandasController extends Controller
             $familia=$f;
             $mesa = $m;
             $zona = Zona::find($z);
-            $refrescos = Producto::all()->where('familia_id', 2);
+            $refrescos = Producto::where('familia_id', 2)->orderBy('nombre', 'asc')->get();
 
             if($familia === "todo"){
-                $productos = Producto::all();  
+                $productos = Producto::orderBy('nombre', 'asc')->get(); 
+              
             }else{
-                $productos = Producto::all()->where('familia_id', $familia);
+                $productos = Producto::where('familia_id', $familia)->orderBy('nombre', 'asc')->get();
             }
             
             $todosProductos = Producto::all();
