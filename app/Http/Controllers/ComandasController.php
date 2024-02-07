@@ -107,17 +107,29 @@ class ComandasController extends Controller
         return view('welcome');
     }
 
-    public function pedido($z, $m)
+    public function pedido($z, $m, $f)
     {
         if (Auth::check()) {
+       
+
+            $familia=$f;
             $mesa = $m;
             $zona = Zona::find($z);
-            $productos = Producto::all();
-            $familias = Familia::all();
+            $refrescos = Producto::where('familia_id', 2)->orderBy('nombre', 'asc')->get();
+
+            if($familia === "todo"){
+                $productos = Producto::orderBy('nombre', 'asc')->get(); 
+              
+            }else{
+                $productos = Producto::where('familia_id', $familia)->orderBy('nombre', 'asc')->get();
+            }
+            
+            $todosProductos = Producto::all();
+            $familias = Familia::orderBy('nombre')->get();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
 
-            return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'familias', 'comandas'));
+            return view('comandas.pedido', compact('zona', 'mesa', 'productos','todosProductos', 'familias', 'comandas','familia','refrescos'));
         }
         return view('welcome');
     }

@@ -27,7 +27,7 @@
        
             
         <div class="d-flex flex-col items-center">
-            <h1 class="text-9xl">TPV Minibar</h1>
+            <h1 class="fw-bold display-2 text-center m-2">TPV Minibar</h1>
             <img src="imagen/logoMinibar.jpeg" alt="imagen logo" class="w-3/4">
         </div>
     

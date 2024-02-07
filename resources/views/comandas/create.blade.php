@@ -26,7 +26,7 @@
     <div class="d-md-none w-full">
 
         <div class="m-2 d-flex justify-center">
-            <a href={{ route('comandas.pedido', [$zona->id, $mesa]) }}><x-boton-admin>
+            <a href={{ route('comandas.pedido', [$zona->id, $mesa, $familia]) }}><x-boton-admin>
                     {{ __('Ver Comanda') }}
                 </x-boton-admin></a>
         </div>

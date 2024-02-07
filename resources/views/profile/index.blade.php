@@ -20,7 +20,7 @@
 
 
 
-        <div class="card-body bg-gray-300 rounded-none my-3">
+        <div class="card-body rounded-none my-3">
             <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
                     <tr>
@@ -48,7 +48,7 @@
                                         <!-- Modal Eliminar-->
                                         <div class="modal fade" id="modalEliminar{{ $usuario->id }}" tabindex="-1"
                                             aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog text-black">
+                                            <div class="modal-dialog ">
                                                 <div class="modal-content">
                                                     <div class="modal-header  bg-red-600">
                                                         <h1 class="modal-title fs-5 text-white">Eliminar Usuario
@@ -57,7 +57,7 @@
                                                     </div>
                                                     <div class="modal-body text-center">
                                                         <div>
-                                                            <p class="text-black">¿Está seguro que desea eliminar el
+                                                            <p>¿Está seguro que desea eliminar el
                                                                 usuario {{ $usuario->nombre }} ?</p>
 
                                                         </div>

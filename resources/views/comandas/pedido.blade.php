@@ -23,7 +23,7 @@
     <div class="">
     
         <div class="d-flex justify-center">
-            <a href={{ route('comandas.create', [$zona->id, $mesa, "todo"]) }}>
+            <a href={{ route('comandas.create', [$zona->id, $mesa, $familia]) }}>
              {{--    <x-boton-comanda class="d-block ">
                     {{ __('Volver a Productos') }}
                 </x-boton-comanda></a> --}}
@@ -54,11 +54,14 @@
                     <tr>
                         <td>{{ $comanda->cantidad }}</td>
                         <td>
-                            @foreach ($productos as $producto)
+                            @foreach ($todosProductos as $producto)
                                 @if ($producto->id === $comanda->producto_id)
                                     {{ $producto->nombre }}
                                 @endif
                             @endforeach
+                            @if ($comanda->refresco !== 'Solo')
+                                /{{ $comanda->refresco }}
+                            @endif
                         </td>
                         <td>
                             <div class="d-flex gap-2 justify-center">
