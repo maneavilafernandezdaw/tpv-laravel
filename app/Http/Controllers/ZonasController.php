@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 use function Laravel\Prompts\text;
 
+use Illuminate\Http\Response;
+
 class ZonasController extends Controller
 {
 
@@ -117,4 +119,8 @@ class ZonasController extends Controller
         }
         return view('welcome');
 }
+
+
+
+
 }

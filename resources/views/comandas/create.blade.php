@@ -84,7 +84,7 @@
                                     <!-- Button trigger modal Combinar-->
 
                                     <button data-bs-toggle="modal" data-bs-target="#modalCombinar{{ $producto->id }}">
-                                        <div class="card border border-danger h-24 w-24  align-middle">
+                                        <div class="card border border-primary h-24 w-24  align-middle">
                                             <div class="card-body  d-flex justify-center items-center p-0">
 
 

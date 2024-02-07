@@ -12,7 +12,7 @@
     </nav>
 
     <div class="container mt-3 card rounded-none">
-        <div class="card-body bg-gray-300 rounded-none my-3">
+        <div class="card-body  rounded-none my-3">
 
             <h1 class=" h1">Total: {{ $total }}€</h1>
 

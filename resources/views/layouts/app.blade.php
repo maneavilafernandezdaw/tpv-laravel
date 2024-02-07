@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+  
 
     <title>{{ config('app.name', 'TPV-Laravel') }}</title>
 
@@ -25,11 +26,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="font-sans antialiased m-0 h-0 min-w-fit bg-dark-grey" data-bs-theme="light">
+<body class="font-sans antialiased m-0 h-0 min-w-fit bg-dark-grey" data-bs-theme ={{ request()->cookie('tema') }}>
+
     <div class=" ">
         {{-- nav --}}
         @include('layouts.navigation')
-
+       
         <!-- Contenido de la página -->
         <main class="m-0 p-0">
             {{ $slot }}
@@ -49,23 +51,7 @@
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
 
-    <script>
-        const temaOscuro = () => {
-            document.querySelector("body").setAttribute("data-bs-theme", "dark");
-            document.querySelector("#dl-icon").setAttribute("class", "fa-solid fa-sun");
-        }
-        const temaClaro = () => {
-            document.querySelector("body").setAttribute("data-bs-theme", "light");
-            document.querySelector("#dl-icon").setAttribute("class", "fa-solid fa-moon");
-        }
-        const cambiarTema = () => {
-            document.querySelector("body").getAttribute("data-bs-theme") === "light"?
-            temaOscuro() : temaClaro();
-        }
-       
 
-
-    </script>
 </body>
 
 </html>

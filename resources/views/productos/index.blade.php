@@ -105,7 +105,7 @@
 
 
 
-        <div class="card-body bg-gray-300 rounded-none my-3">
+        <div class="card-body  rounded-none my-3">
             <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
                     <tr>

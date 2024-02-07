@@ -2,3 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+.dataTables_length select  {
+    color: black; /* Puedes cambiar "blue" al color deseado */
+}
+.dataTables_length select option {
+    color: black; /* Puedes cambiar "blue" al color deseado */
+}

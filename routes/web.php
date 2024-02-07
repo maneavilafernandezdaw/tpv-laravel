@@ -12,6 +12,8 @@ use App\Http\Controllers\CajasController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -30,6 +32,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::get('/home', function () {
     return view('home');
 })->middleware(['auth', 'verified'])->name('home');
@@ -46,7 +49,17 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::controller(Controller::class)->group(function () {
+
+    Route::get('home/oscuro', 'temaOscuro')->name('tema.temaOscuro');
+    Route::get('home/claro', 'temaClaro')->name('tema.temaClaro');
+
+
+});
+
 Route::controller(ZonasController::class)->group(function () {
+
+
     Route::get('zonas', 'index')->name('zonas.index');
     Route::get('zonas/create', 'create')->name('zonas.create');
     Route::post('zonas', 'store')->name('zonas.store');
