@@ -127,17 +127,55 @@
                                 </form>
                             </div>
                             <div>
-                                <form action="{{ route('comandas.eliminarComanda') }}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="hidden" id="mesa" name="mesa"
-                                            value="{{ $mesa }}">
+                                                           <!--Botón Modal Eliminar-->
+                            <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar" />
+
+                            <!-- Modal Eliminar-->
+                            <div class="modal fade" id="modalEliminar" tabindex="-1"
+                                aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header  bg-red-600">
+                                            <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
+                                            </h1>
+
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div>
+                                                <p>¿Está seguro de eliminar la
+                                                    la comanda {{ $zona->nombre }} - Mesa:
+                                                    {{ $mesa }}?</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+
+                                            <form action="{{ route('comandas.eliminarComanda') }}"
+                                                method="post">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <input type="hidden" id="mesa" name="mesa"
+                                                        value="{{ $mesa }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="hidden" id="zona_id" name="zona_id"
+                                                        value="{{ $zona->id }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="hidden" id="familia" name="familia"
+                                                        value="{{ $familia }}">
+                                                </div>
+                                                <x-boton-eliminar />
+
+
+                                            </form>
+
+                                            @include('components.boton-cancelar')
+
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="zona_id" name="zona_id"
-                                            value="{{ $zona->id }}">
-                                    </div>
-                                    <x-boton-eliminar/>
+                                </div>
+                            </div>
                                
 
                                 </form>

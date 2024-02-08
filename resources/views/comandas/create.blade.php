@@ -436,7 +436,7 @@
                             <!-- Modal Eliminar-->
                             <div class="modal fade" id="modalEliminar" tabindex="-1"
                                 aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                <div class="modal-dialog text-black">
+                                <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header  bg-red-600">
                                             <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
@@ -445,7 +445,7 @@
                                         </div>
                                         <div class="modal-body text-center">
                                             <div>
-                                                <p class="text-black">¿Está seguro de eliminar la
+                                                <p>¿Está seguro de eliminar la
                                                     la comanda {{ $zona->nombre }} - Mesa:
                                                     {{ $mesa }}?</p>
 
