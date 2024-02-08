@@ -69,8 +69,7 @@
                                                             @method('DELETE')
                                                             <input type="hidden" name="idusuario" id="idusuario"
                                                                 value="{{ $usuario->id }}">
-                                                            </div>
-                                                            <div class="modal-footer">
+                                                           
                                                                 <x-boton-eliminar/>
                                                                 
 

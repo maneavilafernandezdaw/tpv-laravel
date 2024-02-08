@@ -85,12 +85,12 @@
 
                                     <button data-bs-toggle="modal" data-bs-target="#modalCombinar{{ $producto->id }}">
                                         <div class="card border border-primary h-24 w-24  align-middle">
-                                            <div class="card-body  d-flex justify-center items-center p-0">
+                                            <div class="card-body  d-flex justify-center items-center p-0 text-wrap">
 
 
-                                                <h5 class="card-title  text-lg fw-bold text-center mb-0 ">
+                                                <div class="card-title text-wrap  text-lg fw-bold text-center mb-0 ">
                                                     {{ $producto->nombre }}
-                                                </h5>
+                                                </div>
 
 
                                             </div>
@@ -111,247 +111,310 @@
                                                 <div class="modal-body">
                                                     <div class=" d-flex flex-wrap gap-2 justify-center">
                                                         <form action="{{ route('comandas.store') }}" method="post"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="hidden" id="mesa" name="mesa"
-                                        value="{{ $mesa }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="zona_id" name="zona_id"
-                                        value="{{ $zona->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="producto_id" name="producto_id"
-                                        value="{{ $producto->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="refresco" name="refresco" value="Solo">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="cantidad" name="cantidad" value="1">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="precio" name="precio"
-                                        value="{{ $producto->precio }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="estado" name="estado" value="No enviado">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="familia" name="familia"
-                                        value="{{ $familia }}">
-                                </div>
+                                                            enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="mesa" name="mesa"
+                                                                    value="{{ $mesa }}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="zona_id" name="zona_id"
+                                                                    value="{{ $zona->id }}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="producto_id"
+                                                                    name="producto_id" value="{{ $producto->id }}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="refresco" name="refresco"
+                                                                    value="Solo">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="cantidad" name="cantidad"
+                                                                    value="1">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="precio" name="precio"
+                                                                    value="{{ $producto->precio }}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="estado" name="estado"
+                                                                    value="No enviado">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="familia" name="familia"
+                                                                    value="{{ $familia }}">
+                                                            </div>
 
-                                <button type="submit">
-                                    <div class="card border border-primary h-24 w-24  align-middle">
-                                        <div class="card-body  d-flex justify-center items-center p-0">
+                                                            <button type="submit">
+                                                                <div
+                                                                    class="card border border-primary h-24 w-24  align-middle">
+                                                                    <div
+                                                                        class="card-body  d-flex justify-center items-center p-0">
 
-                                            {{--  @if ($producto->imagen)
+                                                                        {{--  @if ($producto->imagen)
                                             <img src="../../../imagen/{{ $producto->imagen }}"
                                                 class=" h-24 w-24 rounded-full" alt="imagen producto">
                                         @else --}}
-                                            <h5 class="card-title  text-lg fw-bold text-center mb-0 ">
-                                                Solo
-                                            </h5>
-                                            {{--  @endif --}}
+                                                                        <h5
+                                                                            class="card-title text-break text-lg fw-bold text-center mb-0 ">
+                                                                            Solo
+                                                                        </h5>
+                                                                        {{--  @endif --}}
 
-                                        </div>
-                                    </div>
-                                </button>
-                            </form>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
+                                                        </form>
 
 
 
-                                                            @foreach ($refrescos as $refresco)
-                                                                <form action="{{ route('comandas.store') }}"
-                                                                    method="post" enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="mesa"
-                                                                            name="mesa" value="{{ $mesa }}">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="zona_id"
-                                                                            name="zona_id" value="{{ $zona->id }}">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="producto_id"
-                                                                            name="producto_id"
-                                                                            value="{{ $producto->id }}">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="refresco"
-                                                                            name="refresco"
-                                                                            value="{{ $refresco->nombre }}">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="cantidad"
-                                                                            name="cantidad" value="1">
-                                                                    </div>
+                                                        @foreach ($refrescos as $refresco)
+                                                            <form action="{{ route('comandas.store') }}" method="post"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <input type="hidden" id="mesa" name="mesa"
+                                                                        value="{{ $mesa }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="hidden" id="zona_id" name="zona_id"
+                                                                        value="{{ $zona->id }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="hidden" id="producto_id"
+                                                                        name="producto_id"
+                                                                        value="{{ $producto->id }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="hidden" id="refresco"
+                                                                        name="refresco"
+                                                                        value="{{ $refresco->nombre }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="hidden" id="cantidad"
+                                                                        name="cantidad" value="1">
+                                                                </div>
 
-                                                                    @foreach ($productos as $prod)
+                                                                @foreach ($productos as $prod)
+                                                                    @php
+                                                                        $precio = 0;
+                                                                    @endphp
+                                                                    @if ($prod->id === $producto->id)
                                                                         @php
-                                                                            $precio = 0;
+                                                                            $precio = $prod->precio + $refresco->precio;
+
                                                                         @endphp
-                                                                        @if ($prod->id === $producto->id)
-                                                                        @php
-                                                                        $precio = $prod->precio + $refresco->precio;
-                                                                        
-                                                                    @endphp 
                                                                     @break
-                                                                        @endif
-                                                                    @endforeach
+                                                                @endif
+                                                            @endforeach
 
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="precio"
-                                                                            name="precio"
-                                                                            value="{{ $precio }}">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="estado"
-                                                                            name="estado" value="No enviado">
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <input type="hidden" id="familia"
-                                                                            name="familia" value="{{ $familia }}">
-                                                                    </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="precio"
+                                                                    name="precio" value="{{ $precio }}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="estado"
+                                                                    name="estado" value="No enviado">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="hidden" id="familia"
+                                                                    name="familia" value="{{ $familia }}">
+                                                            </div>
 
-                                                                    <button type="submit">
-                                                                        <div
-                                                                            class="card border border-primary h-24 w-24  align-middle">
-                                                                            <div
-                                                                                class="card-body  d-flex justify-center items-center p-0">
+                                                            <button type="submit">
+                                                                <div
+                                                                    class="card border border-primary h-24 w-24  align-middle">
+                                                                    <div
+                                                                        class="card-body  d-flex justify-center items-center p-0">
 
-                                                                                {{--  @if ($producto->imagen)
+                                                                        {{--  @if ($producto->imagen)
                                                             <img src="../../../imagen/{{ $producto->imagen }}"
                                                                 class=" h-24 w-24 rounded-full" alt="imagen producto">
                                                         @else --}}
-                                                                                <h5
-                                                                                    class="card-title  text-lg fw-bold text-center mb-0 ">
-                                                                                    {{ $refresco->nombre }}
-                                                                                </h5>
-                                                                                {{--  @endif --}}
+                                                                        <h5
+                                                                            class="card-title text-break text-clip text-lg fw-bold text-center mb-0 ">
+                                                                            {{ $refresco->nombre }}
+                                                                        </h5>
+                                                                        {{--  @endif --}}
 
-                                                                            </div>
-                                                                        </div>
-                                                                    </button>
-                                                                </form>
-                                                            @endforeach
-                                                    </div>
+                                                                    </div>
+                                                                </div>
+                                                            </button>
+                                                        </form>
+                                                    @endforeach
                                                 </div>
-                                                <div class="modal-footer">
+                                            </div>
+                                            <div class="modal-footer">
 
 
 
-                                                    @include('components.boton-cancelar')
+                                                @include('components.boton-cancelar')
 
-                                                    </form>
-                                                </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            @break
+                            </div>
+                        @break
 
-                        @else
-                            <form action="{{ route('comandas.store') }}" method="post"
-                                enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="hidden" id="mesa" name="mesa"
-                                        value="{{ $mesa }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="zona_id" name="zona_id"
-                                        value="{{ $zona->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="producto_id" name="producto_id"
-                                        value="{{ $producto->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="refresco" name="refresco" value="Solo">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="cantidad" name="cantidad" value="1">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="precio" name="precio"
-                                        value="{{ $producto->precio }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="estado" name="estado" value="No enviado">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="familia" name="familia"
-                                        value="{{ $familia }}">
-                                </div>
+                    @else
+                        <form action="{{ route('comandas.store') }}" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" id="mesa" name="mesa"
+                                    value="{{ $mesa }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="zona_id" name="zona_id"
+                                    value="{{ $zona->id }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="producto_id" name="producto_id"
+                                    value="{{ $producto->id }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="refresco" name="refresco" value="Solo">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="cantidad" name="cantidad" value="1">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="precio" name="precio"
+                                    value="{{ $producto->precio }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="estado" name="estado" value="No enviado">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="familia" name="familia"
+                                    value="{{ $familia }}">
+                            </div>
 
-                                <button type="submit">
-                                    <div class="card border border-primary h-24 w-24  align-middle">
-                                        <div class="card-body  d-flex justify-center items-center p-0">
+                            <button type="submit">
+                                <div class="card border border-primary h-24 w-24  align-middle ">
+                                    <div class="card-body  d-flex justify-center items-center p-0 ">
 
-                                            {{--  @if ($producto->imagen)
+                                        {{--  @if ($producto->imagen)
                                             <img src="../../../imagen/{{ $producto->imagen }}"
                                                 class=" h-24 w-24 rounded-full" alt="imagen producto">
                                         @else --}}
-                                            <h5 class="card-title  text-lg fw-bold text-center mb-0 ">
-                                                {{ $producto->nombre }}
-                                            </h5>
-                                            {{--  @endif --}}
+                                        <h5
+                                            class="card-title text-break  text-lg fw-bold text-center mb-0 text-wrap">
+                                            {{ $producto->nombre }}
+                                        </h5>
+                                        {{--  @endif --}}
 
-                                        </div>
                                     </div>
-                                </button>
-                            </form>
-                        @break
-                    @endif
-
+                                </div>
+                            </button>
+                        </form>
+                    @break
 
                 @endif
-            @endforeach
-        @endforeach
 
-    </div>
+
+            @endif
+        @endforeach
+    @endforeach
+
+</div>
 </div>
 
 
 <div class="hidden d-md-block col-md-4">
 
-    {{-- boton consultar cuenta --}}
-    <a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">
-        <x-boton-consultar>
-            {{ __('Consultar cuenta') }}
-        </x-boton-consultar></a>
+{{-- boton consultar cuenta --}}
+<a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">
+    <x-boton-consultar>
+        {{ __('Consultar cuenta') }}
+    </x-boton-consultar></a>
 
-    {{-- tabla de pedido --}}
-    <table class="table table-striped text-sm  border border-collapse">
-        <thead>
+{{-- tabla de pedido --}}
+<table class="table table-striped text-sm  border border-collapse">
+    <thead>
+        <tr>
+            <th scope="col">Cant.</th>
+            <th scope="col">Producto</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach ($comandas as $comanda)
             <tr>
-                <th scope="col">Cant.</th>
-                <th scope="col">Producto</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($comandas as $comanda)
-                <tr>
-                    <td>{{ $comanda->cantidad }}</td>
-                    <td>
-                        @foreach ($todosProductos as $producto)
-                            @if ($producto->id === $comanda->producto_id)
-                                {{ $producto->nombre }}
-                            @endif
-                        @endforeach
-                        @if ($comanda->refresco !== 'Solo')
-                            /{{ $comanda->refresco }}
+                <td>{{ $comanda->cantidad }}</td>
+                <td>
+                    @foreach ($todosProductos as $producto)
+                        @if ($producto->id === $comanda->producto_id)
+                            {{ $producto->nombre }}
                         @endif
-                    </td>
-                    <td>
-                        <div class="d-flex gap-2 justify-center">
-                            {{-- boton incrementar --}}
-                            <form action="{{ route('comandas.incrementar') }}" method="post">
+                    @endforeach
+                    @if ($comanda->refresco !== 'Solo')
+                        /{{ $comanda->refresco }}
+                    @endif
+                </td>
+                <td>
+                    <div class="d-flex gap-2 justify-center">
+                        {{-- boton incrementar --}}
+                        <form action="{{ route('comandas.incrementar') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" id="mesa" name="mesa"
+                                    value="{{ $mesa }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="zona_id" name="zona_id"
+                                    value="{{ $zona->id }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="comanda_id" name="comanda_id"
+                                    value="{{ $comanda->id }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="familia" name="familia"
+                                    value="{{ $familia }}">
+                            </div>
+
+                            <x-boton-incrementar />
+
+                        </form>
+                        {{-- boton decrementar --}}
+                        <form action="{{ route('comandas.decrementar') }}" method="post">
+                            @csrf
+                            <div class="form-group">
+                                <input type="hidden" id="mesa" name="mesa"
+                                    value="{{ $mesa }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="zona_id" name="zona_id"
+                                    value="{{ $zona->id }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="comanda_id" name="comanda_id"
+                                    value="{{ $comanda->id }}">
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" id="familia" name="familia"
+                                    value="{{ $familia }}">
+                            </div>
+
+                            <x-boton-decrementar />
+
+                        </form>
+                    </div>
+                </td>
+
+            </tr>
+        @endforeach
+        <tr>
+            <td colspan="3">
+                @if (isset($comanda))
+                    <div class="d-flex gap-3 justify-center">
+                        <div>
+                            {{-- boton enviar --}}
+                            <form action="{{ route('comandas.enviar') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <input type="hidden" id="mesa" name="mesa"
@@ -361,123 +424,67 @@
                                     <input type="hidden" id="zona_id" name="zona_id"
                                         value="{{ $zona->id }}">
                                 </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="comanda_id" name="comanda_id"
-                                        value="{{ $comanda->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="familia" name="familia"
-                                        value="{{ $familia }}">
-                                </div>
-
-                                <x-boton-incrementar />
-
-                            </form>
-                            {{-- boton decrementar --}}
-                            <form action="{{ route('comandas.decrementar') }}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <input type="hidden" id="mesa" name="mesa"
-                                        value="{{ $mesa }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="zona_id" name="zona_id"
-                                        value="{{ $zona->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="comanda_id" name="comanda_id"
-                                        value="{{ $comanda->id }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="hidden" id="familia" name="familia"
-                                        value="{{ $familia }}">
-                                </div>
-
-                                <x-boton-decrementar />
+                                <x-boton-enviar-comanda />
 
                             </form>
                         </div>
-                    </td>
+                        <div>
 
-                </tr>
-            @endforeach
-            <tr>
-                <td colspan="3">
-                    @if (isset($comanda))
-                        <div class="d-flex gap-3 justify-center">
-                            <div>
-                                {{-- boton enviar --}}
-                                <form action="{{ route('comandas.enviar') }}" method="post">
-                                    @csrf
-                                    <div class="form-group">
-                                        <input type="hidden" id="mesa" name="mesa"
-                                            value="{{ $mesa }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="hidden" id="zona_id" name="zona_id"
-                                            value="{{ $zona->id }}">
-                                    </div>
-                                    <x-boton-enviar-comanda />
+                            <!--Botón Modal Eliminar-->
+                            <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar" />
 
-                                </form>
-                            </div>
-                            <div>
+                            <!-- Modal Eliminar-->
+                            <div class="modal fade" id="modalEliminar" tabindex="-1"
+                                aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                                <div class="modal-dialog text-black">
+                                    <div class="modal-content">
+                                        <div class="modal-header  bg-red-600">
+                                            <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
+                                            </h1>
 
-                                <!--Botón Modal Eliminar-->
-                                <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar" />
-
-                                <!-- Modal Eliminar-->
-                                <div class="modal fade" id="modalEliminar" tabindex="-1"
-                                    aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                    <div class="modal-dialog text-black">
-                                        <div class="modal-content">
-                                            <div class="modal-header  bg-red-600">
-                                                <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
-                                                </h1>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <div>
+                                                <p class="text-black">¿Está seguro de eliminar la
+                                                    la comanda {{ $zona->nombre }} - Mesa:
+                                                    {{ $mesa }}?</p>
 
                                             </div>
-                                            <div class="modal-body text-center">
-                                                <div>
-                                                    <p class="text-black">¿Está seguro de eliminar la
-                                                        la comanda {{ $zona->nombre }} - Mesa:
-                                                        {{ $mesa }}?</p>
+                                        </div>
+                                        <div class="modal-footer">
 
+                                            <form action="{{ route('comandas.eliminarComanda') }}"
+                                                method="post">
+                                                @csrf
+                                                <div class="form-group">
+                                                    <input type="hidden" id="mesa" name="mesa"
+                                                        value="{{ $mesa }}">
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-
-                                                <form action="{{ route('comandas.eliminarComanda') }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <div class="form-group">
-                                                        <input type="hidden" id="mesa" name="mesa"
-                                                            value="{{ $mesa }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="hidden" id="zona_id" name="zona_id"
-                                                            value="{{ $zona->id }}">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <input type="hidden" id="familia" name="familia"
-                                                            value="{{ $familia }}">
-                                                    </div>
-                                                    <x-boton-eliminar />
+                                                <div class="form-group">
+                                                    <input type="hidden" id="zona_id" name="zona_id"
+                                                        value="{{ $zona->id }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="hidden" id="familia" name="familia"
+                                                        value="{{ $familia }}">
+                                                </div>
+                                                <x-boton-eliminar />
 
 
-                                                </form>
+                                            </form>
 
-                                                @include('components.boton-cancelar')
+                                            @include('components.boton-cancelar')
 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    @endif
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                        </div>
+                @endif
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 </div>
 
