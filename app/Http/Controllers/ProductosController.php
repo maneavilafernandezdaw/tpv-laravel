@@ -23,13 +23,15 @@ class ProductosController extends Controller
             $familias = Familia::all();
 
             try {
-                $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
+                /* $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
                 $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
 
                 $impresoras = [];
                 foreach ($printers as $printer) {
                     $impresoras[] = $printer->Name;
-                }
+                } */
+
+                $impresoras= ['tickets', 'cocina'];
 
                 return view('productos.index', compact('productos', 'familias', 'impresoras'));
             } catch (\Exception $e) {

@@ -63,7 +63,7 @@
 
 
 
-
+        {{-- Tabla zonas --}}
         <div class="card-body  rounded-none my-3">
             <table id="tabla_Datatables" class="table  table-striped table-hover ">
                 <thead>
@@ -93,7 +93,7 @@
 
                                         <!-- Modal Editar-->
 
-                                        <div class="modal fade " id="modalEditar{{ $zona->id }}" tabindex="-1"
+                                        <div class="modal fade" id="modalEditar{{ $zona->id }}" tabindex="-1"
                                             aria-labelledby="modalEditarLabel" aria-hidden="true">
                                             <div class="modal-dialog ">
                                                 <div class="modal-content w-auto">
@@ -126,9 +126,9 @@
                                                             <br>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <x-boton-editar>
+                                                        <x-boton-editar/>
 
-                                                        </x-boton-editar>
+                                                    
 
                                                         @include('components.boton-cancelar')
 
