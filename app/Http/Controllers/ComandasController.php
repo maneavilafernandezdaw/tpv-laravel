@@ -9,7 +9,7 @@ use App\Models\Familia;
 use App\Models\Producto;
 use App\Models\Zona;
 use App\Models\Cliente;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 
 use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
@@ -28,13 +28,13 @@ class ComandasController extends Controller
         if (Auth::check()) {
             $zonas = Zona::all();
             $comandas = Comanda::all();
-   
 
 
 
 
 
-            return view('comandas.index', compact('zonas','comandas'));
+
+            return view('comandas.index', compact('zonas', 'comandas'));
         }
         return view('welcome');
     }
@@ -43,7 +43,7 @@ class ComandasController extends Controller
     {
         if (Auth::check()) {
             $zonas = Zona::all();
-            
+
 
             return view('comandas.cuenta', compact('zonas'));
         }
@@ -67,24 +67,23 @@ class ComandasController extends Controller
     public function create($z, $m, $f)
     {
         if (Auth::check()) {
-            $familia=$f;
+            $familia = $f;
             $mesa = $m;
             $zona = Zona::find($z);
             $refrescos = Producto::where('familia_id', 2)->orderBy('nombre', 'asc')->get();
 
-            if($familia === "todo"){
-                $productos = Producto::orderBy('nombre', 'asc')->get(); 
-              
-            }else{
+            if ($familia === "todo") {
+                $productos = Producto::orderBy('nombre', 'asc')->get();
+            } else {
                 $productos = Producto::where('familia_id', $familia)->orderBy('nombre', 'asc')->get();
             }
-            
+
             $todosProductos = Producto::all();
             $familias = Familia::orderBy('nombre')->get();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
 
-            return view('comandas.create', compact('zona', 'mesa', 'productos','todosProductos', 'familias', 'comandas','familia','refrescos'));
+            return view('comandas.create', compact('zona', 'mesa', 'productos', 'todosProductos', 'familias', 'comandas', 'familia', 'refrescos'));
         }
         return view('welcome');
     }
@@ -99,7 +98,7 @@ class ComandasController extends Controller
             $productos = Producto::all();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'Enviada');
-                $clientes = Cliente::all();
+            $clientes = Cliente::all();
 
 
             return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'));
@@ -110,26 +109,25 @@ class ComandasController extends Controller
     public function pedido($z, $m, $f)
     {
         if (Auth::check()) {
-       
 
-            $familia=$f;
+
+            $familia = $f;
             $mesa = $m;
             $zona = Zona::find($z);
             $refrescos = Producto::where('familia_id', 2)->orderBy('nombre', 'asc')->get();
 
-            if($familia === "todo"){
-                $productos = Producto::orderBy('nombre', 'asc')->get(); 
-              
-            }else{
+            if ($familia === "todo") {
+                $productos = Producto::orderBy('nombre', 'asc')->get();
+            } else {
                 $productos = Producto::where('familia_id', $familia)->orderBy('nombre', 'asc')->get();
             }
-            
+
             $todosProductos = Producto::all();
             $familias = Familia::orderBy('nombre')->get();
             $comandas = Comanda::all()->where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'No enviado');
 
-            return view('comandas.pedido', compact('zona', 'mesa', 'productos','todosProductos', 'familias', 'comandas','familia','refrescos'));
+            return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'todosProductos', 'familias', 'comandas', 'familia', 'refrescos'));
         }
         return view('welcome');
     }
@@ -139,7 +137,7 @@ class ComandasController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
-            
+
             $comanda = Comanda::where('mesa', $request->mesa)
                 ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->where('producto_id', $request->producto_id)->where('refresco', $request->refresco)->first();
 
@@ -185,7 +183,7 @@ class ComandasController extends Controller
         if (Auth::check()) {
             $comanda = Comanda::find($request->comanda_id);
             $comanda->increment('cantidad');
-            return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
+            return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa,  $request->familia]);
         }
         return view('welcome');
     }
@@ -198,7 +196,7 @@ class ComandasController extends Controller
             if ($comanda->cantidad < 1) {
                 $comanda->delete();
             }
-            return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa]);
+            return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa,  $request->familia]);
         }
         return view('welcome');
     }
@@ -229,185 +227,170 @@ class ComandasController extends Controller
 
             $comandas = Comanda::where('mesa', $request->mesa)
                 ->where('zona_id', $request->zona_id)->where('estado', 'No enviado')->get();
-                $zona = Zona::find($request->zona_id);
-                $productos = Producto::all();
-                $zonas = Zona::all();
-                $fecha = date("d-m-Y h:i:s");
+            $zona = Zona::find($request->zona_id);
+            $productos = Producto::all();
+            $zonas = Zona::all();
+            $fecha = date("d-m-Y h:i:s");
 
-                try {
+            try {
 
-                  /*   $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
+                  $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
                     $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
         
                     $impresoras = [];
                     foreach ($printers as $printer) {
                         $impresoras[] = $printer->Name;
-                    } */
-                    $impresoras= ['tickets', 'cocina'];
+                    }
+                $impresoras = ['tickets', 'cocina'];
 
-                    foreach ($impresoras as $impresora) {
-                  $existenProductos=0;
-                        foreach ($comandas as $comanda){
-                            foreach ($productos as $producto){
-                                if($producto->impresora === $impresora)  {
-                                            
-                               
-                                    if ($producto->id === $comanda->producto_id){
-                                       $existenProductos = 1;
-                                       break;
-                                    }
-                                  }
+                foreach ($impresoras as $impresora) {
+                    $existenProductos = 0;
+                    foreach ($comandas as $comanda) {
+                        foreach ($productos as $producto) {
+                            if ($producto->impresora === $impresora) {
+
+
+                                if ($producto->id === $comanda->producto_id) {
+                                    $existenProductos = 1;
+                                    break;
+                                }
                             }
-
                         }
+                    }
 
-                        if($existenProductos === 1){
+                    if ($existenProductos === 1) {
 
-                     
-               
+
+
                         try {
                             $connector = new WindowsPrintConnector($impresora); //  nombre de impresora
-                          
+
                             $printer = new Printer($connector);
-                    
+
                             // Contenido a imprimir
                             $printer->text("Minibar     $fecha\n");
                             $printer->text("\n");
                             $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
                             $printer->text("\n");
-                        
-          
-                            foreach ($comandas as $comanda){
 
-                                
-        
-                             
-                                  
-                                        foreach ($productos as $producto){
 
-                                          if($producto->impresora === $impresora)  {
-                                            
-                               
-                                            if ($producto->id === $comanda->producto_id){
-                                                $printer->text("$comanda->cantidad ");
-                                               
-                                                if ($comanda->refresco !== "Solo"){
-                                                    $printer->text("$producto->nombre / $comanda->refresco\n");
-                                                }else{
-                                                    $printer->text("$producto->nombre\n");
-                                                }
-                                               
-                                               
+
+                            foreach ($comandas as $comanda) {
+
+
+
+
+
+                                foreach ($productos as $producto) {
+
+                                    if ($producto->impresora === $impresora) {
+
+
+                                        if ($producto->id === $comanda->producto_id) {
+                                            $printer->text("$comanda->cantidad ");
+
+                                            if ($comanda->refresco !== "Solo") {
+                                                $printer->text("$producto->nombre / $comanda->refresco\n");
+                                            } else {
+                                                $printer->text("$producto->nombre\n");
                                             }
-                                          }
-                                           
-                                         
-                                   
+                                        }
+                                    }
                                 }
                             }
                             $printer->text("\n\n");
                             $printer->text("\n\n");
                             $printer->cut();
                             $printer->close();
-        
-                             foreach ($comandas as $comanda) {
-                                 $comanda->estado = 'Enviada';
-                                 $comanda->save();}
-        
-        
-                           
-        
+
+                            foreach ($comandas as $comanda) {
+                                $comanda->estado = 'Enviada';
+                                $comanda->save();
+                            }
                         } catch (\Exception $e) {
                             return "Error al imprimir: " . $e->getMessage();
-                        }}
+                        }
                     }
-                    return view('comandas.index', compact('zonas','comandas'))
-                    ->with('mensaje', 'Comanda Enviada Correctamente.');
-    
-                } catch (\Exception $e) {
-                    
-                    return response()->json(['error' => $e->getMessage()], 500);
                 }
               
-        
-            }
-         
-            return view('welcome');
-        }
-       
-        public function imprimirCuenta(Request $request)
-        {
-            if (Auth::check()) {
-    
-                $comandas = Comanda::where('mesa', $request->mesa)
-                    ->where('zona_id', $request->zona_id)->where('estado', 'Enviada')->get();
-                    $mesa = $request->mesa;
-                    $zona = Zona::find($request->zona_id);
-                    $productos = Producto::all();
-                    $clientes = Cliente::all();
-                    $zonas = Zona::all();
-                    $fecha = date("d-m-Y h:i:s");
-                    $total=0;
-                    $subTotal=0;
-                    try {
-                        $connector = new WindowsPrintConnector("tickets"); //  nombre de tu impresora
-                      
-                        $printer = new Printer($connector);
-                
-                        // Contenido a imprimir
-                        $printer->text("Minibar     $fecha\n");
-                        $printer->text("\n");
-                        $printer->text("\n");
-                      
-                        $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
-                        $printer->text("\n");
                     
-      
-                        foreach ($comandas as $comanda){
-    
-                            $printer->text("$comanda->cantidad ");
-                         
-                              
-                                    foreach ($productos as $producto){
-                                        if ($producto->id === $comanda->producto_id){
-                                            $subTotal = $comanda->cantidad*$comanda->precio;
-                                            $subTotal = number_format($comanda->cantidad*$comanda->precio, 2, '.', '');
-                                            $total +=   $subTotal;
+
+                return redirect()->route('comandas.index', compact('zonas', 'comandas'))
+                ->with('mensaje', 'Comanda Enviada Correctamente.');
+            } catch (\Exception $e) {
+
+                return response()->json(['error' => $e->getMessage()], 500);
+            }
+        }
+
+        return view('welcome');
+    }
+
+    public function imprimirCuenta(Request $request)
+    {
+        if (Auth::check()) {
+
+            $comandas = Comanda::where('mesa', $request->mesa)
+                ->where('zona_id', $request->zona_id)->where('estado', 'Enviada')->get();
+            $mesa = $request->mesa;
+            $zona = Zona::find($request->zona_id);
+            $productos = Producto::all();
+            $clientes = Cliente::all();
+            $zonas = Zona::all();
+            $fecha = date("d-m-Y h:i:s");
+            $total = 0;
+            $subTotal = 0;
+            try {
+                $connector = new WindowsPrintConnector("tickets"); //  nombre de tu impresora
+
+                $printer = new Printer($connector);
+
+                // Contenido a imprimir
+                $printer->text("Minibar     $fecha\n");
+                $printer->text("\n");
+                $printer->text("\n");
+
+                $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
+                $printer->text("\n");
 
 
-                                            if ($comanda->refresco !== "Solo"){
-                                                $printer->text("$producto->nombre/$comanda->refresco $comanda->precio  $subTotal\n");
-                                            }else{
-                                                $printer->text("$producto->nombre $comanda->precio  $subTotal\n");
-                                            }
+                foreach ($comandas as $comanda) {
 
-                                            
-                                        }
-                                    
-                               
+                    $printer->text("$comanda->cantidad ");
+
+
+                    foreach ($productos as $producto) {
+                        if ($producto->id === $comanda->producto_id) {
+                            $subTotal = $comanda->cantidad * $comanda->precio;
+                            $subTotal = number_format($comanda->cantidad * $comanda->precio, 2, '.', '');
+                            $total +=   $subTotal;
+
+
+                            if ($comanda->refresco !== "Solo") {
+                                $printer->text("$producto->nombre/$comanda->refresco $comanda->precio  $subTotal\n");
+                            } else {
+                                $printer->text("$producto->nombre $comanda->precio  $subTotal\n");
                             }
                         }
-                        $total = number_format($total, 2, '.', '');
-                        $printer->text("\nTotal: $total \n");
-                        $printer->text("\n\n");
-                        $printer->text("\n\n");
-                        $printer->cut();
-                        $printer->close();
-    
-                        return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'));
-                       
-                
-    
-                    } catch (\Exception $e) {
-                        return "Error al imprimir: " . $e->getMessage();
                     }
-    
-            
                 }
-             
-                return view('welcome');
+                $total = number_format($total, 2, '.', '');
+                $printer->text("\nTotal: $total \n");
+                $printer->text("\n\n");
+                $printer->text("\n\n");
+                $printer->cut();
+                $printer->close();
+
+                return redirect()->route('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'))
+                  ->with('mensaje', 'Cuenta Impresa Correctamente.');
+            } catch (\Exception $e) {
+                return "Error al imprimir: " . $e->getMessage();
             }
-           
+        }
+
+        return view('welcome');
+    }
+
 
 
     public function eliminarComanda(Request $request)
@@ -447,4 +430,34 @@ class ComandasController extends Controller
         }
         return view('welcome');
     }
+
+
+    public function printComanda()
+    {
+      
+
+         
+
+
+                   
+                             $connector = new WindowsPrintConnector("cocina"); //  nombre de impresora
+
+                            $printer = new Printer($connector);
+
+                            // Contenido a imprimir
+                       
+
+                            $printer->text("hola\n\n");
+                            $printer->text("\n\n");
+                            $printer->cut();
+                            $printer->close(); 
+
+                      
+   
+        }
+
+
+
+
+
 }

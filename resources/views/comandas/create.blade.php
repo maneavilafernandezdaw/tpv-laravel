@@ -333,88 +333,33 @@
     </x-boton-consultar></a>
 
 {{-- tabla de pedido --}}
-<table class="table table-striped text-sm  border border-collapse">
-    <thead>
-        <tr>
-            <th scope="col">Cant.</th>
-            <th scope="col">Producto</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($comandas as $comanda)
+<div id="tablaComanda">
+    <table class="table table-striped text-sm  border border-collapse">
+        <thead>
             <tr>
-                <td>{{ $comanda->cantidad }}</td>
-                <td>
-                    @foreach ($todosProductos as $producto)
-                        @if ($producto->id === $comanda->producto_id)
-                            {{ $producto->nombre }}
-                        @endif
-                    @endforeach
-                    @if ($comanda->refresco !== 'Solo')
-                        /{{ $comanda->refresco }}
-                    @endif
-                </td>
-                <td>
-                    <div class="d-flex gap-2 justify-center">
-                        {{-- boton incrementar --}}
-                        <form action="{{ route('comandas.incrementar') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <input type="hidden" id="mesa" name="mesa"
-                                    value="{{ $mesa }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="zona_id" name="zona_id"
-                                    value="{{ $zona->id }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="comanda_id" name="comanda_id"
-                                    value="{{ $comanda->id }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="familia" name="familia"
-                                    value="{{ $familia }}">
-                            </div>
-
-                            <x-boton-incrementar />
-
-                        </form>
-                        {{-- boton decrementar --}}
-                        <form action="{{ route('comandas.decrementar') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <input type="hidden" id="mesa" name="mesa"
-                                    value="{{ $mesa }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="zona_id" name="zona_id"
-                                    value="{{ $zona->id }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="comanda_id" name="comanda_id"
-                                    value="{{ $comanda->id }}">
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" id="familia" name="familia"
-                                    value="{{ $familia }}">
-                            </div>
-
-                            <x-boton-decrementar />
-
-                        </form>
-                    </div>
-                </td>
-
+                <th scope="col">Cant.</th>
+                <th scope="col">Producto</th>
+                <th></th>
             </tr>
-        @endforeach
-        <tr>
-            <td colspan="3">
-                @if (isset($comanda))
-                    <div class="d-flex gap-3 justify-center">
-                        <div>
-                            {{-- boton enviar --}}
-                            <form action="{{ route('comandas.enviar') }}" method="post">
+        </thead>
+        <tbody>
+            @foreach ($comandas as $comanda)
+                <tr>
+                    <td>{{ $comanda->cantidad }}</td>
+                    <td>
+                        @foreach ($todosProductos as $producto)
+                            @if ($producto->id === $comanda->producto_id)
+                                {{ $producto->nombre }}
+                            @endif
+                        @endforeach
+                        @if ($comanda->refresco !== 'Solo')
+                            /{{ $comanda->refresco }}
+                        @endif
+                    </td>
+                    <td>
+                        <div class="d-flex gap-2 justify-center">
+                            {{-- boton incrementar --}}
+                            <form action="{{ route('comandas.incrementar') }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <input type="hidden" id="mesa" name="mesa"
@@ -424,67 +369,125 @@
                                     <input type="hidden" id="zona_id" name="zona_id"
                                         value="{{ $zona->id }}">
                                 </div>
-                                <x-boton-enviar-comanda />
+                                <div class="form-group">
+                                    <input type="hidden" id="comanda_id" name="comanda_id"
+                                        value="{{ $comanda->id }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="familia" name="familia"
+                                        value="{{ $familia }}">
+                                </div>
+
+                                <x-boton-incrementar />
+
+                            </form>
+                            {{-- boton decrementar --}}
+                            <form action="{{ route('comandas.decrementar') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="hidden" id="mesa" name="mesa"
+                                        value="{{ $mesa }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="zona_id" name="zona_id"
+                                        value="{{ $zona->id }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="comanda_id" name="comanda_id"
+                                        value="{{ $comanda->id }}">
+                                </div>
+                                <div class="form-group">
+                                    <input type="hidden" id="familia" name="familia"
+                                        value="{{ $familia }}">
+                                </div>
+
+                                <x-boton-decrementar />
 
                             </form>
                         </div>
-                        <div>
+                    </td>
 
-                            <!--Botón Modal Eliminar-->
-                            <x-boton-eliminar data-bs-toggle="modal" data-bs-target="#modalEliminar" />
+                </tr>
+            @endforeach
+            <tr>
+                <td colspan="3">
+                    @if (isset($comanda))
+                        <div class="d-flex gap-3 justify-center">
+                            <div>
+                                {{-- boton enviar --}}
+                                <form action="{{ route('comandas.enviar') }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <input type="hidden" id="mesa" name="mesa"
+                                            value="{{ $mesa }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="zona_id" name="zona_id"
+                                            value="{{ $zona->id }}">
+                                    </div>
+                                    <x-boton-enviar-comanda />
 
-                            <!-- Modal Eliminar-->
-                            <div class="modal fade" id="modalEliminar" tabindex="-1"
-                                aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header  bg-red-600">
-                                            <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
-                                            </h1>
+                                </form>
+                            </div>
+                            <div>
 
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <div>
-                                                <p>¿Está seguro de eliminar la
-                                                    la comanda {{ $zona->nombre }} - Mesa:
-                                                    {{ $mesa }}?</p>
+                                <!--Botón Modal Eliminar-->
+                                <x-boton-eliminar data-bs-toggle="modal"
+                                    data-bs-target="#modalEliminar" />
+
+                                <!-- Modal Eliminar-->
+                                <div class="modal fade" id="modalEliminar" tabindex="-1"
+                                    aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header  bg-red-600">
+                                                <h1 class="modal-title fs-5 text-white">Eliminar Cuenta
+                                                </h1>
 
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
+                                            <div class="modal-body text-center">
+                                                <div>
+                                                    <p>¿Está seguro de eliminar la
+                                                        la comanda {{ $zona->nombre }} - Mesa:
+                                                        {{ $mesa }}?</p>
 
-                                            <form action="{{ route('comandas.eliminarComanda') }}"
-                                                method="post">
-                                                @csrf
-                                                <div class="form-group">
-                                                    <input type="hidden" id="mesa" name="mesa"
-                                                        value="{{ $mesa }}">
                                                 </div>
-                                                <div class="form-group">
-                                                    <input type="hidden" id="zona_id" name="zona_id"
-                                                        value="{{ $zona->id }}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="hidden" id="familia" name="familia"
-                                                        value="{{ $familia }}">
-                                                </div>
-                                                <x-boton-eliminar />
+                                            </div>
+                                            <div class="modal-footer">
+
+                                                <form action="{{ route('comandas.eliminarComanda') }}"
+                                                    method="post">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="mesa"
+                                                            name="mesa" value="{{ $mesa }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="zona_id"
+                                                            name="zona_id" value="{{ $zona->id }}">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="hidden" id="familia"
+                                                            name="familia" value="{{ $familia }}">
+                                                    </div>
+                                                    <x-boton-eliminar />
 
 
-                                            </form>
+                                                </form>
 
-                                            @include('components.boton-cancelar')
+                                                @include('components.boton-cancelar')
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                @endif
-            </td>
-        </tr>
-    </tbody>
-</table>
+                    @endif
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
 </div>
 

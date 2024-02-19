@@ -55,13 +55,16 @@ class CobrosController extends Controller
             $comandas = Comanda::where('mesa', $request->mesa)
                 ->where('zona_id', $request->zona_id)->get();
 
+            $zonas = Zona::all();
 
             foreach ($comandas as $comanda) {
 
                 $comanda->delete();
             }
 
-            return view('home');
+            return redirect()->route('comandas.index', compact('zonas', 'comandas'))
+            ->with('mensaje', 'Cobro Realizado Correctamente.');
+         
         }
         return view('welcome');
     }

@@ -116,7 +116,7 @@ Route::controller(ComandasController::class)->group(function () {
     Route::post('comandas/imprimirCuenta', 'imprimirCuenta')->name('comandas.imprimirCuenta');
     Route::post('comandas/eliminar', 'eliminarComanda')->name('comandas.eliminarComanda');
     Route::post('comandas/eliminar/cuenta', 'eliminarCuenta')->name('comandas.eliminarCuenta');
-  
+    Route::post('comandas/printComanda', 'printComanda')->name('comandas.printComanda');
 });
 
 Route::controller(CobrosController::class)->group(function () {

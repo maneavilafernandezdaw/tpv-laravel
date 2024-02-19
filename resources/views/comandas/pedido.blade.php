@@ -78,6 +78,10 @@
                                         <input type="hidden" id="comanda_id" name="comanda_id"
                                             value="{{ $comanda->id }}">
                                     </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="familia" name="familia"
+                                            value="{{ $familia }}">
+                                    </div>
 
                                     <x-boton-incrementar/>
                                 
@@ -96,6 +100,10 @@
                                     <div class="form-group">
                                         <input type="hidden" id="comanda_id" name="comanda_id"
                                             value="{{ $comanda->id }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="familia" name="familia"
+                                            value="{{ $familia }}">
                                     </div>
 
                                     <x-boton-decrementar/>
