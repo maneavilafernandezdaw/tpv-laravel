@@ -221,7 +221,7 @@ class ComandasController extends Controller
         return view('welcome');
     }
 
-    public function enviar(Request $request)
+  /*   public function enviar(Request $request)
     {
         if (Auth::check()) {
 
@@ -301,17 +301,19 @@ class ComandasController extends Controller
                             $printer->text("\n\n");
                             $printer->text("\n\n");
                             $printer->cut();
-                            $printer->close();
+                            $printer->close(); 
 
+                          
+ 
                             foreach ($comandas as $comanda) {
                                 $comanda->estado = 'Enviada';
                                 $comanda->save();
                             }
-                        } catch (\Exception $e) {
+                         } catch (\Exception $e) {
                             return "Error al imprimir: " . $e->getMessage();
-                        }
-                    }
-                }
+                        } 
+                    
+                
               
                     
 
@@ -321,10 +323,10 @@ class ComandasController extends Controller
 
                 return response()->json(['error' => $e->getMessage()], 500);
             }
+        
         }
-
         return view('welcome');
-    }
+    } */
 
     public function imprimirCuenta(Request $request)
     {
@@ -432,28 +434,27 @@ class ComandasController extends Controller
     }
 
 
-    public function printComanda()
+    public function ticket($z,$m)
     {
       
-
-         
-
-
-                   
-                             $connector = new WindowsPrintConnector("cocina"); //  nombre de impresora
-
-                            $printer = new Printer($connector);
-
-                            // Contenido a imprimir
-                       
-
-                            $printer->text("hola\n\n");
-                            $printer->text("\n\n");
-                            $printer->cut();
-                            $printer->close(); 
-
-                      
+        $comandas = Comanda::where('mesa', $m)
+        ->where('zona_id', $z)->where('estado', 'No enviado')->get();
    
+    $datos = [
+        "comandas" => $comandas,
+    "zona" => Zona::find($z),
+    "productos" => Producto::all(),
+    "zonas" => Zona::all(),
+    "fecha" => date("d-m-Y h:i:s"),
+    "impresoras" => ['tickets', 'cocina']
+    ];
+    foreach ($comandas as $comanda) {
+        $comanda->estado = 'Enviada';
+        $comanda->save();
+    }
+
+        return view('comandas.ticket', compact('datos'));
+
         }
 
 
