@@ -1,4 +1,5 @@
 <x-app-layout>
+
     @php
         /* var_dump($datos) ; */
         $json = json_encode($datos, JSON_PRETTY_PRINT);
@@ -201,8 +202,8 @@
                     return this;
                 }
                 ImprimirCodigoQr(contenido, anchoMaximo, nivelRecuperacion, tamañoImagen) {
-                    this.operacines.push(new ConectorPlugin.Operacion("ImprimirCodigoQr", Array.from(
-                        arguments)));o
+                    this.operaciones.push(new ConectorPlugin.Operacion("ImprimirCodigoQr", Array.from(
+                        arguments)));
                     return this;
                 }
                 ImprimirImagenEnBase64(imagenCodificadaEnBase64, tamaño, maximoAncho) {
@@ -278,76 +279,60 @@
 
 
 
+var subtotal=0;
+var total=0;
+
+        let conector = new ConectorPluginV3();
+        conector.EscribirTexto("Fecha: " + json.fecha);
+
+        conector.Feed(1);
+        conector.EscribirTexto("Mesa: " + json.comandas[0].mesa + "    Zona: " + json.zona.nombre);
+        conector.Feed(2);
 
 
-        for (let impresora of json.impresoras) {
-            var existenProductos = 0;
-            for (let comanda of json.comandas) {
-
-                for (let producto of json.productos) {
-                    if (producto.impresora === impresora) {
+        for (let comanda of json.comandas) {
 
 
-                        if (producto.id === comanda.producto_id) {
-                            existenProductos = 1;
 
-                        }
+            for (let producto of json.productos) {
+
+
+
+
+                if (producto.id === comanda.producto_id) {
+              subtotal = parseFloat(producto.precio) * comanda.cantidad;
+               total += subtotal;     
+                    conector.EscribirTexto(comanda.cantidad.toString() + " ");
+
+                    if (comanda.refresco === "Solo") {
+                        console.log(producto.nombre );
+                     
+                        conector.EscribirTexto(producto.nombre + " "  + producto.precio + " " + subtotal.toFixed(2) );
+                        conector.Feed(1);
+                    } else {
+
+                        
+                        conector.EscribirTexto(producto.nombre + " / " + comanda.refresco + " "  + producto.precio + " " + subtotal.toFixed(2) );
+                        conector.Feed(1);
                     }
                 }
+
             }
-
-            if (existenProductos === 1) {
-
-
-
-                if (existenProductos === 1) {
-
-
-
-                    let conector = new ConectorPluginV3();
-                    conector.EscribirTexto("Fecha: " + json.fecha);
-
-                    conector.Feed(1);
-                    conector.EscribirTexto("Mesa: " + json.comandas[0].mesa + "    Zona: " + json.zona.nombre);
-                    conector.Feed(2);
-
-
-                    for (let comanda of json.comandas) {
-
-
-                        console.log(comanda.cantidad);
-                        for (let producto of json.productos) {
-
-                            if (producto.impresora === impresora) {
-
-
-                                if (producto.id === comanda.producto_id) {
-
-                                    conector.EscribirTexto(comanda.cantidad.toString() + " ");
-
-                                    if (comanda.refresco === "Solo") {
-                                        console.log(producto.nombre);
-                                        conector.EscribirTexto(producto.nombre);
-                                        conector.Feed(1);
-                                    } else {
-
-                                        conector.EscribirTexto(producto.nombre + " / " + comanda.refresco);
-                                        conector.Feed(1);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    conector.Feed(3);
-                    conector.imprimirEn(impresora);
-
-
-
-                }
-            }
-            
         }
-        window.location.href = "http://localhost/tpv-laravel/public/home";
+
+
+
+
+
+        conector.EscribirTexto("Total: " + total.toFixed(2) +" Euros" );
+        conector.Feed(3);
+        conector.imprimirEn("tickets");
+
+
+
+
+
+       window.location.href = "http://localhost/tpv-laravel/public/home";
     </script>
 
 </x-app-layout>

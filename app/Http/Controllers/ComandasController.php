@@ -221,7 +221,7 @@ class ComandasController extends Controller
         return view('welcome');
     }
 
-  /*   public function enviar(Request $request)
+    /*   public function enviar(Request $request)
     {
         if (Auth::check()) {
 
@@ -434,31 +434,43 @@ class ComandasController extends Controller
     }
 
 
-    public function ticket($z,$m)
+    public function ticket($z, $m)
     {
-      
+
         $comandas = Comanda::where('mesa', $m)
-        ->where('zona_id', $z)->where('estado', 'No enviado')->get();
-   
-    $datos = [
-        "comandas" => $comandas,
-    "zona" => Zona::find($z),
-    "productos" => Producto::all(),
-    "zonas" => Zona::all(),
-    "fecha" => date("d-m-Y h:i:s"),
-    "impresoras" => ['tickets', 'cocina']
-    ];
-    foreach ($comandas as $comanda) {
-        $comanda->estado = 'Enviada';
-        $comanda->save();
-    }
+            ->where('zona_id', $z)->where('estado', 'No enviado')->get();
 
-        return view('comandas.ticket', compact('datos'));
-
+        $datos = [
+            "comandas" => $comandas,
+            "zona" => Zona::find($z),
+            "productos" => Producto::all(),
+            "zonas" => Zona::all(),
+            "fecha" => date("d-m-Y h:i:s"),
+            "impresoras" => ['tickets', 'cocina']
+        ];
+        foreach ($comandas as $comanda) {
+            $comanda->estado = 'Enviada';
+            $comanda->save();
         }
 
+        return view('comandas.ticket', compact('datos'));
+    }
 
+    public function ticketCuenta($z, $m)
+    {
 
+        $comandas = Comanda::where('mesa', $m)
+            ->where('zona_id', $z)->where('estado', 'Enviada')->get();
 
+        $datos = [
+            "comandas" => $comandas,
+            "zona" => Zona::find($z),
+            "productos" => Producto::all(),
+            "zonas" => Zona::all(),
+            "fecha" => date("d-m-Y h:i:s")
+        ];
+     
 
+        return view('comandas.ticketCuenta', compact('datos'));
+    }
 }
