@@ -1,0 +1,292 @@
+[
+    {
+        "comandas": [
+            {
+                "id": 1050,
+                "mesa": 1,
+                "zona_id": 5,
+                "producto_id": 17,
+                "refresco": "Solo",
+                "cantidad": 1,
+                "precio": "3.00",
+                "estado": "Enviada",
+                "created_at": "2024-03-13T09:49:22.000000Z",
+                "updated_at": "2024-03-13T09:49:23.000000Z"
+            }
+        ],
+        "zona": {
+            "id": 5,
+            "nombre": "Terraza 1",
+            "mesas": 20,
+            "created_at": "2023-11-06T10:33:37.000000Z",
+            "updated_at": "2024-02-25T11:31:00.000000Z"
+        },
+        "productos": [
+            {
+                "id": 3,
+                "nombre": "Cola",
+                "descripcion": "sabor original",
+                "precio": "2.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2023-11-06T10:47:23.000000Z",
+                "updated_at": "2024-02-07T12:14:43.000000Z"
+            },
+            {
+                "id": 4,
+                "nombre": "Barcelo",
+                "descripcion": "Ron dominicano",
+                "precio": "4.50",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 3,
+                "impresora": "tickets",
+                "created_at": "2023-11-06T10:48:13.000000Z",
+                "updated_at": "2024-02-05T12:29:53.000000Z"
+            },
+            {
+                "id": 5,
+                "nombre": "JB",
+                "descripcion": "Whisky JB",
+                "precio": "4.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 1,
+                "impresora": "tickets",
+                "created_at": "2023-11-21T18:13:52.000000Z",
+                "updated_at": "2024-02-05T12:30:13.000000Z"
+            },
+            {
+                "id": 14,
+                "nombre": "Cruzcampo 33cl.",
+                "descripcion": "Tercio de cruzcampo 33cl.",
+                "precio": "2.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 4,
+                "impresora": "tickets",
+                "created_at": "2024-01-22T12:20:17.000000Z",
+                "updated_at": "2024-02-09T09:44:09.000000Z"
+            },
+            {
+                "id": 15,
+                "nombre": "Naranja",
+                "descripcion": "Refresco de naranja 25 cl.",
+                "precio": "2.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-01-22T17:56:16.000000Z",
+                "updated_at": "2024-02-07T12:12:21.000000Z"
+            },
+            {
+                "id": 16,
+                "nombre": "Zumo Pi\u00f1a",
+                "descripcion": "Zumo de pi\u00f1a 25cl.",
+                "precio": "1.50",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-01-24T10:06:23.000000Z",
+                "updated_at": "2024-02-07T12:12:04.000000Z"
+            },
+            {
+                "id": 17,
+                "nombre": "Palomitas",
+                "descripcion": "Cuenco de palomitas",
+                "precio": "3.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 5,
+                "impresora": "cocina",
+                "created_at": "2024-01-24T11:45:40.000000Z",
+                "updated_at": "2024-01-26T09:43:38.000000Z"
+            },
+            {
+                "id": 18,
+                "nombre": "Gomitas",
+                "descripcion": "Chuches",
+                "precio": "2.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 5,
+                "impresora": "cocina",
+                "created_at": "2024-01-24T11:51:28.000000Z",
+                "updated_at": "2024-01-26T09:43:23.000000Z"
+            },
+            {
+                "id": 20,
+                "nombre": "Zero",
+                "descripcion": "Coca-Cola zero 25cl.",
+                "precio": "2.00",
+                "iva": 10,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:13:54.000000Z",
+                "updated_at": "2024-02-07T12:13:54.000000Z"
+            },
+            {
+                "id": 21,
+                "nombre": "Zero-Zero",
+                "descripcion": "Coca-Cola zero-zero 25cl.",
+                "precio": "2.00",
+                "iva": 10,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:15:56.000000Z",
+                "updated_at": "2024-02-07T12:15:56.000000Z"
+            },
+            {
+                "id": 22,
+                "nombre": "Zumo-Melocot\u00f3n",
+                "descripcion": "Zumo de melocot\u00f3n 25cl.",
+                "precio": "1.50",
+                "iva": 10,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:17:11.000000Z",
+                "updated_at": "2024-02-07T12:17:11.000000Z"
+            },
+            {
+                "id": 23,
+                "nombre": "Limon",
+                "descripcion": "Refresco de lim\u00f3n 25cl.",
+                "precio": "2.00",
+                "iva": 10,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:20:16.000000Z",
+                "updated_at": "2024-02-23T12:45:31.000000Z"
+            },
+            {
+                "id": 24,
+                "nombre": "Tonica",
+                "descripcion": "T\u00f3nica 25cl.",
+                "precio": "2.00",
+                "iva": 10,
+                "imagen": null,
+                "familia_id": 2,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:21:05.000000Z",
+                "updated_at": "2024-02-23T12:45:18.000000Z"
+            },
+            {
+                "id": 25,
+                "nombre": "Brugal",
+                "descripcion": "Ron dominicano 40\u00ba",
+                "precio": "4.50",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 3,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:22:11.000000Z",
+                "updated_at": "2024-02-07T12:22:11.000000Z"
+            },
+            {
+                "id": 26,
+                "nombre": "W. Label",
+                "descripcion": "Whisky  40\u00ba",
+                "precio": "4.50",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 1,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:23:41.000000Z",
+                "updated_at": "2024-02-07T12:23:41.000000Z"
+            },
+            {
+                "id": 27,
+                "nombre": "Alhambra Verde",
+                "descripcion": "Alhambra Verde",
+                "precio": "2.00",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 4,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:24:32.000000Z",
+                "updated_at": "2024-02-07T12:24:32.000000Z"
+            },
+            {
+                "id": 28,
+                "nombre": "Alhambra Roja",
+                "descripcion": "Alhambra Roja  33cl. 6\u00ba",
+                "precio": "2.50",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 4,
+                "impresora": "tickets",
+                "created_at": "2024-02-07T12:26:40.000000Z",
+                "updated_at": "2024-02-07T12:26:40.000000Z"
+            },
+            {
+                "id": 29,
+                "nombre": "Legendario",
+                "descripcion": "Ron dominicano",
+                "precio": "6.50",
+                "iva": 21,
+                "imagen": null,
+                "familia_id": 3,
+                "impresora": "tickets",
+                "created_at": "2024-02-15T19:08:47.000000Z",
+                "updated_at": "2024-02-15T19:08:47.000000Z"
+            }
+        ],
+        "zonas": [
+            {
+                "id": 5,
+                "nombre": "Terraza 1",
+                "mesas": 20,
+                "created_at": "2023-11-06T10:33:37.000000Z",
+                "updated_at": "2024-02-25T11:31:00.000000Z"
+            },
+            {
+                "id": 6,
+                "nombre": "Barra",
+                "mesas": 10,
+                "created_at": "2023-11-22T20:51:50.000000Z",
+                "updated_at": "2024-02-05T17:52:06.000000Z"
+            },
+            {
+                "id": 7,
+                "nombre": "Sal\u00f3n",
+                "mesas": 40,
+                "created_at": "2023-11-22T21:16:15.000000Z",
+                "updated_at": "2024-01-30T11:13:13.000000Z"
+            },
+            {
+                "id": 8,
+                "nombre": "Interior",
+                "mesas": 12,
+                "created_at": "2024-01-30T11:03:00.000000Z",
+                "updated_at": "2024-01-30T11:12:31.000000Z"
+            },
+            {
+                "id": 9,
+                "nombre": "Patio grande",
+                "mesas": 20,
+                "created_at": "2024-03-02T11:18:59.000000Z",
+                "updated_at": "2024-03-02T11:18:59.000000Z"
+            },
+            {
+                "id": 10,
+                "nombre": "Patio super grande y m\u00e1s aun v",
+                "mesas": 30,
+                "created_at": "2024-03-02T11:19:57.000000Z",
+                "updated_at": "2024-03-02T11:21:09.000000Z"
+            }
+        ],
+        "fecha": "13-03-2024 10:49:23",
+        "impresoras": [
+            "tickets",
+            "cocina"
+        ]
+    }
+]

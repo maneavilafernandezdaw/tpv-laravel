@@ -90,107 +90,101 @@
                                         <x-boton-editar data-bs-toggle="modal"
                                             data-bs-target="#modalEditar{{ $zona->id }}" />
 
-
-                                        <!-- Modal Editar-->
-
-                                        <div class="modal fade" id="modalEditar{{ $zona->id }}" tabindex="-1"
-                                            aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog ">
-                                                <div class="modal-content w-auto">
-                                                    <div class="modal-header  bg-blue-600">
-                                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
-                                                            Editar Zona
-                                                        </h1>
-                                                        @include('components.boton-cancelar-mini')
-                                                    </div>
-                                                    <div class="modal-body">
-
-                                                        <form action="{{ route('zonas.update', $zona->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre</label>
-                                                                <input type="text"
-                                                                    class="form-control  rounded-md bg-white text-black"
-                                                                    id="nombre" name="nombre" required
-                                                                    maxlength="30" value="{{ $zona->nombre }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="mesas">Mesas</label>
-                                                                <input type="number"
-                                                                    class="form-control  rounded-md bg-white text-black"
-                                                                    id="mesas" name="mesas" required
-                                                                    value="{{ $zona->mesas }}">
-                                                            </div>
-                                                            <br>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <x-boton-editar/>
-
-                                                    
-
-                                                        @include('components.boton-cancelar')
-
-
-                                                        </form>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
                                         <x-boton-eliminar data-bs-toggle="modal"
                                             data-bs-target="#modalEliminar{{ $zona->id }}" />
 
-                                        <!-- Modal Eliminar-->
-                                        <div class="modal fade" id="modalEliminar{{ $zona->id }}" tabindex="-1"
-                                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog ">
-                                                <div class="modal-content">
-                                                    <div class="modal-header  bg-red-600">
-                                                        <h1 class="modal-title fs-5 text-white">Eliminar Zona
-                                                        </h1>
-                                                        @include('components.boton-cancelar-mini')
-                                                    </div>
-                                                    <div class="modal-body text-center">
-                                                        <div>
-                                                            <p>¿Está seguro que desea eliminar la
-                                                                zona {{ $zona->nombre }} ?</p>
 
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="{{ route('zonas.destroy', $zona->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="hidden" name="idzona" id="idzona"
-                                                                value="{{ $zona->id }}">
-
-                                                            <x-boton-eliminar />
-
-
-                                                        </form>
-
-                                                        @include('components.boton-cancelar')
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
 
                                     </div>
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- Modal Editar-->
+
+                        <div class="modal fade modal-fullscreen-sm-down" id="modalEditar{{ $zona->id }}"
+                            tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <div class="modal-content w-auto">
+                                    <div class="modal-header  bg-blue-600">
+                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
+                                            Editar Zona
+                                        </h1>
+                                        @include('components.boton-cancelar-mini')
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="{{ route('zonas.update', $zona->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text"
+                                                    class="form-control  rounded-md bg-white text-black" id="nombre"
+                                                    name="nombre" required maxlength="30" value="{{ $zona->nombre }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="mesas">Mesas</label>
+                                                <input type="number"
+                                                    class="form-control  rounded-md bg-white text-black" id="mesas"
+                                                    name="mesas" required value="{{ $zona->mesas }}">
+                                            </div>
+                                            <br>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <x-boton-editar />
+
+
+
+                                        @include('components.boton-cancelar')
+
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal Eliminar-->
+                        <div class="modal fade" id="modalEliminar{{ $zona->id }}" tabindex="-1"
+                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <div class="modal-content">
+                                    <div class="modal-header  bg-red-600">
+                                        <h1 class="modal-title fs-5 text-white">Eliminar Zona
+                                        </h1>
+                                        @include('components.boton-cancelar-mini')
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <div>
+                                            <p>¿Está seguro que desea eliminar la
+                                                zona {{ $zona->nombre }} ?</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ route('zonas.destroy', $zona->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="idzona" id="idzona"
+                                                value="{{ $zona->id }}">
+
+                                            <x-boton-eliminar />
+
+
+                                        </form>
+
+                                        @include('components.boton-cancelar')
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
 
                 </tbody>

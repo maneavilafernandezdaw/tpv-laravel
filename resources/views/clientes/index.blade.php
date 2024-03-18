@@ -99,111 +99,109 @@
                                         <x-boton-editar data-bs-toggle="modal"
                                             data-bs-target="#modalEditar{{ $cliente->id }}" />
 
-                                        <!-- Modal Editar-->
-                                        <div class="modal fade" id="modalEditar{{ $cliente->id }}" tabindex="-1"
-                                            aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header bg-blue-600">
-                                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
-                                                            Editar Cliente
-                                                        </h1>
-                                                        @include('components.boton-cancelar-mini')
-                                                    </div>
-                                                    <div class="modal-body">
 
-                                                        <form action="{{ route('clientes.update', $cliente->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('PUT')
-
-                                                            <div class="form-group">
-                                                                <label for="cif">Cif o Nif</label>
-                                                                <input type="text"
-                                                                    class="form-control rounded-md bg-white text-black"
-                                                                    id="cif" name="cif" required
-                                                                    value="{{ $cliente->cif }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre</label>
-                                                                <input type="text"
-                                                                    class="form-control rounded-md bg-white text-black"
-                                                                    id="nombre" name="nombre" required
-                                                                    value="{{ $cliente->nombre }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="direccion">Dirección</label>
-                                                                <input type="text"
-                                                                    class="form-control rounded-md bg-white text-black"
-                                                                    id="direccion" name="direccion" required
-                                                                    value="{{ $cliente->direccion }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="email">Email</label>
-                                                                <input type="email"
-                                                                    class="form-control rounded-md bg-white text-black"
-                                                                    id="email" name="email" required
-                                                                    value="{{ $cliente->email }}">
-                                                            </div>
-                                                            <br>
-
-                                                    </div>
-                                                    <div class="modal-footer">
-
-                                                        <x-boton-editar />
-
-                                                        @include('components.boton-cancelar')
-
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
                                         <x-boton-eliminar data-bs-toggle="modal"
                                             data-bs-target="#modalEliminar{{ $cliente->id }}" />
 
-                                        <!-- Modal Eliminar-->
-                                        <div class="modal fade" id="modalEliminar{{ $cliente->id }}" tabindex="-1"
-                                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog ">
-                                                <div class="modal-content">
-                                                    <div class="modal-header  bg-red-600">
-                                                        <h1 class="modal-title fs-5 text-white">Eliminar Cliente
-                                                        </h1>
-                                                        @include('components.boton-cancelar-mini')
-                                                    </div>
-                                                    <div class="modal-body text-center">
-                                                        <div>
-                                                            <p>¿Está seguro que desea eliminar el
-                                                                cliente {{ $cliente->nombre }} ?</p>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="{{ route('clientes.destroy', $cliente->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="hidden" name="idcliente" id="idcliente"
-                                                                value="{{ $cliente->id }}">
-
-                                                            <x-boton-eliminar />
-
-                                                        </form>
-
-                                                        @include('components.boton-cancelar')
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- Modal Editar-->
+                        <div class="modal fade" id="modalEditar{{ $cliente->id }}" tabindex="-1"
+                            aria-labelledby="modalEditarLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-blue-600">
+                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
+                                            Editar Cliente
+                                        </h1>
+                                        @include('components.boton-cancelar-mini')
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <form action="{{ route('clientes.update', $cliente->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <div class="form-group">
+                                                <label for="cif">Cif o Nif</label>
+                                                <input type="text"
+                                                    class="form-control rounded-md bg-white text-black" id="cif"
+                                                    name="cif" required value="{{ $cliente->cif }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text"
+                                                    class="form-control rounded-md bg-white text-black" id="nombre"
+                                                    name="nombre" required value="{{ $cliente->nombre }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="direccion">Dirección</label>
+                                                <input type="text"
+                                                    class="form-control rounded-md bg-white text-black" id="direccion"
+                                                    name="direccion" required value="{{ $cliente->direccion }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email">Email</label>
+                                                <input type="email"
+                                                    class="form-control rounded-md bg-white text-black" id="email"
+                                                    name="email" required value="{{ $cliente->email }}">
+                                            </div>
+                                            <br>
+
+                                    </div>
+                                    <div class="modal-footer">
+
+                                        <x-boton-editar />
+
+                                        @include('components.boton-cancelar')
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Modal Eliminar-->
+                        <div class="modal fade" id="modalEliminar{{ $cliente->id }}" tabindex="-1"
+                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <div class="modal-content">
+                                    <div class="modal-header  bg-red-600">
+                                        <h1 class="modal-title fs-5 text-white">Eliminar Cliente
+                                        </h1>
+                                        @include('components.boton-cancelar-mini')
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <div>
+                                            <p>¿Está seguro que desea eliminar el
+                                                cliente {{ $cliente->nombre }} ?</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ route('clientes.destroy', $cliente->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="idcliente" id="idcliente"
+                                                value="{{ $cliente->id }}">
+
+                                            <x-boton-eliminar />
+
+                                        </form>
+
+                                        @include('components.boton-cancelar')
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
                 </tbody>
             </table>

@@ -27,19 +27,21 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control rounded-md bg-white text-black" id="nombre"
-                                                name="nombre" required maxlength="20">
+                                            <input type="text" class="form-control rounded-md bg-white text-black"
+                                                id="nombre" name="nombre" required maxlength="20">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
-                                            <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required aria-label="textarea"></textarea>
+                                            <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required
+                                                aria-label="textarea"></textarea>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="familia_id">Familia</label>
-                                            <select class="form-select  bg-white text-black" aria-label="Default select example"
-                                                id="familia_id" name="familia_id" required>
+                                            <select class="form-select  bg-white text-black"
+                                                aria-label="Default select example" id="familia_id" name="familia_id"
+                                                required>
                                                 @foreach ($familias as $familia)
                                                     <option value="{{ $familia->id }}">{{ $familia->nombre }}</option>
                                                 @endforeach
@@ -48,20 +50,22 @@
 
                                         <div class="form-group">
                                             <label for="precio">Precio (€)</label>
-                                            <input type="number" step=".01" class="form-control rounded-md  bg-white text-black"
-                                                id="precio" name="precio" required>
+                                            <input type="number" step=".01"
+                                                class="form-control rounded-md  bg-white text-black" id="precio"
+                                                name="precio" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="iva">Iva (%)</label>
-                                            <input type="number" class="form-control rounded-md bg-white text-black" id="iva"
-                                                name="iva" value="21">
+                                            <input type="number" class="form-control rounded-md bg-white text-black"
+                                                id="iva" name="iva" value="21">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="impresora">Impresora</label>
-                                            <select class="form-select  bg-white text-black" aria-label="Default select example"
-                                                id="impresora" name="impresora" required>
+                                            <select class="form-select  bg-white text-black"
+                                                aria-label="Default select example" id="impresora" name="impresora"
+                                                required>
                                                 @foreach ($impresoras as $impresora)
                                                     <option value="{{ $impresora }}">{{ $impresora }}</option>
                                                 @endforeach
@@ -155,117 +159,6 @@
                                         <x-boton-editar data-bs-toggle="modal"
                                             data-bs-target="#modalEditar{{ $producto->id }}" />
 
-                                        <!-- Modal Editar-->
-                                        <div class="modal fade" id="modalEditar{{ $producto->id }}" tabindex="-1"
-                                            aria-labelledby="modalEditarLabel" aria-hidden="true">
-                                            <div class="modal-dialog ">
-                                                <div class="modal-content">
-
-                                                    <div class="modal-header bg-blue-600">
-                                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
-                                                            Editar Producto
-                                                        </h1>
-                                                        @include('components.boton-cancelar-mini')
-                                                    </div>
-                                                    <div class="modal-body">
-
-
-                                                        <form action="{{ route('productos.update', $producto->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="form-group">
-                                                                <label for="nombre">Nombre</label>
-                                                                <input type="text" class="form-control rounded-md bg-white text-black"
-                                                                    id="nombre" name="nombre" required
-                                                                    maxlength="30" value="{{ $producto->nombre }}">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="descripcion">Descripción</label>
-                                                                <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required aria-label="textarea">{{ $producto->descripcion }}</textarea>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="familia_id">Familia</label>
-                                                                <select class="form-select  bg-white text-black"
-                                                                    aria-label="Default select example"
-                                                                    id="familia_id" name="familia_id" required
-                                                                    value="{{ $producto->familia_id }}">
-                                                                    @foreach ($familias as $familia)
-                                                                        @if ($familia->id === $producto->familia_id)
-                                                                            <option value="{{ $familia->id }}"
-                                                                                selected>
-                                                                                {{ $familia->nombre }}</option>
-                                                                        @else
-                                                                            <option value="{{ $familia->id }}">
-                                                                                {{ $familia->nombre }}</option>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="precio">Precio</label>
-                                                                <input type="number" step=".01"
-                                                                    class="form-control rounded-md bg-white text-black" id="precio"
-                                                                    name="precio" required
-                                                                    value="{{ $producto->precio }}">
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label for="iva">Iva</label>
-                                                                <input type="number" class="form-control rounded-md bg-white text-black"
-                                                                    id="iva" name="iva"
-                                                                    value="{{ $producto->iva }}">
-                                                            </div><br>
-
-                                                            <div class="form-group">
-                                                                <label for="impresora">Impresora</label>
-                                                                <select class="form-select bg-white text-black"
-                                                                    aria-label="Default select example" id="impresora"
-                                                                    name="impresora" required
-                                                                    value="{{ $producto->impresora }}">
-                                                                    @foreach ($impresoras as $impresora)
-                                                                        @if ($impresora === $producto->impresora)
-                                                                            <option value="{{ $impresora }}"
-                                                                                selected>
-                                                                                {{ $impresora }}</option>
-                                                                        @else
-                                                                            <option value="{{ $impresora }}">
-                                                                                {{ $impresora }}</option>
-                                                                        @endif
-                                                                    @endforeach
-                                                                </select>
-                                                            </div><br>
-
-                                                            {{-- <div class="form-group">
-                                                                <label for="imagen">Imagen</label>
-                                                                <input type="file"
-                                                                    class="form-control rounded-md border border-neutral-900 p-2 "
-                                                                    id="imagen" name="imagen">
-                                                                    @if ($producto->imagen)
-                                                                    <img src="imagen/{{ $producto->imagen }}"
-                                                                        class="h-24 w-24 rounded-full  border border-black" alt="imagen producto">
-                                                             
-                                                                @endif
-                                                            </div><br> --}}
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <x-boton-editar />
-
-
-                                                        @include('components.boton-cancelar')
-
-                                                        </form>
-
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-
-
 
 
                                     </div>
@@ -274,47 +167,154 @@
                                         <x-boton-eliminar data-bs-toggle="modal"
                                             data-bs-target="#modalEliminar{{ $producto->id }}" />
 
-                                        <!-- Modal Eliminar-->
-                                        <div class="modal fade" id="modalEliminar{{ $producto->id }}" tabindex="-1"
-                                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                                            <div class="modal-dialog ">
-                                                <div class="modal-content">
-                                                    <div class="modal-header  bg-red-600">
-                                                        <h1 class="modal-title fs-5 text-white">Eliminar Producto
-                                                        </h1>
-                                                        @include('components.boton-cancelar-mini')
-                                                    </div>
-                                                    <div class="modal-body text-center">
-                                                        <div>
-                                                            <p class="">¿Está seguro que desea eliminar el
-                                                                producto: {{ $producto->nombre }} ?</p>
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="{{ route('productos.destroy', $producto->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <input type="hidden" name="idproducto" id="idproducto"
-                                                                value="{{ $producto->id }}">
-
-                                                            <x-boton-eliminar />
-
-
-                                                        </form>
-
-                                                        @include('components.boton-cancelar')
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
                             </td>
                         </tr>
+
+                        <!-- Modal Editar-->
+                        <div class="modal fade" id="modalEditar{{ $producto->id }}" tabindex="-1"
+                            aria-labelledby="modalEditarLabel" aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <div class="modal-content">
+
+                                    <div class="modal-header bg-blue-600">
+                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
+                                            Editar Producto
+                                        </h1>
+                                        @include('components.boton-cancelar-mini')
+                                    </div>
+                                    <div class="modal-body">
+
+
+                                        <form action="{{ route('productos.update', $producto->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="form-group">
+                                                <label for="nombre">Nombre</label>
+                                                <input type="text"
+                                                    class="form-control rounded-md bg-white text-black" id="nombre"
+                                                    name="nombre" required maxlength="30"
+                                                    value="{{ $producto->nombre }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="descripcion">Descripción</label>
+                                                <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required
+                                                    aria-label="textarea">{{ $producto->descripcion }}</textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="familia_id">Familia</label>
+                                                <select class="form-select  bg-white text-black"
+                                                    aria-label="Default select example" id="familia_id"
+                                                    name="familia_id" required value="{{ $producto->familia_id }}">
+                                                    @foreach ($familias as $familia)
+                                                        @if ($familia->id === $producto->familia_id)
+                                                            <option value="{{ $familia->id }}" selected>
+                                                                {{ $familia->nombre }}</option>
+                                                        @else
+                                                            <option value="{{ $familia->id }}">
+                                                                {{ $familia->nombre }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="precio">Precio</label>
+                                                <input type="number" step=".01"
+                                                    class="form-control rounded-md bg-white text-black" id="precio"
+                                                    name="precio" required value="{{ $producto->precio }}">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="iva">Iva</label>
+                                                <input type="number"
+                                                    class="form-control rounded-md bg-white text-black" id="iva"
+                                                    name="iva" value="{{ $producto->iva }}">
+                                            </div><br>
+
+                                            <div class="form-group">
+                                                <label for="impresora">Impresora</label>
+                                                <select class="form-select bg-white text-black"
+                                                    aria-label="Default select example" id="impresora"
+                                                    name="impresora" required value="{{ $producto->impresora }}">
+                                                    @foreach ($impresoras as $impresora)
+                                                        @if ($impresora === $producto->impresora)
+                                                            <option value="{{ $impresora }}" selected>
+                                                                {{ $impresora }}</option>
+                                                        @else
+                                                            <option value="{{ $impresora }}">
+                                                                {{ $impresora }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div><br>
+
+                                            {{-- <div class="form-group">
+                                                                                        <label for="imagen">Imagen</label>
+                                                                                        <input type="file"
+                                                                                            class="form-control rounded-md border border-neutral-900 p-2 "
+                                                                                            id="imagen" name="imagen">
+                                                                                            @if ($producto->imagen)
+                                                                                            <img src="imagen/{{ $producto->imagen }}"
+                                                                                                class="h-24 w-24 rounded-full  border border-black" alt="imagen producto">
+                                                                                     
+                                                                                        @endif
+                                                                                    </div><br> --}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <x-boton-editar />
+
+
+                                        @include('components.boton-cancelar')
+
+                                        </form>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- Modal Eliminar-->
+                        <div class="modal fade" id="modalEliminar{{ $producto->id }}" tabindex="-1"
+                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                            <div class="modal-dialog ">
+                                <div class="modal-content">
+                                    <div class="modal-header  bg-red-600">
+                                        <h1 class="modal-title fs-5 text-white">Eliminar Producto
+                                        </h1>
+                                        @include('components.boton-cancelar-mini')
+                                    </div>
+                                    <div class="modal-body text-center">
+                                        <div>
+                                            <p class="">¿Está seguro que desea eliminar el
+                                                producto: {{ $producto->nombre }} ?</p>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <form action="{{ route('productos.destroy', $producto->id) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <input type="hidden" name="idproducto" id="idproducto"
+                                                value="{{ $producto->id }}">
+
+                                            <x-boton-eliminar />
+
+
+                                        </form>
+
+                                        @include('components.boton-cancelar')
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
 
                 </tbody>

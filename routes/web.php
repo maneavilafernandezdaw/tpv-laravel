@@ -32,6 +32,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/impticket', function () {
+    return view('comandas/impticket');
+});
+
+Route::get('/impcuenta', function () {
+    return view('comandas/impcuenta');
+});
 
 Route::get('/home', function () {
     return view('home');
@@ -118,7 +125,7 @@ Route::controller(ComandasController::class)->group(function () {
     Route::post('comandas/imprimirCuenta', 'imprimirCuenta')->name('comandas.imprimirCuenta');
     Route::post('comandas/eliminar', 'eliminarComanda')->name('comandas.eliminarComanda');
     Route::post('comandas/eliminar/cuenta', 'eliminarCuenta')->name('comandas.eliminarCuenta');
-    Route::post('comandas/printComanda', 'printComanda')->name('comandas.printComanda');
+  
 });
 
 Route::controller(CobrosController::class)->group(function () {
@@ -150,9 +157,9 @@ Route::controller(ReportController::class)->group(function () {
 
 });
 
-Route::controller(DatatableController::class)->group(function () {
+/* Route::controller(DatatableController::class)->group(function () {
     Route::get('datatable/zonas', 'zonas')->name('datatable.zonas');
 
-});
+}); */
 
 
