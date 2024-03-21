@@ -101,8 +101,9 @@ Route::controller(ProductosController::class)->group(function () {
     Route::get('productos', 'index')->name('productos.index');
     Route::get('productos/create', 'create')->name('productos.create');
     Route::post('productos', 'store')->name('productos.store');
+    Route::post('productos/coctel', 'coctel')->name('productos.coctel');
     Route::get('productos/{producto}', 'show')->name('productos.show');
-    Route::post('productos/ajax', 'ajax')->name('productos.ajax');
+
     Route::put('productos/{producto}/edit', 'update')->name('productos.update');
     Route::delete('productos/{producto}/destroy', 'destroy')->name('productos.destroy');
 });

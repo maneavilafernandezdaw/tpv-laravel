@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Familia;
 use Psy\Readline\Hoa\Console;
-
+use OpenAI;
 use function Laravel\Prompts\alert;
 
 class ProductosController extends Controller
@@ -96,6 +96,47 @@ class ProductosController extends Controller
             } else {
                 return redirect()->route('productos.index')
                     ->with('mensaje', 'Ya Existe un producto con ese nombre.');
+            }
+        }
+        return view('welcome');
+    }
+
+    public function coctel(Request $request)
+    {
+        if (Auth::check()) {
+            $request->validate([
+                'nombre' => 'required|max:30',
+                'precio' => 'required',
+                'iva' => 'required',
+
+            ]);
+
+            $prod = Producto::where('nombre', $request->nombre)->first();
+
+            // Si existe
+            if (!$prod) {
+                $yourApiKey = getenv('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');
+                $client = OpenAI::client("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");
+                
+                $result = $client->chat()->create([
+                    'model' => 'gpt-4',
+                    'messages' => [
+                        ['role' => 'user', 'content' => 'ingredientes y cantidades para hacer un cóctel con el nombre de '.$request->nombre],
+                    ],
+                ]);
+                
+               // echo $result->choices[0]->message->content; // Hello! How can I assist you today?
+
+                $producto = $request->all();
+                $producto['descripcion'] = $result->choices[0]->message->content; 
+
+                Producto::create($producto);
+
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Cóctel creado correctamente.');
+            } else {
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Ya Existe un cóctel con ese nombre.');
             }
         }
         return view('welcome');

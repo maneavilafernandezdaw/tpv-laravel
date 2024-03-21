@@ -97,6 +97,76 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Button trigger modal Coctel-->
+
+                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrearCoctel" > Cóctel</x-boton-crear>
+
+                    <!-- Modal Crear Coctel-->
+                    <div class="modal fade " id="modalCrearCoctel" tabindex="-1" aria-labelledby="modalCrearCoctelLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog ">
+                            <div class="modal-content">
+                                <div class="modal-header  bg-green-600">
+                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Producto</h1>
+                                    @include('components.boton-cancelar-mini')
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="{{ route('productos.coctel') }}" method="post"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control rounded-md bg-white text-black"
+                                                id="nombre" name="nombre" required maxlength="20">
+                                        </div>
+
+                                   
+                                        <div class="form-group">
+                                            <label for="familia_id">Familia</label>
+                                            <select class="form-select  bg-white text-black"
+                                                aria-label="Default select example" id="familia_id" name="familia_id"
+                                                required>
+                                                @foreach ($familias as $familia)
+                                                    <option value="{{ $familia->id }}">{{ $familia->nombre }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="precio">Precio (€)</label>
+                                            <input type="number" step=".01"
+                                                class="form-control rounded-md  bg-white text-black" id="precio"
+                                                name="precio" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="iva">Iva (%)</label>
+                                            <input type="number" class="form-control rounded-md bg-white text-black"
+                                                id="iva" name="iva" value="21">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="hidden" 
+                                            id="impresora" name="impresora" value="tickets">
+                                        </div>
+
+                                       <br>
+                                </div>
+                                <div class="modal-footer">
+                                    <x-boton-crear />
+
+
+                                    @include('components.boton-cancelar')
+
+                                    </form>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
     </nav>

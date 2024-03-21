@@ -119,7 +119,7 @@
                         @if (isset($comanda))
                         <div class="d-flex gap-3 justify-center">
                             <div>
-                                {{-- <form action="{{ route('comandas.enviar') }}" method="post">
+                                <form action="{{ route('comandas.enviar') }}" method="post">
                                     @csrf
                                     <div class="form-group">
                                         <input type="hidden" id="mesa" name="mesa"
@@ -132,12 +132,12 @@
                                     <x-boton-enviar-comanda/>
                                   
 
-                                </form> --}}
+                                </form>
 
-     <a href="{{ route('comandas.ticket', [$zona->id, $mesa]) }}">
+     {{-- <a href="{{ route('comandas.ticket', [$zona->id, $mesa]) }}">
                          
                                     <x-boton-enviar-comanda ></x-boton-enviar-comanda >
-                                    </a>
+                                    </a> --}}
 
                             </div>
                             <div>

@@ -221,7 +221,7 @@ class ComandasController extends Controller
         return view('welcome');
     }
 
-    /*   public function enviar(Request $request)
+       public function enviar(Request $request)
     {
         if (Auth::check()) {
 
@@ -313,9 +313,9 @@ class ComandasController extends Controller
                             return "Error al imprimir: " . $e->getMessage();
                         } 
                     
-                
+                    }
               
-                    
+                }
 
                 return redirect()->route('comandas.index', compact('zonas', 'comandas'))
                 ->with('mensaje', 'Comanda Enviada Correctamente.');
@@ -326,7 +326,7 @@ class ComandasController extends Controller
         
         }
         return view('welcome');
-    } */
+    } 
 
     public function imprimirCuenta(Request $request)
     {
@@ -434,7 +434,7 @@ class ComandasController extends Controller
     }
 
 
-    public function ticket($z, $m)
+/*     public function ticket($z, $m)
     {
 
         $comandas = Comanda::where('mesa', $m)
@@ -472,5 +472,5 @@ class ComandasController extends Controller
      
 
         return view('comandas.ticketCuenta', compact('datos'));
-    }
+    } */
 }
