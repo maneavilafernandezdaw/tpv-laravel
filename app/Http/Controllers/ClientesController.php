@@ -21,7 +21,7 @@ class ClientesController extends Controller
 
         return view('clientes.index', compact('clientes'));
     }
-    return view('welcome');
+    return redirect()->route('welcome');
     }
 
     /**
@@ -53,7 +53,7 @@ class ClientesController extends Controller
           }
   
         }
-        return view('welcome');
+        return redirect()->route('welcome');
           
 
     }
@@ -88,7 +88,7 @@ class ClientesController extends Controller
         return redirect()->route('clientes.index')
             ->with('mensaje', 'Cliente eliminado correctamente');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function edit($id)
@@ -98,7 +98,7 @@ class ClientesController extends Controller
 
         return view('clientes.edit', compact('cliente'));
     }
-    return view('welcome');
+    return redirect()->route('welcome');
     }
 
 

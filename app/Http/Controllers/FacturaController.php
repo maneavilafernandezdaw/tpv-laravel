@@ -21,7 +21,7 @@ class FacturaController extends Controller
 
             return view('facturas.index', compact('facturas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
    

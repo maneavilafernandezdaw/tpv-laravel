@@ -37,7 +37,7 @@ class CobrosController extends Controller
 
             return view('cobros.index', compact('cobros', 'total', 'zonas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -66,7 +66,7 @@ class CobrosController extends Controller
             ->with('mensaje', 'Cobro Realizado Correctamente.');
          
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function descargar(Request $request)
@@ -170,6 +170,6 @@ class CobrosController extends Controller
                 return $response;
             }
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 }

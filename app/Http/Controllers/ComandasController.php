@@ -47,7 +47,7 @@ class ComandasController extends Controller
 
             return view('comandas.cuenta', compact('zonas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -60,7 +60,7 @@ class ComandasController extends Controller
 
             return view('zonas.show', compact('zona'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -85,7 +85,8 @@ class ComandasController extends Controller
 
             return view('comandas.create', compact('zona', 'mesa', 'productos', 'todosProductos', 'familias', 'comandas', 'familia', 'refrescos'));
         }
-        return view('welcome');
+        
+        return redirect()->route('welcome');
     }
 
 
@@ -103,7 +104,7 @@ class ComandasController extends Controller
 
             return view('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function pedido($z, $m, $f)
@@ -129,7 +130,7 @@ class ComandasController extends Controller
 
             return view('comandas.pedido', compact('zona', 'mesa', 'productos', 'todosProductos', 'familias', 'comandas', 'familia', 'refrescos'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
     /**
      * Store a newly created resource in storage.
@@ -151,7 +152,7 @@ class ComandasController extends Controller
                 return redirect()->route('comandas.create', [$request->zona_id, $request->mesa,  $request->familia]);
             }
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -162,7 +163,7 @@ class ComandasController extends Controller
             $comanda->increment('cantidad');
             return redirect()->route('comandas.create', [$request->zona_id, $request->mesa,  $request->familia]);
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function decrementar(Request $request)
@@ -175,7 +176,7 @@ class ComandasController extends Controller
             }
             return redirect()->route('comandas.create', [$request->zona_id, $request->mesa,  $request->familia]);
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function incrementarTabla(Request $request)
@@ -185,7 +186,7 @@ class ComandasController extends Controller
             $comanda->increment('cantidad');
             return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa,  $request->familia]);
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function decrementarTabla(Request $request)
@@ -198,7 +199,7 @@ class ComandasController extends Controller
             }
             return redirect()->route('comandas.pedido', [$request->zona_id, $request->mesa,  $request->familia]);
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -218,9 +219,11 @@ class ComandasController extends Controller
             return redirect()->route('zonas.index')
                 ->with('mensaje', 'Zona actualizada correctamente.');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
+
+    // enviar y imprimirCuenta se utiliza para imprimir en local
        public function enviar(Request $request)
     {
         if (Auth::check()) {
@@ -325,7 +328,7 @@ class ComandasController extends Controller
             }
         
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     } 
 
     public function imprimirCuenta(Request $request)
@@ -390,7 +393,7 @@ class ComandasController extends Controller
             }
         }
 
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -412,7 +415,7 @@ class ComandasController extends Controller
             return redirect()->route('comandas.create', [$request->zona_id, $request->mesa, "todo"])
                 ->with('mensaje', 'Comanda Eliminada Correctamente.');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function eliminarCuenta(Request $request)
@@ -430,47 +433,98 @@ class ComandasController extends Controller
             }
             return view('home');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
-/*     public function ticket($z, $m)
+    // ticket y ticketCuenta se utiliza para imprimir desde el servidor
+    public function ticket($z, $m)
     {
-
+        if (Auth::check()) {
         $comandas = Comanda::where('mesa', $m)
             ->where('zona_id', $z)->where('estado', 'No enviado')->get();
 
-        $datos = [
-            "comandas" => $comandas,
-            "zona" => Zona::find($z),
-            "productos" => Producto::all(),
-            "zonas" => Zona::all(),
-            "fecha" => date("d-m-Y h:i:s"),
-            "impresoras" => ['tickets', 'cocina']
-        ];
-        foreach ($comandas as $comanda) {
-            $comanda->estado = 'Enviada';
-            $comanda->save();
-        }
+      $productos = Producto::all();
+       $comand = [];
+      $mesa = $m;
+      
+      foreach ($comandas as  $comanda) {
+        foreach ($productos as $producto) {
+        if($comanda->producto_id === $producto->id){
+          
+   
+          $comand[]=["cantidad"=>$comanda->cantidad,
+                   "nombre"=>$producto->nombre,
+                     "refresco" => $comanda->refresco,
+                    "impresora"=>$producto->impresora];
+          
+          
+          $com = Comanda::where('mesa', $m)->where('zona_id', $z)->where('estado', 'Enviada')->where('producto_id', $comanda->producto_id)->where('refresco', $comanda->refresco)->first();
 
-        return view('comandas.ticket', compact('datos'));
+            if ($com) {
+
+                $com->cantidad += $comanda->cantidad;
+				$com->save();
+                $comanda->delete();
+            } else {
+                $comanda->estado = 'Enviada';
+            	$comanda->save();
+            }
+          
+          
+          
+
+        }
+        }
+      }
+       $datos = [
+            "comandas" => $comand,
+            "zona" => Zona::find($z)->nombre,
+            "mesa" => $mesa
+        ];
+
+      
+		$json = json_encode([$datos]);
+
+    	return redirect()->away('http://192.168.100.100/tpv-laravel/public/impticket?data=' . $json); 
     }
+    return redirect()->route('welcome');
+    }
+
 
     public function ticketCuenta($z, $m)
     {
-
+        if (Auth::check()) {
         $comandas = Comanda::where('mesa', $m)
             ->where('zona_id', $z)->where('estado', 'Enviada')->get();
 
-        $datos = [
-            "comandas" => $comandas,
-            "zona" => Zona::find($z),
-            "productos" => Producto::all(),
-            "zonas" => Zona::all(),
-            "fecha" => date("d-m-Y h:i:s")
+      $productos = Producto::all();
+      $comand = [];
+      
+      
+      foreach ($comandas as  $comanda) {
+        foreach ($productos as $producto) {
+        if($comanda->producto_id === $producto->id){
+          
+          $comand[]=["cantidad"=>$comanda->cantidad,
+                   "nombre"=>$producto->nombre,
+                   "refresco" => $comanda->refresco,
+                   "precio" => $comanda->precio];
+        }
+        }
+      }
+       $datos = [
+            "comandas" => $comand,
+            "zona" => Zona::find($z)->nombre,
+            "mesa" => $m
         ];
-     
 
-        return view('comandas.ticketCuenta', compact('datos'));
-    } */
+    	$json = json_encode([$datos]);
+      
+		return redirect()->away('http://192.168.100.100/tpv-laravel/public/impcuenta?data=' . $json); 
+    }
+    return redirect()->route('welcome');
+    }
+    
+
 }

@@ -1,11 +1,11 @@
-<x-app-layout>
+<x-app-layout class="w-full">
 
 
 
     {{-- session mensaje  --}}
     @include('partials.session-mensaje')
 
-
+<div class="container-fluid">
     <div class="d-flex justify-center gap-3 items-center mt-3">
         <div>
             <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio /></a>
@@ -496,5 +496,5 @@
 </div>
 
 </div>
-
+</div>
 </x-app-layout>

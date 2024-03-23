@@ -69,7 +69,9 @@
         }
 
         // Redirige a una página web específica
-        $paginaWeb = ' https://linkgenia.es/laravel/public/comandas';
+
+        // $paginaWeb = env('URL_REDIRECCIONAR_LOCAL');
+        $paginaWeb = env('URL_REDIRECCIONAR');
         header("Location: $paginaWeb");
         exit();
 

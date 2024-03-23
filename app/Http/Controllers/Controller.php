@@ -23,7 +23,7 @@ class Controller extends BaseController
                 return redirect()->route('home');
             
             }
-            return view('welcome');
+            return redirect()->route('welcome');
         
     }
 
@@ -38,7 +38,7 @@ class Controller extends BaseController
 
                 return redirect()->route('home');
             }
-            return view('welcome');
+            return redirect()->route('welcome');
         
     }
 

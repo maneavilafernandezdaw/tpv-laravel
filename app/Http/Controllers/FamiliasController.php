@@ -19,7 +19,7 @@ class FamiliasController extends Controller
 
         return view('familias.index', compact('familias'));
     }
-    return view('welcome');
+    return redirect()->route('welcome');
     }
 
     /**
@@ -48,7 +48,7 @@ class FamiliasController extends Controller
           }
   
         }
-        return view('welcome');
+        return redirect()->route('welcome');
           
 
     }
@@ -71,7 +71,7 @@ class FamiliasController extends Controller
         return redirect()->route('familias.index')
             ->with('mensaje', 'Familia actualizada correctamente.');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -86,7 +86,7 @@ class FamiliasController extends Controller
         return redirect()->route('familias.index')
             ->with('mensaje', 'Familia eliminada correctamente');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function edit($id)
@@ -96,6 +96,6 @@ class FamiliasController extends Controller
 
         return view('familias.edit', compact('familia'));
     }
-    return view('welcome');
+    return redirect()->route('welcome');
     }
 }

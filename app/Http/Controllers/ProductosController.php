@@ -39,7 +39,7 @@ class ProductosController extends Controller
                 return response()->json(['error' => $e->getMessage()], 500);
             }
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -53,7 +53,7 @@ class ProductosController extends Controller
 
             return view('productos.show', compact('producto'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -98,7 +98,7 @@ class ProductosController extends Controller
                     ->with('mensaje', 'Ya Existe un producto con ese nombre.');
             }
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function coctel(Request $request)
@@ -115,17 +115,17 @@ class ProductosController extends Controller
 
             // Si existe
             if (!$prod) {
-                $yourApiKey = getenv('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');
+               
                 $client = OpenAI::client("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");
                 
                 $result = $client->chat()->create([
                     'model' => 'gpt-4',
                     'messages' => [
-                        ['role' => 'user', 'content' => 'ingredientes y cantidades para hacer un cóctel con el nombre de '.$request->nombre],
+                        ['role' => 'user', 'content' => 'Necesito solo los ingredientes y cantidades para hacer un cóctel con el nombre de '.$request->nombre],
                     ],
                 ]);
                 
-               // echo $result->choices[0]->message->content; // Hello! How can I assist you today?
+           
 
                 $producto = $request->all();
                 $producto['descripcion'] = $result->choices[0]->message->content; 
@@ -139,7 +139,7 @@ class ProductosController extends Controller
                     ->with('mensaje', 'Ya Existe un cóctel con ese nombre.');
             }
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -180,7 +180,7 @@ class ProductosController extends Controller
                     ->with('mensaje', 'Producto actualizado correctamente.');
             }
         } else {
-            return view('welcome');
+            return redirect()->route('welcome');
         }
     }
 
@@ -196,6 +196,6 @@ class ProductosController extends Controller
             return redirect()->route('productos.index')
                 ->with('mensaje', 'Producto eliminado correctamente');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 }

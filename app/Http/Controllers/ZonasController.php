@@ -27,7 +27,7 @@ class ZonasController extends Controller
 
             return view('zonas.index', compact('zonas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -41,7 +41,7 @@ class ZonasController extends Controller
             $comandas = Comanda::all();
             return view('zonas.show', compact('zona', 'comandas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     public function consultar($id)
@@ -52,7 +52,7 @@ class ZonasController extends Controller
             $comandas = Comanda::all();
             return view('comandas.consultar', compact('zona', 'comandas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -80,7 +80,7 @@ class ZonasController extends Controller
                 ->with('mensaje', 'Existe una zona con ese nombre.');
         }
     }
-    return view('welcome');
+    return redirect()->route('welcome');
     }
 
 
@@ -102,7 +102,7 @@ class ZonasController extends Controller
             ->with('mensaje', 'Zona actualizada correctamente.');
         
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -117,7 +117,7 @@ class ZonasController extends Controller
         return redirect()->route('zonas.index')
             ->with('mensaje', 'Zona eliminada correctamente');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
 }
 
 

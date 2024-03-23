@@ -24,7 +24,7 @@ class ProfileController extends Controller
             return view('profile.index', compact('usuarios'));
 
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
     /**
      * Display the user's profile form.
@@ -107,7 +107,7 @@ class ProfileController extends Controller
         return redirect()->route('profile.index')
             ->with('mensaje', 'Usuario eliminado correctamente');
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 }

@@ -123,14 +123,15 @@
 
                                    
                                         <div class="form-group">
-                                            <label for="familia_id">Familia</label>
-                                            <select class="form-select  bg-white text-black"
-                                                aria-label="Default select example" id="familia_id" name="familia_id"
-                                                required>
+                                        
                                                 @foreach ($familias as $familia)
-                                                    <option value="{{ $familia->id }}">{{ $familia->nombre }}</option>
+                                                    
+                                                    @if( $familia->nombre === "Cóctel")
+                                                    <input type="hidden" 
+                                                    id="familia_id" name="familia_id" value="{{ $familia->id }}">
+                                                    @endif
                                                 @endforeach
-                                            </select>
+
                                         </div>
 
                                         <div class="form-group">
