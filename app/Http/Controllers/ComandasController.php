@@ -85,7 +85,7 @@ class ComandasController extends Controller
 
             return view('comandas.create', compact('zona', 'mesa', 'productos', 'todosProductos', 'familias', 'comandas', 'familia', 'refrescos'));
         }
-        
+
         return redirect()->route('welcome');
     }
 
@@ -224,7 +224,7 @@ class ComandasController extends Controller
 
 
     // enviar y imprimirCuenta se utiliza para imprimir en local
-       public function enviar(Request $request)
+    public function enviar(Request $request)
     {
         if (Auth::check()) {
 
@@ -237,13 +237,13 @@ class ComandasController extends Controller
 
             try {
 
-                  $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
-                    $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
-        
-                    $impresoras = [];
-                    foreach ($printers as $printer) {
-                        $impresoras[] = $printer->Name;
-                    }
+                $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
+                $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
+
+                $impresoras = [];
+                foreach ($printers as $printer) {
+                    $impresoras[] = $printer->Name;
+                }
                 $impresoras = ['tickets', 'cocina'];
 
                 foreach ($impresoras as $impresora) {
@@ -304,32 +304,29 @@ class ComandasController extends Controller
                             $printer->text("\n\n");
                             $printer->text("\n\n");
                             $printer->cut();
-                            $printer->close(); 
+                            $printer->close();
 
-                          
- 
+
+
                             foreach ($comandas as $comanda) {
                                 $comanda->estado = 'Enviada';
                                 $comanda->save();
                             }
-                         } catch (\Exception $e) {
+                        } catch (\Exception $e) {
                             return "Error al imprimir: " . $e->getMessage();
-                        } 
-                    
+                        }
                     }
-              
                 }
 
                 return redirect()->route('comandas.index', compact('zonas', 'comandas'))
-                ->with('mensaje', 'Comanda Enviada Correctamente.');
+                    ->with('mensaje', 'Comanda Enviada Correctamente.');
             } catch (\Exception $e) {
 
                 return response()->json(['error' => $e->getMessage()], 500);
             }
-        
         }
         return redirect()->route('welcome');
-    } 
+    }
 
     public function imprimirCuenta(Request $request)
     {
@@ -387,7 +384,7 @@ class ComandasController extends Controller
                 $printer->close();
 
                 return redirect()->route('comandas.consultarCuenta', compact('zona', 'mesa', 'productos', 'comandas', 'clientes'))
-                  ->with('mensaje', 'Cuenta Impresa Correctamente.');
+                    ->with('mensaje', 'Cuenta Impresa Correctamente.');
             } catch (\Exception $e) {
                 return "Error al imprimir: " . $e->getMessage();
             }
@@ -441,90 +438,88 @@ class ComandasController extends Controller
     public function ticket($z, $m)
     {
         if (Auth::check()) {
-        $comandas = Comanda::where('mesa', $m)
-            ->where('zona_id', $z)->where('estado', 'No enviado')->get();
+            $comandas = Comanda::where('mesa', $m)
+                ->where('zona_id', $z)->where('estado', 'No enviado')->get();
 
-      $productos = Producto::all();
-       $comand = [];
-      $mesa = $m;
-      
-      foreach ($comandas as  $comanda) {
-        foreach ($productos as $producto) {
-        if($comanda->producto_id === $producto->id){
-          
-   
-          $comand[]=["cantidad"=>$comanda->cantidad,
-                   "nombre"=>$producto->nombre,
-                     "refresco" => $comanda->refresco,
-                    "impresora"=>$producto->impresora];
-          
-          
-          $com = Comanda::where('mesa', $m)->where('zona_id', $z)->where('estado', 'Enviada')->where('producto_id', $comanda->producto_id)->where('refresco', $comanda->refresco)->first();
+            $productos = Producto::all();
+            $comand = [];
+            $mesa = $m;
 
-            if ($com) {
+            foreach ($comandas as  $comanda) {
+                foreach ($productos as $producto) {
+                    if ($comanda->producto_id === $producto->id) {
 
-                $com->cantidad += $comanda->cantidad;
-				$com->save();
-                $comanda->delete();
-            } else {
-                $comanda->estado = 'Enviada';
-            	$comanda->save();
+
+                        $comand[] = [
+                            "cantidad" => $comanda->cantidad,
+                            "nombre" => $producto->nombre,
+                            "refresco" => $comanda->refresco,
+                            "impresora" => $producto->impresora
+                        ];
+
+
+                        $com = Comanda::where('mesa', $m)->where('zona_id', $z)->where('estado', 'Enviada')->where('producto_id', $comanda->producto_id)->where('refresco', $comanda->refresco)->first();
+
+                        if ($com) {
+
+                            $com->cantidad += $comanda->cantidad;
+                            $com->save();
+                            $comanda->delete();
+                        } else {
+                            $comanda->estado = 'Enviada';
+                            $comanda->save();
+                        }
+                    }
+                }
             }
-          
-          
-          
+            $datos = [
+                "comandas" => $comand,
+                "zona" => Zona::find($z)->nombre,
+                "mesa" => $mesa
+            ];
 
+
+            $json = json_encode([$datos]);
+
+            return redirect()->away('http://192.168.100.100/tpv-laravel/public/impticket?data=' . $json);
         }
-        }
-      }
-       $datos = [
-            "comandas" => $comand,
-            "zona" => Zona::find($z)->nombre,
-            "mesa" => $mesa
-        ];
-
-      
-		$json = json_encode([$datos]);
-
-    	return redirect()->away('http://192.168.100.100/tpv-laravel/public/impticket?data=' . $json); 
-    }
-    return redirect()->route('welcome');
+        return redirect()->route('welcome');
     }
 
 
     public function ticketCuenta($z, $m)
     {
         if (Auth::check()) {
-        $comandas = Comanda::where('mesa', $m)
-            ->where('zona_id', $z)->where('estado', 'Enviada')->get();
+            $comandas = Comanda::where('mesa', $m)
+                ->where('zona_id', $z)->where('estado', 'Enviada')->get();
 
-      $productos = Producto::all();
-      $comand = [];
-      
-      
-      foreach ($comandas as  $comanda) {
-        foreach ($productos as $producto) {
-        if($comanda->producto_id === $producto->id){
-          
-          $comand[]=["cantidad"=>$comanda->cantidad,
-                   "nombre"=>$producto->nombre,
-                   "refresco" => $comanda->refresco,
-                   "precio" => $comanda->precio];
+            $productos = Producto::all();
+            $comand = [];
+
+
+            foreach ($comandas as  $comanda) {
+                foreach ($productos as $producto) {
+                    if ($comanda->producto_id === $producto->id) {
+
+                        $comand[] = [
+                            "cantidad" => $comanda->cantidad,
+                            "nombre" => $producto->nombre,
+                            "refresco" => $comanda->refresco,
+                            "precio" => $comanda->precio
+                        ];
+                    }
+                }
+            }
+            $datos = [
+                "comandas" => $comand,
+                "zona" => Zona::find($z)->nombre,
+                "mesa" => $m
+            ];
+
+            $json = json_encode([$datos]);
+
+            return redirect()->away('http://192.168.100.100/tpv-laravel/public/impcuenta?data=' . $json);
         }
-        }
-      }
-       $datos = [
-            "comandas" => $comand,
-            "zona" => Zona::find($z)->nombre,
-            "mesa" => $m
-        ];
-
-    	$json = json_encode([$datos]);
-      
-		return redirect()->away('http://192.168.100.100/tpv-laravel/public/impcuenta?data=' . $json); 
+        return redirect()->route('welcome');
     }
-    return redirect()->route('welcome');
-    }
-    
-
 }
