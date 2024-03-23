@@ -26,7 +26,7 @@ class CajasController extends Controller
 
             return view('cajas.index', compact('cajas'));
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
     /**
@@ -70,7 +70,7 @@ class CajasController extends Controller
 
             return view('cajas.index', compact('cajas')) ->with('mensaje', 'Caja creada correctamente');;
         }
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 
 
