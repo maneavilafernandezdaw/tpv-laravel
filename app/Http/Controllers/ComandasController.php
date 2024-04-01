@@ -237,13 +237,13 @@ class ComandasController extends Controller
 
             try {
 
-                $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
+                /* $wmi = new \COM('winmgmts:{impersonationLevel=impersonate}//./root/cimv2');
                 $printers = $wmi->ExecQuery('SELECT * FROM Win32_Printer');
 
                 $impresoras = [];
                 foreach ($printers as $printer) {
                     $impresoras[] = $printer->Name;
-                }
+                } */
                 $impresoras = ['tickets', 'cocina'];
 
                 foreach ($impresoras as $impresora) {
@@ -473,6 +473,7 @@ class ComandasController extends Controller
                 }
             }
             $datos = [
+                "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
                 "mesa" => $mesa
@@ -481,7 +482,7 @@ class ComandasController extends Controller
 
             $json = json_encode([$datos]);
 
-            return redirect()->away('http://192.168.100.100/tpv-laravel/public/impticket?data=' . $json);
+            return redirect()->away('http://tpv-base/tpv-laravel/public/impticket?data=' . $json);
         }
         return redirect()->route('welcome');
     }
@@ -518,7 +519,7 @@ class ComandasController extends Controller
 
             $json = json_encode([$datos]);
 
-            return redirect()->away('http://192.168.100.100/tpv-laravel/public/impcuenta?data=' . $json);
+            return redirect()->away('http://tpv-base/tpv-laravel/public/impcuenta?data=' . $json);
         }
         return redirect()->route('welcome');
     }

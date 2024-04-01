@@ -23,6 +23,7 @@
         $json = json_decode(urldecode(request()->input('data')));
 
         $fecha = date('d-m-Y H:i:s');
+        $usuario = $json[0]->usuario;
         $comandas = $json[0]->comandas;
         $zona = $json[0]->zona;
         $mesa = $json[0]->mesa;
@@ -36,8 +37,9 @@
 
             // Contenido a imprimir
             $printer->text("Minibar     $fecha\n");
+            $printer->text("De:  $usuario\n");
             $printer->text("\n");
-            $printer->text("\n");
+            
 
             $printer->text("Zona: $zona   Mesa:  $mesa\n");
             $printer->text("\n");

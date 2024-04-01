@@ -129,15 +129,15 @@
                                         <input type="hidden" id="zona_id" name="zona_id"
                                             value="{{ $zona->id }}">
                                     </div>
+                                    <div class="form-group">
+                                        <input type="hidden" id="usuario" name="usuario"
+                                            value="{{ Auth::user()->name }}">
+                                    </div>
                                     <x-boton-enviar-comanda/>
                                   
 
                                 </form>
 
-     {{-- <a href="{{ route('comandas.ticket', [$zona->id, $mesa]) }}">
-                         
-                                    <x-boton-enviar-comanda ></x-boton-enviar-comanda >
-                                    </a> --}}
 
                             </div>
                             <div>

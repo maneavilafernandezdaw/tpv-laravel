@@ -113,8 +113,8 @@ Route::controller(ComandasController::class)->group(function () {
     Route::get('comandas/create/{zona}/{mesa}/{familia}', 'create')->name('comandas.create');
     Route::get('comandas/cuenta/{zona}/{mesa}', 'consultarCuenta')->name('comandas.consultarCuenta');
     Route::get('comandas/pedido/{zona}/{mesa}/{familia}', 'pedido')->name('comandas.pedido');
-    Route::get('comandas/ticket/{zona}/{mesa}', 'ticket')->name('comandas.ticket');
-    Route::get('comandas/ticketCuenta/{zona}/{mesa}', 'ticketCuenta')->name('comandas.ticketCuenta');
+    Route::get('comandas/ticket/{zona}/{mesa}/{usuario}', 'ticket')->name('comandas.ticket');
+    Route::get('comandas/ticketCuenta/{zona}/{mesa}/{usuario}', 'ticketCuenta')->name('comandas.ticketCuenta');
     Route::post('comandas/store', 'store')->name('comandas.store');
     Route::post('comandas/incrementar', 'incrementar')->name('comandas.incrementar');
     Route::post('comandas/decrementar', 'decrementar')->name('comandas.decrementar');
