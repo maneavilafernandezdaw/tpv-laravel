@@ -4,8 +4,8 @@
         <div class="container-fluid">
             <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio /></a>
             <h1 class=" h1">PRODUCTOS</h1>
-            <div class="justify-end ">
-                <div class="col ">
+            <div>
+                
 
                     <!-- Button trigger modal Crear-->
 
@@ -17,7 +17,7 @@
                         <div class="modal-dialog ">
                             <div class="modal-content">
                                 <div class="modal-header  bg-green-600">
-                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Producto</h1>
+                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Cóctel</h1>
                                     @include('components.boton-cancelar-mini')
                                 </div>
                                 <div class="modal-body">
@@ -99,7 +99,7 @@
                     </div>
                     <!-- Button trigger modal Coctel-->
 
-                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrearCoctel" > Cóctel</x-boton-crear>
+                    <x-boton-coctel data-bs-toggle="modal" data-bs-target="#modalCrearCoctel" ></x-boton-coctel>
 
                     <!-- Modal Crear Coctel-->
                     <div class="modal fade " id="modalCrearCoctel" tabindex="-1" aria-labelledby="modalCrearCoctelLabel"
@@ -168,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+             
             </div>
     </nav>
 

@@ -121,7 +121,7 @@ class ProductosController extends Controller
                 $result = $client->chat()->create([
                     'model' => 'gpt-4',
                     'messages' => [
-                        ['role' => 'user', 'content' => 'Necesito solo los ingredientes y cantidades para hacer un cóctel con el nombre de '.$request->nombre],
+                        ['role' => 'user', 'content' => 'Dime ingredientes, cantidades y como preparar para hacer un cóctel con el nombre de '.$request->nombre],
                     ],
                 ]);
                 

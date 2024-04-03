@@ -266,7 +266,7 @@ class ComandasController extends Controller
 
 
                         try {
-                            $connector = new WindowsPrintConnector($impresora); //  nombre de impresora
+                            $connector = new WindowsPrintConnector("smb://tpv-base/$impresora"); //  nombre de impresora
 
                             $printer = new Printer($connector);
 
@@ -343,7 +343,7 @@ class ComandasController extends Controller
             $total = 0;
             $subTotal = 0;
             try {
-                $connector = new WindowsPrintConnector("tickets"); //  nombre de tu impresora
+                $connector = new WindowsPrintConnector("smb://tpv-base/tickets"); //  nombre de tu impresora
 
                 $printer = new Printer($connector);
 
