@@ -255,7 +255,7 @@
 
                                             <div>
                                                 {{-- botón factura --}}
-                                                <form action="{{ route('cobros.descargar') }}" method="post"
+                                                <form action="{{ route('factura.descargar') }}" method="post"
                                                     id="facturar">
                                                     @csrf
                                                     <div class="form-group">

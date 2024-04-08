@@ -79,12 +79,21 @@ class FamiliasController extends Controller
      */
     public function destroy(Request $request)
     {
+        
         if (Auth::check()) {
+            try {
         $familia = Familia::where('id', $request->idfamilia);
         $familia->delete();
 
         return redirect()->route('familias.index')
             ->with('mensaje', 'Familia eliminada correctamente');
+        } catch (\Exception $e) {
+            //return "Error al eliminar esta familia: " . $e->getMessage();
+            return redirect()->route('familias.index')
+            ->with('mensaje', 'Esta familia no se ha podido eliminar, se está utilizando.' );
+          
+        }
+
         }
         return redirect()->route('welcome');
     }

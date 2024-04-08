@@ -268,7 +268,7 @@ class ComandasController extends Controller
                         try {
                             $connector = new WindowsPrintConnector("smb://tpv-base/$impresora"); //  nombre de impresora
 
-                            $printer = new Printer($connector);
+                                                        $printer = new Printer($connector);
 
                             // Contenido a imprimir
                             $printer->text("Minibar     $fecha\n");
@@ -327,6 +327,7 @@ class ComandasController extends Controller
         }
         return redirect()->route('welcome');
     }
+
 
     public function imprimirCuenta(Request $request)
     {

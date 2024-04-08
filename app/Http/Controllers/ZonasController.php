@@ -62,25 +62,25 @@ class ZonasController extends Controller
     public function store(Request $request)
     {
         if (Auth::check()) {
-        $request->validate([
-            'nombre' => 'required|max:30',
-            'mesas' => 'required',
-        ]);
+            $request->validate([
+                'nombre' => 'required|max:30',
+                'mesas' => 'required',
+            ]);
 
-        $zon = Zona::where('nombre', $request->nombre)->first();
+            $zon = Zona::where('nombre', $request->nombre)->first();
 
-        // Si existe
-        if (!$zon) {
-            Zona::create($request->all());
-            return redirect()->route('zonas.index')
-                ->with('mensaje', 'Zona creada correctamente.');
-        } else {
+            // Si existe
+            if (!$zon) {
+                Zona::create($request->all());
+                return redirect()->route('zonas.index')
+                    ->with('mensaje', 'Zona creada correctamente.');
+            } else {
 
-            return redirect()->route('zonas.index')
-                ->with('mensaje', 'Existe una zona con ese nombre.');
+                return redirect()->route('zonas.index')
+                    ->with('mensaje', 'Existe una zona con ese nombre.');
+            }
         }
-    }
-    return redirect()->route('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -90,17 +90,16 @@ class ZonasController extends Controller
     public function update(Request $request,  $id)
     {
         if (Auth::check()) {
-        $request->validate([
-            'nombre' => 'required|max:30',
-            'mesas' => 'required',
-        ]);
+            $request->validate([
+                'nombre' => 'required|max:30',
+                'mesas' => 'required',
+            ]);
 
-        $zona = Zona::find($id);
-        $zona->update($request->all());
+            $zona = Zona::find($id);
+            $zona->update($request->all());
 
-        return redirect()->route('zonas.index')
-            ->with('mensaje', 'Zona actualizada correctamente.');
-        
+            return redirect()->route('zonas.index')
+                ->with('mensaje', 'Zona actualizada correctamente.');
         }
         return redirect()->route('welcome');
     }
@@ -110,17 +109,20 @@ class ZonasController extends Controller
      */
     public function destroy(Request $request)
     {
-        if (Auth::check()) {
-        $zona = Zona::where('id', $request->idzona);
-        $zona->delete();
 
-        return redirect()->route('zonas.index')
-            ->with('mensaje', 'Zona eliminada correctamente');
+        if (Auth::check()) {
+            try {
+                $zona = Zona::where('id', $request->idzona);
+                $zona->delete();
+
+                return redirect()->route('zonas.index')
+                    ->with('mensaje', 'Zona eliminada correctamente');
+            } catch (\Exception $e) {
+                //return "Error al eliminar esta zona: " . $e->getMessage();
+                return redirect()->route('zonas.index')
+                    ->with('mensaje', 'Esta zona no se ha podido eliminar, se está utilizando');
+            }
         }
         return redirect()->route('welcome');
-}
-
-
-
-
+    }
 }

@@ -18,7 +18,7 @@
 
 
 
-    <div class="container mt-3 card  rounded-none">
+    <div class="container mt-3 card ">
 
         <h1 class="h1 text-center mt-3">ZONAS</h1>
 

@@ -190,12 +190,19 @@ class ProductosController extends Controller
     public function destroy(Request $request)
     {
         if (Auth::check()) {
+            try {
             $producto = Producto::where('id', $request->idproducto);
             $producto->delete();
 
             return redirect()->route('productos.index')
                 ->with('mensaje', 'Producto eliminado correctamente');
+            } catch (\Exception $e) {
+                //return "Error al eliminar producto: " . $e->getMessage();
+                return redirect()->route('productos.index')
+                    ->with('mensaje', 'Este producto no se ha podido eliminar, se está utilizando.');
+            }
         }
         return redirect()->route('welcome');
     }
 }
+

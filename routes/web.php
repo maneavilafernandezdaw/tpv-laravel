@@ -132,8 +132,7 @@ Route::controller(ComandasController::class)->group(function () {
 Route::controller(CobrosController::class)->group(function () {
 
     Route::post('cobros/store', 'store')->name('cobros.store');
-    Route::post('cobros/descargar', 'descargar')->name('cobros.descargar');
-    Route::post('cobros/enviar-pdf', 'enviarPDF')->name('cobros.enviar-pdf');
+
     Route::get('cobros', 'index')->name('cobros.index');
     
 });
@@ -148,6 +147,8 @@ Route::controller(CajasController::class)->group(function () {
 Route::controller(FacturaController::class)->group(function () {
 
     Route::get('factura', 'index')->name('factura.index');
+    Route::post('factura/descargar', 'descargar')->name('factura.descargar');
+    Route::post('factura/enviar-pdf', 'enviarPDF')->name('factura.enviar-pdf');
 
 });
 

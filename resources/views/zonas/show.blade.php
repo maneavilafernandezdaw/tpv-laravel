@@ -21,8 +21,8 @@
 
 
 
-    <div class="container mt-3 card  rounded-none">
-        <div class="card-body rounded-none my-2 d-flex flex-wrap gap-3 justify-center">
+    <div class="container mt-3 card ">
+        <div class="card-body  my-2 d-flex flex-wrap gap-3 justify-center">
             @for ($i = 1; $i <= $zona->mesas; $i++)
                 @php
                     $ocupada = 0;
