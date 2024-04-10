@@ -5,170 +5,170 @@
             <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio /></a>
             <h1 class=" h1">PRODUCTOS</h1>
             <div>
-                
 
-                    <!-- Button trigger modal Crear-->
 
-                    <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear" />
+                <!-- Button trigger modal Crear-->
 
-                    <!-- Modal Crear-->
-                    <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog ">
-                            <div class="modal-content">
-                                <div class="modal-header  bg-green-600">
-                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Cóctel</h1>
-                                    @include('components.boton-cancelar-mini')
-                                </div>
-                                <div class="modal-body">
+                <x-boton-crear data-bs-toggle="modal" data-bs-target="#modalCrear" />
 
-                                    <form action="{{ route('productos.store') }}" method="post"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control rounded-md bg-white text-black"
-                                                id="nombre" name="nombre" required maxlength="20">
-                                        </div>
+                <!-- Modal Crear-->
+                <div class="modal fade " id="modalCrear" tabindex="-1" aria-labelledby="modalCrearLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header  bg-green-600">
+                                <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Cóctel</h1>
+                                @include('components.boton-cancelar-mini')
+                            </div>
+                            <div class="modal-body">
 
-                                        <div class="form-group">
-                                            <label for="descripcion">Descripción</label>
-                                            <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required
-                                                aria-label="textarea"></textarea>
-                                        </div>
+                                <form action="{{ route('productos.store') }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" class="form-control rounded-md bg-white text-black"
+                                            id="nombre" name="nombre" required maxlength="20">
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="familia_id">Familia</label>
-                                            <select class="form-select  bg-white text-black"
-                                                aria-label="Default select example" id="familia_id" name="familia_id"
-                                                required>
-                                                @foreach ($familias as $familia)
-                                                    <option value="{{ $familia->id }}">{{ $familia->nombre }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="descripcion">Descripción</label>
+                                        <textarea class="min-w-full  rounded-md bg-white text-black" id="descripcion" name="descripcion" required
+                                            aria-label="textarea"></textarea>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="precio">Precio (€)</label>
-                                            <input type="number" step=".01"
-                                                class="form-control rounded-md  bg-white text-black" id="precio"
-                                                name="precio" required>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="familia_id">Familia</label>
+                                        <select class="form-select  bg-white text-black"
+                                            aria-label="Default select example" id="familia_id" name="familia_id"
+                                            required>
+                                            @foreach ($familias as $familia)
+                                                <option value="{{ $familia->id }}">{{ $familia->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="iva">Iva (%)</label>
-                                            <input type="number" class="form-control rounded-md bg-white text-black"
-                                                id="iva" name="iva" value="21">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="precio">Precio (€)</label>
+                                        <input type="number" step=".01"
+                                            class="form-control rounded-md  bg-white text-black" id="precio"
+                                            name="precio" required>
+                                    </div>
 
-                                        <div class="form-group">
-                                            <label for="impresora">Impresora</label>
-                                            <select class="form-select  bg-white text-black"
-                                                aria-label="Default select example" id="impresora" name="impresora"
-                                                required>
-                                                @foreach ($impresoras as $impresora)
-                                                    <option value="{{ $impresora }}">{{ $impresora }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="iva">Iva (%)</label>
+                                        <input type="number" class="form-control rounded-md bg-white text-black"
+                                            id="iva" name="iva" value="21">
+                                    </div>
 
-                                        {{-- <div>
+                                    <div class="form-group">
+                                        <label for="impresora">Impresora</label>
+                                        <select class="form-select  bg-white text-black"
+                                            aria-label="Default select example" id="impresora" name="impresora"
+                                            required>
+                                            @foreach ($impresoras as $impresora)
+                                                <option value="{{ $impresora }}">{{ $impresora }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    {{-- <div>
                                             <img id="imagenSeleccionada" class="max-h-40">
                                         </div> --}}
 
-                                        {{-- <div class="form-group">
+                                    {{-- <div class="form-group">
                                             <label for="imagen">Imagen</label>
                                             <input type="file"
                                                 class="form-control rounded-md border border-neutral-900 p-2 "
                                                 id="imagen" name="imagen">
                                         </div> --}}<br>
-                                </div>
-                                <div class="modal-footer">
-                                    <x-boton-crear />
+                            </div>
+                            <div class="modal-footer">
+                                <x-boton-crear  onclick="mostrarCargando()" />
 
 
-                                    @include('components.boton-cancelar')
+                                @include('components.boton-cancelar')
 
-                                    </form>
+                                </form>
 
-
-                                </div>
 
                             </div>
+
                         </div>
                     </div>
-                    <!-- Button trigger modal Coctel-->
+                </div>
+                <!-- Button trigger modal Coctel-->
 
-                    <x-boton-coctel data-bs-toggle="modal" data-bs-target="#modalCrearCoctel" ></x-boton-coctel>
+                <x-boton-coctel data-bs-toggle="modal" data-bs-target="#modalCrearCoctel"></x-boton-coctel>
 
-                    <!-- Modal Crear Coctel-->
-                    <div class="modal fade " id="modalCrearCoctel" tabindex="-1" aria-labelledby="modalCrearCoctelLabel"
-                        aria-hidden="true">
-                        <div class="modal-dialog ">
-                            <div class="modal-content">
-                                <div class="modal-header  bg-green-600">
-                                    <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Producto</h1>
-                                    @include('components.boton-cancelar-mini')
-                                </div>
-                                <div class="modal-body">
+                <!-- Modal Crear Coctel-->
+                <div class="modal fade " id="modalCrearCoctel" tabindex="-1" aria-labelledby="modalCrearCoctelLabel"
+                    aria-hidden="true">
 
-                                    <form action="{{ route('productos.coctel') }}" method="post"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="form-group">
-                                            <label for="nombre">Nombre</label>
-                                            <input type="text" class="form-control rounded-md bg-white text-black"
-                                                id="nombre" name="nombre" required maxlength="20">
-                                        </div>
+                    <div class="modal-dialog ">
+                        <div class="modal-content">
+                            <div class="modal-header  bg-green-600">
+                                <h1 class="modal-title fs-5 text-white" id="modalCrearLabel">Crear Producto</h1>
+                                @include('components.boton-cancelar-mini')
+                            </div>
+                            <div class="modal-body">
 
-                                   
-                                        <div class="form-group">
-                                        
-                                                @foreach ($familias as $familia)
-                                                    
-                                                    @if( $familia->nombre === "Cóctel")
-                                                    <input type="hidden" 
-                                                    id="familia_id" name="familia_id" value="{{ $familia->id }}">
-                                                    @endif
-                                                @endforeach
-
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="precio">Precio (€)</label>
-                                            <input type="number" step=".01"
-                                                class="form-control rounded-md  bg-white text-black" id="precio"
-                                                name="precio" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="iva">Iva (%)</label>
-                                            <input type="number" class="form-control rounded-md bg-white text-black"
-                                                id="iva" name="iva" value="21">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="hidden" 
-                                            id="impresora" name="impresora" value="tickets">
-                                        </div>
-
-                                       <br>
-                                </div>
-                                <div class="modal-footer">
-                                    <x-boton-crear />
+                                <form id="formCrearCoctel" action="{{ route('productos.coctel') }}" method="post"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label for="nombre">Nombre</label>
+                                        <input type="text" class="form-control rounded-md bg-white text-black"
+                                            id="nombre" name="nombre" required maxlength="20">
+                                    </div>
 
 
-                                    @include('components.boton-cancelar')
+                                    <div class="form-group">
 
-                                    </form>
+                                        @foreach ($familias as $familia)
+                                            @if ($familia->nombre === 'Cóctel')
+                                                <input type="hidden" id="familia_id" name="familia_id"
+                                                    value="{{ $familia->id }}">
+                                            @endif
+                                        @endforeach
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="precio">Precio (€)</label>
+                                        <input type="number" step=".01"
+                                            class="form-control rounded-md  bg-white text-black" id="precio"
+                                            name="precio" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="iva">Iva (%)</label>
+                                        <input type="number" class="form-control rounded-md bg-white text-black"
+                                            id="iva" name="iva" value="21">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" id="impresora" name="impresora" value="tickets">
+                                    </div>
+
+                                    <br>
+                            </div>
+                            <div class="modal-footer">
+
+                                <x-boton-crear onclick="mostrarCargando()" />
 
 
-                                </div>
+                                @include('components.boton-cancelar')
+
+                                </form>
+
 
                             </div>
+
                         </div>
                     </div>
-             
+                </div>
+
             </div>
     </nav>
 
@@ -336,7 +336,7 @@
                                                                                     </div><br> --}}
                                     </div>
                                     <div class="modal-footer">
-                                        <x-boton-editar />
+                                        <x-boton-editar  onclick="mostrarCargando()" />
 
 
                                         @include('components.boton-cancelar')
@@ -375,7 +375,7 @@
                                             <input type="hidden" name="idproducto" id="idproducto"
                                                 value="{{ $producto->id }}">
 
-                                            <x-boton-eliminar />
+                                            <x-boton-eliminar  onclick="mostrarCargando()" />
 
 
                                         </form>
@@ -392,5 +392,20 @@
             </table>
         </div>
     </div>
+    <script>
+        function mostrarCargando() {
+            // Muestra el indicador de carga
+            document.getElementById("loading").style.display = "block";
+           
+            // Seleccionar todos los elementos por su clase
+            var elementos = document.querySelectorAll('.modal');
 
+            // Iterar sobre todos los elementos seleccionados
+            elementos.forEach(function(elemento) {
+                // Ejemplo de manipulación de cada elemento seleccionado
+                elemento.style.display = 'none';
+
+            });
+        }
+    </script>
 </x-app-layout>

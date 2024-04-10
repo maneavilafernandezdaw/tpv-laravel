@@ -35,7 +35,12 @@
 </head>
 
 <body class="font-sans antialiased m-0 h-0 w-100 " data-bs-theme ={{ request()->cookie('tema') }} >
-
+    <div id="loading" style="display: none;">
+        <div class="container-fluid d-flex justify-content-center align-items-center " style="height: 100vh; ">
+            <span class="h2">Cargando...</span>
+            <img src="imagen/cargando.gif" alt="Cargando..." />
+        </div>
+    </div>
     <div class=" ">
         {{-- nav --}}
         @include('layouts.navigation')

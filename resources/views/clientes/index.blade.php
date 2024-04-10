@@ -48,7 +48,7 @@
                                         <br>
                                 </div>
                                 <div class="modal-footer">
-                                    <x-boton-crear />
+                                    <x-boton-crear  onclick="mostrarCargando()"/>
 
 
                                     @include('components.boton-cancelar')
@@ -157,7 +157,7 @@
                                     </div>
                                     <div class="modal-footer">
 
-                                        <x-boton-editar />
+                                        <x-boton-editar onclick="mostrarCargando()"/>
 
                                         @include('components.boton-cancelar')
 
@@ -192,7 +192,7 @@
                                             <input type="hidden" name="idcliente" id="idcliente"
                                                 value="{{ $cliente->id }}">
 
-                                            <x-boton-eliminar />
+                                            <x-boton-eliminar onclick="mostrarCargando()"/>
 
                                         </form>
 
@@ -207,5 +207,20 @@
             </table>
         </div>
     </div>
+    <script>
+        function mostrarCargando() {
+            // Muestra el indicador de carga
+            document.getElementById("loading").style.display = "block";
+           
+            // Seleccionar todos los elementos por su clase
+            var elementos = document.querySelectorAll('.modal');
 
+            // Iterar sobre todos los elementos seleccionados
+            elementos.forEach(function(elemento) {
+                // Ejemplo de manipulación de cada elemento seleccionado
+                elemento.style.display = 'none';
+
+            });
+        }
+    </script>
 </x-app-layout>
