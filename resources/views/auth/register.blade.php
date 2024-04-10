@@ -23,24 +23,25 @@
                 </div>
 
 
-                <!-- Admin -->
+                <!-- Tipo -->
                 <br>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipo" id="flexRadioDefault1" value="0"
+                        checked>
+                    <label class="form-check-label" for="flexRadioDefault3">
+                        Camarero
+                    </label>
+                </div>
 
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault2" value="1">
+                    <input class="form-check-input" type="radio" name="tipo" id="flexRadioDefault2" value="1">
                     <label class="form-check-label" for="flexRadioDefault2">
                         Administrador
                     </label>
                 </div>
+                
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="admin" id="flexRadioDefault3" value="0"
-                        checked>
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        No administrador
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="super" id="flexRadioDefault1" value="1">
+                    <input class="form-check-input" type="radio" name="tipo" id="flexRadioDefault3" value="2">
                     <label class="form-check-label" for="flexRadioDefault1">
                         SuperAdministrador
                     </label>

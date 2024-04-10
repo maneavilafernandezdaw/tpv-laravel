@@ -40,11 +40,30 @@ class ProfileController extends Controller
     public function store(Request $request)
     {
         $user=User::where('name', $request->name)->first();
-        
+        $admin = 0;
+        $super = 0;
         // Si existe
         if(!$user){
-          User::create($request->all());
-          return redirect()->route('home')
+            if( $request->tipo == 0){
+                $admin = 0;
+                $super = 0;
+            }
+            if( $request->tipo == 1){
+                $admin = 1;
+                $super = 0;
+            }
+            if( $request->tipo == 2){
+                $admin = 0;
+                $super = 1;
+            }
+                    $user = User::create([
+                        'name' => $request->name,
+                        'email' => $request->email,
+                        'super' => $super,
+                        'admin' => $admin, 
+                        'password' => $request->password,
+                    ]);
+          return redirect()->route('profile.index')
             ->with('mensaje','Usuario creado correctamente.');
         } else{
            
