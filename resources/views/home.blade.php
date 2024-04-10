@@ -31,11 +31,16 @@
 
                 @if (Auth::user()->super)
                     <a href="{{ route('profile.register') }}"> <x-boton-comanda>
-                            {{ __('crear usuario') }}
+                            {{ __('Crear Usuario') }}
                         </x-boton-comanda></a>
                     <a href="{{ route('profile.index') }}"> <x-boton-comanda>
-                            {{ __('Ver usuarios') }}
+                            {{ __('Usuarios') }}
                         </x-boton-comanda></a>
+               @if (Auth::user()->admin)
+              <a href="{{ route('comandas.index') }}" class="mb-2"> <x-boton-comanda>
+                            {{ __('Comandas') }}
+                        </x-boton-comanda></a>
+               @endif
                 @else
                     <a href="{{ route('comandas.index') }}" class="mb-2"> <x-boton-comanda>
                             {{ __('Comandas') }}

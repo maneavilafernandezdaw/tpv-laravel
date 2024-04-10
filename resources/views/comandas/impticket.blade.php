@@ -88,11 +88,15 @@
         }
         // Redirige a una página web específica
 
-        // $paginaWeb = env('URL_REDIRECCIONAR_LOCAL');
-        $paginaWeb = env('URL_REDIRECCIONAR');
+        if (isset($json[0]->app)){
+            $paginaWeb = env('URL_REDIRECCIONAR_LOCAL');
         header("Location: $paginaWeb");
         exit();
-
+        }else{
+            $paginaWeb = env('URL_REDIRECCIONAR');
+        header("Location: $paginaWeb");
+        exit();
+        }
     @endphp
 
 

@@ -223,7 +223,7 @@ class ComandasController extends Controller
     }
 
 
-    // enviar y imprimirCuenta se utiliza para imprimir en local
+    // enviar y imprimirCuenta se utiliza para imprimir en local directamente 
     public function enviar(Request $request)
     {
         if (Auth::check()) {
@@ -272,6 +272,7 @@ class ComandasController extends Controller
 
                             // Contenido a imprimir
                             $printer->text("Minibar     $fecha\n");
+
                             $printer->text("\n");
                             $printer->text("Mesa: $request->mesa Zona: $zona->nombre\n");
                             $printer->text("\n");
@@ -435,7 +436,7 @@ class ComandasController extends Controller
     }
 
 
-    // ticket y ticketCuenta se utiliza para imprimir desde el servidor
+    // ticket y ticketCuenta se utiliza para imprimir desde el servidor y local con redirecciones
     public function ticket($z, $m)
     {
         if (Auth::check()) {
@@ -445,6 +446,7 @@ class ComandasController extends Controller
             $productos = Producto::all();
             $comand = [];
             $mesa = $m;
+            $app="local";
 
             foreach ($comandas as  $comanda) {
                 foreach ($productos as $producto) {
@@ -477,7 +479,8 @@ class ComandasController extends Controller
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
-                "mesa" => $mesa
+                "mesa" => $mesa,
+                "app" => $app
             ];
 
 
@@ -494,7 +497,7 @@ class ComandasController extends Controller
         if (Auth::check()) {
             $comandas = Comanda::where('mesa', $m)
                 ->where('zona_id', $z)->where('estado', 'Enviada')->get();
-
+            $app = "local";
             $productos = Producto::all();
             $comand = [];
 
@@ -513,9 +516,11 @@ class ComandasController extends Controller
                 }
             }
             $datos = [
+                "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
-                "mesa" => $m
+                "mesa" => $m,
+                "app" => $app
             ];
 
             $json = json_encode([$datos]);

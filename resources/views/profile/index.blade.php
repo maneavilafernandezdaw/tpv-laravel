@@ -27,6 +27,7 @@
                         <th>ID</th>
                         <th>NOMBRE</th>
                         <th>Email</th>
+                        <th>Tipo</th>
                         <th></th>
 
                     </tr>
@@ -37,6 +38,19 @@
                             <td class="fw-bold text-xl align-middle">{{ $usuario->id }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $usuario->name }}</td>
                             <td class="fw-bold text-xl align-middle">{{ $usuario->email }}</td>
+                            <td class="fw-bold text-xl align-middle">
+                                @if($usuario->admin && $usuario->super)
+                                Super/Admin 
+                               @elseif(!$usuario->admin && $usuario->super)
+                               Super
+                                @elseif($usuario->admin && !$usuario->super)
+                                Admin
+                                @elseif(!$usuario->admin && !$usuario->super)
+                               Camarero
+                                @endif
+                                
+                            
+                            </td>
 
                             <td>
                                 <div class="d-flex justify-end gap-4">

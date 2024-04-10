@@ -415,7 +415,13 @@
                         <div class="d-flex gap-3 justify-center">
                             <div>
                                 {{-- boton enviar --}}
-                                <form action="{{ route('comandas.enviar') }}" method="post">
+                                <div>
+                                    {{-- boton enviar --}}
+                                     <a href="{{ route('comandas.ticket', [$zona->id, $mesa, Auth::user()->name]) }}">
+                                        <x-boton-enviar-comanda ></x-boton-enviar-comanda >
+                                        </a>
+                                </div> 
+                               {{--  <form action="{{ route('comandas.enviar') }}" method="post">
                                     @csrf
                                     <div class="form-group">
                                         <input type="hidden" id="mesa" name="mesa"
@@ -431,7 +437,7 @@
                                     </div>
                                     <x-boton-enviar-comanda />
 
-                                </form>
+                                </form> --}}
 
                             </div>
                             <div>
