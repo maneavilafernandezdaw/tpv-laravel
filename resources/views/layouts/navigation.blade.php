@@ -1,10 +1,10 @@
 <nav x-data="{ open: false }" class="  p-1">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-4 ">
+    <div class="max-w-7xl mx-auto  pe-2.5 ">
         <div class="flex  gap-2 justify-between h-16 items-center">
 
             <!-- Logo -->
-            <div class="flex">
+            <div class="flex -ms-2">
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
                         <x-application-logo />
@@ -13,7 +13,7 @@
                 </div>
             </div>
 
-            <div class=" d-flex items-center justify-between gap-2">
+            <div class=" flex items-center justify-between gap-2">
 
 
 
@@ -22,10 +22,10 @@
                 @if (Auth::check())
                     <x-dropdown align="right">
                         <x-slot name="trigger">
-                            <x-boton-usuario pb-3>
+                            <x-boton-usuario class=" flex justify-center content-center">
                                 <div>{{ Auth::user()->name }}</div>
 
-                                <div class="ml-1">
+                                <div>
                                     <svg class="fill-current h-8 w-8" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
@@ -62,7 +62,7 @@
                     @if (Auth::user()->admin)
                         <div class=" flex items-center ">
                             <button @click="open = ! open"
-                                class="inline-flex items-center justify-center p-2 rounded-md  border border-collapse  transition duration-150 ease-in-out">
+                                class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-2xl px-2 py-2 text-center uppercase">
 
                                 <svg class="h-8 w-8" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex"

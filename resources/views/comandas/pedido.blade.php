@@ -24,10 +24,6 @@
     
         <div class="d-flex justify-center">
             <a href={{ route('comandas.create', [$zona->id, $mesa, $familia]) }}>
-             {{--    <x-boton-comanda class="d-block ">
-                    {{ __('Volver a Productos') }}
-                </x-boton-comanda></a> --}}
-               {{--  <button type="submit" class="btn btn-outline-success rounded-none w-screen text-3xl p-3 mb-3 shadow">Volver a Productos</button> --}}
                 <x-boton-volver/>
         </div>
     </div>

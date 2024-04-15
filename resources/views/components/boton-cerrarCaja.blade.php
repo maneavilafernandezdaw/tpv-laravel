@@ -1,4 +1,6 @@
+
 <button
-    {{ $attributes->merge(['type' => 'submit', 'class' => 'btn btn-outline-success bg-success-subtle btn-sm h-16 text-xl inline-flex items-center px-4 py-2  font-semibold uppercase rounded-md']) }}>
-    Cerrar Caja
+    {{ $attributes->merge(['type' => 'submit', 'class' => ' text-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-4xl px-2.5 py-2.5  ']) }}>
+   <span>Cerrar Caja</span>
+     
 </button>

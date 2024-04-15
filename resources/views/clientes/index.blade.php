@@ -1,7 +1,7 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
+    <nav class="">
+        <div class="container flex flex-row justify-between items-center ">
             <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio /></a>
             <h1 class=" h1">CLIENTES</h1>
             <div class="justify-end ">
@@ -45,10 +45,10 @@
                                                 id="email" name="email" required>
                                         </div>
 
-                                        <br>
+
                                 </div>
                                 <div class="modal-footer">
-                                    <x-boton-crear  onclick="mostrarCargando()"/>
+                                    <x-boton-crear onclick="mostrarCargando()" />
 
 
                                     @include('components.boton-cancelar')
@@ -152,12 +152,12 @@
                                                     class="form-control rounded-md bg-white text-black" id="email"
                                                     name="email" required value="{{ $cliente->email }}">
                                             </div>
-                                            <br>
+
 
                                     </div>
                                     <div class="modal-footer">
 
-                                        <x-boton-editar onclick="mostrarCargando()"/>
+                                        <x-boton-editar onclick="mostrarCargando()" />
 
                                         @include('components.boton-cancelar')
 
@@ -192,7 +192,7 @@
                                             <input type="hidden" name="idcliente" id="idcliente"
                                                 value="{{ $cliente->id }}">
 
-                                            <x-boton-eliminar onclick="mostrarCargando()"/>
+                                            <x-boton-eliminar onclick="mostrarCargando()" />
 
                                         </form>
 
@@ -211,9 +211,9 @@
         function mostrarCargando() {
             // Muestra el indicador de carga
             document.getElementById("loading").style.display = "block";
-           
+
             // Seleccionar todos los elementos por su clase
-            var elementos = document.querySelectorAll('.modal');
+            var elementos = document.querySelectorAll('.fade');
 
             // Iterar sobre todos los elementos seleccionados
             elementos.forEach(function(elemento) {

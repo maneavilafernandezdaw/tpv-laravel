@@ -1,3 +1,5 @@
-<button type="button" 
-    class="btn btn-sm h-16 text-lg inline-flex items-center px-4 py-2 bg-danger border border-transparent  font-semibold text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-700 focus:ring-offset-2 transition ease-in-out duration-150  rounded-md"
-    data-bs-dismiss="modal">Cancelar</button>
+
+    <button type="button" 
+    class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-4xl px-2.5 py-2.5 text-center me-2 mb-2"
+    data-bs-dismiss="modal">Cancelar</button> 
+

@@ -3,10 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ZonasController;
 use App\Http\Controllers\FamiliasController;
-use App\Http\Controllers\DatatableController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ComandasController;
-use App\Http\Controllers\ProductAjaxController;
 use App\Http\Controllers\CobrosController;
 use App\Http\Controllers\CajasController;
 use App\Http\Controllers\ClientesController;
@@ -159,9 +157,6 @@ Route::controller(ReportController::class)->group(function () {
 
 });
 
-/* Route::controller(DatatableController::class)->group(function () {
-    Route::get('datatable/zonas', 'zonas')->name('datatable.zonas');
 
-}); */
 
 

@@ -1,8 +1,8 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio></x-boton-inicio></a>
+    <nav class="">
+        <div class="container flex flex-row justify-between items-center ">
+            <a class="" href={{ route('home') }}> <x-boton-inicio></x-boton-inicio></a>
             <h1 class=" h1">ZONAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -35,7 +35,7 @@
                                             <input type="number" class="form-control rounded-md bg-white text-black"
                                                 id="mesas" name="mesas" required>
                                         </div>
-                                        <br>
+                                     
 
                                 </div>
                                 <div class="modal-footer">
@@ -132,7 +132,7 @@
                                                     class="form-control  rounded-md bg-white text-black" id="mesas"
                                                     name="mesas" required value="{{ $zona->mesas }}">
                                             </div>
-                                            <br>
+                                          
                                     </div>
                                     <div class="modal-footer">
                                         <x-boton-editar  onclick="mostrarCargando()" />
@@ -197,7 +197,7 @@
             document.getElementById("loading").style.display = "block";
            
             // Seleccionar todos los elementos por su clase
-            var elementos = document.querySelectorAll('.modal');
+            var elementos = document.querySelectorAll('.fade');
 
             // Iterar sobre todos los elementos seleccionados
             elementos.forEach(function(elemento) {

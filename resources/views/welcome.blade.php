@@ -5,10 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Favicon-->
-<x-favicon-logo/>
+    <!-- Favicon-->
+    <x-favicon-logo />
 
-    <title>TPV-Laravel</title>
+    <title>Minibar</title>
     {{-- bootstrap --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
@@ -17,38 +17,42 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
- <!-- Scripts -->
- @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 
-<body class="bg">
+<body class=" font-sans h-screen">
 
 
 
-    <div class="container h-full vh-100 d-flex flex-col justify-center items-center gap-3">
-       
-            
-        <div class="d-flex flex-col items-center">
-            <h1 class="fw-bold display-2 text-center m-2">TPV Minibar</h1>
+    <div class="h-full w-full flex justify-center items-center flex-col gap-y-4">
+
+
+
+        <div>
+            <h1 class=" text-8xl text-center font-bold text-cyan-700">TPV</h1>
+        </div>
+        <div class="flex justify-center">
             <img src="imagen/logoMinibar.jpeg" alt="imagen logo" class="w-3/4">
         </div>
-    
-    @if (Route::has('login'))
-        <div class="">
-            @auth
 
 
-                <a href="{{ url('/home') }}"><x-boton-inicio/></a>
-            @else
-                <a href="{{ route('login') }}"><x-boton-iniciarSesion/>
-                  
+        @if (Route::has('login'))
+            <div class="m-4">
+                @auth
 
-            @endauth
-        </div>
-    @endif
 
-</div>
+                    <a href="{{ url('/home') }}"><x-boton-inicio /></a>
+                @else
+                    <a href="{{ route('login') }}"><x-boton-iniciarSesion />
+
+
+                    @endauth
+            </div>
+        @endif
+
+    </div>
 
 
 

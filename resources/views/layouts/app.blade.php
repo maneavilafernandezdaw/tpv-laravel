@@ -31,7 +31,7 @@
     <!-- Scripts -->
 
     {{-- <link href="{{ asset('/bootstrap.css') }}" rel="stylesheet"> --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/ConectorJavaScript.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased m-0 h-0 w-100 " data-bs-theme={{ request()->cookie('tema') }}>
@@ -40,7 +40,6 @@
         {{-- div cargando loading --}}
         <div id="loading" style="display: none;">
             <div class="container-fluid d-flex justify-content-center align-items-center " style="height: 100vh; ">
-                <span class="h2">Cargando...</span>
                 <img src="imagen/cargando.gif" alt="Cargando..." />
             </div>
         </div>

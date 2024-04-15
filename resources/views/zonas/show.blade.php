@@ -5,11 +5,11 @@
     @include('partials.session-mensaje')
 
 
-    <div class="container px-4 d-flex justify-center gap-4 items-center mt-2">
+    <div class="container px-4 flex justify-center gap-4 items-center mt-2">
         <div>
             <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio /></a>
         </div>
-        <div class="d-flex flex-col flex-md-row">
+        <div class="flex flex-col flex-md-row">
             <div>
                 <span class=" h1  text-center mt-2"> {{ $zona->nombre }} </span>
             </div>
@@ -21,8 +21,8 @@
 
 
 
-    <div class="container mt-3 card ">
-        <div class="card-body  my-2 d-flex flex-wrap gap-3 justify-center">
+    <div class="container  mt-3  p-6  border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex flex-wrap gap-3 justify-center">
             @for ($i = 1; $i <= $zona->mesas; $i++)
                 @php
                     $ocupada = 0;
@@ -39,19 +39,17 @@
                         @endif
                     @endforeach
                     @if ($ocupada > 0)
-                        <div class="card w-24 h-24 border border-danger border-2 position-relative">
-                            <div class="position-absolute top-50 start-50 translate-middle  fw-bold text-danger">
-
-                                <h5 class=" text-3xl  text-center">{{ $i }}</h5>
-                            </div>
-                        </div>
+                    
+                        <x-boton-mesa-ocupada>
+                            {{ $i }}
+                        </x-boton-mesa-ocupada>
                     @else
-                        <div class="card w-24 h-24 border border-primary border-2 position-relative">
-                            <div class="position-absolute top-50 start-50 translate-middle  fw-bold text-primary">
+             
 
-                                <h5 class=" text-3xl  text-center">{{ $i }}</h5>
-                            </div>
-                        </div>
+                        <x-boton-mesa-libre>
+                            {{ $i }}
+                        </x-boton-mesa-libre>
+
                     @endif
 
                 </a>

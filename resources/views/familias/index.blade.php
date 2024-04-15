@@ -1,8 +1,8 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
-            <a class="navbar-brand text-2xl" href={{ route('home') }}><x-boton-inicio /></a>
+    <nav class="">
+        <div class="container flex flex-row justify-between items-center ">
+            <a class="" href={{ route('home') }}><x-boton-inicio /></a>
             <h1 class=" h1">FAMILIAS</h1>
             <div class="justify-end ">
                 <div class="col ">
@@ -46,7 +46,6 @@
                                             </label>
                                         </div>
 
-                                        <br>
                                 </div>
                                 <div class="modal-footer">
                                     <x-boton-crear  onclick="mostrarCargando()" />
@@ -178,7 +177,7 @@
                                                 </div>
                                             @endif
 
-                                            <br>
+                                      
                                     </div>
                                     <div class="modal-footer">
                                         <x-boton-editar  onclick="mostrarCargando()" />
@@ -244,7 +243,7 @@
             document.getElementById("loading").style.display = "block";
            
             // Seleccionar todos los elementos por su clase
-            var elementos = document.querySelectorAll('.modal');
+            var elementos = document.querySelectorAll('.fade');
 
             // Iterar sobre todos los elementos seleccionados
             elementos.forEach(function(elemento) {
