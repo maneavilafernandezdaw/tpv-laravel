@@ -97,19 +97,18 @@
                             @endif
 
                             <td>
+                                {{-- if para desactivar botones de eliminar y editar de la familia Refrescos --}}
                                 @if ($familia->nombre === 'Refrescos')
                                 <div class="d-flex justify-end gap-4">
                                     <div>
-                                        <!-- Button trigger modal Editar-->
+                                        <!-- Button  Editar desactivado-->
 
-                                        <x-boton-editar data-bs-toggle="modal"
-                                            data-bs-target="#modalEditar{{ $familia->id }}" class="rounded pointer-events-none opacity-50 cursor-not-allowed"/>
+                                        <x-boton-editar  class="rounded pointer-events-none opacity-50 cursor-not-allowed disabled:pointer-events-none "/>
                                     </div>
                                     <div>
-                                        <!-- Button trigger modal Eliminar-->
+                                        <!-- Button Eliminar desactivado-->
 
-                                        <x-boton-eliminar data-bs-toggle="modal"
-                                            data-bs-target="#modalEliminar{{ $familia->id }}"  class="rounded pointer-events-none opacity-50 cursor-not-allowed"/>
+                                        <x-boton-eliminar   class="rounded pointer-events-none opacity-50 cursor-not-allowed disabled:pointer-events-none "/>
                                     </div>
                                 </div>
                                 @else
