@@ -48,7 +48,7 @@
 
                                 </div>
                                 <div class="modal-footer">
-                                    <x-boton-crear  onclick="mostrarCargando()" />
+                                    <x-boton-crear onclick="mostrarCargando()" />
 
 
                                     @include('components.boton-cancelar')
@@ -97,140 +97,152 @@
                             @endif
 
                             <td>
+                                @if ($familia->nombre === 'Refrescos')
                                 <div class="d-flex justify-end gap-4">
                                     <div>
                                         <!-- Button trigger modal Editar-->
 
                                         <x-boton-editar data-bs-toggle="modal"
-                                            data-bs-target="#modalEditar{{ $familia->id }}" />
-
-
-
-
+                                            data-bs-target="#modalEditar{{ $familia->id }}" class="rounded pointer-events-none opacity-50 cursor-not-allowed"/>
                                     </div>
                                     <div>
                                         <!-- Button trigger modal Eliminar-->
+
                                         <x-boton-eliminar data-bs-toggle="modal"
-                                            data-bs-target="#modalEliminar{{ $familia->id }}" />
-
-
+                                            data-bs-target="#modalEliminar{{ $familia->id }}"  class="rounded pointer-events-none opacity-50 cursor-not-allowed"/>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-
-                        <!-- Modal Editar-->
-                        <div class="modal fade" id="modalEditar{{ $familia->id }}" tabindex="-1"
-                            aria-labelledby="modalEditarLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header bg-blue-600">
-                                        <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
-                                            Editar Familia
-                                        </h1>
-                                        @include('components.boton-cancelar-mini')
-                                    </div>
-                                    <div class="modal-body">
-
-                                        <form action="{{ route('familias.update', $familia->id) }}" method="post">
-                                            @csrf
-                                            @method('PUT')
-                                            <div class="form-group">
-                                                <label for="nombre">Nombre</label>
-                                                <input type="text"
-                                                    class="form-control  rounded-md bg-white text-black" id="nombre"
-                                                    name="nombre" required maxlength="30"
-                                                    value="{{ $familia->nombre }}">
-                                            </div>
-                                            <br>
-                                            @if ($familia->combinada)
-                                                <div class="form-check">
-
-                                                    <input class="form-check-input" type="radio" name="combinada"
-                                                        id="combinada" value="1" checked>
-                                                    <label class="form-check-label" for="combinada">
-                                                        Combinada
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="combinada"
-                                                        id="combinada" value="0">
-                                                    <label class="form-check-label" for="combinada">
-                                                        No combinada
-                                                    </label>
-                                                </div>
-                                            @else
-                                                <div class="form-check">
-
-                                                    <input class="form-check-input" type="radio" name="combinada"
-                                                        id="combinada" value="1">
-                                                    <label class="form-check-label" for="combinada">
-                                                        Combinada
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="combinada"
-                                                        id="combinada" value="0" checked>
-                                                    <label class="form-check-label" for="combinada">
-                                                        No combinada
-                                                    </label>
-                                                </div>
-                                            @endif
-
-                                      
-                                    </div>
-                                    <div class="modal-footer">
-                                        <x-boton-editar  onclick="mostrarCargando()" />
-
-
-
-                                        @include('components.boton-cancelar')
-
-
-                                        </form>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Modal Eliminar-->
-                        <div class="modal fade" id="modalEliminar{{ $familia->id }}" tabindex="-1"
-                            aria-labelledby="modalEliminarLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header  bg-red-600">
-                                        <h1 class="modal-title fs-5 text-white">Eliminar Familia
-                                        </h1>
-                                        @include('components.boton-cancelar-mini')
-                                    </div>
-                                    <div class="modal-body text-center">
+                                @else
+                                    <div class="d-flex justify-end gap-4">
                                         <div>
-                                            <p>¿Está seguro que desea eliminar la
-                                                familia {{ $familia->nombre }} ?</p>
+                                            <!-- Button trigger modal Editar-->
 
+                                            <x-boton-editar data-bs-toggle="modal"
+                                                data-bs-target="#modalEditar{{ $familia->id }}" />
+                                        </div>
+                                        <div>
+                                            <!-- Button trigger modal Eliminar-->
+
+                                            <x-boton-eliminar data-bs-toggle="modal"
+                                                data-bs-target="#modalEliminar{{ $familia->id }}" />
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <form action="{{ route('familias.destroy', $familia->id) }}" method="post">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="hidden" name="idfamilia" id="idfamilia"
-                                                value="{{ $familia->id }}">
+                                    @endif
+                            </td>
+                 
+                    </tr>
 
-                                            <x-boton-eliminar  onclick="mostrarCargando()" />
+                    <!-- Modal Editar-->
+                    <div class="modal fade" id="modalEditar{{ $familia->id }}" tabindex="-1"
+                        aria-labelledby="modalEditarLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header bg-blue-600">
+                                    <h1 class="modal-title fs-5 text-white" id="modalEditarLabel">
+                                        Editar Familia
+                                    </h1>
+                                    @include('components.boton-cancelar-mini')
+                                </div>
+                                <div class="modal-body">
+
+                                    <form action="{{ route('familias.update', $familia->id) }}" method="post">
+                                        @csrf
+                                        @method('PUT')
+                                        <div class="form-group">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control  rounded-md bg-white text-black"
+                                                id="nombre" name="nombre" required maxlength="30"
+                                                value="{{ $familia->nombre }}">
+                                        </div>
+                                        <br>
+                                        @if ($familia->combinada)
+                                            <div class="form-check">
+
+                                                <input class="form-check-input" type="radio" name="combinada"
+                                                    id="combinada" value="1" checked>
+                                                <label class="form-check-label" for="combinada">
+                                                    Combinada
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="combinada"
+                                                    id="combinada" value="0">
+                                                <label class="form-check-label" for="combinada">
+                                                    No combinada
+                                                </label>
+                                            </div>
+                                        @else
+                                            <div class="form-check">
+
+                                                <input class="form-check-input" type="radio" name="combinada"
+                                                    id="combinada" value="1">
+                                                <label class="form-check-label" for="combinada">
+                                                    Combinada
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="combinada"
+                                                    id="combinada" value="0" checked>
+                                                <label class="form-check-label" for="combinada">
+                                                    No combinada
+                                                </label>
+                                            </div>
+                                        @endif
 
 
-                                        </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <x-boton-editar onclick="mostrarCargando()" />
 
-                                        @include('components.boton-cancelar')
+
+
+                                    @include('components.boton-cancelar')
+
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Modal Eliminar-->
+                    <div class="modal fade" id="modalEliminar{{ $familia->id }}" tabindex="-1"
+                        aria-labelledby="modalEliminarLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header  bg-red-600">
+                                    <h1 class="modal-title fs-5 text-white">Eliminar Familia
+                                    </h1>
+                                    @include('components.boton-cancelar-mini')
+                                </div>
+                                <div class="modal-body text-center">
+                                    <div>
+                                        <p>¿Está seguro que desea eliminar la
+                                            familia {{ $familia->nombre }} ?</p>
 
                                     </div>
                                 </div>
+                                <div class="modal-footer">
+                                    <form action="{{ route('familias.destroy', $familia->id) }}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="idfamilia" id="idfamilia"
+                                            value="{{ $familia->id }}">
+
+                                        <x-boton-eliminar onclick="mostrarCargando()" />
+
+
+                                    </form>
+
+                                    @include('components.boton-cancelar')
+
+                                </div>
                             </div>
                         </div>
+                    </div>
                     @endforeach
 
                 </tbody>
@@ -241,7 +253,7 @@
         function mostrarCargando() {
             // Muestra el indicador de carga
             document.getElementById("loading").style.display = "block";
-           
+
             // Seleccionar todos los elementos por su clase
             var elementos = document.querySelectorAll('.fade');
 
