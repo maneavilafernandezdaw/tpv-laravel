@@ -31,12 +31,14 @@
 
 
 
-    {{-- tabla de pedido --}}
+   {{-- Botón Consultar cuenta --}}
     <div >
         <div class="d-flex flex-col">
         <h3 class=" h2 text-center mt-2">Comanda</h3>
-        <h1 class="text-center"><a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}"><x-boton-admin>Consultar cuenta</x-boton-admin></a></h1>
+        <h1 class="text-center mx-3"><a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}"><x-boton-consultar>Consultar cuenta</x-boton-consultar></a></h1>
     </div>
+
+     {{-- tabla de pedido --}}
         <table class="table table-striped text-sm">
             <thead>
                 <tr>
