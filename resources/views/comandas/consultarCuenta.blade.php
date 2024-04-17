@@ -323,20 +323,9 @@
 @endif
     <script>
         function mostrarFormulario() {
-            // Oculta todos los formularios
-            $('#facturar').addClass('d-none');
-
-            // Muestra el formulario correspondiente al ID proporcionado
-            $('#enviarFactura').removeClass('d-none');
-
+            // Oculta formulario
+            $('.fade').addClass('d-none');
         }
 
-        function ocultarFormulario() {
-
-
-
-            $('#enviarFactura').addClass('d-none');
-
-        }
     </script>
 </x-app-layout>
