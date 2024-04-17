@@ -41,6 +41,26 @@
                                 {{ __('Perfil') }}
                             </x-dropdown-link>
 
+                          <!-- pdf manuales -->
+                         
+                               @if(!Auth::user()->admin && Auth::user()->super)
+                               <a class="block w-full px-4 py-2 text-left text-xl leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                               target="_blank" href="{{asset('./manuales/super.pdf')}}" >
+                                {{ __('Manual') }}
+                               </a>
+                                @elseif(Auth::user()->admin && !Auth::user()->super)
+                                <a class="block w-full px-4 py-2 text-left text-xl leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                                 target="_blank" href="{{asset('./manuales/admin.pdf')}}" >
+                                    Manual(PDF)
+                                </a>
+                                @elseif(!Auth::user()->admin && !Auth::user()->super)
+                                <a class="block w-full px-4 py-2 text-left text-xl leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                                 target="_blank" href="{{asset('./manuales/camarero.pdf')}}">
+                                    {{ __('Manual') }}
+                                </a>
+                                @endif
+                           
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
