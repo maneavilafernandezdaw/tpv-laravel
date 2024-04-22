@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Zona;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -27,11 +28,11 @@ class ZonasTest extends TestCase
         $this->actingAs(User::factory()->create());
 
         $zona = [
+           
             'nombre' => 'Interior1',
             'mesas' => 12,
         ];
-        $response = $this
-            ->post('zonas/store', $zona);
+        $response = $this->post('/zonas/store', $zona);
             // Verificar que la zona se haya creado en la base de datos
         $this->assertDatabaseHas('zonas', $zona);
 
@@ -57,6 +58,7 @@ class ZonasTest extends TestCase
                 $response->assertStatus(200);
                 $response->assertSeeText($zona->nombre);
                 $response->assertSeeText($zona->tables);
+                
           
     }
     public function test_zona_show_no_existe(): void
@@ -79,17 +81,51 @@ class ZonasTest extends TestCase
             'mesas' => 10,
         ];
         $zona = Zona::create($zonaTest);
-        $comandas = Comanda::all();
+     
 
-        $response = $this->get('/zonas/consultar/' . $zona->id);
-         // Verificar que se muestra la página de la zona específica
-         $response->assertStatus(200);
-         $response
-            ->assertRedirect('/zonas/consultar', [$zona, $comanda]);
+           // Nuevos datos de la zona
+           $newData = [
+            'nombre' => 'Zona Actualizada',
+            'mesas' => 15,
+        ];
+
+        // Hacer una solicitud para actualizar la zona
+        $response = $this->put("/zonas/update/{$zona->id}", $newData);
+
+        // Verificar que la zona se haya actualizado en la base de datos
+        $this->assertDatabaseHas('zonas', $newData);
+
+        // Verificar que la solicitud sea redirigida a la página adecuada después de actualizar la zona (puedes modificar esto según tu aplicación)
+        $response->assertRedirect('/zonas');
             
          
        
     }
 
+    public function test_delete_zona(): void
+    {
+        // Autenticar como un usuario (puedes modificar esto según tu lógica de autenticación)
+        $this->actingAs(User::factory()->create());
 
+        // Crear una zona para eliminar
+        $zonaTest = [
+            'nombre' => 'Interior',
+            'mesas' => 10,
+        ];
+        $zona = Zona::create($zonaTest);
+        $Data = [
+            'idzona' => $zona->id,
+           
+        ];
+
+        // Hacer una solicitud para eliminar la zona
+        $response = $this->delete("/zonas/destroy", $Data);
+
+        // Verificar que la zona se haya eliminado de la base de datos
+    
+       $this->assertDatabaseMissing('zonas', ['id' => $zona->id]);
+
+        // Verificar que la solicitud sea redirigida a la página adecuada después de eliminar la zona (puedes modificar esto según tu aplicación)
+        $response->assertRedirect('/zonas');
+    }
 }

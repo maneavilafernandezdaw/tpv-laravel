@@ -44,16 +44,7 @@ class ZonasController extends Controller
         return redirect()->route('welcome');
     }
 
-    public function consultar($id)
-    {
 
-        if (Auth::check()) {
-            $zona = Zona::find($id);
-            $comandas = Comanda::all();
-            return view('comandas.consultar', compact('zona', 'comandas'));
-        }
-        return redirect()->route('welcome');
-    }
 
 
     /**

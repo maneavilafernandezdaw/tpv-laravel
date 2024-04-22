@@ -202,25 +202,7 @@ class ComandasController extends Controller
         return redirect()->route('welcome');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request,  $id)
-    {
-        if (Auth::check()) {
-            $request->validate([
-                'nombre' => 'required|max:30',
-                'mesas' => 'required',
-            ]);
 
-            $zona = Zona::find($id);
-            $zona->update($request->all());
-
-            return redirect()->route('zonas.index')
-                ->with('mensaje', 'Zona actualizada correctamente.');
-        }
-        return redirect()->route('welcome');
-    }
 
 
     // enviar y imprimirCuenta se utiliza para imprimir en local directamente 
@@ -475,6 +457,7 @@ class ComandasController extends Controller
                     }
                 }
             }
+          
             $datos = [
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
@@ -487,6 +470,10 @@ class ComandasController extends Controller
             $json = json_encode([$datos]);
 
             return redirect()->away('http://tpv-base/tpv-laravel/public/impticket?data=' . $json);
+
+         
+
+
         }
         return redirect()->route('welcome');
     }

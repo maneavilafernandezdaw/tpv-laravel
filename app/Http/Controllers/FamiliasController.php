@@ -98,13 +98,5 @@ class FamiliasController extends Controller
         return redirect()->route('welcome');
     }
 
-    public function edit($id)
-    {
-        if (Auth::check()) {
-        $familia = Familia::find($id);
 
-        return view('familias.edit', compact('familia'));
-    }
-    return redirect()->route('welcome');
-    }
 }

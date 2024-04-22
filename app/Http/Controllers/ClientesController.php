@@ -91,15 +91,7 @@ class ClientesController extends Controller
         return redirect()->route('welcome');
     }
 
-    public function edit($id)
-    {
-        if (Auth::check()) {
-        $cliente = Cliente::find($id);
 
-        return view('clientes.edit', compact('cliente'));
-    }
-    return redirect()->route('welcome');
-    }
 
 
 }
