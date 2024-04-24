@@ -66,44 +66,33 @@ Route::controller(ZonasController::class)->group(function () {
 
 
     Route::get('zonas', 'index')->name('zonas.index');
-    Route::get('zonas/create', 'create')->name('zonas.create');
     Route::post('zonas', 'store')->name('zonas.store');
-    Route::get('zonas/{zona}', 'show')->name('zonas.show');
-    Route::get('zonas/consultar/{zona}', 'consultar')->name('zonas.consultar');
-    Route::get('zonas/{zona}/edit', 'edit')->name('zonas.edit');
-    Route::put('zonas/{zona}', 'update')->name('zonas.update');
-    Route::delete('zonas/{zona}/destroy', 'destroy')->name('zonas.destroy');
+    Route::get('zonas/{zona}', 'show')->name('zonas.show');   
+    Route::put('zonas/update/{zona}', 'update')->name('zonas.update');
+    Route::delete('zonas/destroy/{zona}', 'destroy')->name('zonas.destroy');
 });
 
 Route::controller(FamiliasController::class)->group(function () {
     Route::get('familias', 'index')->name('familias.index');
-    Route::get('familias/create', 'create')->name('familias.create');
-    Route::post('familias', 'store')->name('familias.store');
-    Route::get('familias/{familia}', 'show')->name('familias.show');
+    Route::post('familias/store', 'store')->name('familias.store');
     Route::get('familias/{familia}/edit', 'edit')->name('familias.edit');
-    Route::put('familias/{familia}', 'update')->name('familias.update');
-    Route::delete('familias/{familia}/destroy', 'destroy')->name('familias.destroy');
+    Route::put('familias/update/{familia}', 'update')->name('familias.update');
+    Route::delete('familias/destroy/{familia}', 'destroy')->name('familias.destroy');
 });
 
 Route::controller(ClientesController::class)->group(function () {
     Route::get('clientes', 'index')->name('clientes.index');
-    Route::get('clientes/create', 'create')->name('clientes.create');
-    Route::post('clientes', 'store')->name('clientes.store');
-    Route::get('clientes/{cliente}', 'show')->name('clientes.show');
-    Route::get('clientes/{cliente}/edit', 'edit')->name('clientes.edit');
-    Route::put('clientes/{cliente}', 'update')->name('clientes.update');
-    Route::delete('clientes/{cliente}/destroy', 'destroy')->name('clientes.destroy');
+    Route::post('clientes/store', 'store')->name('clientes.store');
+    Route::put('clientes/update/{cliente}', 'update')->name('clientes.update');
+    Route::delete('clientes/destroy/{cliente}', 'destroy')->name('clientes.destroy');
 });
 
 Route::controller(ProductosController::class)->group(function () {
     Route::get('productos', 'index')->name('productos.index');
-    Route::get('productos/create', 'create')->name('productos.create');
     Route::post('productos', 'store')->name('productos.store');
     Route::post('productos/coctel', 'coctel')->name('productos.coctel');
-    Route::get('productos/{producto}', 'show')->name('productos.show');
-
-    Route::put('productos/{producto}/edit', 'update')->name('productos.update');
-    Route::delete('productos/{producto}/destroy', 'destroy')->name('productos.destroy');
+    Route::put('productos/update/{producto}', 'update')->name('productos.update');
+    Route::delete('productos/destroy/{producto}', 'destroy')->name('productos.destroy');
 });
 
 Route::controller(ComandasController::class)->group(function () {
@@ -118,8 +107,7 @@ Route::controller(ComandasController::class)->group(function () {
     Route::post('comandas/decrementar', 'decrementar')->name('comandas.decrementar');
     Route::post('comandas/incrementarTabla', 'incrementarTabla')->name('comandas.incrementarTabla');
     Route::post('comandas/decrementarTabla', 'decrementarTabla')->name('comandas.decrementarTabla');
-    Route::get('comandas/{comanda}', 'show')->name('comandas.show');
-    Route::put('comandas/{comanda}/edit', 'update')->name('comandas.update');
+    Route::put('comandas/update/{comanda}', 'update')->name('comandas.update');
     Route::post('comandas/enviar', 'enviar')->name('comandas.enviar');
     Route::post('comandas/imprimirCuenta', 'imprimirCuenta')->name('comandas.imprimirCuenta');
     Route::post('comandas/eliminar', 'eliminarComanda')->name('comandas.eliminarComanda');
@@ -130,7 +118,7 @@ Route::controller(ComandasController::class)->group(function () {
 Route::controller(CobrosController::class)->group(function () {
 
     Route::post('cobros/store', 'store')->name('cobros.store');
-
+    
     Route::get('cobros', 'index')->name('cobros.index');
     
 });
