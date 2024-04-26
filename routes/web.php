@@ -57,14 +57,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/usuarios/{usuario}/eliminar',  [ProfileController::class, 'eliminar'])->name('profile.eliminar');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::controller(Controller::class)->group(function () {
 
     Route::get('home/oscuro', 'temaOscuro')->name('tema.temaOscuro');
     Route::get('home/claro', 'temaClaro')->name('tema.temaClaro');
-
-
 });
 
 Route::controller(ZonasController::class)->group(function () {
@@ -118,21 +116,18 @@ Route::controller(ComandasController::class)->group(function () {
     Route::post('comandas/imprimirCuenta', 'imprimirCuenta')->name('comandas.imprimirCuenta');
     Route::post('comandas/eliminar', 'eliminarComanda')->name('comandas.eliminarComanda');
     Route::post('comandas/eliminar/cuenta', 'eliminarCuenta')->name('comandas.eliminarCuenta');
-  
 });
 
 Route::controller(CobrosController::class)->group(function () {
 
     Route::post('cobros/store', 'store')->name('cobros.store');
     Route::get('cobros', 'index')->name('cobros.index');
-    
 });
 
 Route::controller(CajasController::class)->group(function () {
 
     Route::get('cajas/store', 'store')->name('cajas.store');
     Route::get('cajas', 'index')->name('cajas.index');
-
 });
 
 Route::controller(FacturaController::class)->group(function () {
@@ -140,14 +135,12 @@ Route::controller(FacturaController::class)->group(function () {
     Route::get('factura', 'index')->name('factura.index');
     Route::post('factura/descargar', 'descargar')->name('factura.descargar');
     Route::post('factura/enviar-pdf', 'enviarPDF')->name('factura.enviar-pdf');
-
 });
 
 Route::controller(ReportController::class)->group(function () {
 
     Route::get('report', 'report')->name('report.index');
     Route::post('report/send_report', 'sendReport')->name('report.sendReport');
-
 });
 
 Route::controller(ZonasAjaxController::class)->group(function () {
@@ -157,9 +150,9 @@ Route::controller(ZonasAjaxController::class)->group(function () {
     Route::get('zonasAjax/edit/{id}/', 'edit');
     Route::post('zonasAjax/update', 'update')->name('zonasAjax.update');
     Route::post('zonasAjax/destroy/{id}/', 'destroy');
-    
-   
-    Route::post('/','accion');
+
+
+    Route::post('/', 'accion');
 });
 
 Route::controller(FamiliasAjaxController::class)->group(function () {
@@ -169,9 +162,9 @@ Route::controller(FamiliasAjaxController::class)->group(function () {
     Route::get('familiasAjax/edit/{id}/', 'edit');
     Route::post('familiasAjax/update', 'update')->name('familiasAjax.update');
     Route::post('familiasAjax/destroy/{id}/', 'destroy');
-    
-   
-    Route::post('/','accion');
+
+
+    Route::post('/', 'accion');
 });
 
 Route::controller(ClientesAjaxController::class)->group(function () {
@@ -181,9 +174,9 @@ Route::controller(ClientesAjaxController::class)->group(function () {
     Route::get('clientesAjax/edit/{id}/', 'edit');
     Route::post('clientesAjax/update', 'update')->name('clientesAjax.update');
     Route::post('clientesAjax/destroy/{id}/', 'destroy');
-    
-   
-    Route::post('/','accion');
+
+
+    Route::post('/', 'accion');
 });
 
 Route::controller(ProductosAjaxController::class)->group(function () {
@@ -194,7 +187,7 @@ Route::controller(ProductosAjaxController::class)->group(function () {
     Route::get('productosAjax/edit/{id}/', 'edit');
     Route::post('productosAjax/update', 'update')->name('productosAjax.update');
     Route::post('productosAjax/destroy/{id}/', 'destroy');
-    
-   
-    Route::post('/','accion');
+
+
+    Route::post('/', 'accion');
 });

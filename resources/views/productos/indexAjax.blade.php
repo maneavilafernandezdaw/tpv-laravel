@@ -15,7 +15,7 @@
 
                     <x-boton-coctel name="create_coctel" id="create_coctel" class="coctel"></x-boton-coctel>
 
-                    
+
 
 
                 </div>
@@ -90,14 +90,14 @@
                             <div class="form-group">
                                 <label for="precio">Precio (€)</label>
                                 <input type="number" step=".01"
-                                    class="form-control rounded-md  bg-white text-black" id="precio"
-                                    name="precio" required>
+                                    class="form-control rounded-md  bg-white text-black" id="precio" name="precio"
+                                    required>
                             </div>
 
                             <div class="form-group">
                                 <label for="iva">Iva (%)</label>
-                                <input type="number" class="form-control rounded-md bg-white text-black"
-                                    id="iva" name="iva" value="21">
+                                <input type="number" class="form-control rounded-md bg-white text-black" id="iva"
+                                    name="iva" value="21">
                             </div>
 
                             <div class="form-group">
@@ -129,9 +129,9 @@
         </div>
 
         <!-- Modal Crear Coctel-->
-        <div class="modal fade " id="modalCrearCoctel" tabindex="-1"
-        aria-labelledby="modalCrearCoctelLabel" aria-hidden="true">
-      
+        <div class="modal fade " id="modalCrearCoctel" tabindex="-1" aria-labelledby="modalCrearCoctelLabel"
+            aria-hidden="true">
+
             <div class="modal-dialog">
                 <div class="modal-content">
                     <form method="post" id="coctel_form" class="form-horizontal">
@@ -141,109 +141,110 @@
                         </div>
                         <div class="modal-body">
 
-                    <div id="gif1" class="flex flex-col justify-center items-center hidden"><img
-                            src="imagen/cargando.gif" class=" w-20" alt="Cargando..." />
-                        <span id="form_result1" class="text-xl fw-semibold text-center text-dark "></span></div>
-
-               
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control rounded-md bg-white text-black"
-                                id="nombre" name="nombre" required maxlength="20">
-                        </div>
+                            <div id="gif1" class="flex flex-col justify-center items-center hidden"><img
+                                    src="imagen/cargando.gif" class=" w-20" alt="Cargando..." />
+                                <span id="form_result1" class="text-xl fw-semibold text-center text-dark "></span>
+                            </div>
 
 
-                        <div class="form-group">
-
-                            @foreach ($familias as $familia)
-                                @if ($familia->nombre === 'Cóctel')
-                                    <input type="hidden" id="familia_id" name="familia_id"
-                                        value="{{ $familia->id }}">
-                                @endif
-                            @endforeach
-
-                        </div>
-
-                        <div class="form-group">
-                            <label for="precio">Precio (€)</label>
-                            <input type="number" step=".01"
-                                class="form-control rounded-md  bg-white text-black" id="precio"
-                                name="precio" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="iva">Iva (%)</label>
-                            <input type="number" class="form-control rounded-md bg-white text-black"
-                                id="iva" name="iva" value="21">
-                        </div>
-
-                        <div class="form-group">
-                            <input type="hidden" id="impresora" name="impresora" value="tickets">
-                        </div>
-
-                        
-                        <input type="hidden" name="hidden_id" id="hidden_id" />
-                </div>
-                <div class="modal-footer">
-
-                    <x-boton-coctel name="action_button" id="action_button" onclick="mostrarCargando()"/>
+                            <div class="form-group">
+                                <label for="nombre">Nombre</label>
+                                <input type="text" class="form-control rounded-md bg-white text-black"
+                                    id="nombre" name="nombre" required maxlength="20">
+                            </div>
 
 
-                    @include('components.boton-cancelar')
+                            <div class="form-group">
 
-                    </form>
+                                @foreach ($familias as $familia)
+                                    @if ($familia->nombre === 'Cóctel')
+                                        <input type="hidden" id="familia_id" name="familia_id"
+                                            value="{{ $familia->id }}">
+                                    @endif
+                                @endforeach
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="precio">Precio (€)</label>
+                                <input type="number" step=".01"
+                                    class="form-control rounded-md  bg-white text-black" id="precio"
+                                    name="precio" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="iva">Iva (%)</label>
+                                <input type="number" class="form-control rounded-md bg-white text-black"
+                                    id="iva" name="iva" value="21">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="hidden" id="impresora" name="impresora" value="tickets">
+                            </div>
 
 
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <form method="post" id="sample_form" class="form-horizontal">
-                        <div class="modal-header bg-red-600">
-                            <h5 class="modal-title  h5 text-white" id="ModalLabel">Eliminar Zona</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-
-
-                            <h4 id="aviso" class="text-center m-0">Estás seguro de eliminar la zona?</h4>
+                            <input type="hidden" name="hidden_id" id="hidden_id" />
                         </div>
                         <div class="modal-footer">
 
+                            <x-boton-coctel name="action_button" id="action_button" onclick="mostrarCargando()" />
 
 
-                            <button type="button" name="ok_button" id="ok_button"
-                                class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-4xl px-2.5 py-2.5 text-center me-2 mb-2"><svg
-                                    xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                    fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                    <path
-                                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                    <path
-                                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                </svg></button>
                             @include('components.boton-cancelar')
-                        </div>
+
                     </form>
+
+
                 </div>
+
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <form method="post" id="sample_form" class="form-horizontal">
+                    <div class="modal-header bg-red-600">
+                        <h5 class="modal-title  h5 text-white" id="ModalLabel">Eliminar Zona</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <h4 id="aviso" class="text-center m-0">Estás seguro de eliminar la zona?</h4>
+                    </div>
+                    <div class="modal-footer">
+
+
+
+                        <button type="button" name="ok_button" id="ok_button"
+                            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-4xl px-2.5 py-2.5 text-center me-2 mb-2"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-trash" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                <path
+                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                            </svg></button>
+                        @include('components.boton-cancelar')
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
     <script>
-       function mostrarCargando() {
-             // Muestra el indicador de carga
-             $('#gif1').removeClass('hidden');
-             $('#form_result1').html('Conectando con OpenAI API para optener la descripción del cóctel');
-             $('.form-group').addClass('hidden');
-           
-             $('.modal-footer').addClass('hidden');
-        } 
+        function mostrarCargando() {
+            // Muestra el indicador de carga
+            $('#gif1').removeClass('hidden');
+            $('#form_result1').html('Conectando con OpenAI API para optener la descripción del cóctel');
+            $('.form-group').addClass('hidden');
+
+            $('.modal-footer').addClass('hidden');
+        }
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -348,12 +349,12 @@
                 if ($('#action').val() == 'Add') {
                     action_url = "{{ route('productosAjax.store') }}";
                 }
-            
+
 
                 if ($('#action').val() == 'Edit') {
                     action_url = "{{ route('productosAjax.update') }}";
                 }
-              
+
 
                 $.ajax({
                     type: 'post',
@@ -384,8 +385,8 @@
                         }
                         $('#form_result').html(html);
                         $('#gif').removeClass('hidden');
-                         $('.modal-footer').addClass('hidden');
-                           $('.form-group').addClass('hidden');
+                        $('.modal-footer').addClass('hidden');
+                        $('.form-group').addClass('hidden');
                     },
                     error: function(data) {
                         var errors = data.responseJSON;
@@ -409,8 +410,8 @@
                 event.preventDefault();
                 var action_url = "{{ route('productosAjax.coctel') }}";
 
-          
-              
+
+
 
                 $.ajax({
                     type: 'post',
@@ -449,7 +450,7 @@
                 });
             });
 
-           
+
 
             $(document).on('click', '.edit', function(event) {
                 event.preventDefault();
@@ -518,7 +519,7 @@
                 $('#form_result').html('');
                 $('#gif').removeClass('show');
                 $('#aviso').html('¿Estás seguro de eliminar este producto?');
-                 $('.modal-footer').removeClass('hidden');
+                $('.modal-footer').removeClass('hidden');
 
             });
 
@@ -537,7 +538,9 @@
 
                     },
                     success: function(data) {
-                        html = '<div class="alert alert-success text-lg fw-semibold bg-warning">' + data.success +
+                        html =
+                            '<div class="alert alert-success text-lg fw-semibold bg-warning">' +
+                            data.success +
                             '</div>';
                         $('#aviso').html(html);
                         setTimeout(function() {

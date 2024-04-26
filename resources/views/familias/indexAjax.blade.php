@@ -162,15 +162,15 @@
                     {
                         data: 'nombre',
                         name: 'nombre',
-                         "className":"fw-bold  align-middle"
+                        "className": "fw-bold  align-middle"
                     },
                     {
                         data: 'combinada',
                         name: 'combinada',
-                         "className":"fw-bold  align-middle",
+                        "className": "fw-bold  align-middle",
                         "render": function(data) {
                             return data ? 'Sí' :
-                            'No'; // Si es true devuelve 'Sí', de lo contrario 'No'
+                                'No'; // Si es true devuelve 'Sí', de lo contrario 'No'
                         }
                     },
                     {
@@ -184,10 +184,10 @@
 
             $('#create_record').click(function() {
                 $('#nombre').val("");
-                
+
                 $('.modal-title').text('Crear Familia');
-                $('.modal-header').removeClass('bg-cyan-700'); 
-               $('.modal-header').addClass('bg-green-600'); 
+                $('.modal-header').removeClass('bg-cyan-700');
+                $('.modal-header').addClass('bg-green-600');
                 $('#btncrear').removeClass('hidden');
                 $('#btneditar').addClass('hidden');
                 $('#action').val('Add');
@@ -197,7 +197,7 @@
                 $('.form-group').removeClass('hidden');
                 $('.modal-footer').removeClass('hidden');
                 $('.form-check').removeClass('hidden');
-            
+
             });
 
             $('#sample_form').on('submit', function(event) {
@@ -231,7 +231,8 @@
                             html += '</div>';
                         }
                         if (data.success) {
-                            html = '<div class="alert alert-success bg-warning">' + data.success + '</div>';
+                            html = '<div class="alert alert-success bg-warning">' + data
+                                .success + '</div>';
                             $('#sample_form')[0].reset();
                             setTimeout(function() {
                                 $('#formModal').modal('hide');
@@ -241,8 +242,8 @@
                         $('#form_result').html(html);
                         $('#gif').removeClass('hidden');
                         $('.modal-footer').addClass('hidden');
-                           $('.form-group').addClass('hidden');
-                           $('.form-check').addClass('hidden');
+                        $('.form-group').addClass('hidden');
+                        $('.form-check').addClass('hidden');
                     },
                     error: function(data) {
                         var errors = data.responseJSON;
@@ -263,7 +264,7 @@
 
 
                 $.ajax({
-                    url: "familiasAjax/edit/"+id,
+                    url: "familiasAjax/edit/" + id,
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -274,16 +275,16 @@
                         '_token': '{{ csrf_token() }}',
                     },
                     success: function(data) {
-                        console.log('success: '+data);
+                        console.log('success: ' + data);
                         $('#nombre').val(data.result.nombre);
-                      
+
                         $('#hidden_id').val(id);
                         $('.modal-header').removeClass('bg-green-600');
-                        $('.modal-header').addClass('bg-cyan-700'); 
+                        $('.modal-header').addClass('bg-cyan-700');
                         $('.modal-title').text('Editar Familia');
                         $('#btncrear').addClass('hidden');
                         $('#btneditar').removeClass('hidden');
-                        
+
                         $('#action').val('Edit');
                         $('#formModal').modal('show');
                         $('#gif').addClass('hidden');
@@ -310,7 +311,7 @@
             $(document).on('click', '.delete', function() {
                 familia_id = $(this).attr('id');
                 $('#confirmModal').modal('show');
-                $('.modal-header').removeClass('bg-cyan-700'); 
+                $('.modal-header').removeClass('bg-cyan-700');
                 $('.modal-title').text('Eliminar Familia');
                 $('#form_result').html('');
                 $('#gif').removeClass('show');
@@ -322,7 +323,7 @@
 
                 $.ajax({
                     type: "post",
-                    url: 'familiasAjax/destroy/'+familia_id,
+                    url: 'familiasAjax/destroy/' + familia_id,
                     data: {
                         'id': familia_id,
                         '_token': '{{ csrf_token() }}',
@@ -333,7 +334,9 @@
 
                     },
                     success: function(data) {
-                        html = '<div class="alert alert-success text-lg fw-semibold bg-warning">' + data.success +
+                        html =
+                            '<div class="alert alert-success text-lg fw-semibold bg-warning">' +
+                            data.success +
                             '</div>';
                         $('#aviso').html(html);
                         setTimeout(function() {

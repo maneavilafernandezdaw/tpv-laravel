@@ -24,12 +24,12 @@ class FamiliasAjaxController extends Controller
     {
         if (Auth::check()) {
             if ($request->ajax()) {
-               
-                $data = Familia::where('nombre', '!=', "Refrescos")->get();
-        
-                  return Datatables::of($data)->addIndexColumn()
 
-            
+                $data = Familia::where('nombre', '!=', "Refrescos")->get();
+
+                return Datatables::of($data)->addIndexColumn()
+
+
                     ->addColumn('action', function ($data) {
                         $button = ' <div class="flex justify-end gap-2"><div>';
                         $button .= '   <button type="button" name="edit" id="' . $data->id . '" class="edit text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-4xl px-2.5 py-2.5 text-center me-2 mb-2 uppercase">';
@@ -109,12 +109,12 @@ class FamiliasAjaxController extends Controller
     public function edit($id)
     {
         if (Auth::check()) {
-        if (request()->ajax()) {
-            $data  = Familia::find($id);;
-            return response()->json(['result' => $data]);
+            if (request()->ajax()) {
+                $data  = Familia::find($id);;
+                return response()->json(['result' => $data]);
+            }
         }
-    }
-    return redirect()->route('welcome');
+        return redirect()->route('welcome');
     }
 
 
@@ -132,26 +132,24 @@ class FamiliasAjaxController extends Controller
                 'nombre' => 'required|max:30',
                 'combinada' => 'required',
             ]);
-            
+
             $fam = Familia::where('nombre', $request->nombre)->where('id', '!=', $request->hidden_id)->first();
 
             // Si existe
             if (!$fam) {
-               
+
                 $form_data = array(
                     'nombre'    =>  $request->nombre,
                     'combinada'     =>  $request->combinada,
 
                 );
-               
+
                 Familia::whereId($request->hidden_id)->update($form_data);
-          
+
                 return response()->json(['success' => 'Familia actualizada']);
-          
             } else {
                 return response()->json(['success' => 'Ya existe una familia con este nombre.']);
             }
-     
         }
         return redirect()->route('welcome');
     }
