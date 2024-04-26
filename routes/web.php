@@ -12,6 +12,11 @@ use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\ZonasAjaxController;
+use App\Http\Controllers\FamiliasAjaxController;
+use App\Http\Controllers\ClientesAjaxController;
+use App\Http\Controllers\ProductosAjaxController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -71,6 +76,9 @@ Route::controller(ZonasController::class)->group(function () {
     Route::put('zonas/update/{zona}', 'update')->name('zonas.update');
     Route::delete('zonas/destroy', 'destroy')->name('zonas.destroy');
 });
+
+
+
 
 Route::controller(FamiliasController::class)->group(function () {
     Route::get('familias', 'index')->name('familias.index');
@@ -142,6 +150,51 @@ Route::controller(ReportController::class)->group(function () {
 
 });
 
+Route::controller(ZonasAjaxController::class)->group(function () {
 
+    Route::get('zonasAjax', 'index')->name('zonasAjax.index');
+    Route::post('zonasAjax/store', 'store')->name('zonasAjax.store');
+    Route::get('zonasAjax/edit/{id}/', 'edit');
+    Route::post('zonasAjax/update', 'update')->name('zonasAjax.update');
+    Route::post('zonasAjax/destroy/{id}/', 'destroy');
+    
+   
+    Route::post('/','accion');
+});
 
+Route::controller(FamiliasAjaxController::class)->group(function () {
 
+    Route::get('familiasAjax', 'index')->name('familiasAjax.index');
+    Route::post('familiasAjax/store', 'store')->name('familiasAjax.store');
+    Route::get('familiasAjax/edit/{id}/', 'edit');
+    Route::post('familiasAjax/update', 'update')->name('familiasAjax.update');
+    Route::post('familiasAjax/destroy/{id}/', 'destroy');
+    
+   
+    Route::post('/','accion');
+});
+
+Route::controller(ClientesAjaxController::class)->group(function () {
+
+    Route::get('clientesAjax', 'index')->name('clientesAjax.index');
+    Route::post('clientesAjax/store', 'store')->name('clientesAjax.store');
+    Route::get('clientesAjax/edit/{id}/', 'edit');
+    Route::post('clientesAjax/update', 'update')->name('clientesAjax.update');
+    Route::post('clientesAjax/destroy/{id}/', 'destroy');
+    
+   
+    Route::post('/','accion');
+});
+
+Route::controller(ProductosAjaxController::class)->group(function () {
+
+    Route::get('productosAjax', 'index')->name('productosAjax.index');
+    Route::post('productosAjax/store', 'store')->name('productosAjax.store');
+    Route::post('productosAjax/coctel', 'coctel')->name('productosAjax.coctel');
+    Route::get('productosAjax/edit/{id}/', 'edit');
+    Route::post('productosAjax/update', 'update')->name('productosAjax.update');
+    Route::post('productosAjax/destroy/{id}/', 'destroy');
+    
+   
+    Route::post('/','accion');
+});
