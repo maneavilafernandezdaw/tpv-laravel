@@ -51,8 +51,7 @@
                             @include('components.boton-cancelar-mini')
                         </div>
                         <div class="modal-body">
-                            <span id="gif" class="flex flex-col justify-center items-center"><img
-                                    src="imagen/cargando.gif" class=" w-20" alt="Cargando..." />
+                            <span id="gif" class="flex flex-col justify-center items-center">
                                 <span id="form_result" class="text-xl fw-semibold text-center text-dark "></span></span>
 
                             <div class="form-group">
@@ -239,7 +238,7 @@
                             setTimeout(function() {
                                 $('#formModal').modal('hide');
                                 $('#zonas_Datatables').DataTable().ajax.reload();
-                            }, 1000);
+                            }, 1500);
                         }
                         $('#form_result').html(html);
                         $('#gif').removeClass('hidden');
@@ -295,7 +294,7 @@
                             setTimeout(function() {
                                 $('#confirmModal').modal('hide');
                                 $('#zonas_Datatables').DataTable().ajax.reload();
-                            }, 1000);
+                            }, 1500);
 
                         }
                     },
@@ -343,7 +342,7 @@
                             $('#confirmModal').modal('hide');
                             $('#zonas_Datatables').DataTable().ajax.reload();
 
-                        }, 1000);
+                        }, 1500);
 
                     }
                 })

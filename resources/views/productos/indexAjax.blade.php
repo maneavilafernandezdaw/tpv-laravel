@@ -61,8 +61,7 @@
                             @include('components.boton-cancelar-mini')
                         </div>
                         <div class="modal-body">
-                            <span id="gif" class="flex flex-col justify-center items-center"><img
-                                    src="imagen/cargando.gif" class=" w-20" alt="Cargando..." />
+                            <span id="gif" class="flex flex-col justify-center items-center">
                                 <span id="form_result" class="text-xl fw-semibold text-center text-dark "></span></span>
 
                             <div class="form-group">
@@ -97,13 +96,13 @@
                             <div class="form-group">
                                 <label for="iva">Iva (%)</label>
                                 <input type="number" class="form-control rounded-md bg-white text-black" id="iva"
-                                    name="iva" value="21">
+                                    name="iva" value="21"  required>
                             </div>
 
                             <div class="form-group">
                                 <label for="impresora">Impresora</label>
                                 <select class="form-select  bg-white text-black rounded-md"
-                                    aria-label="Default select example" id="impresora" name="impresora" required>
+                                    aria-label="Default select example" id="impresora" name="impresora" value="tickets" required>
                                     @foreach ($impresoras as $impresora)
                                         <option value="{{ $impresora }}">{{ $impresora }}</option>
                                     @endforeach
@@ -141,16 +140,15 @@
                         </div>
                         <div class="modal-body">
 
-                            <div id="gif1" class="flex flex-col justify-center items-center hidden"><img
-                                    src="imagen/cargando.gif" class=" w-20" alt="Cargando..." />
-                                <span id="form_result1" class="text-xl fw-semibold text-center text-dark "></span>
+                            <div id="gif1" class="flex flex-col justify-center items-center hidden">
+                              
                             </div>
-
+<span id="form_result1" class="text-xl fw-semibold text-center text-dark "></span>
 
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control rounded-md bg-white text-black"
-                                    id="nombre" name="nombre" required maxlength="20">
+                                    id="nombre" name="nombre" value="Mojito" required maxlength="30" >
                             </div>
 
 
@@ -169,13 +167,13 @@
                                 <label for="precio">Precio (€)</label>
                                 <input type="number" step=".01"
                                     class="form-control rounded-md  bg-white text-black" id="precio"
-                                    name="precio" required>
+                                    name="precio" value="8" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="iva">Iva (%)</label>
                                 <input type="number" class="form-control rounded-md bg-white text-black"
-                                    id="iva" name="iva" value="21">
+                                    id="iva" name="iva" value="21"  required>
                             </div>
 
                             <div class="form-group">
@@ -240,13 +238,17 @@
         function mostrarCargando() {
             // Muestra el indicador de carga
             $('#gif1').removeClass('hidden');
-            $('#form_result1').html('Conectando con OpenAI API para optener la descripción del cóctel');
+           $('#gif1').html('<img src="imagen/cargando.gif" class=" w-20" alt="Cargando..." /> <span id="form_result1" class="text-xl fw-semibold text-center text-dark ">Conectando con OpenAI API para optener la descripción del cóctel</span>');
+           
             $('.form-group').addClass('hidden');
 
             $('.modal-footer').addClass('hidden');
         }
     </script>
     <script type="text/javascript">
+      
+      var familias = @json($familias);
+      
         $(document).ready(function() {
 
 
@@ -287,6 +289,16 @@
                         name: 'descripcion',
                         "className": " fw-bold align-middle "
                     },
+                      {
+                        data: 'familia_id',
+                         "render": function(data) {
+                            var nombreFamilia = familias.find(function(familia) {
+                                return familia.id === data;
+                            }).nombre;
+                            return nombreFamilia;
+                        },
+                        "className": " fw-bold  align-middle"
+                    },
                     {
                         data: 'precio',
                         name: 'precio',
@@ -297,11 +309,7 @@
                         name: 'iva',
                         "className": " fw-bold  align-middle"
                     },
-                    {
-                        data: 'familia_id',
-                        name: 'familia_id',
-                        "className": " fw-bold  align-middle"
-                    },
+                
                     {
                         data: 'impresora',
                         name: 'impresora',
@@ -381,7 +389,7 @@
                             setTimeout(function() {
                                 $('#formModal').modal('hide');
                                 $('#productos_Datatables').DataTable().ajax.reload();
-                            }, 1000);
+                            }, 1500);
                         }
                         $('#form_result').html(html);
                         $('#gif').removeClass('hidden');
@@ -398,12 +406,15 @@
                 $('#nombre').val("");
                 $('#precio').val("");
                 $('#iva').val("");
+               $('.modal-header').addClass('bg-green-600');
                 $('.modal-title').text('Crear Coctel');
                 $('#form_result1').html('');
+             
                 $('#gif1').addClass('hidden');
                 $('#modalCrearCoctel').modal('show');
                 $('.form-group').removeClass('hidden');
                 $('.modal-footer').removeClass('hidden');
+               
 
             });
             $('#coctel_form').on('submit', function(event) {
@@ -432,16 +443,19 @@
                             html += '</div>';
                         }
                         if (data.success) {
-                            html = '<div class="alert alert-success bg-warning">' + data
+                            html = '<div class="alert text-xl fw-semibold alert-success bg-warning">' + data
                                 .success + '</div>';
                             $('#coctel_form')[0].reset();
                             setTimeout(function() {
                                 $('#modalCrearCoctel').modal('hide');
                                 $('#productos_Datatables').DataTable().ajax.reload();
-                            }, 1000);
+                            }, 1500);
                         }
-                        $('#form_result1').html(html);
-                        $('#gif1').removeClass('hidden');
+                      $('#gif1').removeClass('hidden');
+                        $('#gif1').html(html);
+                     
+                    
+                      
                     },
                     error: function(data) {
                         var errors = data.responseJSON;
@@ -484,7 +498,7 @@
                         $('#hidden_id').val(id);
                         $('.modal-header').removeClass('bg-green-600');
                         $('.modal-header').addClass('bg-cyan-700');
-                        $('.modal-title').text('Editar Cliente');
+                        $('.modal-title').text('Editar Producto');
                         $('#btncrear').addClass('hidden');
                         $('#btneditar').removeClass('hidden');
                         $('#action_button').val('Actualizar');
@@ -498,7 +512,7 @@
                             setTimeout(function() {
                                 $('#confirmModal').modal('hide');
                                 $('#productos_Datatables').DataTable().ajax.reload();
-                            }, 1000);
+                            }, 1500);
 
                         }
                     },
@@ -548,7 +562,7 @@
                             $('#confirmModal').modal('hide');
                             $('#productos_Datatables').DataTable().ajax.reload();
 
-                        }, 1000);
+                        }, 1500);
 
                     }
                 })

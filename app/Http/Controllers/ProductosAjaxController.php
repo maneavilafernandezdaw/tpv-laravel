@@ -72,7 +72,7 @@ class ProductosAjaxController extends Controller
         if (Auth::check()) {
             $request->validate([
                 'nombre' => 'required|max:30',
-                'descripcion' => 'max:300',
+                'descripcion' => 'max:1500',
                 'precio' => 'required',
                 'iva' => 'required',
                 'familia_id' => 'required',
@@ -110,7 +110,7 @@ class ProductosAjaxController extends Controller
         if (Auth::check()) {
             $request->validate([
                 'nombre' => 'required|max:30',
-                'descripcion' => 'max:300',
+                'descripcion' => 'max:1500',
                 'precio' => 'required',
                 'iva' => 'required',
                 'familia_id' => 'required',
@@ -128,7 +128,7 @@ class ProductosAjaxController extends Controller
                 $result = $client->chat()->create([
                     'model' => 'gpt-4',
                     'messages' => [
-                        ['role' => 'user', 'content' => 'Dime ingredientes, cantidades y como preparar para hacer un cóctel con el nombre de ' . $request->nombre],
+                        ['role' => 'user', 'content' => 'Dime solo ingredientes, cantidades y como hacer un cóctel con el nombre de ' . $request->nombre],
                     ],
                 ]);
 
@@ -186,7 +186,7 @@ class ProductosAjaxController extends Controller
         if (Auth::check()) {
             $request->validate([
                 'nombre' => 'required|max:30',
-                'descripcion' => 'max:300',
+                'descripcion' => 'max:1500',
                 'precio' => 'required',
                 'iva' => 'required',
                 'familia_id' => 'required',

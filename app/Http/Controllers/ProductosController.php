@@ -64,7 +64,7 @@ class ProductosController extends Controller
         if (Auth::check()) {
             $request->validate([
                 'nombre' => 'required|max:30',
-                'descripcion' => 'max:300',
+                'descripcion' => 'max:1500',
                 'precio' => 'required',
                 'iva' => 'required',
                 'familia_id' => 'required',

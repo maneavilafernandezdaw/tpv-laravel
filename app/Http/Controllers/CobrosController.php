@@ -5,26 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Cobro;
 use App\Models\Comanda;
 use App\Models\Zona;
-use App\Models\Producto;
-use App\Models\Cliente;
-use App\Models\Factura;
 
-use App\Mail\ReportMail;
-
-use Illuminate\Support\Facades\Mail;
-use Illuminate\View\View;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
-use TCPDF;
+
 
 class CobrosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::check()) {
             $cobros = Cobro::all();
@@ -34,8 +28,13 @@ class CobrosController extends Controller
 
                 $total += $cobro->cantidad;
             }
+            if ($request->ajax()) {
+                $data = Cobro::all();
+            
 
-            return view('cobros.index', compact('cobros', 'total', 'zonas'));
+                return Datatables::of($data)->addIndexColumn()->make(true);
+            }
+            return view('cobros.index', compact( 'total', 'zonas'));
         }
         return redirect()->route('welcome');
     }

@@ -6,25 +6,26 @@ use Illuminate\Http\Request;
 use App\Models\Caja;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cobro;
-
+use Yajra\DataTables\DataTables;
 
 class CajasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         if (Auth::check()) {
-            $cajas = Caja::all();
-            $cobros = Cobro::all();
-            $total = 0;
-            foreach ($cobros as $cobro) {
+           
 
-                $total += $cobro->cantidad;
+            if ($request->ajax()) {
+
+                $data = Caja::all();
+          
+                return Datatables::of($data)->addIndexColumn()->make(true);
             }
 
-            return view('cajas.index', compact('cajas'));
+            return view('cajas.index');
         }
         return redirect()->route('welcome');
     }
@@ -68,7 +69,7 @@ class CajasController extends Controller
 
             $cajas = Caja::all();
 
-            return view('cajas.index', compact('cajas')) ->with('mensaje', 'Caja creada correctamente');;
+            return view('cajas.index') ->with('mensaje', 'Caja creada correctamente');;
         }
         return redirect()->route('welcome');
     }

@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Zona;
-use App\Models\Comanda;
+
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use function Laravel\Prompts\text;
 
-use Illuminate\Http\Response;
+
 
 class ZonasAjaxController extends Controller
 {
@@ -76,7 +75,8 @@ class ZonasAjaxController extends Controller
                     'mesas'     =>  $request->mesas,
 
                 );
-
+             
+            
                 Zona::create($form_data);
 
                 return response()->json(['success' => 'Zona agregada correctamente.']);
