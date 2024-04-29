@@ -19,7 +19,8 @@ class ProfileController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $usuarios = User::all();
+            /* $usuarios = User::all(); */
+            $usuarios = User::where('super', '!=', 1)->get();
         
             return view('profile.index', compact('usuarios'));
 

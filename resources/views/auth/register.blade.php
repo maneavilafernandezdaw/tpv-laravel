@@ -1,6 +1,12 @@
 <x-app-layout>
-
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+ <nav class="navbar flex flex-row justify-center">
+        <div class=" flex flex-row justify-center items-center">
+            <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio></x-boton-inicio></a>
+            <h1 class=" h1">Crear Usuario</h1>
+            
+        </div>
+    </nav>
+    <div class=" flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
         <div class="w-full sm:max-w-md mt-6 px-6 py-4  shadow-md overflow-hidden sm:rounded-lg">
 
             <form method="POST" action="{{ route('profile.store') }}">

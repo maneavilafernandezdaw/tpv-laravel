@@ -1,15 +1,11 @@
 <x-app-layout>
 
-    <nav class="navbar navbar-expand-lg navbar-light ">
-        <div class="container-fluid">
+    <nav class="navbar flex flex-row justify-center">
+        <div class=" flex flex-row justify-center items-center">
             <a class="navbar-brand text-2xl" href={{ route('home') }}> <x-boton-inicio></x-boton-inicio></a>
             <h1 class=" h1">Usuarios</h1>
-            <div class="justify-end ">
-                <div class="col ">
-
-
-                </div>
-            </div>
+            
+        </div>
     </nav>
 
     {{-- session mensaje  --}}

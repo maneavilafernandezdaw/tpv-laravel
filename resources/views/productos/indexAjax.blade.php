@@ -96,13 +96,14 @@
                             <div class="form-group">
                                 <label for="iva">Iva (%)</label>
                                 <input type="number" class="form-control rounded-md bg-white text-black" id="iva"
-                                    name="iva" value="21"  required>
+                                    name="iva" value="21" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="impresora">Impresora</label>
                                 <select class="form-select  bg-white text-black rounded-md"
-                                    aria-label="Default select example" id="impresora" name="impresora" value="tickets" required>
+                                    aria-label="Default select example" id="impresora" name="impresora" value="tickets"
+                                    required>
                                     @foreach ($impresoras as $impresora)
                                         <option value="{{ $impresora }}">{{ $impresora }}</option>
                                     @endforeach
@@ -140,15 +141,15 @@
                         </div>
                         <div class="modal-body">
 
-                            <div id="gif1" class="flex flex-col justify-center items-center hidden">
-                              
+                            <div id="gif1" class="flex flex-col justify-center items-center ">
+
                             </div>
-<span id="form_result1" class="text-xl fw-semibold text-center text-dark "></span>
+                            <span id="form_result1" class="text-xl fw-semibold text-center text-dark "></span>
 
                             <div class="form-group">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control rounded-md bg-white text-black"
-                                    id="nombre" name="nombre" value="Mojito" required maxlength="30" >
+                                    id="nombre" name="nombre" maxlength="30" required>
                             </div>
 
 
@@ -167,13 +168,13 @@
                                 <label for="precio">Precio (€)</label>
                                 <input type="number" step=".01"
                                     class="form-control rounded-md  bg-white text-black" id="precio"
-                                    name="precio" value="8" required>
+                                    name="precio" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="iva">Iva (%)</label>
                                 <input type="number" class="form-control rounded-md bg-white text-black"
-                                    id="iva" name="iva" value="21"  required>
+                                    id="iva" name="iva" value="21" required>
                             </div>
 
                             <div class="form-group">
@@ -185,7 +186,7 @@
                         </div>
                         <div class="modal-footer">
 
-                            <x-boton-coctel name="action_button" id="action_button" onclick="mostrarCargando()" />
+                            <x-boton-coctel name="action_button" id="action_button" />
 
 
                             @include('components.boton-cancelar')
@@ -234,21 +235,10 @@
         </div>
     </div>
     </div>
-    <script>
-        function mostrarCargando() {
-            // Muestra el indicador de carga
-            $('#gif1').removeClass('hidden');
-           $('#gif1').html('<img src="imagen/cargando.gif" class=" w-20" alt="Cargando..." /> <span id="form_result1" class="text-xl fw-semibold text-center text-dark ">Conectando con OpenAI API para optener la descripción del cóctel</span>');
-           
-            $('.form-group').addClass('hidden');
 
-            $('.modal-footer').addClass('hidden');
-        }
-    </script>
     <script type="text/javascript">
-      
-      var familias = @json($familias);
-      
+        var familias = @json($familias);
+
         $(document).ready(function() {
 
 
@@ -289,9 +279,9 @@
                         name: 'descripcion',
                         "className": " fw-bold align-middle "
                     },
-                      {
+                    {
                         data: 'familia_id',
-                         "render": function(data) {
+                        "render": function(data) {
                             var nombreFamilia = familias.find(function(familia) {
                                 return familia.id === data;
                             }).nombre;
@@ -309,7 +299,7 @@
                         name: 'iva',
                         "className": " fw-bold  align-middle"
                     },
-                
+
                     {
                         data: 'impresora',
                         name: 'impresora',
@@ -406,21 +396,24 @@
                 $('#nombre').val("");
                 $('#precio').val("");
                 $('#iva').val("");
-               $('.modal-header').addClass('bg-green-600');
+                $('.modal-header').addClass('bg-green-600');
                 $('.modal-title').text('Crear Coctel');
                 $('#form_result1').html('');
-             
+                $('#action').val('Add');
                 $('#gif1').addClass('hidden');
                 $('#modalCrearCoctel').modal('show');
                 $('.form-group').removeClass('hidden');
                 $('.modal-footer').removeClass('hidden');
-               
+
 
             });
             $('#coctel_form').on('submit', function(event) {
                 event.preventDefault();
-                var action_url = "{{ route('productosAjax.coctel') }}";
+                var action_url = '';
 
+                if ($('#action').val() == 'Add') {
+                    action_url = "{{ route('productosAjax.coctel') }}";
+                }
 
 
 
@@ -432,6 +425,14 @@
                     url: action_url,
                     data: $(this).serialize(),
                     dataType: 'json',
+                    beforeSend: function() {
+
+                        $('.modal-footer').addClass('hidden');
+                        $('.form-group').addClass('hidden');
+                        $('#gif1').removeClass('hidden');
+                        $('#gif1').html('<img src="imagen/cargando.gif" class=" w-20" alt="Cargando..." /> <span id="form_result1" class="text-xl fw-semibold text-center text-dark ">Conectando con OpenAI API para optener la descripción del cóctel</span>' );
+                   
+                    },
                     success: function(data) {
                         console.log('success: ' + data);
                         var html = '';
@@ -443,7 +444,9 @@
                             html += '</div>';
                         }
                         if (data.success) {
-                            html = '<div class="alert text-xl fw-semibold alert-success bg-warning">' + data
+                            html =
+                                '<div class="alert text-xl fw-semibold alert-success bg-warning">' +
+                                data
                                 .success + '</div>';
                             $('#coctel_form')[0].reset();
                             setTimeout(function() {
@@ -451,11 +454,11 @@
                                 $('#productos_Datatables').DataTable().ajax.reload();
                             }, 1500);
                         }
-                      $('#gif1').removeClass('hidden');
+                        $('#gif1').removeClass('hidden');
                         $('#gif1').html(html);
-                     
-                    
-                      
+
+
+
                     },
                     error: function(data) {
                         var errors = data.responseJSON;
