@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Zona;
+use App\Models\Comanda;
 
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
@@ -89,13 +90,16 @@ class ZonasAjaxController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+
+        if (Auth::check()) {
+            $zona = Zona::find($id);
+            $comandas = Comanda::all();
+            return view('zonas.show', compact('zona', 'comandas'));
+        }
+        return redirect()->route('welcome');
     }
 
     /**

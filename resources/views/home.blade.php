@@ -42,11 +42,13 @@
                         <a href="{{ route('comandas.index') }}" class="mb-2"> <x-boton-comanda>
                                 {{ __('Comandas') }}
                             </x-boton-comanda></a>
+                         
                     @endif
                 @else
                     <a href="{{ route('comandas.index') }}" class="mb-2"> <x-boton-comanda>
                             {{ __('Comandas') }}
                         </x-boton-comanda></a>
+                     
                 @endif
 
 

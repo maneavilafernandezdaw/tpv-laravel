@@ -38,7 +38,7 @@
                 @endforeach
                 @if ($ocupada > 0)
           
-                    <a href="{{ route('zonas.show', $zona->id) }}">
+                    <a href="{{ route('zonasAjax.show', $zona->id) }}">
                         <x-boton-zona-ocupada>
                             <div class="  text-center">
                                 <h3 class="font-bold text-xl">{{ $zona->nombre }}</h3>
@@ -49,7 +49,7 @@
                     </a>
                 @else
      
-                    <a href="{{ route('zonas.show', $zona->id) }}">
+                    <a href="{{ route('zonasAjax.show', $zona->id) }}">
                         <x-boton-zona-libre>
                             <div class="  text-center">
                                 <h3 class="font-bold text-xl">{{ $zona->nombre }}</h3>

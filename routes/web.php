@@ -17,6 +17,7 @@ use App\Http\Controllers\FamiliasAjaxController;
 use App\Http\Controllers\ClientesAjaxController;
 use App\Http\Controllers\ProductosAjaxController;
 
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -146,6 +147,8 @@ Route::controller(ReportController::class)->group(function () {
 Route::controller(ZonasAjaxController::class)->group(function () {
 
     Route::get('zonasAjax', 'index')->name('zonasAjax.index');
+    Route::get('zonasAjax/{zona}', 'show')->name('zonasAjax.show');
+ 
     Route::post('zonasAjax/store', 'store')->name('zonasAjax.store');
     Route::get('zonasAjax/edit/{id}/', 'edit');
     Route::post('zonasAjax/update', 'update')->name('zonasAjax.update');
@@ -191,3 +194,4 @@ Route::controller(ProductosAjaxController::class)->group(function () {
 
     Route::post('/', 'accion');
 });
+
