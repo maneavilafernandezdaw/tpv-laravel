@@ -250,7 +250,7 @@ class ComandasController extends Controller
                         try {
                             $connector = new WindowsPrintConnector("smb://tpv-base/$impresora"); //  nombre de impresora
 
-                                                        $printer = new Printer($connector);
+                            $printer = new Printer($connector);
 
                             // Contenido a imprimir
                             $printer->text("Minibar     $fecha\n");
@@ -428,7 +428,7 @@ class ComandasController extends Controller
             $productos = Producto::all();
             $comand = [];
             $mesa = $m;
-            $app="local";
+            $app = "local";
 
             foreach ($comandas as  $comanda) {
                 foreach ($productos as $producto) {
@@ -457,8 +457,9 @@ class ComandasController extends Controller
                     }
                 }
             }
-          
-            $datos = [
+
+            /* imprimir */
+            /*             $datos = [
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
@@ -469,11 +470,13 @@ class ComandasController extends Controller
 
             $json = json_encode([$datos]);
 
-            return redirect()->away('http://tpv-base/tpv-laravel/public/impticket?data=' . $json);
-
-         
+            return redirect()->away('http://tpv-base/tpv-laravel/public/impticket?data=' . $json); */
 
 
+            /* sin imprimir */
+            $zonas = Zona::all();
+            $comandas = Comanda::all();
+            return view('comandas.index', compact('zonas', 'comandas'));
         }
         return redirect()->route('welcome');
     }
@@ -502,7 +505,8 @@ class ComandasController extends Controller
                     }
                 }
             }
-            $datos = [
+            /* Imprimir */
+ /*            $datos = [
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
@@ -512,7 +516,12 @@ class ComandasController extends Controller
 
             $json = json_encode([$datos]);
 
-            return redirect()->away('http://tpv-base/tpv-laravel/public/impcuenta?data=' . $json);
+            return redirect()->away('http://tpv-base/tpv-laravel/public/impcuenta?data=' . $json); */
+
+            /* sin imprimir */
+            $zonas = Zona::all();
+            $comandas = Comanda::all();
+            return view('comandas.index', compact('zonas', 'comandas'));
         }
         return redirect()->route('welcome');
     }
