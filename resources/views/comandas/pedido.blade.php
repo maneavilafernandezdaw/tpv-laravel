@@ -50,8 +50,8 @@
             <tbody>
                 @foreach ($comandas as $comanda)
                     <tr>
-                        <td>{{ $comanda->cantidad }}</td>
-                        <td>
+                        <td class="align-middle">{{ $comanda->cantidad }}</td>
+                        <td class="align-middle">
                             @foreach ($todosProductos as $producto)
                                 @if ($producto->id === $comanda->producto_id)
                                     {{ $producto->nombre }}

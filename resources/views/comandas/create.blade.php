@@ -85,7 +85,7 @@
 
                                         <button data-bs-toggle="modal"
                                             data-bs-target="#modalCombinar{{ $producto->id }}"
-                                            class="max-w-sm w-24 h-24   rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center text-cyan-700 font-bold text-lg flex justify-center items-center border-3 border-cyan-600 bg-cyan-100  hover:scale-110">
+                                            class="max-w-sm w-24 h-24  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center text-cyan-700 font-bold text-lg flex justify-center items-center border-3 border-cyan-600 bg-cyan-100  hover:scale-110">
 
                                             <div class=" container px-0 break-words ...">
                                                 {{ $producto->nombre }}
@@ -211,12 +211,11 @@
                                                                 </div>
 
                                                                 <button type="submit"
-                                                                    class="max-w-sm w-24 h-24  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center text-cyan-700 font-bold text-lg flex justify-center items-center border-3 border-cyan-600 bg-cyan-100  hover:scale-110">
+                                                                    class="max-w-sm w-24 h-24 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center text-cyan-700 font-bold text-lg flex justify-center items-center border-3 border-cyan-600 bg-cyan-100  hover:scale-110">
 
                                                                     <div class=" container px-0 break-words ...">
                                                                         {{ $refresco->nombre }}
                                                                     </div>
-                                                                   
 
                                                                 </button>
                                                             </form>
@@ -273,9 +272,11 @@
 
                                 <button type="submit"
                                     class="max-w-sm w-24 h-24  rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 text-center text-cyan-700 font-bold text-lg flex justify-center items-center border-3 border-cyan-600 bg-cyan-100  hover:scale-110">
+
                                     <div class=" container px-0 break-words ...">
                                         {{ $producto->nombre }}
                                     </div>
+
                                 </button>
 
                             </form>
@@ -292,7 +293,7 @@
 </div>
 
 
-<div class="hidden d-md-block col-md-4">
+<aside class="hidden d-md-block col-md-4">
 
     {{-- boton consultar cuenta --}}
     <a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">
@@ -313,8 +314,8 @@
             <tbody>
                 @foreach ($comandas as $comanda)
                     <tr>
-                        <td>{{ $comanda->cantidad }}</td>
-                        <td>
+                        <td class="align-middle">{{ $comanda->cantidad }}</td>
+                        <td class="align-middle">
                             @foreach ($todosProductos as $producto)
                                 @if ($producto->id === $comanda->producto_id)
                                     {{ $producto->nombre }}
@@ -474,6 +475,6 @@
 
     </div>
 
-</div>
-</div>
+</aside>
+
 </x-app-layout>

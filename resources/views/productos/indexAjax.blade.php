@@ -366,14 +366,14 @@
                         console.log('success: ' + data);
                         var html = '';
                         if (data.errors) {
-                            html = '<div class="alert alert-danger bg-warning">';
+                            html = '<div class="alert alert-danger text-black bg-warning">';
                             for (var count = 0; count < data.errors.length; count++) {
                                 html += '<p>' + data.errors[count] + '</p>';
                             }
                             html += '</div>';
                         }
                         if (data.success) {
-                            html = '<div class="alert alert-success bg-warning">' + data
+                            html = '<div class="alert alert-success text-black bg-warning">' + data
                                 .success + '</div>';
                             $('#sample_form')[0].reset();
                             setTimeout(function() {
@@ -430,14 +430,14 @@
                         $('.modal-footer').addClass('hidden');
                         $('.form-group').addClass('hidden');
                         $('#gif1').removeClass('hidden');
-                        $('#gif1').html('<img src="imagen/cargando.gif" class=" w-20" alt="Cargando..." /> <span id="form_result1" class="text-xl fw-semibold text-center text-dark ">Conectando con OpenAI API para optener la descripción del cóctel</span>' );
+                        $('#gif1').html('<img src="imagen/cargando.gif" class=" w-20" alt="Cargando..." /> <span id="form_result1" class="text-xl fw-semibold text-center ">Conectando con OpenAI API para optener la descripción del cóctel</span>' );
                    
                     },
                     success: function(data) {
                         console.log('success: ' + data);
                         var html = '';
                         if (data.errors) {
-                            html = '<div class="alert alert-danger bg-warning">';
+                            html = '<div class="alert alert-danger bg-warning text-black">';
                             for (var count = 0; count < data.errors.length; count++) {
                                 html += '<p>' + data.errors[count] + '</p>';
                             }
@@ -445,7 +445,7 @@
                         }
                         if (data.success) {
                             html =
-                                '<div class="alert text-xl fw-semibold alert-success bg-warning">' +
+                                '<div class="alert text-black text-xl fw-semibold alert-success bg-warning ">' +
                                 data
                                 .success + '</div>';
                             $('#coctel_form')[0].reset();
@@ -556,7 +556,7 @@
                     },
                     success: function(data) {
                         html =
-                            '<div class="alert alert-success text-lg fw-semibold bg-warning">' +
+                            '<div class="alert alert-success text-lg fw-semibold text-black bg-warning">' +
                             data.success +
                             '</div>';
                         $('#aviso').html(html);

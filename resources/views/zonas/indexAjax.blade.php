@@ -225,14 +225,14 @@
                         console.log('success: ' + data);
                         var html = '';
                         if (data.errors) {
-                            html = '<div class="alert alert-danger bg-warning">';
+                            html = '<div class="alert alert-danger text-black bg-warning">';
                             for (var count = 0; count < data.errors.length; count++) {
                                 html += '<p>' + data.errors[count] + '</p>';
                             }
                             html += '</div>';
                         }
                         if (data.success) {
-                            html = '<div class="alert alert-success bg-warning">' + data
+                            html = '<div class="alert alert-success text-black bg-warning">' + data
                                 .success + '</div>';
                             $('#sample_form')[0].reset();
                             setTimeout(function() {
@@ -334,7 +334,7 @@
                     },
                     success: function(data) {
                         html =
-                            '<div class="alert alert-success text-lg fw-semibold bg-warning">' +
+                            '<div class="alert alert-success text-lg fw-semibold text-black bg-warning">' +
                             data.success + '</div>';
                         $('#aviso').html(html);
                         setTimeout(function() {

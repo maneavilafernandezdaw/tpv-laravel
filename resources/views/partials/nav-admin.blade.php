@@ -1,4 +1,4 @@
-<div class="d-flex flex-col flex-lg-row justify-content-center gap-2 ">
+<nav class="d-flex flex-col flex-lg-row justify-content-center gap-2 ">
 
     @if (Auth::user()->admin)
         {{-- nav con ajax (zonas, familias, clientes, productos) --}}
@@ -72,4 +72,4 @@
         </a>
     @endif
 
-</div>
+    </nav>

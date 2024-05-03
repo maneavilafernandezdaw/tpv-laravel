@@ -37,12 +37,12 @@
 
 <body class="font-sans antialiased m-0 h-0 w-100 " data-bs-theme={{ request()->cookie('tema') }}>
 
-    <div class=" ">
+  
         {{-- div cargando loading --}}
         <div id="loading" style="display: none;">
-            <div class="container-fluid d-flex justify-content-center align-items-center " style="height: 100vh; ">
+            <figure class="container-fluid d-flex justify-content-center align-items-center " style="height: 100vh; ">
                 <img src="imagen/cargando.gif" alt="Cargando..." />
-            </div>
+            </figure>
         </div>
         {{-- nav --}}
         @include('layouts.navigation')
@@ -51,7 +51,7 @@
         <main class="m-0 p-0">
             {{ $slot }}
         </main>
-    </div>
+  
     {{-- script jquery --}}
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     {{-- script bootstrap --}}

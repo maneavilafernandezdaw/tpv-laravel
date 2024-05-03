@@ -33,9 +33,9 @@
         <div>
             <h1 class=" text-8xl text-center font-bold text-cyan-700">TPV</h1>
         </div>
-        <div class="flex justify-center">
+        <figure class="flex justify-center">
             <img src="imagen/logoMinibar.jpeg" alt="imagen logo" class="w-3/4">
-        </div>
+        </figure>
 
 
         @if (Route::has('login'))
