@@ -123,8 +123,10 @@ class ProductosAjaxController extends Controller
             // Si existe
             if (!$prod) {
 
-                $client = OpenAI::client("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");
-
+               
+                $api_key = env('API_KEY_OPENAI');
+                
+                $client = OpenAI::client($api_key);
                 $result = $client->chat()->create([
                     'model' => 'gpt-4',
                     'messages' => [
