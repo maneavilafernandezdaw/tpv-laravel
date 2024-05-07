@@ -27,6 +27,7 @@ class CobrosController extends Controller
             foreach ($cobros as $cobro) {
 
                 $total += $cobro->cantidad;
+                
             }
             if ($request->ajax()) {
                 $data = Cobro::all();
@@ -34,6 +35,7 @@ class CobrosController extends Controller
 
                 return Datatables::of($data)->addIndexColumn()->make(true);
             }
+            $total = number_format($total, 2, '.', '');
             return view('cobros.index', compact( 'total', 'zonas'));
         }
         return redirect()->route('welcome');
