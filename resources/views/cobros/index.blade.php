@@ -24,7 +24,7 @@
                         <th>ID</th>
                         <th>ZONA</th>
                         <th>MESA</th>
-                        <th>CANTIDAD</th>
+                        <th>CANTIDAD (€)</th>
                         <th>TIPO</th>
                         <th>Fecha/Hora</th>
                     </tr>

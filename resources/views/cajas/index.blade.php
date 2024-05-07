@@ -20,10 +20,11 @@
                     <tr>
                         <th>ID</th>
                         <th>FECHA/HORA</th>
-                        <th>EFECTIVO</th>
-                        <th>TARJETA</th>
-                        <th>BIZUM</th>
-                        <th>TOTAL</th>
+                        <th>TOTAL  (€)</th>
+                        <th>EFECTIVO (€)</th>
+                        <th>TARJETA (€)</th>
+                        <th>BIZUM (€)</th>
+                       
 
                     </tr>
                 </thead>
@@ -78,7 +79,7 @@
                 columns: [
 
                     {
-                        data: 'id',
+                        data: 'id', 
                         name: 'id',
                         "className": "fw-bold  align-middle"
                     },
@@ -87,6 +88,11 @@
                         name: 'created_at',
                         "className": " fw-bold  align-middle"
 
+                    },
+                             {
+                        data: 'total',
+                        name: 'total',
+                        "className": " fw-bold  align-middle"
                     },
  
                     {
@@ -106,11 +112,7 @@
                         name: 'bizum',
                         "className": "fw-bold   align-middle"
                     },
-                    {
-                        data: 'total',
-                        name: 'total',
-                        "className": " fw-bold  align-middle"
-                    },
+           
 
 
                 ],
