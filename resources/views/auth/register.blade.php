@@ -46,12 +46,12 @@
                     </label>
                 </div>
                 
-                <div class="form-check">
+               {{--  <div class="form-check">
                     <input class="form-check-input" type="radio" name="tipo" id="flexRadioDefault3" value="2">
                     <label class="form-check-label" for="flexRadioDefault1">
                         SuperAdministrador
                     </label>
-                </div>
+                </div> --}}
 
                 <!-- Password -->
                 <div class="mt-4">
