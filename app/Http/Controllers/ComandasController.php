@@ -392,7 +392,7 @@ class ComandasController extends Controller
 
                 $comanda->delete();
             }
-            $zonas = Zona::all();
+            
             return redirect()->route('comandas.create', [$request->zona_id, $request->mesa, "todo"])
                 ->with('mensaje', 'Comanda Eliminada Correctamente.');
         }
@@ -506,7 +506,7 @@ class ComandasController extends Controller
                 }
             }
             /* Imprimir */
- /*            $datos = [
+            /*  $datos = [
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
