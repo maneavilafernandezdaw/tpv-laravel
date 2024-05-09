@@ -45,10 +45,10 @@
 
                     <a href="{{ url('/home') }}" ><x-boton-inicio class="scale-150"/></a>
                 @else
-                    <a href="{{ route('login') }}"><x-boton-iniciarSesion />
+                    <a href="{{ route('login') }}"><x-boton-iniciarSesion /></a>
 
 
-                    @endauth
+                @endauth
             </div>
         @endif
 
