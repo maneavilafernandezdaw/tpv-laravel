@@ -55,7 +55,7 @@
 
                     // Contenido a imprimir
                     $printer->text("Minibar     $fecha\n");
-                    $printer->text("De     $usuario\n");
+                    $printer->text("Enviado por:     $usuario\n");
                     $printer->text("\n");
                     $printer->text("Zona: $zona   Mesa:  $mesa\n");
                     $printer->text("\n");

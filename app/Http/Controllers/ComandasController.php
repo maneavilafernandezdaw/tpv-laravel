@@ -459,7 +459,7 @@ class ComandasController extends Controller
             }
 
             /* imprimir */
-            /*             $datos = [
+                        $datos = [
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
@@ -470,13 +470,13 @@ class ComandasController extends Controller
 
             $json = json_encode([$datos]);
 
-            return redirect()->away('http://tpv-base/tpv-laravel/public/impticket?data=' . $json); */
+            return redirect()->away('http://tpv-base/tpv-laravel/public/impticket?data=' . $json);
 
 
             /* sin imprimir */
-            $zonas = Zona::all();
+       /*      $zonas = Zona::all();
             $comandas = Comanda::all();
-            return view('comandas.index', compact('zonas', 'comandas'));
+            return view('comandas.index', compact('zonas', 'comandas')); */
         }
         return redirect()->route('welcome');
     }
@@ -506,7 +506,7 @@ class ComandasController extends Controller
                 }
             }
             /* Imprimir */
-            /*  $datos = [
+             $datos = [
                 "usuario" => Auth::user()->name,
                 "comandas" => $comand,
                 "zona" => Zona::find($z)->nombre,
@@ -516,12 +516,12 @@ class ComandasController extends Controller
 
             $json = json_encode([$datos]);
 
-            return redirect()->away('http://tpv-base/tpv-laravel/public/impcuenta?data=' . $json); */
+            return redirect()->away('http://tpv-base/tpv-laravel/public/impcuenta?data=' . $json);
 
             /* sin imprimir */
-            $zonas = Zona::all();
+           /*  $zonas = Zona::all();
             $comandas = Comanda::all();
-            return view('comandas.index', compact('zonas', 'comandas'));
+            return view('comandas.index', compact('zonas', 'comandas')); */
         }
         return redirect()->route('welcome');
     }

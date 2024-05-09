@@ -23,7 +23,7 @@
             </div>
         </div>
         {{-- boton ver comanda --}}
-        <div class="d-md-none w-full">
+        <div class="d-lg-none w-full">
 
             <div class="m-2 d-flex justify-center">
                 <a href={{ route('comandas.pedido', [$zona->id, $mesa, $familia]) }}><x-boton-admin>
@@ -38,7 +38,7 @@
         <div class=" row p-sm-4">
 
             {{-- productos para pedir --}}
-            <div class="col-12  col-md-8">
+            <div class="col-12  col-lg-8">
 
 
 
@@ -293,7 +293,7 @@
 </div>
 
 
-<aside class="hidden d-md-block col-md-4">
+<aside class="hidden d-lg-block col-lg-4">
 
     {{-- boton consultar cuenta --}}
     <a href="{{ route('comandas.consultarCuenta', [$zona->id, $mesa]) }}">

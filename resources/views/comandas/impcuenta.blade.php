@@ -38,7 +38,7 @@
 
             // Contenido a imprimir
             $printer->text("Minibar     $fecha\n");
-            $printer->text("De:  $usuario\n");
+            $printer->text("Enviado por:  $usuario\n");
             $printer->text("\n");
             
 
