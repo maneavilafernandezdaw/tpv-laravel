@@ -5,8 +5,8 @@
 
             <!-- Logo -->
             <div class="flex -ms-2">
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+                <div class="shrink-0 flex items-center"  aria-label="botón inicio">
+                    <a href="{{ route('home') }}"  >
                         <x-application-logo />
                     </a>
 
